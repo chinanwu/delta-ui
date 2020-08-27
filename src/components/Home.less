@@ -1,0 +1,132 @@
+@import '../style/styles';
+
+.Home {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.Home--dark {
+	@dark();
+}
+
+.Home__header {
+	margin-top: 3rem;
+	font-size: 3.6rem;
+}
+
+.Home__game {
+	display: flex;
+	margin-bottom: 1.2rem;
+}
+
+.Home__input {
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	font-size: 2.6rem;
+	margin-right: 1.2rem;
+	text-align: center;
+	box-shadow: @box-shadow-01;
+	border: 1px solid black;
+}
+
+.Home__input--error {
+	border: 2px solid @errorRed;
+}
+
+.Home__btn {
+	@greenBtn();
+	border-radius: 0.3rem;
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	font-size: 2.6rem;
+	box-shadow: @box-shadow-01;
+
+	&:hover {
+		@greenBtnHover();
+		box-shadow: @box-shadow-02;
+	}
+
+	&:active {
+		@greenBtnActive();
+	}
+}
+
+.Home__btn--error {
+	background-color: @disabledBtn;
+	cursor: not-allowed;
+
+	&:hover {
+		background-color: @disabledBtn;
+	}
+
+	&:active {
+		background-color: @disabledBtn;
+	}
+}
+
+.Home__error {
+	position: relative;
+	text-align: center;
+}
+
+.Home__footer--dark a {
+	color: white;
+}
+
+.Home__rules,
+.Home__example--p {
+	text-align: center;
+}
+
+.Home__rules {
+	width: 60%;
+}
+
+.Home__example--p {
+	margin-top: 0;
+}
+
+.Home__example--emphasis {
+	color: red;
+}
+
+.Home__footer {
+	position: absolute;
+	bottom: 0;
+}
+
+@media only screen and (max-width: 830px) {
+	.Home__rules {
+		width: 80%;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.Home p {
+		font-size: 125%;
+	}
+
+	.Home__game {
+		flex-direction: column;
+	}
+
+	.Home__btnContainer {
+		display: flex;
+		justify-content: center;
+	}
+
+	.Home__input {
+		margin-right: 0;
+		margin-bottom: 1rem;
+	}
+
+	.Home__rules {
+		width: initial;
+	}
+
+	.Home__footer {
+		position: initial;
+	}
+}

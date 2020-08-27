@@ -1,0 +1,61 @@
+@import '../style/styles';
+
+.NavBar {
+	//position: absolute;
+	//top: 2.4rem;
+	//left: 1.2rem;
+	font-size: 1.8rem;
+}
+
+.NavBar__btn {
+	padding: 1.2rem;
+	border-radius: 0.5rem;
+	background-color: @blackBtn;
+	box-shadow: @box-shadow-01;
+	color: white;
+	margin-right: 0.8rem;
+}
+
+.NavBar__btn:hover {
+	background-color: @blackBtn-light;
+	box-shadow: @box-shadow-02;
+}
+
+.NavBar__btn:active {
+	background-color: @blackBtn;
+	box-shadow: @box-shadow-02;
+}
+
+.NavBar__btn--dark {
+	background-color: #801336;
+
+	&:hover {
+		background-color: #c72c41;
+	}
+
+	&:active {
+		background-color: #801336;
+	}
+}
+
+.NavBar__btn--disabled {
+	padding: 1.2rem;
+	border-radius: 0.5rem;
+	margin-right: 0.8rem;
+	background-color: @disabledBtn;
+	color: black;
+	cursor: default;
+	pointer-events: none;
+	box-shadow: none;
+}
+
+.NavBar__btn--disabled--dark {
+	padding: 1.2rem;
+	border-radius: 0.5rem;
+	margin-right: 0.8rem;
+	background-color: #51224f;
+	color: white;
+	cursor: default;
+	pointer-events: none;
+	box-shadow: none;
+}
