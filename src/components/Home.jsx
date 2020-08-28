@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { postFetch } from '../functions/FetchFunctions';
+import { getFetch, postFetch } from '../functions/FetchFunctions';
 import generateGameUrl from '../functions/generateGameUrl';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
@@ -53,46 +53,48 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 		}
 	}, [error, gameUrl, setRedirect, setError]);
 
+	const handleCreateVersusClick = useCallback(() => {
+		console.log('I want a versus game!');
+	}, []);
+
 	return redirect ? (
 		<Redirect to={`/${gameUrl}`} />
 	) : (
 		<div className={getThemeClassname('Home', dark)}>
 			<h1 className="Home__header">Delta</h1>
 			<>
-				<div className="Home__gameCreate">
-					<div className="Home__game">
-						<input
-							id="homeInput"
-							className={`Home__input${error ? ' Home__input--error' : ''}`}
-							type="text"
-							name="gameUrl"
-							value={gameUrl}
-							onChange={handleChange}
-						/>
-						<div className="Home__btnContainer">
-							<button
-								id="homeCreateBtn"
-								type="submit"
-								className={`Home__btn${error ? ' Home__btn--error' : ''}`}
-								disabled={!!error}
-								onClick={handleCreateClick}
-							>
-								Create
-							</button>
-						</div>
-					</div>
-					<p className="Home__error" aria-hidden={!error}>
-						{error}
+				<div>
+					<Link to="/solo">
+						<button
+							id="homeCreateSoloBtn"
+							className="Home__btn"
+							aria-label="Create solo game"
+							role="link"
+						>
+							Solo
+						</button>
+					</Link>
+
+					<button
+						id="homeCreateSoloBtn"
+						className="Home__btn"
+						aria-label="Create versus game"
+						role="link"
+						onClick={handleCreateVersusClick}
+					>
+						Versus
+					</button>
+				</div>
+				<div aria-labelledby="rules">
+					<h2 id="rules">Rules</h2>
+					<p className="Home__rules">
+						In each game, you are given two words, a "from" word and a "to"
+						word. Starting from the "from" word, one letter must changed at a
+						time until the word becomes the "to" word. However, each time a
+						letter is swapped out for another, the resulting new word must still
+						be a valid four-letter word in the English language.
 					</p>
 				</div>
-				<h2>Rules</h2>
-				<p className="Home__rules">
-					In each game, you are given two words, a "from" word and a "to" word.
-					Starting from the "from" word, one letter must changed at a time until
-					the word becomes the "to" word. However, each time a letter is swapped
-					out for another, the resulting new word must still be a valid
-					four-letter word in the English language.
-				</p>
 				<h2>Example</h2>
 				<p>From: "heat" -> To: "cold"</p>
 				<p className="Home__example--p">
@@ -119,6 +121,7 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 				className={getThemeClassname('Home__footer', dark)}
 				aria-label="Footer"
 			>
+				Acknowledgements <br />
 				Made by <a href="https://www.github.com/chinanwu">Chin-An Wu</a>
 			</div>
 		</div>
@@ -142,3 +145,30 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Home);
+
+//					<div className="Home__gameCreate">
+// 						<div className="Home__game">
+// 							<input
+// 								id="homeInput"
+// 								className={`Home__input${error ? ' Home__input--error' : ''}`}
+// 								type="text"
+// 								name="gameUrl"
+// 								value={gameUrl}
+// 								onChange={handleChange}
+// 							/>
+// 							<div className="Home__btnContainer">
+// 								<button
+// 									id="homeCreateBtn"
+// 									type="submit"
+// 									className={`Home__btn${error ? ' Home__btn--error' : ''}`}
+// 									disabled={!!error}
+// 									onClick={handleCreateClick}
+// 								>
+// 									Create
+// 								</button>
+// 							</div>
+// 						</div>
+// 						<p className="Home__error" aria-hidden={!error}>
+// 							{error}
+// 						</p>
+// 					</div>

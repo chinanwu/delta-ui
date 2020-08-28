@@ -6,6 +6,7 @@ import { store } from './store';
 
 import Home from './components/Home.jsx';
 import Game from './components/Game.jsx';
+import SoloGame from './components/Solo.jsx';
 import NotFound from './components/NotFound.jsx';
 
 import './App.less';
@@ -15,6 +16,7 @@ const App = () => (
 		<Router>
 			<Switch>
 				<Route exact path="/" component={Home} />
+				<Route path="/solo" component={SoloGame} />
 				<Route path="/:gameUrl" component={Game} />
 				<Route component={NotFound} />
 			</Switch>

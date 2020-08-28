@@ -1,0 +1,33 @@
+@import '../style/styles';
+@import '../style/button';
+
+.StealthInput {
+	margin: 0.4rem;
+	width: 5.5rem;
+	height: 3rem;
+	text-align: center;
+	font-size: 1.6rem;
+}
+
+.StealthInput__inputContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.StealthInput__error {
+	font-size: 0.5rem;
+}
+
+.StealthInput__submit {
+	@smBtn();
+	background-color: @green;
+	color: white;
+
+	&:hover {
+		background-color: @greenHover;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+}
