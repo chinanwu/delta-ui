@@ -32,28 +32,44 @@
 }
 
 .Solo__editor {
-	animation: slideDown 1s;
 	margin-top: 1rem;
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	overflow: hidden;
+	max-height: 0;
 }
 
-@keyframes slideDown {
+.Solo__editor--show {
+	animation: fadeIn 1s;
+	max-height: 20rem;
+	opacity: 1;
+}
+
+@keyframes fadeIn {
 	from {
-		transform: translateY(-1em);
 		opacity: 0;
-		visibility: hidden;
+		max-height: 0;
 	}
 	to {
-		transform: translateY(0);
 		opacity: 1;
-		visibility: visible;
+		max-height: 20rem;
 	}
 }
 
 .Solo__editor--hidden {
-	display: none;
+	animation: fadeOut 1s;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		max-height: 20rem;
+	}
+	to {
+		max-height: 0;
+		opacity: 0;
+	}
 }
 
 .Solo__editorContent {
@@ -99,6 +115,7 @@
 
 	.Solo__editorContent {
 		padding: 2rem;
+		height: 15rem;
 	}
 
 	.Solo__editorForms {

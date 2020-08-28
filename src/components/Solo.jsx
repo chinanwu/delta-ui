@@ -13,8 +13,6 @@ import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
-import StealthInput from './StealthInput.jsx';
-
 import './Solo.less';
 
 export const Solo = ({
@@ -27,7 +25,11 @@ export const Solo = ({
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
-	const [showEditor, setShowEditor] = useState(false);
+
+	// This allows for a bit of a hack way to do this fadeOut animation for the editor.
+	// Need to study how others do Accordians or menu animations to see how to not do this
+	// Or do a smarter hack lol
+	const [showEditor, setShowEditor] = useState('');
 
 	useEffect(() => {
 		document.title = 'Solo - Delta';
@@ -61,12 +63,16 @@ export const Solo = ({
 	}, [onChangeFrom, onChangeTo, setLoading, setError]);
 
 	const handleEditClick = useCallback(() => {
-		setShowEditor(true);
+		setShowEditor('show');
 	}, [setShowEditor]);
 
 	const handleCloseEditor = useCallback(() => {
-		setShowEditor(false);
+		setShowEditor('hidden');
 	}, [setShowEditor]);
+
+	const handleChangeFromEditor = useCallback(() => {
+		console.log('changing from');
+	}, []);
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -91,54 +97,59 @@ export const Solo = ({
 					Edit Game
 				</button>
 			</div>
-			<div
-				className={'Solo__editor' + (showEditor ? '' : ' Solo__editor--hidden')}
-			>
-				<div className="Solo__editorContent">
-					<div className="Solo__editorForms">
-						<div className="Solo__editorForm">
-							<label htmlFor="soloEditFromInput">From:</label>
-							<input
-								id="soloEditFromInput"
-								className="Solo__EditorInput"
-								type="text"
-								maxLength={4}
-								value={from}
-							/>
+
+			{showEditor && (
+				<div className={'Solo__editor  Solo__editor--' + showEditor}>
+					<div className="Solo__editorContent">
+						<div className="Solo__editorForms">
+							<div className="Solo__editorForm">
+								<label htmlFor="soloEditFromInput">From:</label>
+								<input
+									id="soloEditFromInput"
+									className="Solo__EditorInput"
+									type="text"
+									maxLength={4}
+									value={from}
+									onChange={handleChangeFromEditor}
+								/>
+							</div>
+							<div className="Solo__editor--center"> -></div>
+							<div className="Solo__editorForm">
+								<label htmlFor="soloEditToInput" className="Solo__editorLabel">
+									To:
+								</label>
+								<input
+									id="soloEditToInput"
+									className="Solo__EditorInput"
+									type="text"
+									maxLength={4}
+									value={to}
+									onChange={handleChangeFromEditor}
+								/>
+							</div>
 						</div>
-						<div className="Solo__editor--center"> -> </div>
-						<div className="Solo__editorForm">
-							<label htmlFor="soloEditToInput" className="Solo__editorLabel">
-								To:
-							</label>
-							<input
-								id="soloEditToInput"
-								className="Solo__EditorInput"
-								type="text"
-								maxLength={4}
-								value={to}
-							/>
+						<div className="Solo__editorBtns">
+							<button
+								id="soloEditorSubmitBtn"
+								className="Solo__editorBtn"
+								aria-label="Submit"
+							>
+								Submit
+							</button>
+							<button
+								id="soloEditorCancelBtn"
+								className="Solo__editorBtn"
+								aria-label="Cancel"
+								onClick={handleCloseEditor}
+							>
+								Cancel
+							</button>
 						</div>
-					</div>
-					<div className="Solo__editorBtns">
-						<button
-							id="soloEditorSubmitBtn"
-							className="Solo__editorBtn"
-							aria-label="Submit"
-						>
-							Submit
-						</button>
-						<button
-							id="soloEditorCancelBtn"
-							className="Solo__editorBtn"
-							aria-label="Cancel"
-							onClick={handleCloseEditor}
-						>
-							Cancel
-						</button>
 					</div>
 				</div>
-			</div>
+			)}
+
+			<div>Bloop poop</div>
 
 			{loading && createPortal(<div>'ey I'm loadin' 'ere!</div>, document.body)}
 		</div>
