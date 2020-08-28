@@ -1,24 +1,39 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
-import { enterBtn } from '../constants/Keycodes';
+import {
+	aBtn,
+	backspaceBtn,
+	enterBtn,
+	leftArrowBtn,
+	rightArrowBtn,
+	tabBtn,
+	zBtn,
+} from '../constants/Keycodes';
 import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
 import isOneOff from '../functions/isOneOff';
 import { applyGameUrl } from '../thunk/GameThunk.jsx';
 
-import Chat from './Chat.jsx';
-import GameInput from './GameInput.jsx';
 import Modal from './Modal.jsx';
+
 import './Game.less';
 
-const URL = 'http://127.0.0.1:5000';
-const socket = io(URL);
+// const URL = 'http://127.0.0.1:5000';
+// const socket = io(URL);
+
+const reg = /([a-zA-Z])/g;
 
 export const Game = ({
 	match: {
@@ -40,28 +55,38 @@ export const Game = ({
 	const [messages, setMessages] = useState([]);
 	const [messageText, setMessageText] = useState('');
 
+	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+
+	const inputPlaceholder = useMemo(
+		() => (from ? from.match(reg) : ['', '', '', '']),
+		[from]
+	);
+
 	useEffect(() => {
 		document.title = 'Game - Delta';
 		onJoin(gameUrl);
 	}, [onJoin]);
 
-	useEffect(() => {
-		socket.on('connect', () => (!playerName ? setPlayerName(socket.id) : null));
-	}, [playerName, setPlayerName]);
+	// useEffect(() => {
+	// 	socket.on('connect', () => (!playerName ? setPlayerName(socket.id) : null));
+	// }, [playerName, setPlayerName]);
 
 	useEffect(() => {
-		// getFetch('/api/games/getOrCreate/' + gameUrl).then(res => {
-		// 	if (res.success) {
-		// 		setFrom(res.data.from);
-		// 		sessionStorage.setItem(gameUrl + '-from', res.data.from);
-		// 		setEntries([res.data.from]);
-		//
-		// 		setTo(res.data.to);
-		// 		sessionStorage.setItem(gameUrl + '-to', res.data.to);
-		// 		socket.emit('room:join', { room: gameUrl });
-		// 	}
-		// });
-		//
+		getFetch('/api/v1/games/getOrCreate/' + gameUrl).then(res => {
+			if (res.success) {
+				const from = res.data.from;
+				const to = res.data.to;
+
+				setFrom(from);
+				sessionStorage.setItem(gameUrl + '-from', from);
+				setEntries([from]);
+
+				setTo(to);
+				sessionStorage.setItem(gameUrl + '-to', to);
+				// socket.emit('room:join', { room: gameUrl });
+			}
+		});
+
 		// socket.on('words:change', data => {
 		// 	setFrom(data.from);
 		// 	sessionStorage.setItem(gameUrl + '-from', data.from);
@@ -72,17 +97,17 @@ export const Game = ({
 		// });
 	}, [setFrom, setEntries, setTo]);
 
-	useEffect(() => {
-		socket.on('chat:message', data =>
-			setMessages(messages => [...messages, data.message])
-		);
-	}, [setMessages]);
+	// useEffect(() => {
+	// 	socket.on('chat:message', data =>
+	// 		setMessages(messages => [...messages, data.message])
+	// 	);
+	// }, [setMessages]);
 
-	useEffect(() => {
-		if (win) {
-			socket.emit('game:win', { room: gameUrl });
-		}
-	}, [win]);
+	// useEffect(() => {
+	// 	if (win) {
+	// 		socket.emit('game:win', { room: gameUrl });
+	// 	}
+	// }, [win]);
 
 	const handleChange = useCallback(
 		event => {
@@ -101,16 +126,46 @@ export const Game = ({
 
 	const handleKeyDown = useCallback(
 		event => {
-			if (event && event.target && event.keyCode) {
-				if (event.keyCode === 13 || event.keyCode === 32) {
-					handleClick();
+			if (event && event.target && event.keyCode && event.key) {
+				const i = parseInt(event.target.dataset.id);
+				const next = (i + 1) % 6;
+				const prev = i - 1 < 0 ? 5 : i - 1;
+
+				if (event.keyCode >= aBtn && event.keyCode <= zBtn) {
+					event.preventDefault();
+					inputRefs[i].current.value = event.key;
+					inputRefs[next].current.focus();
+					inputRefs[next].current.select();
+				} else {
+					switch (event.keyCode) {
+						case backspaceBtn:
+							event.preventDefault();
+							inputRefs[i].current.value = '';
+							inputRefs[prev].current.focus();
+							inputRefs[prev].current.select();
+							break;
+						case rightArrowBtn:
+							inputRefs[next].current.focus();
+							inputRefs[next].current.select();
+							break;
+						case leftArrowBtn:
+							inputRefs[prev].current.focus();
+							inputRefs[prev].current.select();
+							break;
+						case tabBtn:
+							//do nothing
+							break;
+						default:
+							event.preventDefault();
+							break;
+					}
 				}
 			}
 		},
-		[text, error]
+		[inputRefs]
 	);
 
-	const handleClick = useCallback(() => {
+	const handleEnterClick = useCallback(() => {
 		getFetch('/api/words/validate?word=' + text).then(res => {
 			if (res && isOneOff(entries[entries.length - 1], text)) {
 				setEntries(entries => (entries === [] ? [text] : [...entries, text]));
@@ -122,6 +177,19 @@ export const Game = ({
 			}
 		});
 	}, [setEntries, setText, setWin, text, error]);
+
+	// const handleClick = useCallback(() => {
+	// 	getFetch('/api/words/validate?word=' + text).then(res => {
+	// 		if (res && isOneOff(entries[entries.length - 1], text)) {
+	// 			setEntries(entries => (entries === [] ? [text] : [...entries, text]));
+	// 			setText('');
+	// 			setError(null);
+	// 			text === to ? setWin(true) : setWin(false);
+	// 		} else {
+	// 			setError('Invalid word');
+	// 		}
+	// 	});
+	// }, [setEntries, setText, setWin, text, error]);
 
 	const handleClearClick = useCallback(() => {
 		setEntries([from]);
@@ -141,7 +209,7 @@ export const Game = ({
 			sessionStorage.setItem(gameUrl + '-to', to);
 
 			setWin(false);
-			socket.emit('words:change', { room: gameUrl, from: from, to: to });
+			// socket.emit('words:change', { room: gameUrl, from: from, to: to });
 		});
 	}, [setFrom, setEntries, setTo, setWin]);
 
@@ -169,11 +237,11 @@ export const Game = ({
 					event.preventDefault();
 					setMessages(messages => [...messages, 'You: ' + messageText]);
 					setMessageText('');
-					socket.emit('chat:message', {
-						room: gameUrl,
-						message: messageText,
-						name: playerName,
-					});
+					// socket.emit('chat:message', {
+					// 	room: gameUrl,
+					// 	message: messageText,
+					// 	name: playerName,
+					// });
 				}
 			}
 		},
@@ -183,11 +251,11 @@ export const Game = ({
 	const handleChatClick = useCallback(() => {
 		setMessages(messages => [...messages, 'You: ' + messageText]);
 		setMessageText('');
-		socket.emit('chat:message', {
-			room: gameUrl,
-			message: messageText,
-			name: playerName,
-		});
+		// socket.emit('chat:message', {
+		// 	room: gameUrl,
+		// 	message: messageText,
+		// 	name: playerName,
+		// });
 	}, [setMessages, setMessageText, messageText, playerName]);
 
 	const handleCloseModalClick = useCallback(() => {
@@ -201,57 +269,55 @@ export const Game = ({
 
 	return (
 		<div className={getThemeClassname('Game', dark)}>
-			<div className="Game__nav" role="navigation" aria-label="Game">
-				<Link className={getThemeClassname('Game__navBtn', dark)} to="/">
-					Home
-				</Link>
-				<Link className={getThemeClassname('Game__navBtn', dark)} to="/about">
-					About
-				</Link>
-				<Link
-					className={getThemeClassname('Game__navBtn', dark)}
-					to="/settings"
-				>
-					Settings
-				</Link>
-			</div>
-			<div className="Game__header">
-				<div className="Game__words">
-					<div className="Game__label">From:</div>
-					<div className="Game__word">{from ? from : '...'}</div>
-					<div className="Game__label">To: </div>
-					<div className="Game__word">{to ? to : '...'}</div>
+			<h2 className="Game__words">
+				From: {from} -> To: {to}
+			</h2>
+			<div className="Game__options">
+				<p className="Game__seed">Seed: {gameUrl}</p>
+				<div className="Game__btns">
+					<button
+						id="gameNewBtn"
+						className="Game__btn"
+						aria-label="New Game"
+						onClick={handleNewClick}
+					>
+						New Game
+					</button>
+					<button
+						id="gameChangeNameBtn"
+						className="Game__btn"
+						aria-label="Change Name"
+						onClick={handleNameClick}
+					>
+						Change Name
+					</button>
 				</div>
 			</div>
-			<div className="Game__seed">
-				<div>Seed:</div>
-				<div>{gameUrl}</div>
-			</div>
-			<div className="Game__btns">
-				<button className="Game__btn" onClick={handleNewClick}>
-					New Game
-				</button>
-				<button className="Game__btn" onClick={handleNameClick}>
-					Change Name
-				</button>
-			</div>
-			<div className="Game__content">
-				<GameInput
-					entries={entries}
-					text={text}
-					error={error}
-					onChange={handleChange}
-					onKeyDown={handleKeyDown}
-					onSubmit={handleClick}
-					onClear={handleClearClick}
-				/>
-				<Chat
-					messages={messages}
-					text={messageText}
-					onChange={handleChatChange}
-					onKeyDown={handleChatKeyDown}
-					onClick={handleChatClick}
-				/>
+			<div className="Game__inputsContainer">
+				<div className="Game__entries">{entries}</div>
+				<div className="Game__letterInputsContainer">
+					{inputPlaceholder.map((val, i) => (
+						<input
+							id={'game__letterInput-' + i}
+							ref={inputRefs[i]}
+							data-id={i}
+							className="Game__letter"
+							type="text"
+							maxLength={1}
+							placeholder={val}
+							onKeyDown={handleKeyDown}
+							key={'Game__LetterInput-' + i}
+						/>
+					))}
+
+					<button
+						id="gameEnterBtn"
+						className="Game__enterBtn"
+						onClick={handleEnterClick}
+					>
+						Enter
+					</button>
+				</div>
 			</div>
 			<div className={win ? 'Game__win' : 'Game__win--hidden'}>You've won!</div>
 			{showModal &&
@@ -286,3 +352,26 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Game);
+
+//
+// {
+// 	/*<Chat*/
+// }
+// {
+// 	/*messages={messages}*/
+// }
+// {
+// 	/*text={messageText}*/
+// }
+// {
+// 	/*onChange={handleChatChange}*/
+// }
+// {
+// 	/*onKeyDown={handleChatKeyDown}*/
+// }
+// {
+// 	/*onClick={handleChatClick}*/
+// }
+// {
+// 	/*/>*/
+// }

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -45,16 +45,16 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 				JSON.stringify({ url: gameUrl })
 			).then(res => {
 				res.success
-					? (onChangeFrom(res.data.from),
-					  onChangeTo(res.data.to),
-					  setRedirect(true))
-					: setError('Unable to create new game with url: ' + gameUrl);
+					? setRedirect(true)
+					: setError(
+							`Unable to create new game with url: ${gameUrl}. Please try again`
+					  );
 			});
 		}
-	}, [error, gameUrl]);
+	}, [error, gameUrl, setRedirect, setError]);
 
 	return redirect ? (
-		<Redirect to={`/game/${gameUrl}`} />
+		<Redirect to={`/${gameUrl}`} />
 	) : (
 		<div className={getThemeClassname('Home', dark)}>
 			<h1 className="Home__header">Delta</h1>
