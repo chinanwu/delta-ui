@@ -1,23 +1,19 @@
-import React, {
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Confetti from 'react-confetti';
+
 import {
 	aBtn,
 	backspaceBtn,
 	enterBtn,
 	leftArrowBtn,
 	rightArrowBtn,
+	spaceBtn,
 	tabBtn,
 	zBtn,
 } from '../constants/Keycodes';
-
 import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
@@ -39,6 +35,7 @@ export const Solo = ({
 	onChangeTo,
 	onChangeGame,
 }) => {
+	const [win, setWin] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 
@@ -64,7 +61,7 @@ export const Solo = ({
 			getFetch('http://localhost:5000/api/v1/games/words').then(res => {
 				if (res.success && res.data && res.data.from && res.data.to) {
 					onChangeGame({ from: res.data.from, to: res.data.to });
-					// setHistory([res.data.from]);
+					setHistory([res.data.from]);
 					setGuessVals(res.data.from.match(regex));
 					setLoading(false);
 				} else {
@@ -94,17 +91,33 @@ export const Solo = ({
 
 	// Duplicate code here, but not sure what is the best way to pull it out, because of the state vals
 	const handleNewClick = useCallback(() => {
+		setWin(false);
+		setError(null);
+		inputRefs.forEach(inputRef => {
+			inputRef.current.value = '';
+		});
 		setLoading(true);
 		getFetch('http://localhost:5000/api/v1/games/words').then(res => {
 			if (res.success && res.data && res.data.from && res.data.to) {
 				onChangeGame({ from: res.data.from, to: res.data.to });
+				setEditorFromVal(res.data.from);
+				setEditorToVal(res.data.to);
 				setLoading(false);
 			} else {
 				// Error is for guessing, need another way to log this
 				// setError('Something went wrong grabbing game words!');
 			}
 		});
-	}, [onChangeFrom, onChangeTo, setLoading]);
+	}, [
+		onChangeFrom,
+		onChangeTo,
+		inputRefs,
+		setWin,
+		setError,
+		setLoading,
+		setEditorFromVal,
+		setEditorToVal,
+	]);
 
 	const handleEditClick = useCallback(() => {
 		setShowEditor('show');
@@ -128,6 +141,18 @@ export const Solo = ({
 			}
 		},
 		[setEditorToVal]
+	);
+
+	const handleKeyDownFromEditor = useCallback(
+		event => {
+			if (event && event.keyCode) {
+				if (event.keyCode === enterBtn || event.keyCode === spaceBtn) {
+					event.preventDefault();
+					handleSubmitEditor();
+				}
+			}
+		},
+		[editorFromVal, editorToVal]
 	);
 
 	const handleSubmitEditor = useCallback(() => {
@@ -180,8 +205,10 @@ export const Solo = ({
 						case backspaceBtn:
 							event.preventDefault();
 							inputRefs[i].current.value = '';
-							inputRefs[prev].current.focus();
-							inputRefs[prev].current.select();
+							if (prev <= i) {
+								inputRefs[prev].current.focus();
+								inputRefs[prev].current.select();
+							}
 							break;
 						case rightArrowBtn:
 							inputRefs[next].current.focus();
@@ -206,21 +233,31 @@ export const Solo = ({
 
 	const handleEnterClick = useCallback(() => {
 		const guess = guessVals.join('');
-		getFetch(`http://localhost:5000/api/v1/words/validate?word=${guess}`).then(
-			res => {
+		inputRefs.forEach(inputRef => {
+			inputRef.current.value = '';
+		});
+
+		if (guess === to) {
+			setWin(true);
+			setError(null);
+		} else {
+			getFetch(
+				`http://localhost:5000/api/v1/words/validate?word=${guess}`
+			).then(res => {
 				if (res) {
 					if (isOneOff(guess, history[history.length - 1])) {
 						setHistory(history => [...history, guess]);
-						inputRefs.forEach(inputRef => (inputRef.current.value = ''));
 					} else {
-						setError('Word must be one letter off from previous word!');
+						setGuessVals(history[history.length - 1].match(regex));
+						setError('Word must be one letter off from previous word');
 					}
 				} else {
-					setError('Invalid word when trying to add to history');
+					setGuessVals(history[history.length - 1].match(regex));
+					setError('Word entered isn\t a real word');
 				}
-			}
-		);
-	}, [guessVals, history, setHistory, setError]);
+			});
+		}
+	}, [guessVals, setWin, history, setHistory, setError, setGuessVals]);
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -259,6 +296,7 @@ export const Solo = ({
 									maxLength={4}
 									value={editorFromVal}
 									onChange={handleChangeFromEditor}
+									onKeyDown={handleKeyDownFromEditor}
 								/>
 							</div>
 							<div className="Solo__editor--center">-></div>
@@ -273,6 +311,7 @@ export const Solo = ({
 									maxLength={4}
 									value={editorToVal}
 									onChange={handleChangeToEditor}
+									onKeyDown={handleKeyDownFromEditor}
 								/>
 							</div>
 						</div>
@@ -334,9 +373,31 @@ export const Solo = ({
 				</button>
 			</div>
 
-			<div>{error}</div>
+			<div className="Solo__gameError">{error}</div>
 
 			{loading && createPortal(<Loading />, document.body)}
+
+			{win &&
+				createPortal(
+					<div className="Solo__win">
+						<Confetti number={50} />
+						<div className="Solo__winText">You've won!</div>
+						<button
+							id="soloWinNewGame"
+							className="Solo__winBtn"
+							aria-label="New Game"
+							onClick={handleNewClick}
+						>
+							New Game
+						</button>
+						<div className="Solo__stats">
+							{history.length === 1
+								? 'It took you only one word!'
+								: 'Dang dude took u a while!'}
+						</div>
+					</div>,
+					document.body
+				)}
 		</div>
 	);
 };

@@ -132,18 +132,12 @@
 }
 
 .Solo__historyLabel {
-	border: 1px solid black;
+	border: 1px solid @green;
+	background-color: @green;
 }
 
-//.Solo__historyListContainer {
-// This must be done to enable scrolling for a flex container that justify-content end
-// https://stackoverflow.com/questions/36130760/use-justify-content-flex-end-and-to-have-vertical-scrollbar
-//https://stackoverflow.com/questions/41863033/cant-get-vertical-scrollbar-with-justify-content-flex-end
-//overflow: scroll;
-//}
-
 .Solo__historyList {
-	border: 1px solid red;
+	border: 1px solid black;
 	list-style: none;
 	padding: 1rem 0;
 	margin: 0;
@@ -161,6 +155,47 @@
 	height: 4.2rem;
 	text-align: center;
 	font-size: 1.6rem;
+}
+
+.Solo__gameError {
+	font-size: 1.8rem;
+	text-align: center;
+	color: @error;
+	margin-top: 1rem;
+}
+
+.Solo__win {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: @green;
+	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.Solo__winText {
+	font-size: 3.6rem;
+}
+
+.Solo__winBtn {
+	@largeBtn();
+	background-color: @green;
+
+	&:hover {
+		background-color: @greenHover;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+}
+
+.Solo__stats {
+	font-size: 1.8rem;
 }
 
 @media only screen and (max-width: 375px) {
@@ -210,16 +245,10 @@
 		height: 20rem;
 		display: flex;
 		align-items: center;
-		//justify-content: end;
 		flex-direction: column;
 		font-size: 3rem;
 		text-align: center;
 		padding-left: 0;
 		width: 22rem;
-	}
-
-	.test {
-		display: flex;
-		flex-direction: column;
 	}
 }
