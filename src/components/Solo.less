@@ -9,7 +9,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 3rem;
+	padding-top: 2rem;
+	font-size: 2.4rem;
 }
 
 .Solo__btns {
@@ -108,6 +109,7 @@
 	margin-top: 1rem;
 }
 
+.Solo__enterBtn,
 .Solo__editorBtn {
 	@smBtn();
 	background-color: @green;
@@ -121,10 +123,51 @@
 	}
 }
 
+.Solo__history {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 1rem;
+	text-align: center; // For history label
+}
+
+.Solo__historyLabel {
+	border: 1px solid black;
+}
+
+//.Solo__historyListContainer {
+// This must be done to enable scrolling for a flex container that justify-content end
+// https://stackoverflow.com/questions/36130760/use-justify-content-flex-end-and-to-have-vertical-scrollbar
+//https://stackoverflow.com/questions/41863033/cant-get-vertical-scrollbar-with-justify-content-flex-end
+//overflow: scroll;
+//}
+
+.Solo__historyList {
+	border: 1px solid red;
+	list-style: none;
+	padding: 1rem 0;
+	margin: 0;
+	overflow: scroll;
+}
+
+.Solo__guessInputs {
+	display: flex;
+	justify-content: center;
+}
+
+.Solo__guessInput {
+	margin: 0.4rem;
+	width: 3.6rem;
+	height: 4.2rem;
+	text-align: center;
+	font-size: 1.6rem;
+}
+
 @media only screen and (max-width: 375px) {
 	.Solo__btn,
 	.Solo__editor,
-	.Solo__editorBtn {
+	.Solo__editorBtn,
+	.Solo__enterBtn {
 		font-size: 125%;
 	}
 
@@ -157,5 +200,26 @@
 
 	.Solo__EditorInput {
 		width: 15rem;
+	}
+
+	.Solo__historyLabel {
+		width: 20rem;
+	}
+
+	.Solo__historyList {
+		height: 20rem;
+		display: flex;
+		align-items: center;
+		//justify-content: end;
+		flex-direction: column;
+		font-size: 3rem;
+		text-align: center;
+		padding-left: 0;
+		width: 22rem;
+	}
+
+	.test {
+		display: flex;
+		flex-direction: column;
 	}
 }
