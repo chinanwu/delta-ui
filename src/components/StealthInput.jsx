@@ -6,6 +6,7 @@ import hasValidCharacters from '../functions/hasValidCharacters';
 import './StealthInput.less';
 
 export const StealthInput = ({ stealthModeOn, value, ariaLabel, onChange }) => {
+	// TODO remoe me!
 	const [val, setVal] = useState(value);
 
 	const handleChange = useCallback(

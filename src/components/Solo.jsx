@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 
 import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
+import hasValidCharacters from '../functions/hasValidCharacters';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
+
+import Loading from './Loading.jsx';
 
 import './Solo.less';
 
@@ -30,6 +33,8 @@ export const Solo = ({
 	// Need to study how others do Accordians or menu animations to see how to not do this
 	// Or do a smarter hack lol
 	const [showEditor, setShowEditor] = useState('');
+	const [editorFromVal, setEditorFromVal] = useState(from);
+	const [editorToVal, setEditorToVal] = useState(to);
 
 	useEffect(() => {
 		document.title = 'Solo - Delta';
@@ -66,13 +71,50 @@ export const Solo = ({
 		setShowEditor('show');
 	}, [setShowEditor]);
 
+	const handleChangeFromEditor = useCallback(
+		event => {
+			if (event && event.target) {
+				const val = event.target.value ? event.target.value.toString() : '';
+				if (hasValidCharacters(val)) setEditorFromVal(val);
+			}
+		},
+		[setEditorFromVal]
+	);
+
+	const handleChangeToEditor = useCallback(
+		event => {
+			if (event && event.target) {
+				const val = event.target.value ? event.target.value.toString() : '';
+				if (hasValidCharacters(val)) setEditorToVal(val);
+			}
+		},
+		[setEditorToVal]
+	);
+
+	const handleSubmitEditor = useCallback(() => {
+		if (editorFromVal.length < 4 || editorToVal.length < 4) {
+			// Maybe I'll customize an alert in the future, TODO
+			alert('Words must be 4 letters long!');
+			return;
+		}
+
+		setLoading(true);
+		getFetch(
+			`/api/v1/words/validateMany?words=${editorFromVal}&words=${editorToVal}`
+		).then(res => {
+			if (res) {
+				setShowEditor('hidden');
+				onChangeGame({ from: editorFromVal, to: editorToVal });
+			} else {
+				alert('Word must be a real 4 letter English word!');
+			}
+			setLoading(false);
+		});
+	}, [editorFromVal, editorToVal, setShowEditor, setLoading]);
+
 	const handleCloseEditor = useCallback(() => {
 		setShowEditor('hidden');
 	}, [setShowEditor]);
-
-	const handleChangeFromEditor = useCallback(() => {
-		console.log('changing from');
-	}, []);
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -109,11 +151,11 @@ export const Solo = ({
 									className="Solo__EditorInput"
 									type="text"
 									maxLength={4}
-									value={from}
+									value={editorFromVal}
 									onChange={handleChangeFromEditor}
 								/>
 							</div>
-							<div className="Solo__editor--center"> -></div>
+							<div className="Solo__editor--center">-></div>
 							<div className="Solo__editorForm">
 								<label htmlFor="soloEditToInput" className="Solo__editorLabel">
 									To:
@@ -123,8 +165,8 @@ export const Solo = ({
 									className="Solo__EditorInput"
 									type="text"
 									maxLength={4}
-									value={to}
-									onChange={handleChangeFromEditor}
+									value={editorToVal}
+									onChange={handleChangeToEditor}
 								/>
 							</div>
 						</div>
@@ -133,6 +175,7 @@ export const Solo = ({
 								id="soloEditorSubmitBtn"
 								className="Solo__editorBtn"
 								aria-label="Submit"
+								onClick={handleSubmitEditor}
 							>
 								Submit
 							</button>
@@ -151,7 +194,7 @@ export const Solo = ({
 
 			<div>Bloop poop</div>
 
-			{loading && createPortal(<div>'ey I'm loadin' 'ere!</div>, document.body)}
+			{loading && createPortal(<Loading />, document.body)}
 		</div>
 	);
 };

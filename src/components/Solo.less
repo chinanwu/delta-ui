@@ -78,6 +78,28 @@
 	justify-content: center;
 	border: 1px solid black;
 	padding: 1rem;
+	height: 10rem;
+}
+
+.Solo__editorForms {
+	display: flex;
+}
+
+.Solo__EditorInput {
+	font-size: 1.4rem;
+}
+
+.Solo__editor--center {
+	&::before,
+	&::after {
+		content: '\00a0';
+	}
+}
+
+.Solo__editor--center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .Solo__editorBtns {
@@ -119,7 +141,6 @@
 	}
 
 	.Solo__editorForms {
-		display: flex;
 		flex-direction: column;
 	}
 
@@ -136,9 +157,5 @@
 
 	.Solo__EditorInput {
 		width: 15rem;
-	}
-
-	.Solo__editor--center {
-		text-align: center;
 	}
 }

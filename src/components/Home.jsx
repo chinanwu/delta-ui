@@ -85,7 +85,7 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 						Versus
 					</button>
 				</div>
-				<div aria-labelledby="rules">
+				<div className="Home--centre" aria-labelledby="rules">
 					<h2 id="rules">Rules</h2>
 					<p className="Home__rules">
 						In each game, you are given two words, a "from" word and a "to"
@@ -95,35 +95,34 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 						be a valid four-letter word in the English language.
 					</p>
 				</div>
-				<h2>Example</h2>
-				<p>From: "heat" -> To: "cold"</p>
-				<p className="Home__example--p">
-					heat -> hea<strong className="Home__example--emphasis">d</strong> ->
-					he<strong className="Home__example--emphasis">l</strong>d -> h
-					<strong className="Home__example--emphasis">o</strong>ld ->{' '}
-					<strong className="Home__example--emphasis">c</strong>old
-				</p>
-				<p className="Home__example--p">Or alternatively,</p>
-				<p className="Home__example--p">
-					heat -> <strong className="Home__example--emphasis">m</strong>eat -> m
-					<strong className="Home__example--emphasis">o</strong>at -> moa
-					<strong className="Home__example--emphasis">n</strong> -> mo
-					<strong className="Home__example--emphasis">o</strong>n -> moo
-					<strong className="Home__example--emphasis">d</strong> -> mo
-					<strong className="Home__example--emphasis">l</strong>d ->{' '}
-					<strong className="Home__example--emphasis">c</strong>old
-				</p>
-				<p className="Home__example--p">
-					For most word pairs, there are a multitude of possible answers!
-				</p>
+				<div className="Home--centre" aria-labelledby="example">
+					<h2 id="example">Example</h2>
+					<p>From: "heat" -> To: "cold"</p>
+					<p className="Home__example--p">
+						heat -> hea<strong className="Home__example--emphasis">d</strong> ->
+						he<strong className="Home__example--emphasis">l</strong>d -> h
+						<strong className="Home__example--emphasis">o</strong>ld ->{' '}
+						<strong className="Home__example--emphasis">c</strong>old
+					</p>
+					<p className="Home__example--p">Or alternatively,</p>
+					<p className="Home__example--p">
+						heat -> <strong className="Home__example--emphasis">m</strong>eat ->
+						m<strong className="Home__example--emphasis">o</strong>at -> moa
+						<strong className="Home__example--emphasis">n</strong> -> mo
+						<strong className="Home__example--emphasis">o</strong>n -> moo
+						<strong className="Home__example--emphasis">d</strong> -> mo
+						<strong className="Home__example--emphasis">l</strong>d ->{' '}
+						<strong className="Home__example--emphasis">c</strong>old
+					</p>
+					<p className="Home__example--p">
+						For most word pairs, there are a multitude of possible answers!
+					</p>
+				</div>
 			</>
-			<div
-				className={getThemeClassname('Home__footer', dark)}
-				aria-label="Footer"
-			>
+			<footer className={getThemeClassname('Home__footer', dark)}>
 				Acknowledgements <br />
 				Made by <a href="https://www.github.com/chinanwu">Chin-An Wu</a>
-			</div>
+			</footer>
 		</div>
 	);
 };
