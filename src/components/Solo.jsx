@@ -52,6 +52,7 @@ export const Solo = ({
 	const [history, setHistory] = useState([]);
 	const [guessVals, setGuessVals] = useState([]);
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+	const historyBottomRef = useRef(null);
 
 	useEffect(() => {
 		document.title = 'Solo - Delta';
@@ -63,7 +64,7 @@ export const Solo = ({
 			getFetch('http://localhost:5000/api/v1/games/words').then(res => {
 				if (res.success && res.data && res.data.from && res.data.to) {
 					onChangeGame({ from: res.data.from, to: res.data.to });
-					setHistory([res.data.from]);
+					// setHistory([res.data.from]);
 					setGuessVals(res.data.from.match(regex));
 					setLoading(false);
 				} else {
@@ -84,6 +85,12 @@ export const Solo = ({
 		setHistory,
 		setGuessVals,
 	]);
+
+	useEffect(() => {
+		historyBottomRef.current.scrollIntoView({
+			behavior: 'smooth',
+		});
+	}, [history]);
 
 	// Duplicate code here, but not sure what is the best way to pull it out, because of the state vals
 	const handleNewClick = useCallback(() => {
@@ -297,10 +304,9 @@ export const Solo = ({
 				</h3>
 				<ul className="Solo__historyList">
 					{history.map((item, i) => (
-						<li ref={testRef} key={`Solo__historyItem--${i}`}>
-							{item}
-						</li>
+						<li key={`Solo__historyItem--${i}`}>{item}</li>
 					))}
+					<li ref={historyBottomRef} />
 				</ul>
 			</div>
 
