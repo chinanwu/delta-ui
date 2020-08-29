@@ -27,6 +27,14 @@ import './Solo.less';
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
 
+const getFormattedTimer = timer => {
+	const seconds = ('0' + (Math.floor(timer / 10) % 100)).slice(-2);
+	const minutes = ('0' + (Math.floor(timer / 1000) % 60)).slice(-2);
+	const hours = ('0' + (Math.floor(timer / 60000) % 60)).slice(-2);
+
+	return `${hours}h : ${minutes}m : ${seconds}s`;
+};
+
 export const Solo = ({
 	dark,
 	from,
@@ -51,6 +59,18 @@ export const Solo = ({
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 	const historyBottomRef = useRef(null);
 
+	const [timer, setTimer] = useState(0);
+
+	useEffect(() => {
+		let interval = null;
+		if (!win) {
+			interval = setInterval(() => {
+				setTimer(seconds => seconds + 1);
+			}, 100);
+		}
+		return () => clearInterval(interval);
+	}, [timer, win]);
+
 	useEffect(() => {
 		document.title = 'Solo - Delta';
 	}, []);
@@ -65,7 +85,7 @@ export const Solo = ({
 					setGuessVals(res.data.from.match(regex));
 					setLoading(false);
 				} else {
-					// Error is for guessing, need another way to log this
+					// Error is for guessing, need another way to log this TODO
 					// setError('Something went wrong grabbing game words!');
 				}
 			});
@@ -89,7 +109,6 @@ export const Solo = ({
 		});
 	}, [history]);
 
-	// Duplicate code here, but not sure what is the best way to pull it out, because of the state vals
 	const handleNewClick = useCallback(() => {
 		setWin(false);
 		setError(null);
@@ -103,8 +122,9 @@ export const Solo = ({
 				setEditorFromVal(res.data.from);
 				setEditorToVal(res.data.to);
 				setLoading(false);
+				setTimer(0);
 			} else {
-				// Error is for guessing, need another way to log this
+				// Error is for guessing, need another way to log this TODO
 				// setError('Something went wrong grabbing game words!');
 			}
 		});
@@ -117,6 +137,7 @@ export const Solo = ({
 		setLoading,
 		setEditorFromVal,
 		setEditorToVal,
+		setTimer,
 	]);
 
 	const handleEditClick = useCallback(() => {
@@ -169,12 +190,13 @@ export const Solo = ({
 			if (res) {
 				setShowEditor('hidden');
 				onChangeGame({ from: editorFromVal, to: editorToVal });
+				setTimer(0);
 			} else {
 				alert('Word must be a real 4 letter English word!');
 			}
 			setLoading(false);
 		});
-	}, [editorFromVal, editorToVal, setShowEditor, setLoading]);
+	}, [editorFromVal, editorToVal, setShowEditor, setLoading, setTimer]);
 
 	const handleCloseEditor = useCallback(() => {
 		setShowEditor('hidden');
@@ -237,27 +259,36 @@ export const Solo = ({
 			inputRef.current.value = '';
 		});
 
-		if (guess === to) {
-			setWin(true);
-			setError(null);
-		} else {
-			getFetch(
-				`http://localhost:5000/api/v1/words/validate?word=${guess}`
-			).then(res => {
-				if (res) {
-					if (isOneOff(guess, history[history.length - 1])) {
+		if (isOneOff(guess, history[history.length - 1])) {
+			if (guess === to) {
+				setWin(true);
+				setError(null);
+			} else {
+				getFetch(
+					`http://localhost:5000/api/v1/words/validate?word=${guess}`
+				).then(res => {
+					if (res) {
 						setHistory(history => [...history, guess]);
+						setError(null);
 					} else {
 						setGuessVals(history[history.length - 1].match(regex));
-						setError('Word must be one letter off from previous word');
+						setError("Word entered isn't a real word");
 					}
-				} else {
-					setGuessVals(history[history.length - 1].match(regex));
-					setError('Word entered isn\t a real word');
-				}
-			});
+				});
+			}
+		} else {
+			setGuessVals(history[history.length - 1].match(regex));
+			setError('Word must be one letter off from previous word');
 		}
-	}, [guessVals, setWin, history, setHistory, setError, setGuessVals]);
+	}, [
+		guessVals,
+		setWin,
+		history,
+		setHistory,
+		setError,
+		setGuessVals,
+		setTimer,
+	]);
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -282,7 +313,6 @@ export const Solo = ({
 					Edit Game
 				</button>
 			</div>
-
 			{showEditor && (
 				<div className={'Solo__editor  Solo__editor--' + showEditor}>
 					<div className="Solo__editorContent">
@@ -337,46 +367,53 @@ export const Solo = ({
 				</div>
 			)}
 
-			<div className="Solo__history" aria-labelledby="soloHistory">
-				<h3 id="soloHistory" className="Solo__historyLabel">
-					History
-				</h3>
-				<ul className="Solo__historyList">
-					{history.map((item, i) => (
-						<li key={`Solo__historyItem--${i}`}>{item}</li>
-					))}
-					<li ref={historyBottomRef} />
-				</ul>
+			<div className="Solo__timer">{getFormattedTimer(timer)}</div>
+
+			<div className="Solo__game">
+				<div className="Solo__history" aria-labelledby="soloHistory">
+					<h3 id="soloHistory" className="Solo__historyLabel">
+						History
+					</h3>
+					<ul className="Solo__historyList">
+						{history.map((item, i) => (
+							<li key={`Solo__historyItem--${i}`}>{item}</li>
+						))}
+						<li ref={historyBottomRef} />
+					</ul>
+				</div>
+
+				<div className="Solo__guessContainer">
+					<div className="Solo__guessInputs">
+						<div>
+							{guessVals.map((val, i) => (
+								<input
+									id={'soloGuessInput-' + i}
+									ref={inputRefs[i]}
+									data-id={i}
+									className="Solo__guessInput"
+									type="text"
+									maxLength={1}
+									placeholder={val}
+									onKeyDown={handleKeyDown}
+									key={'Solo__guessInput-' + i}
+								/>
+							))}
+						</div>
+
+						<button
+							id="soloEnterBtn"
+							className="Solo__enterBtn"
+							onClick={handleEnterClick}
+						>
+							Enter
+						</button>
+					</div>
+
+					<div className="Solo__gameError">{error}</div>
+				</div>
 			</div>
-
-			<div className="Solo__guessInputs">
-				{guessVals.map((val, i) => (
-					<input
-						id={'soloGuessInput-' + i}
-						ref={inputRefs[i]}
-						data-id={i}
-						className="Solo__guessInput"
-						type="text"
-						maxLength={1}
-						placeholder={val}
-						onKeyDown={handleKeyDown}
-						key={'Solo__guessInput-' + i}
-					/>
-				))}
-
-				<button
-					id="soloEnterBtn"
-					className="Solo__enterBtn"
-					onClick={handleEnterClick}
-				>
-					Enter
-				</button>
-			</div>
-
-			<div className="Solo__gameError">{error}</div>
 
 			{loading && createPortal(<Loading />, document.body)}
-
 			{win &&
 				createPortal(
 					<div className="Solo__win">
@@ -392,12 +429,14 @@ export const Solo = ({
 						</button>
 						<div className="Solo__stats">
 							{history.length === 1
-								? 'It took you only one word!'
-								: 'Dang dude took u a while!'}
+								? 'It took you only one word! '
+								: `It took you ${history.length} words! `}
+							It also took you {getFormattedTimer(timer)}
 						</div>
 					</div>,
 					document.body
 				)}
+			<div className="Solo__easterEgg">This is an incredibly tiny screen</div>
 		</div>
 	);
 };
@@ -432,3 +471,6 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Solo);
+
+// Timer stuff here: https://medium.com/@peterjd42/building-timers-in-react-stopwatch-and-countdown-bc06486560a2
+// Fun ideas: Reverse button. Work from To -> From
