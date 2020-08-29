@@ -472,5 +472,4 @@ export default connect(
 	mapDispatchToProps
 )(Solo);
 
-// Timer stuff here: https://medium.com/@peterjd42/building-timers-in-react-stopwatch-and-countdown-bc06486560a2
 // Fun ideas: Reverse button. Work from To -> From

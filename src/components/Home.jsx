@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createPortal } from 'react-dom';
+import FocusTrap from 'focus-trap-react';
 
-import { getFetch, postFetch } from '../functions/FetchFunctions';
+import { postFetch } from '../functions/FetchFunctions';
 import generateGameUrl from '../functions/generateGameUrl';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
@@ -15,6 +17,7 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 	const [gameUrl, setGameUrl] = useState(generateGameUrl);
 	const [error, setError] = useState(null);
 	const [redirect, setRedirect] = useState(false);
+	const [showAcks, setShowAcks] = useState(false);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
@@ -57,6 +60,14 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 		console.log('I want a versus game!');
 	}, []);
 
+	const handleOpenAcks = useCallback(() => {
+		setShowAcks(true);
+	}, [setShowAcks]);
+
+	const handleCloseAcks = useCallback(() => {
+		setShowAcks(false);
+	}, [setShowAcks]);
+
 	return redirect ? (
 		<Redirect to={`/${gameUrl}`} />
 	) : (
@@ -81,6 +92,8 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 						aria-label="Create versus game"
 						role="link"
 						onClick={handleCreateVersusClick}
+						disabled={true}
+						aria-disabled={true}
 					>
 						Versus
 					</button>
@@ -120,9 +133,37 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 				</div>
 			</>
 			<footer className={getThemeClassname('Home__footer', dark)}>
-				Acknowledgements <br />
-				Made by <a href="https://www.github.com/chinanwu">Chin-An Wu</a>
+				<button
+					id="homeOpenAcksBtn"
+					className="Home__acksBtn"
+					aria-label="Open Acknowledgements"
+					onClick={handleOpenAcks}
+				>
+					Acknowledgements
+				</button>
+				<br />
+				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
 			</footer>
+
+			{showAcks &&
+				createPortal(
+					<FocusTrap>
+						<div className="Home__modal">
+							<div className="Home__modalContent">
+								<button
+									id="homeCloseAcksBtn"
+									className="Home__closeAcksBtn"
+									aria-label="Close"
+									onClick={handleCloseAcks}
+								>
+									X
+								</button>
+								Thank you to MCS, the one who introduced me to this word game.
+							</div>
+						</div>
+					</FocusTrap>,
+					document.body
+				)}
 		</div>
 	);
 };
