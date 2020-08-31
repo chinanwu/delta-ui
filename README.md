@@ -19,8 +19,6 @@ Note: As there is no mock API right now, this won't run without the Delta-API. T
 ### Potential (Quality of Life/General) Improvements
 - Rule refresher under the game
 - Dark mode modal?
-- Get a hint - Just be giving solver the current word as from, and provide next word in solution (that it comes up with)
-    - Maybe lim. # of hints, and then after that the game gives you the option to give up?
 
 ### Code Cleanup Backlog
 - Style files needs a cleanup
