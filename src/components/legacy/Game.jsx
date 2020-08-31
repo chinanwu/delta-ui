@@ -19,12 +19,12 @@ import {
 	rightArrowBtn,
 	tabBtn,
 	zBtn,
-} from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
-import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
-import isOneOff from '../functions/isOneOff';
-import { applyGameUrl } from '../thunk/GameThunk.jsx';
+} from '../../constants/Keycodes';
+import { getFetch } from '../../functions/FetchFunctions';
+import getThemeClassname from '../../functions/getThemeClassname';
+import hasValidCharacters from '../../functions/hasValidCharacters';
+import isOneOff from '../../functions/isOneOff';
+import { applyGameUrl } from '../../thunk/GameThunk.jsx';
 
 import Modal from './Modal.jsx';
 

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import FocusTrap from 'focus-trap-react';
 
-import { enterBtn } from '../constants/Keycodes';
+import { enterBtn } from '../../constants/Keycodes';
 
 import './Modal.less';
 

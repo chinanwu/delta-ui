@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { store } from './store';
 
 import Home from './components/Home.jsx';
-import Game from './components/Game.jsx';
+import Game from './components/legacy/Game.jsx';
 import SoloGame from './components/Solo.jsx';
 import NotFound from './components/NotFound.jsx';
 
