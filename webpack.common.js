@@ -7,7 +7,7 @@ module.exports = {
 	entry: { app: './src/index.jsx' },
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: './css/[name].css',
+			filename: './css/[name].[contenthash].css',
 		}),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
@@ -16,7 +16,7 @@ module.exports = {
 		}),
 	],
 	output: {
-		filename: '[name].bundle.js',
+		filename: '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	module: {
@@ -24,11 +24,16 @@ module.exports = {
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env'],
+					},
+				},
 			},
 			{ test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
 			{
-				test: /\.(png|pdf)$/,
+				test: /\.(png|svg)$/,
 				use: [
 					{
 						loader: 'file-loader',

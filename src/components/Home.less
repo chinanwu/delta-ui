@@ -4,8 +4,9 @@
 .Home {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	//justify-content: center;
+	//align-items: center;
+	height: 100%;
 }
 
 .Home--dark {
@@ -13,6 +14,8 @@
 }
 
 .Home__header {
+	display: flex;
+	justify-content: center;
 	margin-top: 3rem;
 	font-size: 3.6rem;
 }
@@ -34,6 +37,11 @@
 
 .Home__input--error {
 	border: 2px solid @error;
+}
+
+.Home__btns {
+	display: flex;
+	justify-content: center;
 }
 
 .Home__btn {
@@ -100,29 +108,43 @@
 	color: red;
 }
 
+.Home__example--emphasis--dark {
+	color: #ff8a8a;
+}
+
 .Home__footer {
 	position: absolute;
 	bottom: 0;
 	text-align: center;
+	width: 100%;
+}
+
+.Home__acksBtn--dark {
+	color: white;
 }
 
 .Home__acksBtn {
 	border: none;
 	background-color: initial;
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	cursor: pointer;
 	text-decoration: underline;
+	margin-bottom: 0.5rem;
 }
 
 .Home__modal {
-	position: absolute;
+	position: fixed;
 	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	height: 100%;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	box-shadow: @box-shadow-24;
 }
 
 .Home__modalContent {
@@ -142,6 +164,20 @@
 	border: none;
 }
 
+.Home__modalHeader {
+	text-align: center;
+}
+
+.Home__modalDesc {
+	text-align: center;
+}
+
+@media only screen and (max-height: 615px) {
+	.Home__footer {
+		position: initial;
+	}
+}
+
 @media only screen and (max-width: 830px) {
 	.Home__rules {
 		width: 80%;
@@ -149,12 +185,22 @@
 }
 
 @media only screen and (max-width: 450px) {
+	.Home {
+		height: auto;
+	}
+
 	.Home p {
 		font-size: 125%;
 	}
 
 	.Home__game {
 		flex-direction: column;
+	}
+
+	.Home__btns {
+		flex-direction: column;
+		padding-left: 3rem;
+		padding-right: 3rem;
 	}
 
 	.Home__btn {
@@ -174,5 +220,17 @@
 
 	.Home__footer {
 		position: initial;
+	}
+
+	.Home__modalContent {
+		padding: 3rem;
+		margin: 4rem;
+		font-size: 125%;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.Home__header {
+		margin-top: 0;
 	}
 }

@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
+import { escapeBtn } from '../constants/Keycodes';
 
-import { postFetch } from '../functions/FetchFunctions';
 import generateGameUrl from '../functions/generateGameUrl';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
+import ThemeToggle from './ThemeToggle.jsx';
+
 import './Home.less';
+
+// Modal boxshadow
 
 export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 	const [gameUrl, setGameUrl] = useState(generateGameUrl);
@@ -41,40 +45,57 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 		[setGameUrl, setError]
 	);
 
-	const handleCreateClick = useCallback(() => {
-		if (!error) {
-			postFetch(
-				'http://localhost:5000/api/v1/games/new',
-				JSON.stringify({ url: gameUrl })
-			).then(res => {
-				res.success
-					? setRedirect(true)
-					: setError(
-							`Unable to create new game with url: ${gameUrl}. Please try again`
-					  );
-			});
-		}
-	}, [error, gameUrl, setRedirect, setError]);
+	// const handleCreateClick = useCallback(() => {
+	// 	if (!error) {
+	// 		postFetch(
+	// 			'/api/v1/games/new,
+	// 			JSON.stringify({ url: gameUrl })
+	// 		).then(res => {
+	// 			res.success
+	// 				? setRedirect(true)
+	// 				: setError(
+	// 						`Unable to create new game with url: ${gameUrl}. Please try again`
+	// 				  );
+	// 		});
+	// 	}
+	// }, [error, gameUrl, setRedirect, setError]);
 
 	const handleCreateVersusClick = useCallback(() => {
 		console.log('I want a versus game!');
 	}, []);
 
 	const handleOpenAcks = useCallback(() => {
+		// TODO: figure out a better way to do this
+		document.body.classList.add('Modal--open');
 		setShowAcks(true);
 	}, [setShowAcks]);
 
 	const handleCloseAcks = useCallback(() => {
+		document.body.classList.remove('Modal--open');
 		setShowAcks(false);
 	}, [setShowAcks]);
+
+	const handleModalKeyDown = useCallback(
+		event => {
+			if (event && event.keyCode) {
+				if (event.keyCode === escapeBtn) {
+					event.preventDefault();
+					handleCloseAcks();
+				}
+			}
+		},
+		[setShowAcks]
+	);
 
 	return redirect ? (
 		<Redirect to={`/${gameUrl}`} />
 	) : (
 		<div className={getThemeClassname('Home', dark)}>
+			<ThemeToggle />
+
 			<h1 className="Home__header">Delta</h1>
 			<>
-				<div>
+				<div className="Home__btns">
 					<Link to="/solo">
 						<button
 							id="homeCreateSoloBtn"
@@ -112,20 +133,77 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 					<h2 id="example">Example</h2>
 					<p>From: "heat" -> To: "cold"</p>
 					<p className="Home__example--p">
-						heat -> hea<strong className="Home__example--emphasis">d</strong> ->
-						he<strong className="Home__example--emphasis">l</strong>d -> h
-						<strong className="Home__example--emphasis">o</strong>ld ->{' '}
-						<strong className="Home__example--emphasis">c</strong>old
+						heat -> hea
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							d
+						</strong>{' '}
+						-> he
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							l
+						</strong>
+						d -> h
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							o
+						</strong>
+						ld ->{' '}
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							c
+						</strong>
+						old
 					</p>
 					<p className="Home__example--p">Or alternatively,</p>
 					<p className="Home__example--p">
-						heat -> <strong className="Home__example--emphasis">m</strong>eat ->
-						m<strong className="Home__example--emphasis">o</strong>at -> moa
-						<strong className="Home__example--emphasis">n</strong> -> mo
-						<strong className="Home__example--emphasis">o</strong>n -> moo
-						<strong className="Home__example--emphasis">d</strong> -> mo
-						<strong className="Home__example--emphasis">l</strong>d ->{' '}
-						<strong className="Home__example--emphasis">c</strong>old
+						heat ->{' '}
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							m
+						</strong>
+						eat -> m
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							o
+						</strong>
+						at -> moa
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							n
+						</strong>{' '}
+						-> mo
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							o
+						</strong>
+						n -> moo
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							d
+						</strong>{' '}
+						-> mo
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							l
+						</strong>
+						d ->{' '}
+						<strong
+							className={getThemeClassname('Home__example--emphasis', dark)}
+						>
+							c
+						</strong>
+						old
 					</p>
 					<p className="Home__example--p">
 						For most word pairs, there are a multitude of possible answers!
@@ -135,7 +213,7 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 			<footer className={getThemeClassname('Home__footer', dark)}>
 				<button
 					id="homeOpenAcksBtn"
-					className="Home__acksBtn"
+					className={getThemeClassname('Home__acksBtn', dark)}
 					aria-label="Open Acknowledgements"
 					onClick={handleOpenAcks}
 				>
@@ -148,7 +226,14 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 			{showAcks &&
 				createPortal(
 					<FocusTrap>
-						<div className="Home__modal">
+						<div
+							className="Home__modal"
+							role="dialog"
+							aria-labelledby="homeModalHeader"
+							aria-describedby="homeModalDesc"
+							aria-modal={true}
+							onKeyDown={handleModalKeyDown}
+						>
 							<div className="Home__modalContent">
 								<button
 									id="homeCloseAcksBtn"
@@ -158,7 +243,27 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 								>
 									X
 								</button>
-								Thank you to MCS, the one who introduced me to this word game.
+								<h2 id="homeModalHeader" className="Home__modalHeader">
+									Acknowledgements
+								</h2>
+								<div id="homeModalDesc" className="Home__modalDesc">
+									Thank you to MCS, the one who introduced me to this word game.
+								</div>
+								<h3 className="Home__modalHeader">Icons</h3>
+								<div className="Home__modalDesc">
+									Moon icon in theme toggle made by{' '}
+									<a
+										href="https://www.flaticon.com/authors/freepik"
+										title="Freepik"
+									>
+										Freepik
+									</a>{' '}
+									from{' '}
+									<a href="https://www.flaticon.com/" title="Flaticon">
+										{' '}
+										www.flaticon.com
+									</a>
+								</div>
 							</div>
 						</div>
 					</FocusTrap>,

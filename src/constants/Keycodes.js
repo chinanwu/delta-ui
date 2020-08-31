@@ -8,3 +8,4 @@ export const upArrow = 38;
 export const downArrow = 40;
 export const aBtn = 65;
 export const zBtn = 90;
+export const escapeBtn = 27;

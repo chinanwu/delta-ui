@@ -1,0 +1,97 @@
+.ThemeToggle__container {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+
+.ThemeToggle {
+	position: relative;
+	display: inline-block;
+	width: 5rem;
+	height: 2.6rem;
+}
+
+.ThemeToggle__label {
+	position: relative;
+}
+
+.ThemeToggle input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.ThemeToggle__slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: linear-gradient(
+		to left top,
+		#167aad,
+		#1d8bbb,
+		#299dc7,
+		#38aed4,
+		#48c0df
+	);
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	border-radius: 3.4rem;
+}
+
+.ThemeToggle__slider:before {
+	position: absolute;
+	content: '';
+	height: 1.8rem;
+	width: 1.8rem;
+	left: 0.4rem;
+	bottom: 0.4rem;
+	background-color: yellow;
+	box-shadow: 0 0 12px 1px rgba(255, 247, 50, 0.53);
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+	border-radius: 50%;
+}
+
+input:checked + .ThemeToggle__slider {
+	background-image: linear-gradient(
+		to bottom,
+		#010019,
+		#03001f,
+		#030026,
+		#03002d,
+		#020033
+	);
+}
+
+input:checked + .ThemeToggle__slider:before {
+	background-color: initial;
+	box-shadow: none;
+	background-image: url('../resources/moon.svg');
+}
+
+input:focus + .ThemeToggle__slider {
+	box-shadow: 0 0 1px rgba(184, 175, 177, 0.25);
+}
+
+input:checked + .ThemeToggle__slider:before {
+	-webkit-transform: translateX(2.4rem);
+	-ms-transform: translateX(2.4rem);
+	transform: translateX(2.4rem);
+}
+// From: https://www.w3schools.com/howto/howto_css_ThemeToggle.asp
+
+@media only screen and (max-width: 375px) {
+	.ThemeToggle__container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+	}
+
+	.ThemeToggle__label {
+		padding-right: 0.4rem;
+	}
+}

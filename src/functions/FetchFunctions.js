@@ -1,11 +1,19 @@
-export const getFetch = url =>
-	fetch(url)
+const API_URL =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:8080'
+		: 'http://api-delta.chinanwu.com';
+
+// endpt: String, e.g. /api/v1/ping
+export const getFetch = endpt =>
+	fetch(API_URL + endpt)
 		.then(res => res.json())
 		.then(res => res)
 		.catch(err => err);
 
-export const postFetch = (url, body) =>
-	fetch(url, {
+// endpt: string, e.g. /api/v1/pong
+// body: string
+export const postFetch = (endpt, body) =>
+	fetch(API_URL + endpt, {
 		method: 'POST',
 		body: body,
 		headers: { 'Content-Type': 'application/json' },

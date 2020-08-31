@@ -21,18 +21,25 @@ import isOneOff from '../functions/isOneOff';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
 import Loading from './Loading.jsx';
+import ThemeToggle from './ThemeToggle.jsx';
 
 import './Solo.less';
+
+// TODO ALERT role for Loading?
 
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
 
 const getFormattedTimer = timer => {
-	const seconds = ('0' + (Math.floor(timer / 10) % 100)).slice(-2);
-	const minutes = ('0' + (Math.floor(timer / 1000) % 60)).slice(-2);
-	const hours = ('0' + (Math.floor(timer / 60000) % 60)).slice(-2);
+	let seconds = timer;
+	const hours = Math.floor(timer / 3600);
+	seconds = seconds - 3600 * hours;
+	const minutes = Math.floor(timer / 60);
+	seconds = seconds - 60 * minutes;
 
-	return `${hours}h : ${minutes}m : ${seconds}s`;
+	return `${hours < 10 ? '0' + hours : hours}h : ${
+		minutes < 10 ? '0' + minutes : minutes
+	}m : ${seconds < 10 ? '0' + seconds : seconds}s`;
 };
 
 export const Solo = ({
@@ -66,7 +73,7 @@ export const Solo = ({
 		if (!win) {
 			interval = setInterval(() => {
 				setTimer(seconds => seconds + 1);
-			}, 100);
+			}, 1000);
 		}
 		return () => clearInterval(interval);
 	}, [timer, win]);
@@ -78,17 +85,19 @@ export const Solo = ({
 	useEffect(() => {
 		if (!from && !to) {
 			setLoading(true);
-			getFetch('http://localhost:5000/api/v1/games/words').then(res => {
-				if (res.success && res.data && res.data.from && res.data.to) {
-					onChangeGame({ from: res.data.from, to: res.data.to });
-					setHistory([res.data.from]);
-					setGuessVals(res.data.from.match(regex));
-					setLoading(false);
-				} else {
-					// Error is for guessing, need another way to log this TODO
-					// setError('Something went wrong grabbing game words!');
-				}
-			});
+			getFetch('/api/v1/words')
+				.then(res => {
+					if (res.from && res.to) {
+						onChangeGame({ from: res.from, to: res.to });
+						setHistory([res.from]);
+						setGuessVals(res.from.match(regex));
+						setLoading(false);
+					} else {
+						// Error is for guessing, need another way to log this TODO
+						// setError('Something went wrong grabbing game words!');
+					}
+				})
+				.catch(err => console.log(err));
 		} else {
 			setHistory([from]);
 			setGuessVals(from.match(regex));
@@ -116,11 +125,11 @@ export const Solo = ({
 			inputRef.current.value = '';
 		});
 		setLoading(true);
-		getFetch('http://localhost:5000/api/v1/games/words').then(res => {
-			if (res.success && res.data && res.data.from && res.data.to) {
-				onChangeGame({ from: res.data.from, to: res.data.to });
-				setEditorFromVal(res.data.from);
-				setEditorToVal(res.data.to);
+		getFetch('/api/v1/words').then(res => {
+			if (res.from && res.to) {
+				onChangeGame({ from: res.from, to: res.to });
+				setEditorFromVal(res.from);
+				setEditorToVal(res.to);
 				setLoading(false);
 				setTimer(0);
 			} else {
@@ -184,18 +193,18 @@ export const Solo = ({
 		}
 
 		setLoading(true);
-		getFetch(
-			`/api/v1/words/validateMany?words=${editorFromVal}&words=${editorToVal}`
-		).then(res => {
-			if (res) {
-				setShowEditor('hidden');
-				onChangeGame({ from: editorFromVal, to: editorToVal });
-				setTimer(0);
-			} else {
-				alert('Word must be a real 4 letter English word!');
+		getFetch(`/api/v1/validate?word=${editorFromVal}&word=${editorToVal}`).then(
+			res => {
+				if (res) {
+					setShowEditor('hidden');
+					onChangeGame({ from: editorFromVal, to: editorToVal });
+					setTimer(0);
+				} else {
+					alert('Word must be a real 4 letter English word!');
+				}
+				setLoading(false);
 			}
-			setLoading(false);
-		});
+		);
 	}, [editorFromVal, editorToVal, setShowEditor, setLoading, setTimer]);
 
 	const handleCloseEditor = useCallback(() => {
@@ -264,9 +273,7 @@ export const Solo = ({
 				setWin(true);
 				setError(null);
 			} else {
-				getFetch(
-					`http://localhost:5000/api/v1/words/validate?word=${guess}`
-				).then(res => {
+				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
 					if (res) {
 						setHistory(history => [...history, guess]);
 						setError(null);
@@ -292,6 +299,8 @@ export const Solo = ({
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
+			<ThemeToggle />
+
 			<h2 className="Solo__words">
 				From: {from} -> To: {to}
 			</h2>
@@ -374,7 +383,7 @@ export const Solo = ({
 					<h3 id="soloHistory" className="Solo__historyLabel">
 						History
 					</h3>
-					<ul className="Solo__historyList">
+					<ul className={getThemeClassname('Solo__historyList', dark)}>
 						{history.map((item, i) => (
 							<li key={`Solo__historyItem--${i}`}>{item}</li>
 						))}
@@ -390,7 +399,7 @@ export const Solo = ({
 									id={'soloGuessInput-' + i}
 									ref={inputRefs[i]}
 									data-id={i}
-									className="Solo__guessInput"
+									className={getThemeClassname('Solo__guessInput', dark)}
 									type="text"
 									maxLength={1}
 									placeholder={val}
@@ -409,7 +418,9 @@ export const Solo = ({
 						</button>
 					</div>
 
-					<div className="Solo__gameError">{error}</div>
+					<div className={getThemeClassname('Solo__gameError', dark)}>
+						{error}
+					</div>
 				</div>
 			</div>
 
