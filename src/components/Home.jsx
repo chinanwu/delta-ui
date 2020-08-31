@@ -95,6 +95,7 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 
 			<h1 className="Home__header">Delta</h1>
 			<>
+				<h2 className="Home--centre Home__gameModeLabel">Game Mode:</h2>
 				<div className="Home__btns">
 					<Link to="/solo">
 						<button
@@ -106,7 +107,6 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 							Solo
 						</button>
 					</Link>
-
 					<button
 						id="homeCreateSoloBtn"
 						className="Home__btn"

@@ -35,7 +35,16 @@
 	}
 }
 
-.Solo__editor {
+.Solo__hintBtn::before {
+	content: 'Get A ';
+}
+
+.Solo__editBtn::after {
+	content: ' Game';
+}
+
+.Solo__editor,
+.Solo__hint {
 	margin-top: 1rem;
 	width: 100%;
 	display: flex;
@@ -44,9 +53,10 @@
 	max-height: 0;
 }
 
-.Solo__editor--show {
-	animation: fadeIn 1s;
-	max-height: 20rem;
+.Solo__editor--show,
+.Solo__hint--show {
+	animation: fadeIn 1.5s;
+	max-height: 25rem;
 	opacity: 1;
 }
 
@@ -57,11 +67,12 @@
 	}
 	to {
 		opacity: 1;
-		max-height: 20rem;
+		max-height: 25rem;
 	}
 }
 
-.Solo__editor--hidden {
+.Solo__editor--hidden,
+.Solo__hint--hidden {
 	animation: fadeOut 1s;
 }
 
@@ -85,11 +96,31 @@
 	height: 10rem;
 }
 
+.Solo__editorContent--dark {
+	background-color: #685167;
+}
+
+.Solo__hintContent {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem;
+}
+
+.Solo__hintContent--dark {
+	background-color: #685167;
+}
+
+.Solo__hint--short {
+	margin-top: 0;
+}
+
 .Solo__editorForms {
 	display: flex;
 }
 
-.Solo__EditorInput {
+.Solo__editorInput {
 	font-size: 1.4rem;
 }
 
@@ -108,12 +139,13 @@
 
 .Solo__editorBtns {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	margin-top: 1rem;
 }
 
 .Solo__enterBtn,
-.Solo__editorBtn {
+.Solo__editorBtn,
+.Solo__hintCloseBtn {
 	@smBtn();
 	background-color: @green;
 
@@ -135,6 +167,10 @@
 	display: flex;
 	justify-content: center;
 	height: 70%;
+}
+
+.Solo__game--dark {
+	@dark();
 }
 
 .Solo__history {
@@ -208,9 +244,13 @@
 	color: @errorDark;
 }
 
-.Solo__win {
-	position: absolute;
+.Solo__win,
+.Solo__solution {
+	position: fixed;
 	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -219,6 +259,23 @@
 	flex-direction: column;
 	color: @green;
 	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.Solo__solutionContent {
+	background-color: white;
+	color: black;
+	padding: 2rem;
+}
+
+.Solo__solutionHeader {
+	text-align: center;
+}
+
+.Solo__solutionList {
+	text-align: center;
+	list-style: none;
+	padding-left: 0;
+	font-size: 1.6rem;
 }
 
 .Solo__winText {
@@ -256,7 +313,9 @@
 	.Solo__btn,
 	.Solo__editor,
 	.Solo__editorBtn,
-	.Solo__enterBtn {
+	.Solo__enterBtn,
+	.Solo__hint,
+	.Solo__hintCloseBtn {
 		font-size: 125%;
 	}
 
@@ -267,9 +326,26 @@
 		margin-right: 2rem;
 	}
 
+	.Solo__hintContent {
+		margin-right: 2rem;
+		margin-left: 2rem;
+	}
+
+	.Solo__optionBtn {
+		width: 13rem;
+	}
+
+	.Solo__hintBtn::before {
+		content: '';
+	}
+
+	.Solo__editBtn::after {
+		content: '';
+	}
+
 	.Solo__editorContent {
 		padding: 2rem;
-		height: 15rem;
+		height: 20rem;
 	}
 
 	.Solo__editorForms {
@@ -283,12 +359,16 @@
 	}
 
 	.Solo__editorLabel,
-	.Solo__EditorInput {
+	.Solo__editorInput {
 		font-size: 1.8rem;
 	}
 
-	.Solo__EditorInput {
+	.Solo__editorInput {
 		width: 15rem;
+	}
+
+	.Solo__editorBtns {
+		flex-direction: column;
 	}
 
 	.Solo__guessContainer {
@@ -339,10 +419,6 @@
 		justify-content: space-between;
 		margin-left: 2rem;
 		margin-right: 2rem;
-	}
-
-	.Solo__OptionBtn {
-		width: 12rem;
 	}
 }
 
