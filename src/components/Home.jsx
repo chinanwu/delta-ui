@@ -17,48 +17,13 @@ import './Home.less';
 
 // Modal boxshadow
 
-export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
-	const [gameUrl, setGameUrl] = useState(generateGameUrl);
-	const [error, setError] = useState(null);
+export const Home = ({ dark }) => {
 	const [redirect, setRedirect] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
-
-	const handleChange = useCallback(
-		event => {
-			if (event && event.target) {
-				if (event.target.value) {
-					const url = event.target.value;
-					setGameUrl(url);
-					hasValidCharacters(url)
-						? setError(null)
-						: setError('Game URL must only contain letters');
-				} else {
-					setGameUrl('');
-					setError('Game URL cannot be empty');
-				}
-			}
-		},
-		[setGameUrl, setError]
-	);
-
-	// const handleCreateClick = useCallback(() => {
-	// 	if (!error) {
-	// 		postFetch(
-	// 			'/api/v1/games/new,
-	// 			JSON.stringify({ url: gameUrl })
-	// 		).then(res => {
-	// 			res.success
-	// 				? setRedirect(true)
-	// 				: setError(
-	// 						`Unable to create new game with url: ${gameUrl}. Please try again`
-	// 				  );
-	// 		});
-	// 	}
-	// }, [error, gameUrl, setRedirect, setError]);
 
 	const handleCreateVersusClick = useCallback(() => {
 		console.log('I want a versus game!');
@@ -234,10 +199,10 @@ export const Home = ({ dark, onChangeFrom, onChangeTo }) => {
 							aria-modal={true}
 							onKeyDown={handleModalKeyDown}
 						>
-							<div className="Home__modalContent">
+							<div className={getThemeClassname('Home__modalContent', dark)}>
 								<button
 									id="homeCloseAcksBtn"
-									className="Home__closeAcksBtn"
+									className={getThemeClassname('Home__closeAcksBtn', dark)}
 									aria-label="Close"
 									onClick={handleCloseAcks}
 								>
@@ -290,30 +255,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Home);
-
-//					<div className="Home__gameCreate">
-// 						<div className="Home__game">
-// 							<input
-// 								id="homeInput"
-// 								className={`Home__input${error ? ' Home__input--error' : ''}`}
-// 								type="text"
-// 								name="gameUrl"
-// 								value={gameUrl}
-// 								onChange={handleChange}
-// 							/>
-// 							<div className="Home__btnContainer">
-// 								<button
-// 									id="homeCreateBtn"
-// 									type="submit"
-// 									className={`Home__btn${error ? ' Home__btn--error' : ''}`}
-// 									disabled={!!error}
-// 									onClick={handleCreateClick}
-// 								>
-// 									Create
-// 								</button>
-// 							</div>
-// 						</div>
-// 						<p className="Home__error" aria-hidden={!error}>
-// 							{error}
-// 						</p>
-// 					</div>

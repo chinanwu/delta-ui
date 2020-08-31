@@ -28,7 +28,7 @@ import './Solo.less';
 // TODO ALERT role for Loading?
 // Also just making the Loading
 // TODO scrollbar colour for dark mode?
-// TODO Hint dark
+// TODO dark mode for solution modal
 // TODO catch get errors
 // TODO better confetti
 
