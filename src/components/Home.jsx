@@ -6,16 +6,12 @@ import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 import { escapeBtn } from '../constants/Keycodes';
 
-import generateGameUrl from '../functions/generateGameUrl';
 import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
-
-// Modal boxshadow
 
 export const Home = ({ dark }) => {
 	const [redirect, setRedirect] = useState(false);

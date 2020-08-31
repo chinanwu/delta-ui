@@ -5,7 +5,6 @@
 - MORE accessibility!
 - Scoring
 - Mock API
-- Get solutions to problems
 
 ## Want to view this UI?
 Simply:

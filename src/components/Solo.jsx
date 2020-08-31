@@ -281,7 +281,7 @@ export const Solo = ({
 		setLoading(true);
 		getFetch(`/api/v1/validate?word=${editorFromVal}&word=${editorToVal}`)
 			.then(res => {
-				if (res) {
+				if (res.success) {
 					setShowEditor('hidden');
 					onChangeGame({ from: editorFromVal, to: editorToVal });
 					setTimer(0);
@@ -367,7 +367,7 @@ export const Solo = ({
 				setError(null);
 			} else {
 				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
-					if (res) {
+					if (res.success) {
 						setHistory(history => [...history, guess]);
 						setError(null);
 					} else {
