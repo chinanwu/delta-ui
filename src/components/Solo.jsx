@@ -25,13 +25,6 @@ import ThemeToggle from './ThemeToggle.jsx';
 
 import './Solo.less';
 
-// TODO ALERT role for Loading?
-// Also just making the Loading
-// TODO scrollbar colour for dark mode?
-// TODO dark mode for solution modal
-// TODO catch get errors
-// TODO better confetti
-
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
 
@@ -102,7 +95,7 @@ export const Solo = ({
 						setHistory([res.from]);
 						setGuessVals(res.from.match(regex));
 					} else {
-						// Error is for guessing, need another way to log this TODO
+						// Error is for guessing, need another way to log this
 						// setError('Something went wrong grabbing game words!');
 					}
 				})
@@ -132,7 +125,7 @@ export const Solo = ({
 		setWin(false);
 		setError(null);
 
-		// Trying to solve the repeated animation bug but this didn't do it. TODO
+		// Trying to solve the repeated animation bug but this didn't do it.
 		setShowEditor(showEditor => (showEditor === 'hidden' ? null : 'hidden'));
 		setShowHint(showHint => (showHint === 'hidden' ? null : 'hidden'));
 
@@ -149,7 +142,7 @@ export const Solo = ({
 					setEditorToVal(res.to);
 					setTimer(0);
 				} else {
-					// Error is for guessing, need another way to log this TODO
+					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
@@ -182,7 +175,7 @@ export const Solo = ({
 					setHint({ word: res.hint, numLeft: res.numLeft });
 					setShowHint('show');
 				} else {
-					// Error is for guessing, need another way to log this TODO
+					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
@@ -206,7 +199,7 @@ export const Solo = ({
 					console.log(res.solution);
 					setSolution(res.solution);
 				} else {
-					// Error is for guessing, need another way to log this TODO
+					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
@@ -217,7 +210,6 @@ export const Solo = ({
 		if (showHint !== 'show') {
 			setShowEditor('show');
 		} else {
-			// TODO not sure this is the best thing to do here
 			setError('Please close the hint to edit the game');
 		}
 	}, [showHint, setShowEditor]);
@@ -264,7 +256,7 @@ export const Solo = ({
 					setEditorFromVal(res.from);
 					setEditorToVal(res.to);
 				} else {
-					// Error is for guessing, need another way to log this TODO
+					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
@@ -273,7 +265,7 @@ export const Solo = ({
 
 	const handleSubmitEditor = useCallback(() => {
 		if (editorFromVal.length < 4 || editorToVal.length < 4) {
-			// Maybe I'll customize an alert in the future, TODO
+			// Maybe I'll customize an alert in the future
 			alert('Words must be 4 letters long!');
 			return;
 		}
@@ -298,7 +290,7 @@ export const Solo = ({
 
 	const handleCloseHint = useCallback(() => {
 		if (error === 'Please close the hint to edit the game') {
-			// TODO improve this, want to use some sort of constant instead of str
+			// improve this, want to use some sort of constant instead of str
 			setError(null);
 		}
 		setShowHint('hidden');
@@ -412,6 +404,7 @@ export const Solo = ({
 						id="soloSolnBtn"
 						className="Solo__btn Solo__optionBtn"
 						aria-label="Get the Solution"
+						aria-haspopup="dialog" // Is this right though?
 						onClick={handleGetSoln}
 					>
 						Get Solution
@@ -643,4 +636,24 @@ export default connect(
 	mapDispatchToProps
 )(Solo);
 
-// Fun ideas: Reverse button. Work from To -> From
+// Fun Ideas:
+// - Reverse button. Work from To -> From
+
+// TODO:
+// - Check for accessibility
+// 			- Missing aria?
+//			- Should Loading have an Alert role?
+// - Error handling, need to figure out best way to deal with errors from the API
+// - Similarly, should I improve the response check?
+// - Loading component needs to be made
+// - Scrollbar colour dark mode
+//			- https://alligator.io/css/css-scrollbars/
+// - Add styling specific to each platform (e.g. moz, etc.)
+// - Solution Modal dark mode
+// - Better win page
+// 			- Better confetti
+//			- Include more content - Stats (Time, path taken, num of words, etc), score, optimal solution
+// - Figure out a better animation for the accordion-like drop down of Edit and Hint buttons
+// - Constant Error strings instead of having it typed out over and over
+// - Error displays for Edit (it's just an alert() right now)
+// - Error displays for when Hint drop down is open and user tries to open Edit Game
