@@ -15,10 +15,11 @@ Simply:
 
 Note: As there is no mock API right now, this won't run without the Delta-API. The Delta-API is currently not finished so I haven't released it.
 
-## Potential Quality of Life Improvements
+### Potential (Quality of Life/General) Improvements
 - Rule refresher under the game
+- Dark mode modal?
 
-## Code Cleanup Backlog
+### Code Cleanup Backlog
 - Style files needs a cleanup
 
 Some tools I used for this project:

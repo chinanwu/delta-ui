@@ -307,7 +307,7 @@ export const Solo = ({
 			<div className="Solo__btns">
 				<button
 					id="soloNewBtn"
-					className="Solo__btn"
+					className="Solo__btn Solo__OptionBtn"
 					aria-label="New Game"
 					onClick={handleNewClick}
 				>
@@ -315,7 +315,7 @@ export const Solo = ({
 				</button>
 				<button
 					id="soloEditGameBtn"
-					className="Solo__btn"
+					className="Solo__btn Solo__OptionBtn"
 					aria-label="Edit Game"
 					onClick={handleEditClick}
 				>
