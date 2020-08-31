@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component rendering renders App 1`] = `
+<Switch>
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [MockFunction],
+        "apply": [MockFunction],
+        "bind": [MockFunction],
+        "call": [MockFunction],
+        "compare": null,
+        "displayName": "Connect(Home)",
+        "type": [MockFunction],
+      }
+    }
+    exact={true}
+    path="/"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [MockFunction],
+        "apply": [MockFunction],
+        "bind": [MockFunction],
+        "call": [MockFunction],
+        "compare": null,
+        "displayName": "Connect(Solo)",
+        "type": [MockFunction],
+      }
+    }
+    path="/solo"
+  />
+  <Route
+    component={[Function]}
+  />
+</Switch>
+`;

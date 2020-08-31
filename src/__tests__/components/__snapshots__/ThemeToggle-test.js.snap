@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThemeToggle behaviour changes the theme 1`] = `
+<div
+  aria-labelledby="themeToggleLabel"
+  className="ThemeToggle__container"
+>
+  <label
+    className="ThemeToggle"
+  >
+    <input
+      aria-checked={true}
+      checked={true}
+      id="themeToggleInput"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="ThemeToggle__slider"
+    />
+  </label>
+  <div
+    className="ThemeToggle__label"
+    id="themeToggleLabel"
+  >
+    Theme
+  </div>
+</div>
+`;
+
+exports[`ThemeToggle rendering renders ThemeToggle 1`] = `
+<div
+  aria-labelledby="themeToggleLabel"
+  className="ThemeToggle__container"
+>
+  <label
+    className="ThemeToggle"
+  >
+    <input
+      id="themeToggleInput"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="ThemeToggle__slider"
+    />
+  </label>
+  <div
+    className="ThemeToggle__label"
+    id="themeToggleLabel"
+  >
+    Theme
+  </div>
+</div>
+`;
+
+exports[`ThemeToggle rendering renders ThemeToggle dark mode 1`] = `
+<div
+  aria-labelledby="themeToggleLabel"
+  className="ThemeToggle__container"
+>
+  <label
+    className="ThemeToggle"
+  >
+    <input
+      aria-checked={true}
+      checked={true}
+      id="themeToggleInput"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="ThemeToggle__slider"
+    />
+  </label>
+  <div
+    className="ThemeToggle__label"
+    id="themeToggleLabel"
+  >
+    Theme
+  </div>
+</div>
+`;
+
+exports[`ThemeToggle rendering renders ThemeToggle light 1`] = `
+<div
+  aria-labelledby="themeToggleLabel"
+  className="ThemeToggle__container"
+>
+  <label
+    className="ThemeToggle"
+  >
+    <input
+      aria-checked={false}
+      checked={false}
+      id="themeToggleInput"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="ThemeToggle__slider"
+    />
+  </label>
+  <div
+    className="ThemeToggle__label"
+    id="themeToggleLabel"
+  >
+    Theme
+  </div>
+</div>
+`;

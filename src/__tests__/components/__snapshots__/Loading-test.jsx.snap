@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading component rendering renders NotFound 1`] = `
+<div
+  className="Loading"
+>
+  'ey I'm loadin' 'ere!
+</div>
+`;

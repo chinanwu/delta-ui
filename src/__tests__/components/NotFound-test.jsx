@@ -7,7 +7,7 @@ jest.unmock('../../components/NotFound.jsx');
 
 describe('NotFound component', () => {
 	describe('rendering', () => {
-		it('renders NavBar', () => {
+		it('renders NotFound', () => {
 			const wrapper = shallow(<NotFound />);
 			expect(wrapper.getElement()).toMatchSnapshot();
 		});
