@@ -12,13 +12,14 @@ export const ThemeToggle = ({ dark, onChangeTheme }) => {
 	}, [dark, onChangeTheme]);
 
 	return (
-		<div className="ThemeToggle__container" aria-labelledby="themeToggleLabel">
+		<div className="ThemeToggle__container">
 			<label className="ThemeToggle">
 				<input
 					id="themeToggleInput"
 					type="checkbox"
 					checked={dark}
 					aria-checked={dark}
+					aria-labelledby="themeToggleLabel"
 					onChange={handleChange}
 				/>
 				<span className="ThemeToggle__slider" />

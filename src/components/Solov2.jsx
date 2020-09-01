@@ -21,23 +21,24 @@ import isOneOff from '../functions/isOneOff';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
 import Loading from './Loading.jsx';
+import HintButton from './HintButton.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
-// import './Solo.less';
+import './Solov2.less';
 
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
 
 const getFormattedTimer = timer => {
-	let seconds = timer;
-	const hours = Math.floor(timer / 3600);
-	seconds = seconds - 3600 * hours;
-	const minutes = Math.floor(timer / 60);
-	seconds = seconds - 60 * minutes;
+	let centis = timer;
+	const minutes = Math.floor(centis / 6000);
+	centis = centis - 6000 * minutes;
+	const seconds = Math.floor(centis / 100);
+	centis = centis - 100 * seconds;
 
-	return `${hours < 10 ? '0' + hours : hours}h : ${
-		minutes < 10 ? '0' + minutes : minutes
-	}m : ${seconds < 10 ? '0' + seconds : seconds}s`;
+	return `${minutes < 10 ? '0' + minutes : minutes}m : ${
+		seconds < 10 ? '0' + seconds : seconds
+	}s : ${centis < 10 ? '0' + centis : centis}cs`;
 };
 
 export const Solo = ({
@@ -78,7 +79,7 @@ export const Solo = ({
 		if (!win) {
 			interval = setInterval(() => {
 				setTimer(seconds => seconds + 1);
-			}, 1000);
+			}, 10);
 		}
 		return () => clearInterval(interval);
 	}, [timer, win]);
@@ -172,36 +173,21 @@ export const Solo = ({
 		getFetch(`/api/v1/hint?from=${history[history.length - 1]}&to=${to}`)
 			.then(res => {
 				if (res.hint && (res.numLeft === 0 || res.numLeft !== null)) {
-					if (showEditor === 'show') {
-						setShowEditor('hidden');
-					}
 					setNumHints(numHints => numHints - 1);
 					setHint({ word: res.hint, numLeft: res.numLeft });
-					setShowHint('show');
-					hintRef.current.focus(); // Focus on close button in Hint
 				} else {
 					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
 			.then(() => setLoading(false));
-	}, [
-		numHints,
-		history,
-		showEditor,
-		setShowEditor,
-		setNumHints,
-		setHint,
-		setShowHint,
-		setLoading,
-	]);
+	}, [numHints, history, showEditor, setNumHints, setHint, setLoading]);
 
 	const handleGetSoln = useCallback(() => {
 		setLoading(true);
 		getFetch(`/api/v1/solve?from=${from}&to=${to}`)
 			.then(res => {
 				if (res.solution) {
-					console.log(res.solution);
 					setSolution(res.solution);
 				} else {
 					// Error is for guessing, need another way to log this
@@ -411,39 +397,18 @@ export const Solo = ({
 		<div className={getThemeClassname('Solo', dark)}>
 			<ThemeToggle />
 
+			<button
+				id="soloEditGameBtn"
+				className="Solo__btn Solo__editBtn"
+				aria-label="Edit Game"
+				onClick={handleEditClick}
+			>
+				Edit
+			</button>
+
 			<h2 className="Solo__words">
 				From: {from} -> To: {to}
 			</h2>
-			<div className="Solo__btns">
-				{numHints > 0 ? (
-					<button
-						id="soloHintBtn"
-						className="Solo__btn Solo__optionBtn Solo__hintBtn"
-						aria-label="Get a Hint"
-						onClick={handleHintClick}
-					>
-						Hint: {numHints}
-					</button>
-				) : (
-					<button
-						id="soloSolnBtn"
-						className="Solo__btn Solo__optionBtn"
-						aria-label="Get the Solution"
-						aria-haspopup="dialog" // Is this right though?
-						onClick={handleGetSoln}
-					>
-						Get Solution
-					</button>
-				)}
-				<button
-					id="soloEditGameBtn"
-					className="Solo__btn Solo__optionBtn Solo__editBtn"
-					aria-label="Edit Game"
-					onClick={handleEditClick}
-				>
-					Edit
-				</button>
-			</div>
 
 			{showEditor && (
 				<div className={'Solo__editor Solo__editor--' + showEditor}>
@@ -512,27 +477,6 @@ export const Solo = ({
 				</div>
 			)}
 
-			{showHint && (
-				<div className={'Solo__hint' + ' Solo__hint--' + showHint}>
-					<div className={getThemeClassname('Solo__hintContent', dark)}>
-						<p>Recommended next word: {hint.word}</p>
-						<p className="Solo__hint--short">
-							Estimated number of words left: {hint.numLeft}
-						</p>
-
-						<button
-							id="soloHintCloseBtn"
-							className="Solo__hintCloseBtn"
-							aria-label="Close Hint"
-							ref={hintRef}
-							onClick={handleCloseHint}
-						>
-							Close
-						</button>
-					</div>
-				</div>
-			)}
-
 			<div className="Solo__timer">{getFormattedTimer(timer)}</div>
 
 			<div className={getThemeClassname('Solo__game', dark)}>
@@ -551,39 +495,58 @@ export const Solo = ({
 					</ul>
 				</div>
 
-				<div className="Solo__guessContainer">
-					<h3 id="soloGuessLabel" className="Solo__guessLabel">
-						Next Word:
-					</h3>
-					<div className="Solo__guessInputs">
-						<div>
-							{guessVals.map((val, i) => (
-								<input
-									id={'soloGuessInput-' + i}
-									ref={inputRefs[i]}
-									data-id={i}
-									className={getThemeClassname('Solo__guessInput', dark)}
-									type="text"
-									maxLength={1}
-									placeholder={val}
-									aria-labelledby="soloGuessLabel"
-									onKeyDown={handleKeyDown}
-									key={'Solo__guessInput-' + i}
-								/>
-							))}
+				<div>
+					<HintButton
+						id="soloHintBtn"
+						numHints={numHints}
+						btnText={`Get a Hint: ${numHints}`}
+						ariaLabelledBy="soloHintHeader"
+						onClick={handleHintClick}
+						onSolnClick={handleGetSoln}
+					>
+						<h3 id="soloHintHeader">Hint: </h3>
+						<p className="Solo__hint">
+							Recommended next word: {hint ? hint.word : ''}
+						</p>
+						<p className="Solo__hint">
+							Estimated number of words left: {hint ? hint.numLeft : ''}
+						</p>
+					</HintButton>
+
+					<div className="Solo__guessContainer">
+						<h3 id="soloGuessLabel" className="Solo__guessLabel">
+							Next Word:
+						</h3>
+						<div className="Solo__guessInputs">
+							<div>
+								{guessVals.map((val, i) => (
+									<input
+										id={'soloGuessInput-' + i}
+										ref={inputRefs[i]}
+										data-id={i}
+										className={getThemeClassname('Solo__guessInput', dark)}
+										type="text"
+										maxLength={1}
+										placeholder={val}
+										aria-labelledby="soloGuessLabel"
+										onKeyDown={handleKeyDown}
+										key={'Solo__guessInput-' + i}
+									/>
+								))}
+							</div>
+
+							<button
+								id="soloEnterBtn"
+								className="Solo__enterBtn"
+								onClick={handleEnterClick}
+							>
+								Enter
+							</button>
 						</div>
 
-						<button
-							id="soloEnterBtn"
-							className="Solo__enterBtn"
-							onClick={handleEnterClick}
-						>
-							Enter
-						</button>
-					</div>
-
-					<div className={getThemeClassname('Solo__gameError', dark)}>
-						{error}
+						<div className={getThemeClassname('Solo__gameError', dark)}>
+							{error}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -682,7 +645,7 @@ export default connect(
 //							http://webcheatsheet.com/HTML/controll_tab_order.php
 //							- Perhaps same tab order of Hint button and Close button in Hint
 //			- Should Loading have an Alert role?
-//			- Timer accessibility ? https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/ARIA_timer_role YO
+//			- Timer accessibility ?
 // - Error handling, need to figure out best way to deal with errors from the API
 // - Similarly, should I improve the response check?
 // - Loading component needs to be made

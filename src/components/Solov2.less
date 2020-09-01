@@ -13,18 +13,20 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 2rem;
+	padding-top: 0;
 	font-size: 2.4rem;
 }
 
-.Solo__btns {
-	display: flex;
-	justify-content: center;
-}
-
-.Solo__btn {
+.Solo__editBtn {
 	@smBtn();
 	background-color: @green;
+	margin-left: 2rem;
+	margin-top: 2rem;
+	font-size: 1.6rem;
+
+	&::after {
+		content: ' Game';
+	}
 
 	&:hover {
 		background-color: @greenHover;
@@ -32,58 +34,6 @@
 
 	&:active {
 		background-color: @greenActive;
-	}
-}
-
-.Solo__hintBtn::before {
-	content: 'Get A ';
-}
-
-.Solo__editBtn::after {
-	content: ' Game';
-}
-
-.Solo__editor,
-.Solo__hint {
-	margin-top: 1rem;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	overflow: hidden;
-	max-height: 0;
-}
-
-.Solo__editor--show,
-.Solo__hint--show {
-	animation: fadeIn 1.5s;
-	max-height: 25rem;
-	opacity: 1;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		max-height: 0;
-	}
-	to {
-		opacity: 1;
-		max-height: 25rem;
-	}
-}
-
-.Solo__editor--hidden,
-.Solo__hint--hidden {
-	animation: fadeOut 1s;
-}
-
-@keyframes fadeOut {
-	from {
-		opacity: 1;
-		max-height: 20rem;
-	}
-	to {
-		max-height: 0;
-		opacity: 0;
 	}
 }
 
@@ -167,6 +117,7 @@
 	display: flex;
 	justify-content: center;
 	height: 70%;
+	margin-top: 1rem;
 }
 
 .Solo__game--dark {
@@ -177,7 +128,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 1rem;
 	text-align: center; // For history label
 }
 
@@ -201,6 +151,12 @@
 
 .Solo__historyList--dark {
 	background: #685167;
+}
+
+.Solo__hint {
+	font-size: 1.6rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
 }
 
 .Solo__guessContainer {
@@ -315,12 +271,11 @@
 		height: initial;
 	}
 
-	.Solo__btn,
 	.Solo__editor,
 	.Solo__editorBtn,
 	.Solo__enterBtn,
-	.Solo__hint,
-	.Solo__hintCloseBtn {
+	.Solo__editBtn,
+	.Solo__hint {
 		font-size: 125%;
 	}
 
@@ -336,16 +291,14 @@
 		margin-left: 2rem;
 	}
 
-	.Solo__optionBtn {
-		width: 13rem;
-	}
-
-	.Solo__hintBtn::before {
-		content: '';
-	}
-
 	.Solo__editBtn::after {
 		content: '';
+	}
+
+	.Solo__editBtn {
+		width: 7rem;
+		margin-left: 1rem;
+		margin-top: 1rem;
 	}
 
 	.Solo__editorContent {
@@ -409,12 +362,6 @@
 	}
 }
 
-@media only screen and (max-width: 455px) {
-	.Solo__words {
-		padding-top: 5rem;
-	}
-}
-
 @media only screen and (max-width: 375px) {
 	.Solo__words {
 		padding-top: 2rem;
@@ -422,12 +369,6 @@
 
 	.Solo__guessInput {
 		font-size: 2rem;
-	}
-
-	.Solo__btns {
-		justify-content: space-between;
-		margin-left: 2rem;
-		margin-right: 2rem;
 	}
 }
 

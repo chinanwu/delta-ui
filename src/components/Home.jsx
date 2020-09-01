@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 
 import { escapeBtn } from '../constants/Keycodes';
+import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
@@ -217,15 +218,13 @@ export const Home = ({ dark }) => {
 			{showAcks &&
 				createPortal(
 					<FocusTrap>
-						<div
-							className="Home__modal"
-							role="dialog"
-							aria-labelledby="homeModalHeader"
-							aria-describedby="homeModalDesc"
-							aria-modal={true}
-							onKeyDown={handleModalKeyDown}
-						>
-							<div className={getThemeClassname('Home__modalContent', dark)}>
+						<div className="Home__modal" onKeyDown={handleModalKeyDown}>
+							<div
+								className={getThemeClassname('Home__modalContent', dark)}
+								role="dialog"
+								aria-modal={true}
+								aria-labelledby="homeModalHeader"
+							>
 								<button
 									id="homeCloseAcksBtn"
 									className={getThemeClassname('Home__closeAcksBtn', dark)}
@@ -237,11 +236,11 @@ export const Home = ({ dark }) => {
 								<h2 id="homeModalHeader" className="Home__modalHeader">
 									Acknowledgements
 								</h2>
-								<div id="homeModalDesc" className="Home__modalDesc">
+								<div id="homeModalDesc" className="Home__modalAck">
 									Thank you to MCS, the one who introduced me to this word game.
 								</div>
 								<h3 className="Home__modalHeader">Icons</h3>
-								<div className="Home__modalDesc">
+								<div className="Home__modalAck">
 									Moon icon in theme toggle made by{' '}
 									<a
 										href="https://www.flaticon.com/authors/freepik"

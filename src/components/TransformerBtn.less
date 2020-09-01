@@ -1,0 +1,50 @@
+@import '../style/button';
+@import '../style/styles';
+
+@initialWidth: 15rem;
+@initialHeight: 2rem;
+@expandedWidth: 30rem;
+@expandedHeight: 13rem;
+
+.TransformerBtnContainer {
+	width: 30rem;
+	height: 15rem; // expandedHeight + 1rem of padding + 1rem of margin
+}
+
+.TransformerBtn {
+	@medBtn();
+	max-width: @initialWidth;
+	height: @initialHeight;
+	overflow: hidden;
+	transition: all 1s;
+	text-align: center;
+	background-color: @green;
+	margin-top: 0;
+
+	&:hover {
+		background-color: @greenHover;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+}
+
+.TransformerBtn--expanded {
+	max-width: @expandedWidth;
+	height: @expandedHeight;
+	background-color: white;
+	border: 1px solid black;
+	box-shadow: none;
+	cursor: default;
+
+	&:hover {
+		background-color: white;
+		box-shadow: none;
+	}
+
+	&:active {
+		background-color: white;
+		box-shadow: none;
+	}
+}
