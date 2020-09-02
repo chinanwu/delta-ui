@@ -2,44 +2,43 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 
 import './HintButton.less';
+import getThemeClassname from '../functions/getThemeClassname';
 
 export const HintButton = ({
 	id,
+	dark,
 	children,
 	btnText,
 	numHints,
+	isExpanded,
 	ariaLabelledBy,
 	onClick,
 	onSolnClick,
+	onExpandChange,
 }) => {
-	const [isExpanded, setIsExpanded] = useState(false);
-
 	const handleClick = useCallback(() => {
-		if (numHints > 0) {
-			setIsExpanded(isExpanded => {
-				if (isExpanded) {
-					return false;
-				} else {
-					onClick();
-					return true;
-				}
-			});
+		if (isExpanded) {
+			onExpandChange(false);
 		} else {
-			setIsExpanded(isExpanded => {
-				if (!isExpanded) {
-					onSolnClick();
-				} else {
-					return false;
-				}
-			});
+			if (numHints > 0) {
+				onClick();
+				onExpandChange(true);
+			} else {
+				onSolnClick();
+			}
 		}
-	}, [isExpanded, setIsExpanded, onClick]);
+	}, [isExpanded, numHints, onExpandChange, onClick, onSolnClick]);
 
 	return (
-		<div className="HintButton">
+		<div
+			className={
+				getThemeClassname('HintButton', dark) +
+				(isExpanded ? ' HintButton--expanded' : '')
+			}
+		>
 			<div
 				className={
-					'HintButton__content' +
+					getThemeClassname('HintButton__content', dark) +
 					(isExpanded ? ' HintButton__content--expanded' : '')
 				}
 				aria-labelledby={ariaLabelledBy}
@@ -75,11 +74,13 @@ export const HintButton = ({
 
 HintButton.propTypes = {
 	id: PropTypes.string.isRequired,
+	dark: PropTypes.bool,
 	children: PropTypes.any,
 	btnText: PropTypes.string,
 	numHints: PropTypes.number,
 	onClick: PropTypes.func,
 	onSolnClick: PropTypes.func,
+	onExpandChange: PropTypes.func,
 };
 
 export default HintButton;

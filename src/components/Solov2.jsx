@@ -53,11 +53,10 @@ export const Solo = ({
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
-	// This allows for a bit of a hack way to do this fadeOut animation for the editor.
-	// Need to study how others do Accordians or menu animations to see how to not do this
-	// Or do a smarter hack lol
 	const [numHints, setNumHints] = useState(3);
 	const [hint, setHint] = useState(null);
+	const [isHintExpanded, setIsHintExpanded] = useState(false);
+	const [showHintInHistory, setShowHintInHistory] = useState(false);
 	const [solution, setSolution] = useState(null);
 
 	const [history, setHistory] = useState([]);
@@ -120,11 +119,11 @@ export const Solo = ({
 	const handleNewClick = useCallback(() => {
 		setWin(false);
 		setNumHints(3);
+		setHint(null);
+		setIsHintExpanded(false);
+		setShowHintInHistory(false);
 		setError(null);
-
-		// Has to be done, animated bug would show the things closing over and over
-		setShowEditor('');
-		setShowHint('');
+		setTimer(0);
 
 		setSolution(null);
 		inputRefs.forEach(inputRef => {
@@ -135,8 +134,6 @@ export const Solo = ({
 			.then(res => {
 				if (res.from && res.to) {
 					onChangeGame({ from: res.from, to: res.to });
-					setEditorFromVal(res.from);
-					setEditorToVal(res.to);
 					setTimer(0);
 				} else {
 					// Error is for guessing, need another way to log this
@@ -149,7 +146,10 @@ export const Solo = ({
 		inputRefs,
 		setWin,
 		setError,
+		setHint,
 		setNumHints,
+		setIsHintExpanded,
+		setShowHintInHistory,
 		setSolution,
 		setLoading,
 		setTimer,
@@ -162,13 +162,21 @@ export const Solo = ({
 				if (res.hint && (res.numLeft === 0 || res.numLeft !== null)) {
 					setNumHints(numHints => numHints - 1);
 					setHint({ word: res.hint, numLeft: res.numLeft });
+					setShowHintInHistory(true);
 				} else {
 					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
 				}
 			})
 			.then(() => setLoading(false));
-	}, [numHints, history, setNumHints, setHint, setLoading]);
+	}, [
+		numHints,
+		history,
+		setNumHints,
+		setHint,
+		setShowHintInHistory,
+		setLoading,
+	]);
 
 	const handleGetSoln = useCallback(() => {
 		setLoading(true);
@@ -184,14 +192,32 @@ export const Solo = ({
 			.then(() => setLoading(false));
 	}, [setLoading, setSolution]);
 
+	const handleExpandHint = useCallback(
+		expand => {
+			setIsHintExpanded(expand);
+		},
+		[setIsHintExpanded]
+	);
+
 	const handleSubmitEdit = useCallback(
 		(nextFrom, nextTo) => {
 			setNumHints(3);
+			setHint(null);
+			setIsHintExpanded(false);
+			setShowHintInHistory(false);
 			setError(null);
 			onChangeGame({ from: nextFrom, to: nextTo });
 			setTimer(0);
 		},
-		[setNumHints, setError, setTimer, onChangeGame]
+		[
+			setNumHints,
+			setHint,
+			setIsHintExpanded,
+			setShowHintInHistory,
+			setError,
+			setTimer,
+			onChangeGame,
+		]
 	);
 
 	const handleKeyDown = useCallback(
@@ -260,6 +286,7 @@ export const Solo = ({
 					if (res.success) {
 						setHistory(history => [...history, guess]);
 						setError(null);
+						setShowHintInHistory(false);
 					} else {
 						setGuessVals(history[history.length - 1].match(regex));
 						setError("Word entered isn't a real word");
@@ -276,9 +303,25 @@ export const Solo = ({
 		setWin,
 		setHistory,
 		setError,
+		setShowHintInHistory,
 		setGuessVals,
 		setTimer,
 	]);
+
+	const makeMysteryStepListItems = num => {
+		let all = [];
+		for (let i = 0; i < num; i++) {
+			all[i] = (
+				<li
+					className="Solo__historyHintMysteryLi"
+					key={`Solo__historyHintMystery--${i}`}
+				>
+					<div className="Solo__historyHintMystery">?</div>
+				</li>
+			);
+		}
+		return all;
+	};
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -291,7 +334,9 @@ export const Solo = ({
 				onChange={handleSubmitEdit}
 			/>
 
-			<div className="Solo__timer">{getFormattedTimer(timer)}</div>
+			<div className="Solo__timer" role="timer">
+				{getFormattedTimer(timer)}
+			</div>
 
 			<div className={getThemeClassname('Solo__game', dark)}>
 				<div className="Solo__history" aria-labelledby="soloHistory">
@@ -306,6 +351,24 @@ export const Solo = ({
 							<li key={`Solo__historyItem--${i}`}>{item}</li>
 						))}
 						<li ref={historyBottomRef} />
+
+						{showHintInHistory && hint ? (
+							hint.word !== to ? (
+								<>
+									<li
+										className={getThemeClassname('Solo__historyHintWord', dark)}
+									>
+										{hint.word}
+									</li>
+									{makeMysteryStepListItems(hint.numLeft)}
+									<li>{to}</li>
+								</>
+							) : (
+								<>
+									<li className="Solo__historyHintWord">{hint.word}</li>
+								</>
+							)
+						) : null}
 					</ul>
 				</div>
 
@@ -313,10 +376,13 @@ export const Solo = ({
 					<HintButton
 						id="soloHintBtn"
 						numHints={numHints}
+						isExpanded={isHintExpanded}
+						dark={dark}
 						btnText={`Get a Hint: ${numHints}`}
 						ariaLabelledBy="soloHintHeader"
 						onClick={handleHintClick}
 						onSolnClick={handleGetSoln}
+						onExpandChange={handleExpandHint}
 					>
 						<h3 id="soloHintHeader">Hint: </h3>
 						<p className="Solo__hint">
@@ -343,6 +409,7 @@ export const Solo = ({
 										maxLength={1}
 										placeholder={val}
 										aria-labelledby="soloGuessLabel"
+										aria-invalid={error}
 										onKeyDown={handleKeyDown}
 										key={'Solo__guessInput-' + i}
 									/>
@@ -453,13 +520,8 @@ export default connect(
 // - Reverse button. Work from To -> From
 
 // TODO:
-// - Check for accessibility
+// - Check for accessibility - Ongoing, forever and ever
 // 			- Missing aria?
-//					- Tabbing order - When open Hint, next tab (if focus on Hint should be to Close)
-//							http://webcheatsheet.com/HTML/controll_tab_order.php
-//							- Perhaps same tab order of Hint button and Close button in Hint
-//			- Should Loading have an Alert role?
-//			- Timer accessibility ?
 // - Error handling, need to figure out best way to deal with errors from the API
 // - Similarly, should I improve the response check?
 // - Loading component needs to be made
@@ -470,7 +532,7 @@ export default connect(
 // - Better win page
 // 			- Better confetti
 //			- Include more content - Stats (Time, path taken, num of words, etc), score, optimal solution
-// - Figure out a better animation for the accordion-like drop down of Edit and Hint buttons
 // - Constant Error strings instead of having it typed out over and over
-// - Error displays for Edit (it's just an alert() right now)
-// - Error displays for when Hint drop down is open and user tries to open Edit Game
+// - Error causes input box to be red maybe?
+
+// https://wireframe.cc/mNTM9B

@@ -27,6 +27,7 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 		setIsEditable(false);
 		setFromVal('');
 		setToVal('');
+		setError('');
 	}, [setIsEditable, setFromVal, setToVal]);
 
 	const handleFromChange = useCallback(
@@ -94,7 +95,7 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 			<button
 				id="stealthFormEditBtn"
 				className="StealthForm__btn StealthForm__editBtn"
-				aria-label="Edit game button"
+				aria-roledescription="Modify the game words"
 				disabled={isEditable}
 				onClick={handleOpen}
 			>
@@ -109,7 +110,8 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 							: '')
 					}
 				>
-					<h2 className="StealthForm__words">
+					{isEditable && <h2 className="StealthForm__editHeader">Edit Game</h2>}
+					<h3 className="StealthForm__words">
 						<span id="stealthFormFrom">From</span>:{' '}
 						{isEditable ? (
 							<input
@@ -122,6 +124,7 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 								aria-placeholder={from}
 								aria-live="polite"
 								aria-labelledby="stealthFormFrom"
+								aria-invalid={error}
 								onChange={handleFromChange}
 								onKeyDown={handleKeyDown}
 							/>
@@ -139,24 +142,30 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 								className="StealthForm__input"
 								type="text"
 								maxLength={4}
+								value={toVal}
 								placeholder={to}
 								aria-placeholder={to}
 								aria-live="polite"
 								aria-labelledby="stealthFormTo"
-								value={toVal}
+								aria-invalid={error}
 								onChange={handleToChange}
 								onKeyDown={handleKeyDown}
 							/>
 						) : (
 							to
 						)}
-					</h2>
+					</h3>
+					{isEditable && (
+						<div className={getThemeClassname('StealthForm__error', dark)}>
+							{error}
+						</div>
+					)}
 					{isEditable && (
 						<div className="StealthForm__btns">
 							<button
 								id="stealthFormRandomizeBtn"
 								className="StealthForm__btn"
-								aria-label="Randomize words"
+								aria-roledescription="Get a random pair of 4-letter words"
 								onClick={handleRandomizeClick}
 							>
 								Randomize
@@ -164,7 +173,6 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 							<button
 								id="stealthFormSubmitBtn"
 								className="StealthForm__btn"
-								aria-label="Submit new words"
 								onClick={handleSubmitClick}
 							>
 								Submit
@@ -179,7 +187,6 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 							</button>
 						</div>
 					)}
-					{error && <div>{error}</div>}
 				</div>
 			</FocusTrap>
 

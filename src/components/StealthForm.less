@@ -29,7 +29,8 @@
 	&[disabled] {
 		background-color: @disabledBtn;
 		box-shadow: none;
-		cursor: default;
+		color: #484747;
+		cursor: not-allowed;
 	}
 }
 
@@ -38,16 +39,22 @@
 }
 
 .StealthForm--editable {
-	padding-top: 2rem;
+	padding-top: 1rem;
 	padding-bottom: 1.5rem;
 	margin-right: 1rem;
 	margin-left: 1rem;
 	margin-bottom: 1rem;
 	box-shadow: @box-shadow-08;
+	transition: all 1s;
+	border: 1px solid black;
 }
 
 .StealthForm--editable--dark {
 	background: #685167;
+}
+
+.StealthForm__editHeader {
+	text-align: center;
 }
 
 .StealthForm__words {
@@ -62,6 +69,19 @@
 	font-size: 2rem;
 	width: 6rem;
 	text-align: center;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
 }
 
 .StealthForm__to:before {
@@ -71,6 +91,18 @@
 .StealthForm__btns {
 	display: flex;
 	justify-content: center;
+}
+
+.StealthForm__error {
+	text-align: center;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	color: @error;
+	font-size: 1.6rem;
+}
+
+.StealthForm__error--dark {
+	color: @errorDark;
 }
 
 @media only screen and (max-width: 550px) {
@@ -87,5 +119,13 @@
 		width: 7rem;
 		margin-left: 1rem;
 		margin-top: 1rem;
+	}
+
+	.StealthForm--editable {
+		padding-top: 2rem;
+		padding-bottom: 1.5rem;
+		margin-right: 1rem;
+		margin-left: 1rem;
+		margin-bottom: 1rem;
 	}
 }

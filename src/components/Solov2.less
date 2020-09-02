@@ -153,6 +153,32 @@
 	background: #685167;
 }
 
+.Solo__historyHintWord {
+	color: #757575;
+}
+
+.Solo__historyHintWord--dark {
+	color: #ddb6e8;
+}
+
+.Solo__historyHintMysteryLi {
+	display: flex;
+	justify-content: center;
+}
+
+.Solo__historyHintMystery {
+	width: 10rem;
+	margin-bottom: 0.5rem;
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+.Solo__historyHintMystery--dark {
+	background-color: #3c2b3b;
+	color: white;
+}
+
 .Solo__hint {
 	font-size: 1.6rem;
 	margin-bottom: 0.5rem;
@@ -183,12 +209,38 @@
 	height: 4.2rem;
 	text-align: center;
 	font-size: 1.6rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
 }
 
 .Solo__guessInput--dark {
 	color: white;
 	background: #151515;
 	border: 1px solid black;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #a2a2a2;
+	}
+
+	&:-ms-input-placeholder {
+		color: #a2a2a2;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #a2a2a2;
+	}
 }
 
 .Solo__gameError {
