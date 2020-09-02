@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useCallback, useState } from 'react';
 
 import './HintButton.less';
 
@@ -59,6 +59,7 @@ export const HintButton = ({
 						? 'Get the solution'
 						: 'Get a Hint'
 				}
+				aria-expanded={isExpanded}
 				aria-haspopup={!isExpanded && numHints === 0 ? 'dialog' : null}
 				onClick={handleClick}
 			>

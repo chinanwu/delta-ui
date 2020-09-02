@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-
-import StealthForm from './StealthForm.jsx';
+import React, { useCallback } from 'react';
 
 export const Playground = () => {
+	const test = useCallback(() => {
+		console.log('change');
+	}, []);
+
 	return (
 		<div>
-			<StealthForm />
+			<input placeholder="test" onChange={test} />
 		</div>
 	);
 };

@@ -1,0 +1,91 @@
+@import '../style/styles';
+@import '../style/button';
+
+.StealthForm__btn {
+	@medBtn();
+	background-color: @green;
+
+	&:hover {
+		background-color: @greenHover;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+}
+
+.StealthForm__editBtn {
+	@smBtn();
+	margin-left: 1rem;
+	margin-top: 1rem;
+	font-size: 1.6rem;
+	transition: all 0.5s;
+
+	&::after {
+		content: ' Game';
+	}
+
+	&:disabled,
+	&[disabled] {
+		background-color: @disabledBtn;
+		box-shadow: none;
+		cursor: default;
+	}
+}
+
+.StealthForm__form {
+	transition: box-shadow 0.2s;
+}
+
+.StealthForm--editable {
+	padding-top: 2rem;
+	padding-bottom: 1.5rem;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+	box-shadow: @box-shadow-08;
+}
+
+.StealthForm--editable--dark {
+	background: #685167;
+}
+
+.StealthForm__words {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0;
+	font-size: 2.4rem;
+}
+
+.StealthForm__input {
+	font-size: 2rem;
+	width: 6rem;
+	text-align: center;
+}
+
+.StealthForm__to:before {
+	content: '\00a0';
+}
+
+.StealthForm__btns {
+	display: flex;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 550px) {
+	.StealthForm__btn,
+	.StealthForm__editBtn {
+		font-size: 125%;
+	}
+
+	.StealthForm__editBtn::after {
+		content: '';
+	}
+
+	.StealthForm__editBtn {
+		width: 7rem;
+		margin-left: 1rem;
+		margin-top: 1rem;
+	}
+}

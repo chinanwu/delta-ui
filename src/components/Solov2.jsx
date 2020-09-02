@@ -16,12 +16,12 @@ import {
 } from '../constants/Keycodes';
 import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
 import isOneOff from '../functions/isOneOff';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
+import StealthForm from './StealthForm.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Solov2.less';
@@ -56,16 +56,9 @@ export const Solo = ({
 	// This allows for a bit of a hack way to do this fadeOut animation for the editor.
 	// Need to study how others do Accordians or menu animations to see how to not do this
 	// Or do a smarter hack lol
-	const [showEditor, setShowEditor] = useState('');
-	const [editorFromVal, setEditorFromVal] = useState(from);
-	const [editorToVal, setEditorToVal] = useState(to);
-	const randRef = useRef(null);
-
 	const [numHints, setNumHints] = useState(3);
 	const [hint, setHint] = useState(null);
-	const [showHint, setShowHint] = useState('');
 	const [solution, setSolution] = useState(null);
-	const hintRef = useRef(null);
 
 	const [history, setHistory] = useState([]);
 	const [guessVals, setGuessVals] = useState([]);
@@ -157,14 +150,8 @@ export const Solo = ({
 		setWin,
 		setError,
 		setNumHints,
-		showEditor,
-		showHint,
-		setShowEditor,
-		setShowHint,
 		setSolution,
 		setLoading,
-		setEditorFromVal,
-		setEditorToVal,
 		setTimer,
 	]);
 
@@ -181,7 +168,7 @@ export const Solo = ({
 				}
 			})
 			.then(() => setLoading(false));
-	}, [numHints, history, showEditor, setNumHints, setHint, setLoading]);
+	}, [numHints, history, setNumHints, setHint, setLoading]);
 
 	const handleGetSoln = useCallback(() => {
 		setLoading(true);
@@ -197,107 +184,15 @@ export const Solo = ({
 			.then(() => setLoading(false));
 	}, [setLoading, setSolution]);
 
-	const handleEditClick = useCallback(() => {
-		if (showHint !== 'show') {
-			setShowEditor('show');
-			randRef.current.focus(); // Focus on first button in editor
-		} else {
-			setError('Please close the hint to edit the game');
-		}
-	}, [showHint, setShowEditor]);
-
-	const handleChangeFromEditor = useCallback(
-		event => {
-			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
-				if (hasValidCharacters(val)) setEditorFromVal(val);
-			}
-		},
-		[setEditorFromVal]
-	);
-
-	const handleChangeToEditor = useCallback(
-		event => {
-			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
-				if (hasValidCharacters(val)) setEditorToVal(val);
-			}
-		},
-		[setEditorToVal]
-	);
-
-	const handleKeyDownFromEditor = useCallback(
-		event => {
-			if (event && event.keyCode) {
-				if (event.keyCode === enterBtn || event.keyCode === spaceBtn) {
-					event.preventDefault();
-					handleSubmitEditor();
-				}
-			}
-		},
-		[editorFromVal, editorToVal]
-	);
-
-	const handleRandomizeEditor = useCallback(() => {
-		setWin(false);
-		setError(null);
-		setLoading(true);
-		getFetch('/api/v1/words')
-			.then(res => {
-				if (res.from && res.to) {
-					setEditorFromVal(res.from);
-					setEditorToVal(res.to);
-				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [setWin, setError, setLoading, setEditorFromVal, setEditorToVal]);
-
-	const handleSubmitEditor = useCallback(() => {
-		if (editorFromVal.length < 4 || editorToVal.length < 4) {
-			// Maybe I'll customize an alert in the future
-			alert('Words must be 4 letters long!');
-			return;
-		}
-
-		setNumHints(3);
-		setError(null);
-		setLoading(true);
-		getFetch(`/api/v1/validate?word=${editorFromVal}&word=${editorToVal}`)
-			.then(res => {
-				console.log(res);
-				if (res.success) {
-					setShowEditor('hidden');
-					onChangeGame({ from: editorFromVal, to: editorToVal });
-					setTimer(0);
-				} else {
-					alert('Word must be a real 4 letter English word!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [
-		editorFromVal,
-		editorToVal,
-		setNumHints,
-		setError,
-		setShowEditor,
-		setLoading,
-		setTimer,
-	]);
-
-	const handleCloseEditor = useCallback(() => {
-		setShowEditor('hidden');
-	}, [setShowEditor]);
-
-	const handleCloseHint = useCallback(() => {
-		if (error === 'Please close the hint to edit the game') {
-			// improve this, want to use some sort of constant instead of str
+	const handleSubmitEdit = useCallback(
+		(nextFrom, nextTo) => {
+			setNumHints(3);
 			setError(null);
-		}
-		setShowHint('hidden');
-	}, [error, setShowHint]);
+			onChangeGame({ from: nextFrom, to: nextTo });
+			setTimer(0);
+		},
+		[setNumHints, setError, setTimer, onChangeGame]
+	);
 
 	const handleKeyDown = useCallback(
 		event => {
@@ -360,12 +255,6 @@ export const Solo = ({
 			if (guess === to) {
 				setWin(true);
 				setError(null);
-
-				// Has to be done, animated bug would show the things closing over and over
-				setShowEditor('');
-				setShowHint('');
-
-				// getFetch(`/api/v1/score?from=${from}&to=${to}&time=${timer}`);
 			} else {
 				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
 					if (res.success) {
@@ -387,8 +276,6 @@ export const Solo = ({
 		setWin,
 		setHistory,
 		setError,
-		setShowEditor,
-		setShowHint,
 		setGuessVals,
 		setTimer,
 	]);
@@ -397,85 +284,12 @@ export const Solo = ({
 		<div className={getThemeClassname('Solo', dark)}>
 			<ThemeToggle />
 
-			<button
-				id="soloEditGameBtn"
-				className="Solo__btn Solo__editBtn"
-				aria-label="Edit Game"
-				onClick={handleEditClick}
-			>
-				Edit
-			</button>
-
-			<h2 className="Solo__words">
-				From: {from} -> To: {to}
-			</h2>
-
-			{showEditor && (
-				<div className={'Solo__editor Solo__editor--' + showEditor}>
-					<div className={getThemeClassname('Solo__editorContent', dark)}>
-						<div className="Solo__editorForms">
-							<div className="Solo__editorForm">
-								<label htmlFor="soloEditFromInput">From:</label>
-								<input
-									id="soloEditFromInput"
-									className="Solo__editorInput"
-									type="text"
-									maxLength={4}
-									value={editorFromVal}
-									aria-live="polite"
-									onChange={handleChangeFromEditor}
-									onKeyDown={handleKeyDownFromEditor}
-								/>
-							</div>
-							<div className="Solo__editor--center">-></div>
-							<div className="Solo__editorForm">
-								<label htmlFor="soloEditToInput" className="Solo__editorLabel">
-									To:
-								</label>
-								<input
-									id="soloEditToInput"
-									className="Solo__editorInput"
-									type="text"
-									maxLength={4}
-									value={editorToVal}
-									aria-live="polite"
-									onChange={handleChangeToEditor}
-									onKeyDown={handleKeyDownFromEditor}
-								/>
-							</div>
-						</div>
-						<div className="Solo__editorBtns">
-							<button
-								id="soloEditorRandomizeBtn"
-								className="Solo__editorBtn"
-								aria-label="Randomize"
-								ref={randRef}
-								onClick={handleRandomizeEditor}
-							>
-								Randomize
-							</button>
-							<div>
-								<button
-									id="soloEditorSubmitBtn"
-									className="Solo__editorBtn"
-									aria-label="Submit"
-									onClick={handleSubmitEditor}
-								>
-									Submit
-								</button>
-								<button
-									id="soloEditorCancelBtn"
-									className="Solo__editorBtn"
-									aria-label="Cancel"
-									onClick={handleCloseEditor}
-								>
-									Cancel
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
+			<StealthForm
+				from={from}
+				to={to}
+				dark={dark}
+				onChange={handleSubmitEdit}
+			/>
 
 			<div className="Solo__timer">{getFormattedTimer(timer)}</div>
 
