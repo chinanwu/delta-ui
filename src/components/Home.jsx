@@ -6,7 +6,6 @@ import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 
 import { escapeBtn } from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
@@ -168,36 +167,6 @@ export const Home = ({ dark }) => {
 					</p>
 					<p className="Home__example--p">
 						For most word pairs, there are a multitude of possible answers!
-					</p>
-				</div>
-				<div className="Home--centre" aria-labelledby="funFacts">
-					<h2 id="funFacts">Fun Facts!</h2>
-					<p>
-						There are <strong>3997</strong> 4 letter words*! Of those, 62 have{' '}
-						<strong>no</strong> words that are one letter off from them! Meaning
-						they are essentially <strong>impossible</strong> problems. They are
-						not able to be provided as a game word though, no worries! <br />* =
-						Think this is wrong? Want to add a word? Create an issue or make a
-						pull request on the Delta-API{' '}
-						<a
-							href="https://github.com/chinanwu/delta-api/issues"
-							title="A link to the issues section of Delta-API"
-						>
-							github
-						</a>
-					</p>
-					<p>
-						The longest path needed to get (optimally) between two words is{' '}
-						<strong>17</strong>. There are currently <strong>four</strong>{' '}
-						unique pairings (atap -> unau, atom -> unau, inch -> unau, quey ->
-						unau) that requires 17 steps to get from one of the words to the
-						other. All four have one thing in common - They all have{' '}
-						<strong>unau</strong>, in the problem pairing, which is a South
-						American sloth! Neat!
-					</p>
-					<p>
-						The average (optimal) path to get from one word to another is{' '}
-						<strong>four</strong>.
 					</p>
 				</div>
 			</>

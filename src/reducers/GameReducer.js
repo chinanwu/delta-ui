@@ -1,18 +1,12 @@
 import { handleActions } from 'redux-actions';
 
-import {
-	editFrom,
-	editPlayerName,
-	editSolo,
-	editTo,
-} from '../actions/GameActions';
+import { editFrom, editSolo, editTo } from '../actions/GameActions';
 
 export const defaultState = {
 	solo: {
 		from: sessionStorage.getItem('from') || '',
 		to: sessionStorage.getItem('to') || '',
 	},
-	playerName: null,
 };
 
 export default handleActions(
@@ -28,10 +22,6 @@ export default handleActions(
 		[editSolo]: (state, { payload }) => ({
 			...state,
 			solo: { from: payload.from, to: payload.to },
-		}),
-		[editPlayerName]: (state, { payload }) => ({
-			...state,
-			playerName: payload,
 		}),
 	},
 	defaultState

@@ -1,3 +1,4 @@
+import FocusTrap from 'focus-trap-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -15,30 +16,21 @@ import {
 	zBtn,
 } from '../constants/Keycodes';
 import { getFetch } from '../functions/FetchFunctions';
+import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
 import isOneOff from '../functions/isOneOff';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
 import Loading from './Loading.jsx';
+import HintButton from './HintButton.jsx';
+import StealthForm from './StealthForm.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
+import WinModal from './WinModal.jsx';
 
-// import './Solo.less';
+import './Solo.less';
 
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
-
-const getFormattedTimer = timer => {
-	let seconds = timer;
-	const hours = Math.floor(timer / 3600);
-	seconds = seconds - 3600 * hours;
-	const minutes = Math.floor(timer / 60);
-	seconds = seconds - 60 * minutes;
-
-	return `${hours < 10 ? '0' + hours : hours}h : ${
-		minutes < 10 ? '0' + minutes : minutes
-	}m : ${seconds < 10 ? '0' + seconds : seconds}s`;
-};
 
 export const Solo = ({
 	dark,
@@ -52,19 +44,10 @@ export const Solo = ({
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
-	// This allows for a bit of a hack way to do this fadeOut animation for the editor.
-	// Need to study how others do Accordians or menu animations to see how to not do this
-	// Or do a smarter hack lol
-	const [showEditor, setShowEditor] = useState('');
-	const [editorFromVal, setEditorFromVal] = useState(from);
-	const [editorToVal, setEditorToVal] = useState(to);
-	const randRef = useRef(null);
-
 	const [numHints, setNumHints] = useState(3);
 	const [hint, setHint] = useState(null);
-	const [showHint, setShowHint] = useState('');
-	const [solution, setSolution] = useState(null);
-	const hintRef = useRef(null);
+	const [isHintExpanded, setIsHintExpanded] = useState(false);
+	const [showHintInHistory, setShowHintInHistory] = useState(false);
 
 	const [history, setHistory] = useState([]);
 	const [guessVals, setGuessVals] = useState([]);
@@ -73,12 +56,15 @@ export const Solo = ({
 
 	const [timer, setTimer] = useState(0);
 
+	const [solution, setSolution] = useState(null);
+	const [score, setScore] = useState(0);
+
 	useEffect(() => {
 		let interval = null;
 		if (!win) {
 			interval = setInterval(() => {
 				setTimer(seconds => seconds + 1);
-			}, 1000);
+			}, 10);
 		}
 		return () => clearInterval(interval);
 	}, [timer, win]);
@@ -126,11 +112,11 @@ export const Solo = ({
 	const handleNewClick = useCallback(() => {
 		setWin(false);
 		setNumHints(3);
+		setHint(null);
+		setIsHintExpanded(false);
+		setShowHintInHistory(false);
 		setError(null);
-
-		// Has to be done, animated bug would show the things closing over and over
-		setShowEditor('');
-		setShowHint('');
+		setTimer(0);
 
 		setSolution(null);
 		inputRefs.forEach(inputRef => {
@@ -141,8 +127,6 @@ export const Solo = ({
 			.then(res => {
 				if (res.from && res.to) {
 					onChangeGame({ from: res.from, to: res.to });
-					setEditorFromVal(res.from);
-					setEditorToVal(res.to);
 					setTimer(0);
 				} else {
 					// Error is for guessing, need another way to log this
@@ -155,15 +139,12 @@ export const Solo = ({
 		inputRefs,
 		setWin,
 		setError,
+		setHint,
 		setNumHints,
-		showEditor,
-		showHint,
-		setShowEditor,
-		setShowHint,
+		setIsHintExpanded,
+		setShowHintInHistory,
 		setSolution,
 		setLoading,
-		setEditorFromVal,
-		setEditorToVal,
 		setTimer,
 	]);
 
@@ -172,13 +153,11 @@ export const Solo = ({
 		getFetch(`/api/v1/hint?from=${history[history.length - 1]}&to=${to}`)
 			.then(res => {
 				if (res.hint && (res.numLeft === 0 || res.numLeft !== null)) {
-					if (showEditor === 'show') {
-						setShowEditor('hidden');
-					}
 					setNumHints(numHints => numHints - 1);
+					// num left would be all words after last history word, includes to
+					// e.g. heat -> cold, hint would be head, and numLeft 4 [head, held, hold, cold]
 					setHint({ word: res.hint, numLeft: res.numLeft });
-					setShowHint('show');
-					hintRef.current.focus(); // Focus on close button in Hint
+					setShowHintInHistory(true);
 				} else {
 					// Error is for guessing, need another way to log this
 					// setError('Something went wrong grabbing game words!');
@@ -188,11 +167,9 @@ export const Solo = ({
 	}, [
 		numHints,
 		history,
-		showEditor,
-		setShowEditor,
 		setNumHints,
 		setHint,
-		setShowHint,
+		setShowHintInHistory,
 		setLoading,
 	]);
 
@@ -201,7 +178,6 @@ export const Solo = ({
 		getFetch(`/api/v1/solve?from=${from}&to=${to}`)
 			.then(res => {
 				if (res.solution) {
-					console.log(res.solution);
 					setSolution(res.solution);
 				} else {
 					// Error is for guessing, need another way to log this
@@ -211,107 +187,33 @@ export const Solo = ({
 			.then(() => setLoading(false));
 	}, [setLoading, setSolution]);
 
-	const handleEditClick = useCallback(() => {
-		if (showHint !== 'show') {
-			setShowEditor('show');
-			randRef.current.focus(); // Focus on first button in editor
-		} else {
-			setError('Please close the hint to edit the game');
-		}
-	}, [showHint, setShowEditor]);
-
-	const handleChangeFromEditor = useCallback(
-		event => {
-			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
-				if (hasValidCharacters(val)) setEditorFromVal(val);
-			}
+	const handleExpandHint = useCallback(
+		expand => {
+			setIsHintExpanded(expand);
 		},
-		[setEditorFromVal]
+		[setIsHintExpanded]
 	);
 
-	const handleChangeToEditor = useCallback(
-		event => {
-			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
-				if (hasValidCharacters(val)) setEditorToVal(val);
-			}
-		},
-		[setEditorToVal]
-	);
-
-	const handleKeyDownFromEditor = useCallback(
-		event => {
-			if (event && event.keyCode) {
-				if (event.keyCode === enterBtn || event.keyCode === spaceBtn) {
-					event.preventDefault();
-					handleSubmitEditor();
-				}
-			}
-		},
-		[editorFromVal, editorToVal]
-	);
-
-	const handleRandomizeEditor = useCallback(() => {
-		setWin(false);
-		setError(null);
-		setLoading(true);
-		getFetch('/api/v1/words')
-			.then(res => {
-				if (res.from && res.to) {
-					setEditorFromVal(res.from);
-					setEditorToVal(res.to);
-				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [setWin, setError, setLoading, setEditorFromVal, setEditorToVal]);
-
-	const handleSubmitEditor = useCallback(() => {
-		if (editorFromVal.length < 4 || editorToVal.length < 4) {
-			// Maybe I'll customize an alert in the future
-			alert('Words must be 4 letters long!');
-			return;
-		}
-
-		setNumHints(3);
-		setError(null);
-		setLoading(true);
-		getFetch(`/api/v1/validate?word=${editorFromVal}&word=${editorToVal}`)
-			.then(res => {
-				console.log(res);
-				if (res.success) {
-					setShowEditor('hidden');
-					onChangeGame({ from: editorFromVal, to: editorToVal });
-					setTimer(0);
-				} else {
-					alert('Word must be a real 4 letter English word!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [
-		editorFromVal,
-		editorToVal,
-		setNumHints,
-		setError,
-		setShowEditor,
-		setLoading,
-		setTimer,
-	]);
-
-	const handleCloseEditor = useCallback(() => {
-		setShowEditor('hidden');
-	}, [setShowEditor]);
-
-	const handleCloseHint = useCallback(() => {
-		if (error === 'Please close the hint to edit the game') {
-			// improve this, want to use some sort of constant instead of str
+	const handleSubmitEdit = useCallback(
+		(nextFrom, nextTo) => {
+			setNumHints(3);
+			setHint(null);
+			setIsHintExpanded(false);
+			setShowHintInHistory(false);
 			setError(null);
-		}
-		setShowHint('hidden');
-	}, [error, setShowHint]);
+			onChangeGame({ from: nextFrom, to: nextTo });
+			setTimer(0);
+		},
+		[
+			setNumHints,
+			setHint,
+			setIsHintExpanded,
+			setShowHintInHistory,
+			setError,
+			setTimer,
+			onChangeGame,
+		]
+	);
 
 	const handleKeyDown = useCallback(
 		event => {
@@ -372,19 +274,27 @@ export const Solo = ({
 
 		if (isOneOff(guess, history[history.length - 1])) {
 			if (guess === to) {
-				setWin(true);
-				setError(null);
-
-				// Has to be done, animated bug would show the things closing over and over
-				setShowEditor('');
-				setShowHint('');
-
-				// getFetch(`/api/v1/score?from=${from}&to=${to}&time=${timer}`);
+				setLoading(true);
+				getFetch(
+					`/api/v1/score?from=${from}&to=${to}&time=${timer}&hintsUsed=${3 -
+						numHints}&solution=${[...history, guess]}`
+				)
+					.then(res => {
+						if (res) {
+							setScore(res.score);
+							setSolution(res.optimalSolution);
+							setWin(true);
+							setError(null);
+							setHistory(history => [...history, guess]);
+						}
+					})
+					.then(() => setLoading(false));
 			} else {
 				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
 					if (res.success) {
 						setHistory(history => [...history, guess]);
 						setError(null);
+						setShowHintInHistory(false);
 					} else {
 						setGuessVals(history[history.length - 1].match(regex));
 						setError("Word entered isn't a real word");
@@ -398,142 +308,46 @@ export const Solo = ({
 	}, [
 		guessVals,
 		history,
+		setScore,
+		setSolution,
 		setWin,
-		setHistory,
 		setError,
-		setShowEditor,
-		setShowHint,
+		setHistory,
+		setLoading,
+		setShowHintInHistory,
 		setGuessVals,
 		setTimer,
 	]);
+
+	const makeMysteryStepListItems = num => {
+		let all = [];
+		for (let i = 0; i < num; i++) {
+			all[i] = (
+				<li
+					className="Solo__historyHintMysteryLi"
+					key={`Solo__historyHintMystery--${i}`}
+				>
+					<div className="Solo__historyHintMystery">?</div>
+				</li>
+			);
+		}
+		return all;
+	};
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
 			<ThemeToggle />
 
-			<h2 className="Solo__words">
-				From: {from} -> To: {to}
-			</h2>
-			<div className="Solo__btns">
-				{numHints > 0 ? (
-					<button
-						id="soloHintBtn"
-						className="Solo__btn Solo__optionBtn Solo__hintBtn"
-						aria-label="Get a Hint"
-						onClick={handleHintClick}
-					>
-						Hint: {numHints}
-					</button>
-				) : (
-					<button
-						id="soloSolnBtn"
-						className="Solo__btn Solo__optionBtn"
-						aria-label="Get the Solution"
-						aria-haspopup="dialog" // Is this right though?
-						onClick={handleGetSoln}
-					>
-						Get Solution
-					</button>
-				)}
-				<button
-					id="soloEditGameBtn"
-					className="Solo__btn Solo__optionBtn Solo__editBtn"
-					aria-label="Edit Game"
-					onClick={handleEditClick}
-				>
-					Edit
-				</button>
+			<StealthForm
+				from={from}
+				to={to}
+				dark={dark}
+				onChange={handleSubmitEdit}
+			/>
+
+			<div className="Solo__timer" role="timer">
+				{formatCentisecondsTimer(timer)}
 			</div>
-
-			{showEditor && (
-				<div className={'Solo__editor Solo__editor--' + showEditor}>
-					<div className={getThemeClassname('Solo__editorContent', dark)}>
-						<div className="Solo__editorForms">
-							<div className="Solo__editorForm">
-								<label htmlFor="soloEditFromInput">From:</label>
-								<input
-									id="soloEditFromInput"
-									className="Solo__editorInput"
-									type="text"
-									maxLength={4}
-									value={editorFromVal}
-									aria-live="polite"
-									onChange={handleChangeFromEditor}
-									onKeyDown={handleKeyDownFromEditor}
-								/>
-							</div>
-							<div className="Solo__editor--center">-></div>
-							<div className="Solo__editorForm">
-								<label htmlFor="soloEditToInput" className="Solo__editorLabel">
-									To:
-								</label>
-								<input
-									id="soloEditToInput"
-									className="Solo__editorInput"
-									type="text"
-									maxLength={4}
-									value={editorToVal}
-									aria-live="polite"
-									onChange={handleChangeToEditor}
-									onKeyDown={handleKeyDownFromEditor}
-								/>
-							</div>
-						</div>
-						<div className="Solo__editorBtns">
-							<button
-								id="soloEditorRandomizeBtn"
-								className="Solo__editorBtn"
-								aria-label="Randomize"
-								ref={randRef}
-								onClick={handleRandomizeEditor}
-							>
-								Randomize
-							</button>
-							<div>
-								<button
-									id="soloEditorSubmitBtn"
-									className="Solo__editorBtn"
-									aria-label="Submit"
-									onClick={handleSubmitEditor}
-								>
-									Submit
-								</button>
-								<button
-									id="soloEditorCancelBtn"
-									className="Solo__editorBtn"
-									aria-label="Cancel"
-									onClick={handleCloseEditor}
-								>
-									Cancel
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			)}
-
-			{showHint && (
-				<div className={'Solo__hint' + ' Solo__hint--' + showHint}>
-					<div className={getThemeClassname('Solo__hintContent', dark)}>
-						<p>Recommended next word: {hint.word}</p>
-						<p className="Solo__hint--short">
-							Estimated number of words left: {hint.numLeft}
-						</p>
-
-						<button
-							id="soloHintCloseBtn"
-							className="Solo__hintCloseBtn"
-							aria-label="Close Hint"
-							ref={hintRef}
-							onClick={handleCloseHint}
-						>
-							Close
-						</button>
-					</div>
-				</div>
-			)}
-
-			<div className="Solo__timer">{getFormattedTimer(timer)}</div>
 
 			<div className={getThemeClassname('Solo__game', dark)}>
 				<div className="Solo__history" aria-labelledby="soloHistory">
@@ -548,42 +362,83 @@ export const Solo = ({
 							<li key={`Solo__historyItem--${i}`}>{item}</li>
 						))}
 						<li ref={historyBottomRef} />
+
+						{showHintInHistory && hint ? (
+							hint.word !== to ? (
+								<>
+									<li
+										className={getThemeClassname('Solo__historyHintWord', dark)}
+									>
+										{hint.word}
+									</li>
+									{makeMysteryStepListItems(hint.numLeft - 2)}
+									<li>{to}</li>
+								</>
+							) : (
+								<>
+									<li className="Solo__historyHintWord">{hint.word}</li>
+								</>
+							)
+						) : null}
 					</ul>
 				</div>
 
-				<div className="Solo__guessContainer">
-					<h3 id="soloGuessLabel" className="Solo__guessLabel">
-						Next Word:
-					</h3>
-					<div className="Solo__guessInputs">
-						<div>
-							{guessVals.map((val, i) => (
-								<input
-									id={'soloGuessInput-' + i}
-									ref={inputRefs[i]}
-									data-id={i}
-									className={getThemeClassname('Solo__guessInput', dark)}
-									type="text"
-									maxLength={1}
-									placeholder={val}
-									aria-labelledby="soloGuessLabel"
-									onKeyDown={handleKeyDown}
-									key={'Solo__guessInput-' + i}
-								/>
-							))}
+				<div>
+					<HintButton
+						id="soloHintBtn"
+						numHints={numHints}
+						isExpanded={isHintExpanded}
+						dark={dark}
+						btnText={`Get a Hint: ${numHints}`}
+						ariaLabelledBy="soloHintHeader"
+						onClick={handleHintClick}
+						onSolnClick={handleGetSoln}
+						onExpandChange={handleExpandHint}
+					>
+						<h3 id="soloHintHeader">Hint: </h3>
+						<p className="Solo__hint">
+							Recommended next word: {hint ? hint.word : ''}
+						</p>
+						<p className="Solo__hint">
+							Estimated number of words left: {hint ? hint.numLeft : ''}
+						</p>
+					</HintButton>
+
+					<div className="Solo__guessContainer">
+						<h3 id="soloGuessLabel" className="Solo__guessLabel">
+							Next Word:
+						</h3>
+						<div className="Solo__guessInputs">
+							<div>
+								{guessVals.map((val, i) => (
+									<input
+										id={'soloGuessInput-' + i}
+										ref={inputRefs[i]}
+										data-id={i}
+										className={getThemeClassname('Solo__guessInput', dark)}
+										type="text"
+										maxLength={1}
+										placeholder={val}
+										aria-labelledby="soloGuessLabel"
+										aria-invalid={error}
+										onKeyDown={handleKeyDown}
+										key={'Solo__guessInput-' + i}
+									/>
+								))}
+							</div>
+
+							<button
+								id="soloEnterBtn"
+								className="Solo__enterBtn"
+								onClick={handleEnterClick}
+							>
+								Enter
+							</button>
 						</div>
 
-						<button
-							id="soloEnterBtn"
-							className="Solo__enterBtn"
-							onClick={handleEnterClick}
-						>
-							Enter
-						</button>
-					</div>
-
-					<div className={getThemeClassname('Solo__gameError', dark)}>
-						{error}
+						<div className={getThemeClassname('Solo__gameError', dark)}>
+							{error}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -591,24 +446,20 @@ export const Solo = ({
 			{loading && createPortal(<Loading />, document.body)}
 			{win &&
 				createPortal(
-					<div className="Solo__win">
-						<Confetti number={50} recycle={false} />
-						<div className="Solo__winText">You've won!</div>
-						<button
-							id="soloWinNewGame"
-							className="Solo__winBtn"
-							aria-label="New Game"
-							onClick={handleNewClick}
-						>
-							New Game
-						</button>
-						<div className="Solo__stats">
-							{history.length === 1
-								? 'It took you only one word! '
-								: `It took you ${history.length} words! `}
-							It also took you {getFormattedTimer(timer)}
+					<FocusTrap>
+						<div className="Solo__win">
+							<Confetti number={50} recycle={false} />
+							<WinModal
+								from={from}
+								to={to}
+								playerSoln={history}
+								timer={timer}
+								hintsUsed={3 - numHints}
+								score={score}
+								solution={solution}
+							/>
 						</div>
-					</div>,
+					</FocusTrap>,
 					document.body
 				)}
 			{solution &&
@@ -676,13 +527,8 @@ export default connect(
 // - Reverse button. Work from To -> From
 
 // TODO:
-// - Check for accessibility
+// - Check for accessibility - Ongoing, forever and ever
 // 			- Missing aria?
-//					- Tabbing order - When open Hint, next tab (if focus on Hint should be to Close)
-//							http://webcheatsheet.com/HTML/controll_tab_order.php
-//							- Perhaps same tab order of Hint button and Close button in Hint
-//			- Should Loading have an Alert role?
-//			- Timer accessibility ? https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/ARIA_timer_role YO
 // - Error handling, need to figure out best way to deal with errors from the API
 // - Similarly, should I improve the response check?
 // - Loading component needs to be made
@@ -693,7 +539,7 @@ export default connect(
 // - Better win page
 // 			- Better confetti
 //			- Include more content - Stats (Time, path taken, num of words, etc), score, optimal solution
-// - Figure out a better animation for the accordion-like drop down of Edit and Hint buttons
 // - Constant Error strings instead of having it typed out over and over
-// - Error displays for Edit (it's just an alert() right now)
-// - Error displays for when Hint drop down is open and user tries to open Edit Game
+// - Error causes input box to be red maybe?
+
+// https://wireframe.cc/mNTM9B

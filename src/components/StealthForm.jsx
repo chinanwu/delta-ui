@@ -55,11 +55,11 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 			if (event && event.keyCode) {
 				if (event.keyCode === enterBtn || event.keyCode === spaceBtn) {
 					event.preventDefault();
-					onChange(fromVal, toVal);
+					handleSubmitClick();
 				}
 			}
 		},
-		[fromVal, toVal, onChange]
+		[fromVal, toVal, setLoading, setError, onChange]
 	);
 
 	const handleRandomizeClick = useCallback(() => {
@@ -203,3 +203,5 @@ StealthForm.propTypes = {
 	onRandomizeClick: PropTypes.func,
 };
 export default StealthForm;
+
+//handleKeyDown enter to submit

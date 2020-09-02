@@ -1,10 +1,4 @@
-import {
-	editFrom,
-	editGameUrl,
-	editPlayerName,
-	editSolo,
-	editTo,
-} from '../actions/GameActions';
+import { editFrom, editSolo, editTo } from '../actions/GameActions';
 
 export const applyFrom = from => dispatch => {
 	sessionStorage.setItem('from', from);
@@ -21,9 +15,3 @@ export const applyGame = words => dispatch => {
 
 	dispatch(editSolo(words));
 };
-
-export const applyGameUrl = gameUrl => dispatch =>
-	dispatch(editGameUrl(gameUrl));
-
-export const applyPlayerName = playerName => dispatch =>
-	dispatch(editPlayerName(playerName));
