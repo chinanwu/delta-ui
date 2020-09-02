@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { enterBtn, spaceBtn } from '../constants/Keycodes';
+import { enterBtn, escapeBtn, spaceBtn } from '../constants/Keycodes';
 import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
@@ -28,7 +28,7 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 		setFromVal('');
 		setToVal('');
 		setError('');
-	}, [setIsEditable, setFromVal, setToVal]);
+	}, [setIsEditable, setFromVal, setToVal, setError]);
 
 	const handleFromChange = useCallback(
 		event => {
@@ -56,10 +56,22 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 				if (event.keyCode === enterBtn || event.keyCode === spaceBtn) {
 					event.preventDefault();
 					handleSubmitClick();
+				} else if (event.keyCode === escapeBtn) {
+					handleCancelClick();
 				}
 			}
 		},
-		[fromVal, toVal, setLoading, setError, onChange]
+		[
+			fromVal,
+			toVal,
+			setLoading,
+			setError,
+			onChange,
+			setIsEditable,
+			setFromVal,
+			setToVal,
+			setError,
+		]
 	);
 
 	const handleRandomizeClick = useCallback(() => {
