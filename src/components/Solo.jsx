@@ -11,7 +11,6 @@ import {
 	enterBtn,
 	leftArrowBtn,
 	rightArrowBtn,
-	spaceBtn,
 	tabBtn,
 	zBtn,
 } from '../constants/Keycodes';

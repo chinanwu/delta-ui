@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
+
+import getThemeClassname from '../functions/getThemeClassname';
 
 import './HintButton.less';
-import getThemeClassname from '../functions/getThemeClassname';
 
 export const HintButton = ({
 	id,

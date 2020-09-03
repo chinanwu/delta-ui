@@ -1,4 +1,4 @@
-@import '../style/styles';
+@import '../style/colours';
 @import '../style/button';
 
 .StealthForm__btn {
@@ -24,14 +24,6 @@
 	&::after {
 		content: ' Game';
 	}
-
-	&:disabled,
-	&[disabled] {
-		background-color: @disabledBtn;
-		box-shadow: none;
-		color: #484747;
-		cursor: not-allowed;
-	}
 }
 
 .StealthForm__form {
@@ -50,7 +42,7 @@
 }
 
 .StealthForm--editable--dark {
-	background: #685167;
+	background: @lightPurple;
 }
 
 .StealthForm__editHeader {

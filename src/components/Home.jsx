@@ -14,16 +14,16 @@ import ThemeToggle from './ThemeToggle.jsx';
 import './Home.less';
 
 export const Home = ({ dark }) => {
-	const [redirect, setRedirect] = useState(false);
+	const [learnMore, setLearnMore] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
 
-	const handleCreateVersusClick = useCallback(() => {
-		console.log('I want a versus game!');
-	}, []);
+	const handleLearnMore = useCallback(() => {
+		setLearnMore(learnMore => !learnMore);
+	}, [learnMore, setLearnMore]);
 
 	const handleOpenAcks = useCallback(() => {
 		document.body.classList.add('Modal--open');
@@ -47,9 +47,7 @@ export const Home = ({ dark }) => {
 		[setShowAcks]
 	);
 
-	return redirect ? (
-		<Redirect to={`/${gameUrl}`} />
-	) : (
+	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<ThemeToggle />
 
@@ -67,17 +65,40 @@ export const Home = ({ dark }) => {
 							Solo
 						</button>
 					</Link>
-					<button
-						id="homeCreateSoloBtn"
-						className="Home__btn"
-						aria-label="Create versus game"
-						role="link"
-						onClick={handleCreateVersusClick}
-						disabled={true}
-						aria-disabled={true}
-					>
-						Versus
+					<Link to="/versus">
+						<button
+							id="homeCreateSoloBtn"
+							className="Home__btn"
+							aria-label="Create versus game"
+							role="link"
+						>
+							Versus
+						</button>
+					</Link>
+				</div>
+				<div className="Home__learnMore">
+					<button className="Home__learnMoreBtn" onClick={handleLearnMore}>
+						Learn {learnMore ? 'less' : 'more'} about game modes
 					</button>
+					<div
+						className={
+							'Home__learnMoreContent' +
+							(learnMore ? ' Home__learnMoreContent--expanded' : '')
+						}
+					>
+						<h2>Solo Game Mode</h2>
+						<p>
+							Play Delta, solo! You'll be provided with two words and you'll
+							attempt to get from one to the other! Classic Delta fun.
+						</p>
+
+						<h2>Versus Game Mode</h2>
+						<p>
+							Compete with up to 3 other folks in an attempt to either solve the
+							problem fastest or with the best score! Fun family fun if you're
+							family has only 4 folks (including you).
+						</p>
+					</div>
 				</div>
 				<div className="Home--centre" aria-labelledby="rules">
 					<h2 id="rules">Rules</h2>
@@ -170,7 +191,12 @@ export const Home = ({ dark }) => {
 					</p>
 				</div>
 			</>
-			<footer className={getThemeClassname('Home__footer', dark)}>
+			<footer
+				className={
+					getThemeClassname('Home__footer', dark) +
+					(learnMore ? ' Home__footer--relative' : '')
+				}
+			>
 				<button
 					id="homeOpenAcksBtn"
 					className={getThemeClassname('Home__acksBtn', dark)}

@@ -1,5 +1,5 @@
 @import '../style/button';
-@import '../style/styles';
+@import '../style/colours';
 
 .HintButton {
 	width: 30rem;
@@ -20,22 +20,13 @@
 }
 
 .HintButton__content--dark {
-	background-color: #685167;
+	background-color: @lightPurple;
 	color: white;
 }
 
 .HintButton__btn {
 	@medBtn();
 	margin-top: 0;
-	background-color: @green;
-
-	&:hover {
-		background-color: @greenHover;
-	}
-
-	&:active {
-		background-color: @greenActive;
-	}
 }
 
 .HintButton__btn--expanded {

@@ -1,4 +1,4 @@
-@import '../style/styles';
+@import '../style/colours';
 @import '../style/button';
 
 .Solo {
@@ -19,21 +19,12 @@
 
 .Solo__editBtn {
 	@smBtn();
-	background-color: @green;
 	margin-left: 2rem;
 	margin-top: 2rem;
 	font-size: 1.6rem;
 
 	&::after {
 		content: ' Game';
-	}
-
-	&:hover {
-		background-color: @greenHover;
-	}
-
-	&:active {
-		background-color: @greenActive;
 	}
 }
 
@@ -47,7 +38,7 @@
 }
 
 .Solo__editorContent--dark {
-	background-color: #685167;
+	background-color: @lightPurple;
 }
 
 .Solo__hintContent {
@@ -59,7 +50,7 @@
 }
 
 .Solo__hintContent--dark {
-	background-color: #685167;
+	background-color: @lightPurple;
 }
 
 .Solo__hint--short {
@@ -97,15 +88,6 @@
 .Solo__editorBtn,
 .Solo__hintCloseBtn {
 	@smBtn();
-	background-color: @green;
-
-	&:hover {
-		background-color: @greenHover;
-	}
-
-	&:active {
-		background-color: @greenActive;
-	}
 }
 
 .Solo__timer {
@@ -150,7 +132,7 @@
 }
 
 .Solo__historyList--dark {
-	background: #685167;
+	background: @lightPurple;
 }
 
 .Solo__historyHintWord {
@@ -271,7 +253,7 @@
 	align-items: center;
 	flex-direction: column;
 	color: @green;
-	background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+	background-color: @modalBg;
 }
 
 .Solo__solutionContent {
@@ -297,15 +279,6 @@
 
 .Solo__winBtn {
 	@largeBtn();
-	background-color: @green;
-
-	&:hover {
-		background-color: @greenHover;
-	}
-
-	&:active {
-		background-color: @greenActive;
-	}
 }
 
 .Solo__stats {

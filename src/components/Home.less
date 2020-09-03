@@ -1,4 +1,4 @@
-@import '../style/styles';
+@import '../style/colours';
 @import '../style/button';
 
 .Home {
@@ -24,25 +24,6 @@
 	padding-bottom: 0;
 }
 
-.Home__game {
-	display: flex;
-	margin-bottom: 1.2rem;
-}
-
-.Home__input {
-	padding-top: 1.2rem;
-	padding-bottom: 1.2rem;
-	font-size: 2.6rem;
-	margin-right: 1.2rem;
-	text-align: center;
-	box-shadow: @box-shadow-01;
-	border: 1px solid black;
-}
-
-.Home__input--error {
-	border: 2px solid @error;
-}
-
 .Home__btns {
 	display: flex;
 	justify-content: center;
@@ -51,42 +32,33 @@
 .Home__btn {
 	@medBtn();
 	width: 15rem;
-	background-color: @green;
 	border-radius: 0.3rem;
 	padding-top: 1.2rem;
 	padding-bottom: 1.2rem;
 	font-size: 2.6rem;
-	box-shadow: @box-shadow-01;
-
-	&:hover {
-		background-color: @greenHover;
-	}
-
-	&:active {
-		background-color: @greenActive;
-	}
 }
 
-.Home__btn--error {
-	background-color: @disabledBtn;
-	cursor: not-allowed;
-
-	&:hover {
-		background-color: @disabledBtn;
-	}
-
-	&:active {
-		background-color: @disabledBtn;
-	}
-}
-
-.Home__error {
-	position: relative;
+.Home__learnMore {
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: all 1s;
 }
 
-.Home__footer--dark a {
-	color: white;
+.Home__learnMoreBtn {
+	@medBtn();
+}
+
+.Home__learnMoreContent {
+	transition: all 1s;
+	max-height: 0;
+	width: 60%;
+	overflow: hidden;
+}
+
+.Home__learnMoreContent--expanded {
+	max-height: 50rem;
 }
 
 .Home--centre {
@@ -123,6 +95,10 @@
 	width: 100%;
 }
 
+.Home__footer--dark a {
+	color: white;
+}
+
 .Home__acksBtn--dark {
 	color: white;
 }
@@ -147,7 +123,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	background-color: @modalBg;
 	box-shadow: @box-shadow-24;
 }
 
@@ -187,15 +163,25 @@
 	text-align: center;
 }
 
+@media only screen and (max-height: 895px) {
+	.Home__footer--relative {
+		position: initial;
+	}
+}
+
+@media only screen and (max-height: 690px) {
+	.Home__footer {
+		position: initial;
+	}
+}
+
 @media only screen and (max-width: 830px) {
 	.Home__rules {
 		width: 80%;
 	}
-}
 
-@media only screen and (max-height: 630px) {
-	.Home__footer {
-		position: initial;
+	.Home__learnMoreContent {
+		width: 80%;
 	}
 }
 
@@ -206,10 +192,6 @@
 
 	.Home p {
 		font-size: 125%;
-	}
-
-	.Home__game {
-		flex-direction: column;
 	}
 
 	.Home__btns {
@@ -224,12 +206,11 @@
 		margin: 1rem 0;
 	}
 
-	.Home__input {
-		margin-right: 0;
-		margin-bottom: 1rem;
+	.Home__rules {
+		width: initial;
 	}
 
-	.Home__rules {
+	.Home__learnMoreContent {
 		width: initial;
 	}
 

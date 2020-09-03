@@ -1,63 +1,45 @@
 @import './shadows.less';
+@import 'colours.less';
 
 @btn: {
 	border: none;
 	cursor: pointer;
+	background-color: @green;
+	box-shadow: @box-shadow-01;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin: 1rem;
+
+	&:hover {
+		background-color: @greenHover;
+		box-shadow: @box-shadow-02;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+
+	&:disabled,
+	&[disabled] {
+		background-color: @disabledBtn;
+		box-shadow: none;
+		cursor: not-allowed;
+		color: #484747;
+	}
 };
 
 @largeBtn: {
 	@btn();
-	padding: 1rem;
-	margin: 1rem;
 	font-size: 2.4rem;
-	box-shadow: @box-shadow-01;
-	border-radius: 0.5rem;
-
-	&:hover {
-		box-shadow: @box-shadow-02;
-	}
-
-	&:disabled,
-	&[disabled] {
-		box-shadow: none;
-		cursor: default;
-	}
 };
 
 @medBtn: {
 	@btn();
-	padding: 1rem;
-	margin: 1rem;
 	font-size: 1.8rem;
-	box-shadow: @box-shadow-01;
-	border-radius: 0.5rem;
-
-	&:hover {
-		box-shadow: @box-shadow-02;
-	}
-
-	&:disabled,
-	&[disabled] {
-		box-shadow: none;
-		cursor: default;
-	}
 };
 
 @smBtn: {
 	@btn();
-	padding: 1rem;
 	margin: 0.5rem;
 	font-size: 1.4rem;
-	box-shadow: @box-shadow-01;
-	border-radius: 0.5rem;
-
-	&:hover {
-		box-shadow: @box-shadow-02;
-	}
-
-	&:disabled,
-	&[disabled] {
-		box-shadow: none;
-		cursor: default;
-	}
 };
