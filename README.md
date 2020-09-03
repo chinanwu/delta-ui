@@ -4,7 +4,6 @@
 - Versus mode!
 - MORE accessibility!
 - Scoring
-- Mock API
 - Dictionary for words seen during game at the end of game
 - Daily challenge - Perhaps pairings that require 10+ steps ?
 - Wildcard ability - Turns one of the letters into a "blank" card basically. Allows you to essentially change 2 letters
@@ -17,15 +16,14 @@ Simply:
 - Run `npm i`, this will install all the dependencies!
 - Then run `npm start`, this will start Delta-UI in a browser window
 
-Note: As there is no mock API right now, this won't run without the Delta-API. The Delta-API is currently not finished so I haven't released it.
+Note: As there is no mock API right now, this won't run without the Delta-API, which you can also find at my github! 
 
 ### Potential (Quality of Life/General) Improvements
 - Rule refresher under the game
 - Dark mode modal?
-- Meta description
 
 ### Code Cleanup Backlog
-- Style files needs a cleanup
+- Mock API
 - Lazy loading? https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52/
 
 Some tools I used for this project:

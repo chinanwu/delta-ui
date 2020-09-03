@@ -95,7 +95,7 @@ export const Home = ({ dark }) => {
 						<h2>Versus Game Mode</h2>
 						<p>
 							Compete with up to 3 other folks in an attempt to either solve the
-							problem fastest or with the best score! Fun family fun if you're
+							problem fastest or with the best score! Fun family fun if your
 							family has only 4 folks (including you).
 						</p>
 					</div>

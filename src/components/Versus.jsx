@@ -34,7 +34,7 @@ export const Versus = ({ dark }) => {
 					<input
 						name="playerName"
 						className="Versus__input"
-						placeholder="Salm"
+						placeholder="Socks"
 						maxLength={4}
 					/>
 				</div>
@@ -42,6 +42,17 @@ export const Versus = ({ dark }) => {
 				<button className="Versus__btn">Join</button>
 
 				<button className="Versus__btn">Create</button>
+
+				<div>
+					<div>Room Creation Options</div>
+					<div>
+						Win condition:
+						<input type="radio" name="versusCondtn" id="versusScoreCondtn" />
+						<label htmlFor="versusScoreCondtn">Score</label>
+						<input type="radio" name="versusCondtn" id="versusSpeedCondtn" />
+						<label htmlFor="versusSpeedCondtn">Speed</label>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -56,3 +67,4 @@ export default connect(mapStateToProps)(Versus);
 // TODO
 // - Input verification - Only letters
 // - Accessibility btns and inputs
+// - input id or name for label?
