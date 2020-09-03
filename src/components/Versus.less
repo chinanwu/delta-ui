@@ -1,0 +1,52 @@
+@import '../style/button';
+
+.Versus {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.Versus--dark {
+	@dark();
+}
+
+.Versus__header {
+	padding-top: 5rem;
+}
+
+.Versus__form {
+	display: flex;
+	flex-direction: column;
+}
+
+.Versus__field {
+	margin-bottom: 1rem;
+}
+
+.Versus__label,
+.Versus__input {
+	font-size: 2.4rem;
+}
+
+.Versus__input {
+	width: 8rem;
+	text-align: center;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
+}
+
+.Versus__btn {
+	@largeBtn();
+}
