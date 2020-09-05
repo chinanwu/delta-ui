@@ -184,7 +184,7 @@ export const Solo = ({
 				}
 			})
 			.then(() => setLoading(false));
-	}, [setLoading, setSolution]);
+	}, [from, to, setLoading, setSolution]);
 
 	const handleExpandHint = useCallback(
 		expand => {
@@ -305,6 +305,10 @@ export const Solo = ({
 			setError('Word must be one letter off from previous word');
 		}
 	}, [
+		from,
+		to,
+		timer,
+		numHints,
 		guessVals,
 		history,
 		setScore,
@@ -354,7 +358,10 @@ export const Solo = ({
 						History
 					</h3>
 					<ul
-						className={getThemeClassname('Solo__historyList', dark)}
+						className={
+							getThemeClassname('Solo__historyList', dark) +
+							(win ? ' Solo__historyList--hideScroll' : '')
+						}
 						aria-live="polite"
 					>
 						{history.map((item, i) => (
@@ -449,6 +456,7 @@ export const Solo = ({
 						<div className="Solo__win">
 							<Confetti number={50} recycle={false} />
 							<WinModal
+								dark={dark}
 								from={from}
 								to={to}
 								playerSoln={history}
@@ -456,6 +464,7 @@ export const Solo = ({
 								hintsUsed={3 - numHints}
 								score={score}
 								solution={solution}
+								onNewGame={handleNewClick}
 							/>
 						</div>
 					</FocusTrap>,

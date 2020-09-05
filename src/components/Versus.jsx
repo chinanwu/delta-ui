@@ -68,3 +68,4 @@ export default connect(mapStateToProps)(Versus);
 // - Input verification - Only letters
 // - Accessibility btns and inputs
 // - input id or name for label?
+// - Fieldset and label?

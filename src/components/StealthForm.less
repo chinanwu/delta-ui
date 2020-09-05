@@ -1,6 +1,12 @@
 @import '../style/colours';
 @import '../style/button';
 
+.StealthForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .StealthForm__btn {
 	@medBtn();
 	background-color: @green;
@@ -19,7 +25,7 @@
 	margin-left: 1rem;
 	margin-top: 1rem;
 	font-size: 1.6rem;
-	transition: all 0.5s;
+	align-self: start;
 
 	&::after {
 		content: ' Game';
@@ -38,11 +44,13 @@
 	margin-bottom: 1rem;
 	box-shadow: @box-shadow-08;
 	transition: all 1s;
-	border: 1px solid black;
+	border-radius: 1rem;
+	width: 50rem;
 }
 
 .StealthForm--editable--dark {
-	background: @lightPurple;
+	background-color: @dark-04;
+	color: #fff;
 }
 
 .StealthForm__editHeader {
@@ -61,6 +69,7 @@
 	font-size: 2rem;
 	width: 6rem;
 	text-align: center;
+	margin-left: 0.5rem;
 
 	&::-moz-placeholder {
 		// Make placeholder text colour AAA
@@ -76,8 +85,11 @@
 	}
 }
 
-.StealthForm__to:before {
-	content: '\00a0';
+.StealForm__arrow {
+	&:before,
+	&:after {
+		content: '\00a0';
+	}
 }
 
 .StealthForm__btns {
@@ -116,8 +128,7 @@
 	.StealthForm--editable {
 		padding-top: 2rem;
 		padding-bottom: 1.5rem;
-		margin-right: 1rem;
-		margin-left: 1rem;
-		margin-bottom: 1rem;
+		margin: 1rem;
+		width: initial;
 	}
 }

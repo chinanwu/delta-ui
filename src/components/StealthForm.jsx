@@ -142,12 +142,9 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 							/>
 						) : (
 							from
-						)}{' '}
-						->{' '}
-						<span id="stealthFormTo" className="StealthForm__to">
-							To
-						</span>
-						:{' '}
+						)}
+						<span className="StealForm__arrow">-></span>
+						<span id="stealthFormTo">To</span>:{' '}
 						{isEditable ? (
 							<input
 								id="stealthFormToInput"

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 
 import './WinModal.less';
+import getThemeClassname from '../functions/getThemeClassname';
 
 export const WinModal = ({
+	dark,
 	from,
 	to,
 	playerSoln,
@@ -13,15 +15,20 @@ export const WinModal = ({
 	hintsUsed,
 	score,
 	solution,
+	onNewGame,
 }) => {
 	const [showSolution, setShowSolution] = useState(false);
 	const handleShowOptimal = useCallback(() => {
 		setShowSolution(true);
 	}, [setShowSolution]);
 
+	const handleNewGame = useCallback(() => {
+		onNewGame();
+	}, [onNewGame]);
+
 	return (
-		<div className="WinModal">
-			<h1>Success!</h1>
+		<div className={getThemeClassname('WinModal', dark)}>
+			<h1 className="WinModal__header">Success!</h1>
 			<div>
 				<h2>Stats:</h2>
 				<ul>
@@ -41,49 +48,65 @@ export const WinModal = ({
 					</li>
 				</ul>
 			</div>
-			<div>
-				<h2>Your solution:</h2>
-				{playerSoln.map((word, i) => (
-					<span key={`WinModal__playerSoln--${i}`}>
-						{i === 0
-							? `${word} ->`
-							: i < playerSoln.length - 1
-							? ` ${word} ->`
-							: ` ${word}`}
-					</span>
-				))}
-			</div>
-			<div>
-				<h2>Optimal solution:</h2>
-				{showSolution ? (
-					solution.map((word, i) => (
-						<span key={`WinModal__optimalSoln--${i}`}>
-							{i === 0
-								? `${word} ->`
-								: i < solution.length - 1
-								? ` ${word} ->`
-								: ` ${word}`}
-						</span>
-					))
-				) : (
-					<button
-						className="WinModal__optimalSolnBtn"
-						onClick={handleShowOptimal}
-					>
-						Click here to reveal optimal solution
-					</button>
-				)}
+			<div className="WinModal__solutions">
+				<div className="WinModal__solution">
+					<h2>Your solution:</h2>
+					<ul className="WinModal__solutionList">
+						{playerSoln.map((word, i) => (
+							<li
+								className="WinModal__solutionItem"
+								key={`winModalPlayerSoln-${i}`}
+							>
+								{word}
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className="WinModal__solution" aria-live="passive">
+					<h2>Optimal Solution:</h2>
+					{showSolution ? (
+						<ul className="WinModal__solutionList">
+							{solution.map((word, i) => (
+								<li
+									className="WinModal__solutionItem"
+									key={`winModalOptSoln-${i}`}
+								>
+									{word}
+								</li>
+							))}
+						</ul>
+					) : (
+						<div className="WinModal__btn--center">
+							<button
+								id="winModalShowSoln"
+								className="WinModal__showSolnBtn"
+								onClick={handleShowOptimal}
+							>
+								Show Solution
+							</button>
+						</div>
+					)}
+				</div>
 			</div>
 			<div>
 				<h2>Your Score:</h2>
-				<div>{score}</div>
+				<div className="WinModal__score">{score}</div>
 			</div>
-			<button>New game bebs!</button>
+			<div className="WinModal__btn--center">
+				<button
+					id="winModalNewGame"
+					className="WinModal__newBtn"
+					onClick={handleNewGame}
+				>
+					New Game
+				</button>
+			</div>
 		</div>
 	);
 };
 
 WinModal.propTypes = {
+	dark: PropTypes.bool,
 	from: PropTypes.string,
 	to: PropTypes.string,
 	playerSoln: PropTypes.arrayOf(PropTypes.string),
@@ -91,6 +114,12 @@ WinModal.propTypes = {
 	hintsUsed: PropTypes.number,
 	score: PropTypes.number,
 	solution: PropTypes.arrayOf(PropTypes.string),
+	onNewGame: PropTypes.func,
 };
 
 export default WinModal;
+
+// TODO
+// Optimal solution on hover and active styling
+
+// add bing to word list

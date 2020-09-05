@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 
 import { escapeBtn } from '../constants/Keycodes';
+// import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
@@ -20,6 +21,10 @@ export const Home = ({ dark }) => {
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
+
+	// useEffect(() => {
+	// 	getFetch('/api/v1/ping').then(res => console.log(res));
+	// }, []);
 
 	const handleLearnMore = useCallback(() => {
 		setLearnMore(learnMore => !learnMore);
@@ -76,7 +81,7 @@ export const Home = ({ dark }) => {
 						</button>
 					</Link>
 				</div>
-				<div className="Home__learnMore">
+				<div className={getThemeClassname('Home__learnMore', dark)}>
 					<button className="Home__learnMoreBtn" onClick={handleLearnMore}>
 						Learn {learnMore ? 'less' : 'more'} about game modes
 					</button>
@@ -100,7 +105,10 @@ export const Home = ({ dark }) => {
 						</p>
 					</div>
 				</div>
-				<div className="Home--centre" aria-labelledby="rules">
+				<div
+					className={getThemeClassname('Home--centre', dark)}
+					aria-labelledby="rules"
+				>
 					<h2 id="rules">Rules</h2>
 					<p className="Home__rules">
 						In each game, you are given two words, a "from" word and a "to"
@@ -110,7 +118,10 @@ export const Home = ({ dark }) => {
 						be a valid four-letter word in the English language.
 					</p>
 				</div>
-				<div className="Home--centre" aria-labelledby="example">
+				<div
+					className={getThemeClassname('Home--centre', dark)}
+					aria-labelledby="example"
+				>
 					<h2 id="example">Example</h2>
 					<p>From: "heat" -> To: "cold"</p>
 					<p className="Home__example--p">
@@ -200,7 +211,6 @@ export const Home = ({ dark }) => {
 				<button
 					id="homeOpenAcksBtn"
 					className={getThemeClassname('Home__acksBtn', dark)}
-					aria-label="Open Acknowledgements"
 					aria-haspopup="dialog"
 					onClick={handleOpenAcks}
 				>
