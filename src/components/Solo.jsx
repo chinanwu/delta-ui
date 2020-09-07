@@ -397,6 +397,7 @@ export const Solo = ({
 						dark={dark}
 						btnText={`Get a Hint: ${numHints}`}
 						ariaLabelledBy="soloHintHeader"
+						giveSolution={true}
 						onClick={handleHintClick}
 						onSolnClick={handleGetSoln}
 						onExpandChange={handleExpandHint}
@@ -540,13 +541,8 @@ export default connect(
 // - Error handling, need to figure out best way to deal with errors from the API
 // - Similarly, should I improve the response check?
 // - Loading component needs to be made
-// - Scrollbar colour dark mode
-//			- https://alligator.io/css/css-scrollbars/
 // - Add styling specific to each platform (e.g. moz, etc.)
 // - Solution Modal dark mode
-// - Better win page
-// 			- Better confetti
-//			- Include more content - Stats (Time, path taken, num of words, etc), score, optimal solution
 // - Constant Error strings instead of having it typed out over and over
 // - Error causes input box to be red maybe?
 

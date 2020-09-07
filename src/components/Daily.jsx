@@ -18,13 +18,10 @@ import { getFetch } from '../functions/FetchFunctions';
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
-import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
-import StealthForm from './StealthForm.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
-import WinModal from './WinModal.jsx';
 
 import './Daily.less';
 
@@ -34,6 +31,8 @@ const regex = /([a-zA-Z])/g;
 export const Daily = ({ dark, onChangeGame }) => {
 	const [from, setFrom] = useState('');
 	const [to, setTo] = useState('');
+	const [date, setDate] = useState('');
+	const [lowestHighscore, setLowestHighscore] = useState(-1);
 
 	const [win, setWin] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -51,7 +50,6 @@ export const Daily = ({ dark, onChangeGame }) => {
 
 	const [timer, setTimer] = useState(0);
 
-	const [solution, setSolution] = useState(null);
 	const [score, setScore] = useState(0);
 
 	useEffect(() => {
@@ -65,93 +63,28 @@ export const Daily = ({ dark, onChangeGame }) => {
 	}, [timer, win]);
 
 	useEffect(() => {
-		document.title = 'Daily Challenge- Delta';
+		document.title = 'Daily Challenge - Delta';
 	}, []);
 
 	useEffect(() => {
 		setLoading(true);
 		getFetch('/api/v1/dailychallenge')
 			.then(res => {
+				setDate(res.id);
 				setFrom(res.from);
 				setTo(res.to);
+				setHistory([res.from]);
+				setGuessVals(res.from.match(regex));
+				setLowestHighscore(res.leaderboard[res.leaderboard.length - 1].score);
 			})
 			.then(() => setLoading(false));
-	}, [setLoading, setFrom, setTo]);
-
-	// useEffect(() => {
-	// 	if (!from && !to) {
-	// 		setLoading(true);
-	// 		getFetch('/api/v1/words')
-	// 			.then(res => {
-	// 				if (res.from && res.to) {
-	// 					onChangeGame({ from: res.from, to: res.to });
-	// 					setHistory([res.from]);
-	// 					setGuessVals(res.from.match(regex));
-	// 				} else {
-	// 					// Error is for guessing, need another way to log this
-	// 					// setError('Something went wrong grabbing game words!');
-	// 				}
-	// 			})
-	// 			.then(() => setLoading(false))
-	// 			.catch(err => console.log(err));
-	// 	} else {
-	// 		setHistory([from]);
-	// 		setGuessVals(from.match(regex));
-	// 	}
-	// }, [
-	// 	from,
-	// 	to,
-	// 	onChangeFrom,
-	// 	onChangeTo,
-	// 	setLoading,
-	// 	setHistory,
-	// 	setGuessVals,
-	// ]);
+	}, [setLoading, setDate, setFrom, setTo, setLowestHighscore]);
 
 	useEffect(() => {
 		historyBottomRef.current.scrollIntoView({
 			behavior: 'smooth',
 		});
 	}, [history]);
-
-	const handleNewClick = useCallback(() => {
-		setWin(false);
-		setNumHints(3);
-		setHint(null);
-		setIsHintExpanded(false);
-		setShowHintInHistory(false);
-		setError(null);
-		setTimer(0);
-
-		setSolution(null);
-		inputRefs.forEach(inputRef => {
-			inputRef.current.value = '';
-		});
-		setLoading(true);
-		getFetch('/api/v1/words')
-			.then(res => {
-				if (res.from && res.to) {
-					onChangeGame({ from: res.from, to: res.to });
-					setTimer(0);
-				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [
-		onChangeGame,
-		inputRefs,
-		setWin,
-		setError,
-		setHint,
-		setNumHints,
-		setIsHintExpanded,
-		setShowHintInHistory,
-		setSolution,
-		setLoading,
-		setTimer,
-	]);
 
 	const handleHintClick = useCallback(() => {
 		setLoading(true);
@@ -178,46 +111,11 @@ export const Daily = ({ dark, onChangeGame }) => {
 		setLoading,
 	]);
 
-	const handleGetSoln = useCallback(() => {
-		setLoading(true);
-		getFetch(`/api/v1/solve?from=${from}&to=${to}`)
-			.then(res => {
-				if (res.solution) {
-					setSolution(res.solution);
-				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [from, to, setLoading, setSolution]);
-
 	const handleExpandHint = useCallback(
 		expand => {
 			setIsHintExpanded(expand);
 		},
 		[setIsHintExpanded]
-	);
-
-	const handleSubmitEdit = useCallback(
-		(nextFrom, nextTo) => {
-			setNumHints(3);
-			setHint(null);
-			setIsHintExpanded(false);
-			setShowHintInHistory(false);
-			setError(null);
-			onChangeGame({ from: nextFrom, to: nextTo });
-			setTimer(0);
-		},
-		[
-			setNumHints,
-			setHint,
-			setIsHintExpanded,
-			setShowHintInHistory,
-			setError,
-			setTimer,
-			onChangeGame,
-		]
 	);
 
 	const handleKeyDown = useCallback(
@@ -287,7 +185,6 @@ export const Daily = ({ dark, onChangeGame }) => {
 					.then(res => {
 						if (res) {
 							setScore(res.score);
-							setSolution(res.optimalSolution);
 							setWin(true);
 							setError(null);
 							setHistory(history => [...history, guess]);
@@ -318,7 +215,6 @@ export const Daily = ({ dark, onChangeGame }) => {
 		guessVals,
 		history,
 		setScore,
-		setSolution,
 		setWin,
 		setError,
 		setHistory,
@@ -347,12 +243,12 @@ export const Daily = ({ dark, onChangeGame }) => {
 		<div className={getThemeClassname('Daily', dark)}>
 			<ThemeToggle />
 
-			<StealthForm
-				from={from}
-				to={to}
-				dark={dark}
-				onChange={handleSubmitEdit}
-			/>
+			<h2>Daily Challenge</h2>
+			<p>For the day of {date}</p>
+
+			<h3 className="Daily__words">
+				From: {from} -> To: {to}
+			</h3>
 
 			<div className="Daily__timer" role="timer">
 				{formatCentisecondsTimer(timer)}
@@ -406,8 +302,8 @@ export const Daily = ({ dark, onChangeGame }) => {
 						dark={dark}
 						btnText={`Get a Hint: ${numHints}`}
 						ariaLabelledBy="dailyHintHeader"
+						giveSolution={false}
 						onClick={handleHintClick}
-						onSolnClick={handleGetSoln}
 						onExpandChange={handleExpandHint}
 					>
 						<h3 id="dailyHintHeader">Hint: </h3>
@@ -464,46 +360,20 @@ export const Daily = ({ dark, onChangeGame }) => {
 					<FocusTrap>
 						<div className="Daily__win">
 							<Confetti number={50} recycle={false} />
-							<WinModal
-								dark={dark}
-								from={from}
-								to={to}
-								playerSoln={history}
-								timer={timer}
-								hintsUsed={3 - numHints}
-								score={score}
-								solution={solution}
-								onNewGame={handleNewClick}
-							/>
+							{/*<DailyWinModal*/}
+							{/*	dark={dark}*/}
+							{/*	from={from}*/}
+							{/*	to={to}*/}
+							{/*	playerSoln={history}*/}
+							{/*	timer={timer}*/}
+							{/*	hintsUsed={3 - numHints}*/}
+							{/*	score={score}*/}
+							{/*	onNewGame={handleNewClick}*/}
+							{/*/>*/}
 						</div>
 					</FocusTrap>,
 					document.body
 				)}
-			{solution &&
-				createPortal(
-					<div className="Daily__solution">
-						<div className="Daily__solutionContent">
-							<h2 className="Daily__solutionHeader">Solution</h2>
-
-							<ul className="Daily__solutionList">
-								{solution.map((step, i) => (
-									<li key={`Daily__solution-${i}`}>{step}</li>
-								))}
-							</ul>
-
-							<button
-								id="dailyWinNewGame"
-								className="Daily__winBtn"
-								aria-label="New Game"
-								onClick={handleNewClick}
-							>
-								New Game
-							</button>
-						</div>
-					</div>,
-					document.body
-				)}
-
 			<div className="Daily__easterEgg">This is an incredibly tiny screen</div>
 		</div>
 	);
@@ -518,45 +388,11 @@ Daily.propTypes = {
 	onChangeGame: PropTypes.func,
 };
 
-export const mapStateToProps = ({
-	game: {
-		daily: { from, to },
-	},
-	theme: { dark },
-}) => ({
+export const mapStateToProps = ({ theme: { dark } }) => ({
 	dark,
-	from,
-	to,
 });
 
-const mapDispatchToProps = {
-	onChangeFrom: applyFrom,
-	onChangeTo: applyTo,
-	onChangeGame: applyGame,
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Daily);
-
-// Fun Ideas:
-// - Reverse button. Work from To -> From
+export default connect(mapStateToProps)(Daily);
 
 // TODO:
-// - Check for accessibility - Ongoing, forever and ever
-// 			- Missing aria?
-// - Error handling, need to figure out best way to deal with errors from the API
-// - Similarly, should I improve the response check?
-// - Loading component needs to be made
-// - Scrollbar colour dark mode
-//			- https://alligator.io/css/css-scrollbars/
-// - Add styling specific to each platform (e.g. moz, etc.)
-// - Solution Modal dark mode
-// - Better win page
-// 			- Better confetti
-//			- Include more content - Stats (Time, path taken, num of words, etc), score, optimal solution
-// - Constant Error strings instead of having it typed out over and over
-// - Error causes input box to be red maybe?
-
-// https://wireframe.cc/mNTM9B
+// - See Solo

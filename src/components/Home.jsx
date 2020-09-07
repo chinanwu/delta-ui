@@ -19,7 +19,7 @@ export const Home = ({ dark }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const [leaderboard, setLeaderboard] = useState('');
+	const [leaderboard, setLeaderboard] = useState([]);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
@@ -29,9 +29,16 @@ export const Home = ({ dark }) => {
 		setLoading(true);
 		getFetch('/api/v1/dailychallenge')
 			.then(res => {
-				if (res.body && res.body.leaderboard) {
+				if (res.leaderboard) {
 					// TODO check if this response is correct
-					setLeaderboard(res.leaderboard);
+					const leaderboard = [];
+					for (let i = 0; i < res.leaderboard.length; i++) {
+						leaderboard[i] = [
+							res.leaderboard[i].name,
+							res.leaderboard[i].score,
+						];
+					}
+					setLeaderboard(leaderboard);
 				}
 			})
 			.then(() => setLoading(false));
@@ -73,7 +80,7 @@ export const Home = ({ dark }) => {
 					<Link className="Home__btnContainer" to="/solo">
 						<button
 							id="homeCreateSoloBtn"
-							className="Home__btn"
+							className="Home__btn Home__soloBtn"
 							aria-label="Create solo game"
 							role="link"
 						>
@@ -82,7 +89,7 @@ export const Home = ({ dark }) => {
 					</Link>
 					<Link className="Home__btnContainer" to="/daily">
 						<button
-							id="homeCreateSoloBtn"
+							id="homeDailyBtn"
 							className="Home__btn Home__dailyBtn"
 							aria-label="Create versus game"
 							role="link"
@@ -94,27 +101,51 @@ export const Home = ({ dark }) => {
 
 				<div
 					className={getThemeClassname('Home--centre', dark)}
-					aria-labelledby="daily"
+					aria-label="Daily Challenge"
 				>
-					<h2 id="daily">Daily Challenge</h2>
 					<p className="Home__dailyExplanation">
-						Complete the daily challenge with a record score and be added to the
-						daily leaderboard! New challenges every day at midnight EST (UTC -5)
+						Complete the daily challenge with a record (read: top 10) score and
+						be added to the daily leaderboard! New challenges every day at
+						midnight EST (UTC -5).
 					</p>
-					<div className={getThemeClassname('Home__leaderboard', dark)}>
+					<div className="Home__leaderboard">
 						<button
 							className="Home__leaderboardBtn"
 							onClick={handleLeaderboardClick}
 						>
-							Today's Leaderboard
+							<span>Today's Leaderboard</span>{' '}
+							<span>{showLeaderboard ? '-' : '+'}</span>
 						</button>
 						<div
 							className={
-								'Home__leaderboardContent' +
+								getThemeClassname('Home__leaderboardContent', dark) +
 								(showLeaderboard ? ' Home__leaderboardContent--expanded' : '')
 							}
 						>
-							{leaderboard}
+							{leaderboard ? (
+								leaderboard.length > 0 ? (
+									<table>
+										<thead>
+											<tr>
+												<th>Rank</th>
+												<th>Name</th>
+												<th>Score</th>
+											</tr>
+										</thead>
+										<tbody>
+											{leaderboard.map((player, i) => (
+												<tr key={`key--${i}`}>
+													<td>{i + 1}</td>
+													<td>{player[0]}</td>
+													<td>{player[1]}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								) : (
+									<p>No one has completed the Daily Challenge... yet? 👀</p>
+								)
+							) : null}
 						</div>
 					</div>
 				</div>

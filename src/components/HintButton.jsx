@@ -13,6 +13,7 @@ export const HintButton = ({
 	numHints,
 	isExpanded,
 	ariaLabelledBy,
+	giveSolution,
 	onClick,
 	onSolnClick,
 	onExpandChange,
@@ -25,7 +26,7 @@ export const HintButton = ({
 				onClick();
 				onExpandChange(true);
 			} else {
-				onSolnClick();
+				if (giveSolution) onSolnClick();
 			}
 		}
 	}, [isExpanded, numHints, onExpandChange, onClick, onSolnClick]);
@@ -50,23 +51,33 @@ export const HintButton = ({
 			<button
 				id={id}
 				className={
-					'HintButton__btn' + (isExpanded ? ' HintButton__btn--expanded' : '')
+					'HintButton__btn' +
+					(isExpanded
+						? ' HintButton__btn--expanded'
+						: !giveSolution && numHints === 0 && dark
+						? ' HintButton__btn--disabled--dark'
+						: '')
 				}
 				aria-label={
 					isExpanded
 						? 'Close Hint'
 						: numHints === 0
-						? 'Get the solution'
+						? giveSolution
+							? 'Get the solution'
+							: 'Out of Hints'
 						: 'Get a Hint'
 				}
 				aria-expanded={isExpanded}
 				aria-haspopup={!isExpanded && numHints === 0 ? 'dialog' : null}
+				disabled={!giveSolution && numHints === 0 && !isExpanded}
 				onClick={handleClick}
 			>
 				{isExpanded
 					? 'Close Hint'
 					: numHints === 0
-					? 'Get the Solution'
+					? giveSolution
+						? 'Get the solution'
+						: 'Out of Hints'
 					: btnText}
 			</button>
 		</div>

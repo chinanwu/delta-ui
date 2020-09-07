@@ -106,7 +106,10 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 		<div className="StealthForm">
 			<button
 				id="stealthFormEditBtn"
-				className="StealthForm__btn StealthForm__editBtn"
+				className={
+					'StealthForm__btn StealthForm__editBtn' +
+					(isEditable && dark ? ' StealthForm__editBtn--disabled--dark' : '')
+				}
 				aria-roledescription="Modify the game words"
 				disabled={isEditable}
 				onClick={handleOpen}

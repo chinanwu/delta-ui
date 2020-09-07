@@ -4,8 +4,6 @@
 .Home {
 	display: flex;
 	flex-direction: column;
-	//justify-content: center;
-	//align-items: center;
 	height: 100%;
 }
 
@@ -31,33 +29,96 @@
 	width: 15rem;
 	padding-top: 1.2rem;
 	padding-bottom: 1.2rem;
-	font-size: 2.6rem;
+}
+
+.Home__soloBtn {
+	font-size: 3.2rem;
 }
 
 .Home__dailyBtn {
-	width: 27rem;
+	width: initial;
+	font-size: 2rem;
 }
 
 .Home__leaderboard {
+	width: 60%;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.Home__leaderboard--dark {
-	@dark();
-}
-
 .Home__leaderboardBtn {
 	@medBtn();
+	border-radius: 0;
+	font-size: 1.8rem;
+	box-shadow: none;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+
+	&:hover {
+		box-shadow: none;
+	}
 }
 
 .Home__leaderboardContent {
-	transition: max-height 1s;
+	transition: max-height 0.5s;
 	max-height: 0;
-	width: 60%;
 	overflow: hidden;
+	display: flex;
+	justify-content: center;
+
+	table {
+		border-collapse: collapse;
+		font-size: 1.6rem;
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+
+	thead {
+		background-color: @greenActive;
+	}
+
+	th,
+	td {
+		border: 1px solid black;
+		padding: 1rem;
+		width: 5rem;
+	}
+
+	tbody {
+		tr:hover {
+			background-color: rgba(139, 195, 74, 0.2);
+		}
+	}
+
+	tr:nth-child(even) {
+		background-color: @greenLight;
+		color: black;
+	}
+}
+
+.Home__leaderboardContent--dark {
+	thead {
+		background-color: @dark-02;
+	}
+
+	th,
+	td {
+		border: 1px solid @dark-05;
+	}
+
+	tbody {
+		tr:hover {
+			background-color: @dark-04;
+		}
+	}
+
+	tr:nth-child(even) {
+		background-color: @dark-03;
+		color: white;
+	}
 }
 
 .Home__leaderboardContent--expanded {
@@ -110,6 +171,10 @@
 
 .Home__footer--dark a {
 	color: white;
+}
+
+.Home__footer--relative {
+	position: initial;
 }
 
 .Home__acksBtn--dark {
@@ -176,12 +241,6 @@
 	text-align: center;
 }
 
-@media only screen and (max-height: 895px) {
-	.Home__footer--relative {
-		position: initial;
-	}
-}
-
 @media only screen and (max-height: 850px) {
 	.Home__footer {
 		position: initial;
@@ -190,11 +249,8 @@
 
 @media only screen and (max-width: 830px) {
 	.Home__dailyExplanation,
+	.Home__leaderboard,
 	.Home__rules {
-		width: 80%;
-	}
-
-	.Home__leaderboardContent {
 		width: 80%;
 	}
 }
@@ -223,13 +279,28 @@
 		margin: 1rem 0;
 	}
 
+	.Home__soloBtn {
+		padding: 2rem;
+	}
+
+	.Home__dailyBtn {
+		font-size: 2.4rem;
+	}
+
 	.Home__dailyExplanation,
+	.Home__leaderboard,
 	.Home__rules {
 		width: initial;
 	}
 
-	.Home__leaderboardContent {
-		width: initial;
+	.Home__leaderboard {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
+	.Home__dailyExplanation {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
 	}
 
 	.Home__modalContent {

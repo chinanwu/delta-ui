@@ -7,7 +7,7 @@
 }
 
 .HintButton__content {
-	background-color: rgba(139, 195, 74, 0.5);
+	background-color: @greenLight;
 	height: 0;
 	transition: height 1s;
 	overflow: hidden;
@@ -31,6 +31,10 @@
 
 .HintButton__btn--expanded {
 	border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.HintButton__btn--disabled--dark {
+	@btnDark();
 }
 
 @media only screen and (max-width: 550px) {

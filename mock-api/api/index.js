@@ -24,9 +24,16 @@ router.get('/api/v1/dailychallenge', (req, res) =>
 		from: 'quey',
 		to: 'unau',
 		leaderboard: [
-			{ name: 'sox', score: 99 },
-			{ name: 'atl', score: 81 },
-			{ name: 'sea', score: 70 },
+			{ name: 'sock', score: 99 },
+			{ name: 'slmn', score: 81 },
+			{ name: 'sam1', score: 70 },
+			{ name: 'sam2', score: 69 },
+			{ name: 'sam3', score: 50 },
+			{ name: 'sam4', score: 31 },
+			{ name: 'john', score: 30 },
+			{ name: 'sam5', score: 20 },
+			{ name: 'sam6', score: 10 },
+			{ name: 'sam6', score: 2 },
 		],
 	})
 );

@@ -1,7 +1,7 @@
 const API_URL =
 	process.env.NODE_ENV === 'development'
 		? 'http://localhost:8081'
-		: 'http://api.delta.chinanwu.com';
+		: process.env.API_URL; //'http://api.delta.chinanwu.com'
 
 // endpt: String, e.g. /api/v1/ping
 export const getFetch = endpt =>
