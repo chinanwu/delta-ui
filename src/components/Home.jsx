@@ -1,34 +1,45 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 
 import { escapeBtn } from '../constants/Keycodes';
-// import { getFetch } from '../functions/FetchFunctions';
+import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
+import Loading from './Loading.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
 
 export const Home = ({ dark }) => {
-	const [learnMore, setLearnMore] = useState(false);
+	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [leaderboard, setLeaderboard] = useState('');
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
 
-	// useEffect(() => {
-	// 	getFetch('/api/v1/ping').then(res => console.log(res));
-	// }, []);
+	useEffect(() => {
+		setLoading(true);
+		getFetch('/api/v1/dailychallenge')
+			.then(res => {
+				if (res.body && res.body.leaderboard) {
+					// TODO check if this response is correct
+					setLeaderboard(res.leaderboard);
+				}
+			})
+			.then(() => setLoading(false));
+	}, [setLoading, setLeaderboard]);
 
-	const handleLearnMore = useCallback(() => {
-		setLearnMore(learnMore => !learnMore);
-	}, [learnMore, setLearnMore]);
+	const handleLeaderboardClick = useCallback(() => {
+		setShowLeaderboard(showLeaderboard => !showLeaderboard);
+	}, [showLeaderboard, setShowLeaderboard]);
 
 	const handleOpenAcks = useCallback(() => {
 		document.body.classList.add('Modal--open');
@@ -58,51 +69,53 @@ export const Home = ({ dark }) => {
 
 			<h1 className="Home__header">Delta</h1>
 			<>
-				<h2 className="Home--centre Home__gameModeLabel">Game Mode:</h2>
 				<div className="Home__btns">
-					<Link to="/solo">
+					<Link className="Home__btnContainer" to="/solo">
 						<button
 							id="homeCreateSoloBtn"
 							className="Home__btn"
 							aria-label="Create solo game"
 							role="link"
 						>
-							Solo
+							Play!
 						</button>
 					</Link>
-					<Link to="/versus">
+					<Link className="Home__btnContainer" to="/daily">
 						<button
 							id="homeCreateSoloBtn"
-							className="Home__btn"
+							className="Home__btn Home__dailyBtn"
 							aria-label="Create versus game"
 							role="link"
 						>
-							Versus
+							Daily Challenge
 						</button>
 					</Link>
 				</div>
-				<div className={getThemeClassname('Home__learnMore', dark)}>
-					<button className="Home__learnMoreBtn" onClick={handleLearnMore}>
-						Learn {learnMore ? 'less' : 'more'} about game modes
-					</button>
-					<div
-						className={
-							'Home__learnMoreContent' +
-							(learnMore ? ' Home__learnMoreContent--expanded' : '')
-						}
-					>
-						<h2>Solo Game Mode</h2>
-						<p>
-							Play Delta, solo! You'll be provided with two words and you'll
-							attempt to get from one to the other! Classic Delta fun.
-						</p>
 
-						<h2>Versus Game Mode</h2>
-						<p>
-							Compete with up to 3 other folks in an attempt to either solve the
-							problem fastest or with the best score! Fun family fun if your
-							family has only 4 folks (including you).
-						</p>
+				<div
+					className={getThemeClassname('Home--centre', dark)}
+					aria-labelledby="daily"
+				>
+					<h2 id="daily">Daily Challenge</h2>
+					<p className="Home__dailyExplanation">
+						Complete the daily challenge with a record score and be added to the
+						daily leaderboard! New challenges every day at midnight EST (UTC -5)
+					</p>
+					<div className={getThemeClassname('Home__leaderboard', dark)}>
+						<button
+							className="Home__leaderboardBtn"
+							onClick={handleLeaderboardClick}
+						>
+							Today's Leaderboard
+						</button>
+						<div
+							className={
+								'Home__leaderboardContent' +
+								(showLeaderboard ? ' Home__leaderboardContent--expanded' : '')
+							}
+						>
+							{leaderboard}
+						</div>
 					</div>
 				</div>
 				<div
@@ -205,7 +218,7 @@ export const Home = ({ dark }) => {
 			<footer
 				className={
 					getThemeClassname('Home__footer', dark) +
-					(learnMore ? ' Home__footer--relative' : '')
+					(showLeaderboard ? ' Home__footer--relative' : '')
 				}
 			>
 				<button
@@ -219,6 +232,8 @@ export const Home = ({ dark }) => {
 				<br />
 				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
 			</footer>
+
+			{loading && createPortal(<Loading />, document.body)}
 
 			{showAcks &&
 				createPortal(

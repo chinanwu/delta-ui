@@ -1,15 +1,15 @@
 @import '../style/colours';
 @import '../style/button';
 
-.Solo {
+.Daily {
 	height: 100%;
 }
 
-.Solo--dark {
+.Daily--dark {
 	@dark();
 }
 
-.Solo__words {
+.Daily__words {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,7 +17,7 @@
 	font-size: 2.4rem;
 }
 
-.Solo__editBtn {
+.Daily__editBtn {
 	@smBtn();
 	margin-left: 2rem;
 	margin-top: 2rem;
@@ -28,7 +28,7 @@
 	}
 }
 
-.Solo__editorContent {
+.Daily__editorContent {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -37,12 +37,12 @@
 	height: 10rem;
 }
 
-.Solo__editorContent--dark {
+.Daily__editorContent--dark {
 	background-color: @dark-02;
 	color: #fff;
 }
 
-.Solo__hintContent {
+.Daily__hintContent {
 	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
@@ -50,79 +50,79 @@
 	padding: 1rem;
 }
 
-.Solo__hintContent--dark {
+.Daily__hintContent--dark {
 	background-color: @dark-02;
 	color: #fff;
 }
 
-.Solo__hint--short {
+.Daily__hint--short {
 	margin-top: 0;
 }
 
-.Solo__editorForms {
+.Daily__editorForms {
 	display: flex;
 }
 
-.Solo__editorInput {
+.Daily__editorInput {
 	font-size: 1.4rem;
 }
 
-.Solo__editor--center {
+.Daily__editor--center {
 	&::before,
 	&::after {
 		content: '\00a0';
 	}
 }
 
-.Solo__editor--center {
+.Daily__editor--center {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.Solo__editorBtns {
+.Daily__editorBtns {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1rem;
 }
 
-.Solo__enterBtn,
-.Solo__editorBtn,
-.Solo__hintCloseBtn {
+.Daily__enterBtn,
+.Daily__editorBtn,
+.Daily__hintCloseBtn {
 	@smBtn();
 }
 
-.Solo__timer {
+.Daily__timer {
 	text-align: center;
 	font-size: 2.4rem;
 }
 
-.Solo__game {
+.Daily__game {
 	display: flex;
 	justify-content: center;
 	height: 70%;
 	margin-top: 1rem;
 }
 
-.Solo__game--dark {
+.Daily__game--dark {
 	@dark();
 }
 
-.Solo__history {
+.Daily__history {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center; // For history label
 }
 
-.Solo__historyLabel {
+.Daily__historyLabel {
 	border: 1px solid @green;
 	background-color: @green;
 	width: 22rem;
 	color: black;
 }
 
-.Solo__historyList {
+.Daily__historyList {
 	border: 1px solid black;
 	list-style: none;
 	padding: 1rem 0;
@@ -143,7 +143,7 @@
 	scrollbar-color: #b0b0b0 white; /* scroll thumb & track */
 }
 
-.Solo__historyList--dark {
+.Daily__historyList--dark {
 	border: none;
 	background-color: @dark-02;
 	color: #fff;
@@ -159,24 +159,24 @@
 	scrollbar-color: #323232 @dark-02; /* scroll thumb & track */
 }
 
-.Solo__historyList--hideScroll {
+.Daily__historyList--hideScroll {
 	overflow: hidden;
 }
 
-.Solo__historyHintWord {
+.Daily__historyHintWord {
 	color: #757575;
 }
 
-.Solo__historyHintWord--dark {
+.Daily__historyHintWord--dark {
 	color: #aedb7a;
 }
 
-.Solo__historyHintMysteryLi {
+.Daily__historyHintMysteryLi {
 	display: flex;
 	justify-content: center;
 }
 
-.Solo__historyHintMystery {
+.Daily__historyHintMystery {
 	width: 10rem;
 	margin-bottom: 0.5rem;
 	text-align: center;
@@ -184,18 +184,18 @@
 	color: white;
 }
 
-.Solo__historyHintMystery--dark {
+.Daily__historyHintMystery--dark {
 	background-color: #3c2b3b;
 	color: white;
 }
 
-.Solo__hint {
+.Daily__hint {
 	font-size: 1.6rem;
 	margin-bottom: 0.5rem;
 	margin-top: 0;
 }
 
-.Solo__guessContainer {
+.Daily__guessContainer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -203,17 +203,17 @@
 	width: 30rem;
 }
 
-.Solo__guessLabel {
+.Daily__guessLabel {
 	margin-bottom: 2rem;
 }
 
-.Solo__guessInputs {
+.Daily__guessInputs {
 	display: flex;
 	justify-content: center;
 	position: absolute;
 }
 
-.Solo__guessInput {
+.Daily__guessInput {
 	margin: 0.4rem;
 	width: 3.6rem;
 	height: 4.2rem;
@@ -234,7 +234,7 @@
 	}
 }
 
-.Solo__guessInput--dark {
+.Daily__guessInput--dark {
 	color: white;
 	background: @dark-02;
 	border: 1px solid black;
@@ -253,7 +253,7 @@
 	}
 }
 
-.Solo__gameError {
+.Daily__gameError {
 	font-size: 1.8rem;
 	text-align: center;
 	color: @error;
@@ -263,12 +263,12 @@
 	height: 6rem;
 }
 
-.Solo__gameError--dark {
+.Daily__gameError--dark {
 	color: @errorDark;
 }
 
-.Solo__win,
-.Solo__solution {
+.Daily__win,
+.Daily__solution {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -284,122 +284,122 @@
 	background-color: @modalBg;
 }
 
-.Solo__solutionContent {
+.Daily__solutionContent {
 	background-color: white;
 	color: black;
 	padding: 4rem;
 }
 
-.Solo__solutionHeader {
+.Daily__solutionHeader {
 	text-align: center;
 }
 
-.Solo__solutionList {
+.Daily__solutionList {
 	text-align: center;
 	list-style: none;
 	padding-left: 0;
 	font-size: 1.8rem;
 }
 
-.Solo__winText {
+.Daily__winText {
 	font-size: 3.6rem;
 }
 
-.Solo__winBtn {
+.Daily__winBtn {
 	@largeBtn();
 }
 
-.Solo__stats {
+.Daily__stats {
 	font-size: 1.8rem;
 	text-align: center;
 }
 
-.Solo__easterEgg {
+.Daily__easterEgg {
 	display: none;
 }
 
 @media only screen and (max-width: 550px) {
-	.Solo__game {
+	.Daily__game {
 		flex-direction: column;
 		height: initial;
 	}
 
-	.Solo__editor,
-	.Solo__editorBtn,
-	.Solo__enterBtn,
-	.Solo__editBtn,
-	.Solo__hint {
+	.Daily__editor,
+	.Daily__editorBtn,
+	.Daily__enterBtn,
+	.Daily__editBtn,
+	.Daily__hint {
 		font-size: 125%;
 	}
 
-	.Solo__editor,
-	.Solo__editor--hiding {
+	.Daily__editor,
+	.Daily__editor--hiding {
 		width: initial;
 		margin-left: 2rem;
 		margin-right: 2rem;
 	}
 
-	.Solo__hintContent {
+	.Daily__hintContent {
 		margin-right: 2rem;
 		margin-left: 2rem;
 	}
 
-	.Solo__editBtn::after {
+	.Daily__editBtn::after {
 		content: '';
 	}
 
-	.Solo__editBtn {
+	.Daily__editBtn {
 		width: 7rem;
 		margin-left: 1rem;
 		margin-top: 1rem;
 	}
 
-	.Solo__editorContent {
+	.Daily__editorContent {
 		padding: 2rem;
 		height: 20rem;
 	}
 
-	.Solo__editorForms {
+	.Daily__editorForms {
 		flex-direction: column;
 	}
 
-	.Solo__editorForm {
+	.Daily__editorForm {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
 
-	.Solo__editorLabel,
-	.Solo__editorInput {
+	.Daily__editorLabel,
+	.Daily__editorInput {
 		font-size: 1.8rem;
 	}
 
-	.Solo__editorInput {
+	.Daily__editorInput {
 		width: 15rem;
 	}
 
-	.Solo__editorBtns {
+	.Daily__editorBtns {
 		flex-direction: column;
 	}
 
-	.Solo__guessContainer {
+	.Daily__guessContainer {
 		width: initial;
 	}
 
-	.Solo__guessLabel {
+	.Daily__guessLabel {
 		margin-bottom: 0;
 	}
 
-	.Solo__guessInputs {
+	.Daily__guessInputs {
 		position: initial;
 	}
 
-	.Solo__gameError {
+	.Daily__gameError {
 		position: initial;
 		top: initial;
 	}
 
-	.Solo__historyList {
+	.Daily__historyList {
 		display: flex;
 		align-items: center;
 		flex-direction: column;
@@ -410,44 +410,44 @@
 		height: 20rem;
 	}
 
-	.Solo__historyLabel {
+	.Daily__historyLabel {
 		width: 20rem;
 	}
 }
 
 @media only screen and (max-width: 375px) {
-	.Solo__words {
+	.Daily__words {
 		padding-top: 2rem;
 	}
 
-	.Solo__guessInput {
+	.Daily__guessInput {
 		font-size: 2rem;
 	}
 }
 
 @media only screen and (max-width: 340px) {
-	.Solo__words {
+	.Daily__words {
 		text-align: center;
 	}
 }
 
 @media only screen and (max-width: 290px) {
-	.Solo__editor {
+	.Daily__editor {
 		margin: 0;
 		border: 1px solid black;
 	}
 
-	.Solo__editorContent {
+	.Daily__editorContent {
 		border: none;
 	}
 
-	.Solo__guessInputs {
+	.Daily__guessInputs {
 		flex-direction: column;
 	}
 }
 
 @media only screen and (max-width: 225px) {
-	.Solo__easterEgg {
+	.Daily__easterEgg {
 		display: initial;
 		position: absolute;
 		top: 0;

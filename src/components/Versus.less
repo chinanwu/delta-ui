@@ -14,11 +14,18 @@
 .Versus__header {
 	padding-top: 5rem;
 	font-size: 3.2rem;
+	padding-bottom: 0;
+}
+
+.Versus__headerSubtext {
+	font-size: 1.6rem;
+	padding-bottom: 1.4rem;
 }
 
 .Versus__form {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
 .Versus__field {
@@ -51,6 +58,64 @@
 	}
 }
 
+.Versus__input--dark {
+	color: white;
+	background: @dark-02;
+	border: 1px solid black;
+	padding: 0.3rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #bfbfbf;
+	}
+
+	&:-ms-input-placeholder {
+		color: #bfbfbf;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #bfbfbf;
+	}
+}
+
+.Versus__error {
+	font-size: 1.8rem;
+	text-align: center;
+	color: @error;
+}
+
+.Versus__error--dark {
+	color: @errorDark;
+}
+
 .Versus__btn {
 	@largeBtn();
+	width: 21rem;
+}
+
+.Versus__or {
+	text-align: center;
+	font-size: 1.8rem;
+}
+
+.Versus__gameOpts {
+	margin-top: 1rem;
+}
+
+.Versus__gameOptsHeader {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+
+.Versus__winCondtHeader {
+	font-size: 1.8rem;
+}
+
+.Versus__winCondtRadioLabel {
+	font-size: 1.8rem;
+}
+
+.Versus__gameOptsInputContainer {
+	display: flex;
+	justify-content: space-evenly;
 }

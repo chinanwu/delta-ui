@@ -20,13 +20,10 @@
 	font-size: 3.6rem;
 }
 
-.Home__gameModeLabel {
-	padding-bottom: 0;
-}
-
 .Home__btns {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .Home__btn {
@@ -37,29 +34,33 @@
 	font-size: 2.6rem;
 }
 
-.Home__learnMore {
+.Home__dailyBtn {
+	width: 27rem;
+}
+
+.Home__leaderboard {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.Home__learnMore--dark {
+.Home__leaderboard--dark {
 	@dark();
 }
 
-.Home__learnMoreBtn {
+.Home__leaderboardBtn {
 	@medBtn();
 }
 
-.Home__learnMoreContent {
+.Home__leaderboardContent {
 	transition: max-height 1s;
 	max-height: 0;
 	width: 60%;
 	overflow: hidden;
 }
 
-.Home__learnMoreContent--expanded {
+.Home__leaderboardContent--expanded {
 	max-height: 50rem;
 }
 
@@ -73,11 +74,13 @@
 	@dark();
 }
 
+.Home__dailyExplanation,
 .Home__rules,
 .Home__example--p {
 	text-align: center;
 }
 
+.Home__dailyExplanation,
 .Home__rules {
 	width: 60%;
 }
@@ -179,18 +182,19 @@
 	}
 }
 
-@media only screen and (max-height: 690px) {
+@media only screen and (max-height: 850px) {
 	.Home__footer {
 		position: initial;
 	}
 }
 
 @media only screen and (max-width: 830px) {
+	.Home__dailyExplanation,
 	.Home__rules {
 		width: 80%;
 	}
 
-	.Home__learnMoreContent {
+	.Home__leaderboardContent {
 		width: 80%;
 	}
 }
@@ -205,22 +209,26 @@
 	}
 
 	.Home__btns {
-		flex-direction: column;
-		padding-left: 3rem;
-		padding-right: 3rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.Home__btnContainer {
+		width: 100%;
 	}
 
 	.Home__btn {
-		font-size: 3rem;
 		width: 100%;
+		font-size: 3rem;
 		margin: 1rem 0;
 	}
 
+	.Home__dailyExplanation,
 	.Home__rules {
 		width: initial;
 	}
 
-	.Home__learnMoreContent {
+	.Home__leaderboardContent {
 		width: initial;
 	}
 
