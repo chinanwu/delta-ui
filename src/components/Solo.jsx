@@ -484,8 +484,8 @@ export const Solo = ({
 							</ul>
 
 							<button
-								id="soloWinNewGame"
-								className="Solo__winBtn"
+								id="soloSolnNewGame"
+								className="Solo__newBtn"
 								aria-label="New Game"
 								onClick={handleNewClick}
 							>
@@ -542,7 +542,7 @@ export default connect(
 // - Similarly, should I improve the response check?
 // - Loading component needs to be made
 // - Add styling specific to each platform (e.g. moz, etc.)
-// - Solution Modal dark mode
+// - Solution Modal dark mode, and just general design
 // - Constant Error strings instead of having it typed out over and over
 // - Error causes input box to be red maybe?
 

@@ -19,6 +19,7 @@ import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
 
+import DailyWinModal from './DailyWinModal.jsx';
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
@@ -28,7 +29,7 @@ import './Daily.less';
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
 
-export const Daily = ({ dark, onChangeGame }) => {
+export const Daily = ({ dark }) => {
 	const [from, setFrom] = useState('');
 	const [to, setTo] = useState('');
 	const [date, setDate] = useState('');
@@ -243,8 +244,8 @@ export const Daily = ({ dark, onChangeGame }) => {
 		<div className={getThemeClassname('Daily', dark)}>
 			<ThemeToggle />
 
-			<h2>Daily Challenge</h2>
-			<p>For the day of {date}</p>
+			<h2 className="Daily__header">Daily Challenge</h2>
+			<p className="Daily__date">For the day of {date}</p>
 
 			<h3 className="Daily__words">
 				From: {from} -> To: {to}
@@ -360,16 +361,16 @@ export const Daily = ({ dark, onChangeGame }) => {
 					<FocusTrap>
 						<div className="Daily__win">
 							<Confetti number={50} recycle={false} />
-							{/*<DailyWinModal*/}
-							{/*	dark={dark}*/}
-							{/*	from={from}*/}
-							{/*	to={to}*/}
-							{/*	playerSoln={history}*/}
-							{/*	timer={timer}*/}
-							{/*	hintsUsed={3 - numHints}*/}
-							{/*	score={score}*/}
-							{/*	onNewGame={handleNewClick}*/}
-							{/*/>*/}
+							<DailyWinModal
+								dark={dark}
+								from={from}
+								to={to}
+								playerSoln={history}
+								timer={timer}
+								hintsUsed={3 - numHints}
+								score={score}
+								isHighscore={score > lowestHighscore}
+							/>
 						</div>
 					</FocusTrap>,
 					document.body
@@ -381,11 +382,6 @@ export const Daily = ({ dark, onChangeGame }) => {
 
 Daily.propTypes = {
 	dark: PropTypes.bool,
-	from: PropTypes.string,
-	to: PropTypes.string,
-	onChangeFrom: PropTypes.func,
-	onChangeTo: PropTypes.func,
-	onChangeGame: PropTypes.func,
 };
 
 export const mapStateToProps = ({ theme: { dark } }) => ({

@@ -9,37 +9,22 @@
 	@dark();
 }
 
+.Daily__header {
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.Daily__date {
+	text-align: center;
+	margin: 0;
+}
+
 .Daily__words {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding-top: 0;
 	font-size: 2.4rem;
-}
-
-.Daily__editBtn {
-	@smBtn();
-	margin-left: 2rem;
-	margin-top: 2rem;
-	font-size: 1.6rem;
-
-	&::after {
-		content: ' Game';
-	}
-}
-
-.Daily__editorContent {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	border: 1px solid black;
-	padding: 1rem;
-	height: 10rem;
-}
-
-.Daily__editorContent--dark {
-	background-color: @dark-02;
-	color: #fff;
 }
 
 .Daily__hintContent {
@@ -59,35 +44,7 @@
 	margin-top: 0;
 }
 
-.Daily__editorForms {
-	display: flex;
-}
-
-.Daily__editorInput {
-	font-size: 1.4rem;
-}
-
-.Daily__editor--center {
-	&::before,
-	&::after {
-		content: '\00a0';
-	}
-}
-
-.Daily__editor--center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.Daily__editorBtns {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 1rem;
-}
-
 .Daily__enterBtn,
-.Daily__editorBtn,
 .Daily__hintCloseBtn {
 	@smBtn();
 }
@@ -267,8 +224,7 @@
 	color: @errorDark;
 }
 
-.Daily__win,
-.Daily__solution {
+.Daily__win {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -284,36 +240,6 @@
 	background-color: @modalBg;
 }
 
-.Daily__solutionContent {
-	background-color: white;
-	color: black;
-	padding: 4rem;
-}
-
-.Daily__solutionHeader {
-	text-align: center;
-}
-
-.Daily__solutionList {
-	text-align: center;
-	list-style: none;
-	padding-left: 0;
-	font-size: 1.8rem;
-}
-
-.Daily__winText {
-	font-size: 3.6rem;
-}
-
-.Daily__winBtn {
-	@largeBtn();
-}
-
-.Daily__stats {
-	font-size: 1.8rem;
-	text-align: center;
-}
-
 .Daily__easterEgg {
 	display: none;
 }
@@ -324,62 +250,14 @@
 		height: initial;
 	}
 
-	.Daily__editor,
-	.Daily__editorBtn,
 	.Daily__enterBtn,
-	.Daily__editBtn,
 	.Daily__hint {
 		font-size: 125%;
-	}
-
-	.Daily__editor,
-	.Daily__editor--hiding {
-		width: initial;
-		margin-left: 2rem;
-		margin-right: 2rem;
 	}
 
 	.Daily__hintContent {
 		margin-right: 2rem;
 		margin-left: 2rem;
-	}
-
-	.Daily__editBtn::after {
-		content: '';
-	}
-
-	.Daily__editBtn {
-		width: 7rem;
-		margin-left: 1rem;
-		margin-top: 1rem;
-	}
-
-	.Daily__editorContent {
-		padding: 2rem;
-		height: 20rem;
-	}
-
-	.Daily__editorForms {
-		flex-direction: column;
-	}
-
-	.Daily__editorForm {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.Daily__editorLabel,
-	.Daily__editorInput {
-		font-size: 1.8rem;
-	}
-
-	.Daily__editorInput {
-		width: 15rem;
-	}
-
-	.Daily__editorBtns {
-		flex-direction: column;
 	}
 
 	.Daily__guessContainer {
@@ -426,21 +304,16 @@
 }
 
 @media only screen and (max-width: 340px) {
+	.Daily__header {
+		margin-top: 4rem;
+	}
+
 	.Daily__words {
 		text-align: center;
 	}
 }
 
-@media only screen and (max-width: 290px) {
-	.Daily__editor {
-		margin: 0;
-		border: 1px solid black;
-	}
-
-	.Daily__editorContent {
-		border: none;
-	}
-
+@media only screen and (max-width: 310px) {
 	.Daily__guessInputs {
 		flex-direction: column;
 	}

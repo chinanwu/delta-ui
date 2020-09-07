@@ -91,7 +91,7 @@ export const Versus = ({ dark }) => {
 							playerName: name,
 						};
 
-						postFetch('/api/v1/game');
+						// postFetch('/api/v1/game');
 					}
 				})
 				.then(() => setLoading(false));

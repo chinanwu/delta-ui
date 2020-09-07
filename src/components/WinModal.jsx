@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
+import getThemeClassname from '../functions/getThemeClassname';
 
 import './WinModal.less';
-import getThemeClassname from '../functions/getThemeClassname';
 
 export const WinModal = ({
 	dark,

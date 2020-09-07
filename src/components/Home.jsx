@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
+import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { escapeBtn } from '../constants/Keycodes';
 import { getFetch } from '../functions/FetchFunctions';
@@ -91,7 +91,6 @@ export const Home = ({ dark }) => {
 						<button
 							id="homeDailyBtn"
 							className="Home__btn Home__dailyBtn"
-							aria-label="Create versus game"
 							role="link"
 						>
 							Daily Challenge

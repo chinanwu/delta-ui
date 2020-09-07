@@ -37,6 +37,11 @@ router.get('/api/v1/dailychallenge', (req, res) =>
 		],
 	})
 );
+router.put('/api/v1/highscore', (req, res) =>
+	res.json({
+		message: 'Successfully updated leaderboard!',
+	})
+);
 router.get('/api/v1/allWords', (req, res) =>
 	res.json({
 		words: ['heat', 'meat', 'mead', 'meld', 'mold', 'cold', 'quey', 'unau'],
