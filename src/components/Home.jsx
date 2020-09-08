@@ -1,15 +1,15 @@
-import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { lazy, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { escapeBtn } from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
 
+const AcksModal = lazy(() => import('./AcksModal.jsx'));
+const Leaderboard = lazy(() => import('./Leaderboard.jsx'));
 import Loading from './Loading.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
@@ -18,31 +18,10 @@ import './Home.less';
 export const Home = ({ dark }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [leaderboard, setLeaderboard] = useState([]);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
-
-	useEffect(() => {
-		setLoading(true);
-		getFetch('/api/v1/dailychallenge')
-			.then(res => {
-				if (res.leaderboard) {
-					// TODO check if this response is correct
-					const leaderboard = [];
-					for (let i = 0; i < res.leaderboard.length; i++) {
-						leaderboard[i] = [
-							res.leaderboard[i].name,
-							res.leaderboard[i].score,
-						];
-					}
-					setLeaderboard(leaderboard);
-				}
-			})
-			.then(() => setLoading(false));
-	}, [setLoading, setLeaderboard]);
 
 	const handleLeaderboardClick = useCallback(() => {
 		setShowLeaderboard(showLeaderboard => !showLeaderboard);
@@ -121,30 +100,7 @@ export const Home = ({ dark }) => {
 								(showLeaderboard ? ' Home__leaderboardContent--expanded' : '')
 							}
 						>
-							{leaderboard ? (
-								leaderboard.length > 0 ? (
-									<table>
-										<thead>
-											<tr>
-												<th>Rank</th>
-												<th>Name</th>
-												<th>Score</th>
-											</tr>
-										</thead>
-										<tbody>
-											{leaderboard.map((player, i) => (
-												<tr key={`key--${i}`}>
-													<td>{i + 1}</td>
-													<td>{player[0]}</td>
-													<td>{player[1]}</td>
-												</tr>
-											))}
-										</tbody>
-									</table>
-								) : (
-									<p>No one has completed the Daily Challenge... yet? 👀</p>
-								)
-							) : null}
+							<Leaderboard />
 						</div>
 					</div>
 				</div>
@@ -263,50 +219,13 @@ export const Home = ({ dark }) => {
 				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
 			</footer>
 
-			{loading && createPortal(<Loading />, document.body)}
-
 			{showAcks &&
 				createPortal(
-					<FocusTrap>
-						<div className="Home__modal" onKeyDown={handleModalKeyDown}>
-							<div
-								className={getThemeClassname('Home__modalContent', dark)}
-								role="dialog"
-								aria-modal={true}
-								aria-labelledby="homeModalHeader"
-							>
-								<button
-									id="homeCloseAcksBtn"
-									className={getThemeClassname('Home__closeAcksBtn', dark)}
-									aria-label="Close"
-									onClick={handleCloseAcks}
-								>
-									X
-								</button>
-								<h2 id="homeModalHeader" className="Home__modalHeader">
-									Acknowledgements
-								</h2>
-								<div id="homeModalDesc" className="Home__modalAck">
-									Thank you to MCS, the one who introduced me to this word game.
-								</div>
-								<h3 className="Home__modalHeader">Icons</h3>
-								<div className="Home__modalAck">
-									Moon icon in theme toggle made by{' '}
-									<a
-										href="https://www.flaticon.com/authors/freepik"
-										title="Freepik"
-									>
-										Freepik
-									</a>{' '}
-									from{' '}
-									<a href="https://www.flaticon.com/" title="Flaticon">
-										{' '}
-										www.flaticon.com
-									</a>
-								</div>
-							</div>
-						</div>
-					</FocusTrap>,
+					<AcksModal
+						dark={dark}
+						handleModalKeyDown={handleModalKeyDown}
+						handleCloseAcks={handleCloseAcks}
+					/>,
 					document.body
 				)}
 		</div>

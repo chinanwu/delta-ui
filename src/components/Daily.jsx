@@ -1,5 +1,5 @@
 import FocusTrap from 'focus-trap-react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
 
-import DailyWinModal from './DailyWinModal.jsx';
+const DailyWinModal = lazy(() => import('./DailyWinModal.jsx'));
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
 import ThemeToggle from './ThemeToggle.jsx';

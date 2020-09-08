@@ -3,12 +3,12 @@ import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { getFetch } from '../functions/FetchFunctions';
-import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
+import { getFetch } from '../src/functions/FetchFunctions';
+import getThemeClassname from '../src/functions/getThemeClassname';
+import hasValidCharacters from '../src/functions/hasValidCharacters';
 
-import Loading from './Loading.jsx';
-import ThemeToggle from './ThemeToggle.jsx';
+import Loading from '../src/components/Loading.jsx';
+import ThemeToggle from '../src/components/ThemeToggle.jsx';
 
 import './Versus.less';
 

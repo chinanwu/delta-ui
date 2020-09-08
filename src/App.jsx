@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Daily from './components/Daily.jsx';
-import Home from './components/Home.jsx';
-import NotFound from './components/NotFound.jsx';
-import Solo from './components/Solo.jsx';
+// Lazy loads
+const Daily = lazy(() => import('./components/Daily.jsx'));
+const Home = lazy(() => import('./components/Home.jsx'));
+const NotFound = lazy(() => import('./components/NotFound.jsx'));
+const Solo = lazy(() => import('./components/Solo.jsx'));
 
 import './App.less';
 

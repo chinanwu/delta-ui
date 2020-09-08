@@ -72,7 +72,7 @@ export const DailyWinModal = ({
 							</label>
 							<input
 								id="dailyWinModalInput"
-								className="DailyWinModal__input"
+								className={getThemeClassname('DailyWinModal__input', dark)}
 								placeholder="Sock"
 								value={name}
 								maxLength={4}
@@ -162,3 +162,4 @@ export default DailyWinModal;
 
 // TODO
 // - See WinModal
+// - Maybe if click home without entering name, give error?

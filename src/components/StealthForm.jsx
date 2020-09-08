@@ -216,6 +216,5 @@ StealthForm.propTypes = {
 };
 export default StealthForm;
 
-// TODO:
-// handleKeyDown enter to submit
-// Fieldset? Legend?
+// Potential future improvements:
+// - Putting form inside a fieldset tag with a legend
