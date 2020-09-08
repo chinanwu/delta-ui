@@ -63,7 +63,7 @@ export const WinModal = ({
 					</ul>
 				</div>
 				<div className="WinModal__solution" aria-live="passive">
-					<h2>Optimal Solution:</h2>
+					<h2>Optimal:</h2>
 					{showSolution ? (
 						<ul className="WinModal__solutionList">
 							{solution.map((word, i) => (

@@ -1,0 +1,30 @@
+@import '../style/colours';
+@import '../style/button';
+
+.Error {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	font-size: 4rem;
+	background-color: @modalBg;
+}
+
+.Error__content {
+	background-color: white;
+	width: 45rem;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.Error__homeBtn {
+	@largeBtn();
+	margin-top: 2rem;
+}

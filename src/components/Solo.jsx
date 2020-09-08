@@ -20,6 +20,7 @@ import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
 import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
 
+import Error from './Error.jsx';
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
 import StealthForm from './StealthForm.jsx';
@@ -30,6 +31,22 @@ import './Solo.less';
 
 const maxLen = 4;
 const regex = /([a-zA-Z])/g;
+const totalHints = 3;
+
+const makeMysteryStepListItems = num => {
+	let all = [];
+	for (let i = 0; i < num; i++) {
+		all[i] = (
+			<li
+				className="Solo__historyHintMysteryLi"
+				key={`Solo__historyHintMystery--${i}`}
+			>
+				<div className="Solo__historyHintMystery">?</div>
+			</li>
+		);
+	}
+	return all;
+};
 
 export const Solo = ({
 	dark,
@@ -42,8 +59,9 @@ export const Solo = ({
 	const [win, setWin] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	const [apiError, setApiError] = useState(false);
 
-	const [numHints, setNumHints] = useState(3);
+	const [numHints, setNumHints] = useState(totalHints);
 	const [hint, setHint] = useState(null);
 	const [isHintExpanded, setIsHintExpanded] = useState(false);
 	const [showHintInHistory, setShowHintInHistory] = useState(false);
@@ -82,12 +100,11 @@ export const Solo = ({
 						setHistory([res.from]);
 						setGuessVals(res.from.match(regex));
 					} else {
-						// Error is for guessing, need another way to log this
-						// setError('Something went wrong grabbing game words!');
+						setApiError(true);
 					}
 				})
 				.then(() => setLoading(false))
-				.catch(err => console.log(err));
+				.catch(() => setApiError(true));
 		} else {
 			setHistory([from]);
 			setGuessVals(from.match(regex));
@@ -100,24 +117,25 @@ export const Solo = ({
 		setLoading,
 		setHistory,
 		setGuessVals,
+		setApiError,
 	]);
 
 	useEffect(() => {
 		historyBottomRef.current.scrollIntoView({
 			behavior: 'smooth',
 		});
-	}, [history]);
+	}, [history, historyBottomRef]);
 
 	const handleNewClick = useCallback(() => {
 		setWin(false);
-		setNumHints(3);
+		setNumHints(totalHints);
 		setHint(null);
 		setIsHintExpanded(false);
 		setShowHintInHistory(false);
 		setError(null);
 		setTimer(0);
-
 		setSolution(null);
+
 		inputRefs.forEach(inputRef => {
 			inputRef.current.value = '';
 		});
@@ -126,25 +144,29 @@ export const Solo = ({
 			.then(res => {
 				if (res.from && res.to) {
 					onChangeGame({ from: res.from, to: res.to });
-					setTimer(0);
+					setHistory([res.from]);
+					setGuessVals(res.from.match(regex));
 				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
+					setApiError(true);
 				}
 			})
-			.then(() => setLoading(false));
+			.then(() => setLoading(false))
+			.catch(() => setApiError(true));
 	}, [
-		onChangeGame,
-		inputRefs,
 		setWin,
-		setError,
-		setHint,
 		setNumHints,
+		setHint,
 		setIsHintExpanded,
 		setShowHintInHistory,
-		setSolution,
-		setLoading,
+		setError,
 		setTimer,
+		setSolution,
+		inputRefs,
+		setLoading,
+		onChangeGame,
+		setHistory,
+		setGuessVals,
+		setApiError,
 	]);
 
 	const handleHintClick = useCallback(() => {
@@ -158,18 +180,20 @@ export const Solo = ({
 					setHint({ word: res.hint, numLeft: res.numLeft });
 					setShowHintInHistory(true);
 				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
+					setApiError(true);
 				}
 			})
-			.then(() => setLoading(false));
+			.then(() => setLoading(false))
+			.catch(() => setApiError(true));
 	}, [
+		to,
 		numHints,
 		history,
 		setNumHints,
 		setHint,
 		setShowHintInHistory,
 		setLoading,
+		setApiError,
 	]);
 
 	const handleGetSoln = useCallback(() => {
@@ -179,12 +203,12 @@ export const Solo = ({
 				if (res.solution) {
 					setSolution(res.solution);
 				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
+					setApiError(true);
 				}
 			})
-			.then(() => setLoading(false));
-	}, [from, to, setLoading, setSolution]);
+			.then(() => setLoading(false))
+			.catch(() => setApiError(true));
+	}, [from, to, setLoading, setSolution, setApiError]);
 
 	const handleExpandHint = useCallback(
 		expand => {
@@ -195,7 +219,7 @@ export const Solo = ({
 
 	const handleSubmitEdit = useCallback(
 		(nextFrom, nextTo) => {
-			setNumHints(3);
+			setNumHints(totalHints);
 			setHint(null);
 			setIsHintExpanded(false);
 			setShowHintInHistory(false);
@@ -275,7 +299,7 @@ export const Solo = ({
 			if (guess === to) {
 				setLoading(true);
 				getFetch(
-					`/api/v1/score?from=${from}&to=${to}&time=${timer}&hintsUsed=${3 -
+					`/api/v1/score?from=${from}&to=${to}&time=${timer}&hintsUsed=${totalHints -
 						numHints}&solution=${[...history, guess]}`
 				)
 					.then(res => {
@@ -285,9 +309,12 @@ export const Solo = ({
 							setWin(true);
 							setError(null);
 							setHistory(history => [...history, guess]);
+						} else {
+							setApiError(true);
 						}
 					})
-					.then(() => setLoading(false));
+					.then(() => setLoading(false))
+					.catch(() => setApiError(true));
 			} else {
 				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
 					if (res.success) {
@@ -310,32 +337,19 @@ export const Solo = ({
 		timer,
 		numHints,
 		guessVals,
+		inputRefs,
 		history,
 		setScore,
 		setSolution,
 		setWin,
 		setError,
 		setHistory,
+		setApiError,
 		setLoading,
 		setShowHintInHistory,
 		setGuessVals,
 		setTimer,
 	]);
-
-	const makeMysteryStepListItems = num => {
-		let all = [];
-		for (let i = 0; i < num; i++) {
-			all[i] = (
-				<li
-					className="Solo__historyHintMysteryLi"
-					key={`Solo__historyHintMystery--${i}`}
-				>
-					<div className="Solo__historyHintMystery">?</div>
-				</li>
-			);
-		}
-		return all;
-	};
 
 	return (
 		<div className={getThemeClassname('Solo', dark)}>
@@ -451,6 +465,7 @@ export const Solo = ({
 			</div>
 
 			{loading && createPortal(<Loading />, document.body)}
+			{apiError && createPortal(<Error />, document.body)}
 			{win &&
 				createPortal(
 					<FocusTrap>
@@ -462,7 +477,7 @@ export const Solo = ({
 								to={to}
 								playerSoln={history}
 								timer={timer}
-								hintsUsed={3 - numHints}
+								hintsUsed={totalHints - numHints}
 								score={score}
 								solution={solution}
 								onNewGame={handleNewClick}
@@ -532,8 +547,9 @@ export default connect(
 	mapDispatchToProps
 )(Solo);
 
-// Fun Ideas:
+// Potential future improvements:
 // - Reverse button. Work from To -> From
+// - Rule refresher under the game
 
 // TODO:
 // - Check for accessibility - Ongoing, forever and ever
