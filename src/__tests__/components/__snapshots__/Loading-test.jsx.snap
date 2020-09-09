@@ -1,5 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Loading component rendering renders Loading 1`] = `
+<div
+  aria-busy="true"
+  className="Loading"
+  role="alert"
+>
+  <Loader
+    color="#000000"
+    css=""
+    loading={true}
+    size={35}
+  />
+</div>
+`;
+
 exports[`Loading component rendering renders NotFound 1`] = `
 <div
   className="Loading"
