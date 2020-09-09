@@ -143,8 +143,10 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 								onChange={handleFromChange}
 								onKeyDown={handleKeyDown}
 							/>
-						) : (
+						) : from ? (
 							from
+						) : (
+							'....'
 						)}
 						<span className="StealForm__arrow">-></span>
 						<span id="stealthFormTo">To</span>:{' '}
@@ -163,8 +165,10 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 								onChange={handleToChange}
 								onKeyDown={handleKeyDown}
 							/>
-						) : (
+						) : to ? (
 							to
+						) : (
+							'....'
 						)}
 					</h3>
 					{isEditable && (

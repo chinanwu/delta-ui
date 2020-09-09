@@ -30,15 +30,14 @@ export const Home = ({ dark }) => {
 		getFetch('/api/v1/dailychallenge')
 			.then(res => {
 				if (res.leaderboard) {
-					// TODO check if this response is correct
-					const leaderboard = [];
+					const resLeaderboard = [];
 					for (let i = 0; i < res.leaderboard.length; i++) {
-						leaderboard[i] = [
+						resLeaderboard[i] = [
 							res.leaderboard[i].name,
 							res.leaderboard[i].score,
 						];
 					}
-					setLeaderboard(leaderboard);
+					setLeaderboard(resLeaderboard);
 				}
 			})
 			.then(() => setLoading(false));
@@ -109,6 +108,7 @@ export const Home = ({ dark }) => {
 					</p>
 					<div className="Home__leaderboard">
 						<button
+							id="homeLeaderboardBtn"
 							className="Home__leaderboardBtn"
 							onClick={handleLeaderboardClick}
 						>
@@ -268,7 +268,11 @@ export const Home = ({ dark }) => {
 			{showAcks &&
 				createPortal(
 					<FocusTrap>
-						<div className="Home__modal" onKeyDown={handleModalKeyDown}>
+						<div
+							id="homeModalDiv"
+							className="Home__modal"
+							onKeyDown={handleModalKeyDown}
+						>
 							<div
 								className={getThemeClassname('Home__modalContent', dark)}
 								role="dialog"
@@ -338,3 +342,4 @@ export default connect(
 // 			 - If I remove it, reminder to reset the Home__footer position to a different height
 // - Figure out a better way to prevent scrolling on body when Modal opens (if there is a way)
 // - Add styling specific to each platform (e.g. moz, etc.)
+// - Esc keydown for modal
