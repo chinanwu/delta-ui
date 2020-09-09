@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,6 +15,7 @@ module.exports = {
 			template: path.resolve('./index.html'),
 			favicon: path.resolve('./src/resources/favicon.ico'),
 		}),
+		new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
 	],
 	output: {
 		filename: '[name].[contenthash].js',

@@ -67,7 +67,7 @@ export const Solo = ({
 	const [showHintInHistory, setShowHintInHistory] = useState(false);
 
 	const [history, setHistory] = useState([]);
-	const [guessVals, setGuessVals] = useState([]);
+	const [guessVals, setGuessVals] = useState(['.', '.', '.', '.']);
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 	const historyBottomRef = useRef(null);
 
@@ -87,7 +87,7 @@ export const Solo = ({
 	}, [timer, win]);
 
 	useEffect(() => {
-		document.title = 'Solo - Delta';
+		document.title = 'Play - Delta';
 	}, []);
 
 	useEffect(() => {
@@ -431,21 +431,22 @@ export const Solo = ({
 						</h3>
 						<div className="Solo__guessInputs">
 							<div>
-								{guessVals.map((val, i) => (
-									<input
-										id={'soloGuessInput-' + i}
-										ref={inputRefs[i]}
-										data-id={i}
-										className={getThemeClassname('Solo__guessInput', dark)}
-										type="text"
-										maxLength={1}
-										placeholder={val}
-										aria-labelledby="soloGuessLabel"
-										aria-invalid={error}
-										onKeyDown={handleKeyDown}
-										key={'Solo__guessInput-' + i}
-									/>
-								))}
+								{guessVals &&
+									guessVals.map((val, i) => (
+										<input
+											id={'soloGuessInput-' + i}
+											ref={inputRefs[i]}
+											data-id={i}
+											className={getThemeClassname('Solo__guessInput', dark)}
+											type="text"
+											maxLength={1}
+											placeholder={val}
+											aria-labelledby="soloGuessLabel"
+											aria-invalid={error}
+											onKeyDown={handleKeyDown}
+											key={'Solo__guessInput-' + i}
+										/>
+									))}
 							</div>
 
 							<button
@@ -489,7 +490,7 @@ export const Solo = ({
 			{solution &&
 				createPortal(
 					<div className="Solo__solution">
-						<div className="Solo__solutionContent">
+						<div className={getThemeClassname('Solo__solutionContent', dark)}>
 							<h2 className="Solo__solutionHeader">Solution</h2>
 
 							<ul className="Solo__solutionList">
@@ -548,18 +549,12 @@ export default connect(
 )(Solo);
 
 // Potential future improvements:
+// - Check for accessibility - Ongoing, forever and ever
 // - Reverse button. Work from To -> From
 // - Rule refresher under the game
+// - Error causes input box to be red maybe?
 
 // TODO:
-// - Check for accessibility - Ongoing, forever and ever
-// 			- Missing aria?
-// - Error handling, need to figure out best way to deal with errors from the API
-// - Similarly, should I improve the response check?
-// - Loading component needs to be made
 // - Add styling specific to each platform (e.g. moz, etc.)
-// - Solution Modal dark mode, and just general design
-// - Constant Error strings instead of having it typed out over and over
-// - Error causes input box to be red maybe?
 
 // https://wireframe.cc/mNTM9B

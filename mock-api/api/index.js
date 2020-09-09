@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/api/v1/ping', (req, res) => res.json({ message: 'pong' }));
-// router.get('/api/v1/words', (req, res) =>
-// 	res.json({ from: 'heat', to: 'cold' })
-// );
-router.get('/api/v1/words', (req, res) => res.json({ error: 'message' }));
+router.get('/api/v1/words', (req, res) =>
+	res.json({ from: 'heat', to: 'cold' })
+);
+// router.get('/api/v1/words', (req, res) => res.json({ error: 'message' }));
 router.get('/api/v1/validate', (req, res) => res.json({ success: true }));
 router.get('/api/v1/hint', (req, res) =>
 	res.json({ hint: 'meat', numLeft: 3 })

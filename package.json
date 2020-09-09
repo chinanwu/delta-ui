@@ -16,6 +16,7 @@
   "author": "Chin-An Wu",
   "license": "ISC",
   "dependencies": {
+    "@loadable/component": "^5.13.1",
     "focus-trap-react": "^6.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "react": "^16.12.0",
