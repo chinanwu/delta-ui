@@ -1,19 +1,26 @@
 import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { connect } from 'react-redux';
 
+import { ERROR_INVALID_WORDS_ENTERED } from '../constants/Errors';
 import { enterBtn, escapeBtn, spaceBtn } from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
+import { getWords } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
-
-import Loading from './Loading.jsx';
+import isValidWord from '../functions/isValidWord';
+import { applyError, applyLoading } from '../thunk/SoloThunk.jsx';
 
 import './StealthForm.less';
 
-export const StealthForm = ({ from, to, dark, onChange }) => {
-	const [loading, setLoading] = useState(false);
+export const StealthForm = ({
+	dark,
+	from,
+	to,
+	onChange,
+	onLoading,
+	onApiError,
+}) => {
 	const [isEditable, setIsEditable] = useState(false);
 	const [fromVal, setFromVal] = useState('');
 	const [toVal, setToVal] = useState('');
@@ -23,11 +30,15 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 		setIsEditable(true);
 	}, [setIsEditable]);
 
-	const handleCancelClick = useCallback(() => {
+	const handleClose = useCallback(() => {
 		setIsEditable(false);
 		setFromVal('');
 		setToVal('');
 		setError('');
+	}, [setIsEditable, setFromVal, setToVal, setError]);
+
+	const handleCancelClick = useCallback(() => {
+		handleClose();
 	}, [setIsEditable, setFromVal, setToVal, setError]);
 
 	const handleFromChange = useCallback(
@@ -61,46 +72,29 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 				}
 			}
 		},
-		[
-			fromVal,
-			toVal,
-			setLoading,
-			setError,
-			onChange,
-			setIsEditable,
-			setFromVal,
-			setToVal,
-			setError,
-		]
+		[fromVal, toVal, setIsEditable, setFromVal, setToVal, setError, onChange]
 	);
 
 	const handleRandomizeClick = useCallback(() => {
-		setLoading(true);
-		getFetch('/api/v1/words')
+		onLoading(true);
+		getWords()
 			.then(res => {
-				if (res.from && res.to) {
-					setFromVal(res.from);
-					setToVal(res.to);
-				} else {
-					setError('Something went wrong Randomizing!');
-				}
+				setFromVal(res.from);
+				setToVal(res.to);
+				setError('');
 			})
-			.then(() => setLoading(false));
-	}, [setLoading, setFromVal, setToVal, setError]);
+			.then(() => onLoading(false))
+			.catch(e => onApiError(e));
+	}, [setFromVal, setToVal, setError, onLoading, onApiError]);
 
 	const handleSubmitClick = useCallback(() => {
-		setLoading(true);
-		getFetch(`/api/v1/validate?word=${fromVal}&word=${toVal}`)
-			.then(res => {
-				if (res.success) {
-					onChange(fromVal, toVal);
-					setIsEditable(false);
-				} else {
-					setError('Invalid word(s) provided');
-				}
-			})
-			.then(() => setLoading(false));
-	}, [fromVal, toVal, setLoading, setError, onChange]);
+		if (isValidWord(fromVal) && isValidWord(toVal)) {
+			onChange(fromVal, toVal);
+			handleClose();
+		} else {
+			setError(ERROR_INVALID_WORDS_ENTERED);
+		}
+	}, [fromVal, toVal, setIsEditable, setFromVal, setToVal, setError, onChange]);
 
 	return (
 		<div className="StealthForm">
@@ -127,49 +121,63 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 				>
 					{isEditable && <h2 className="StealthForm__editHeader">Edit Game</h2>}
 					<h3 className="StealthForm__words">
-						<span id="stealthFormFrom">From</span>:{' '}
-						{isEditable ? (
-							<input
-								id="stealthFormFromInput"
-								className="StealthForm__input"
-								type="text"
-								maxLength={4}
-								value={fromVal}
-								placeholder={from}
-								aria-placeholder={from}
-								aria-live="polite"
-								aria-labelledby="stealthFormFrom"
-								aria-invalid={error}
-								onChange={handleFromChange}
-								onKeyDown={handleKeyDown}
-							/>
-						) : from ? (
-							from
-						) : (
-							'....'
-						)}
+						<span
+							className={
+								'StealthForm__wordLine' +
+								(isEditable ? ' StealthForm__wordLine--editable' : '')
+							}
+						>
+							<span id="stealthFormFrom">From</span>:{' '}
+							{isEditable ? (
+								<input
+									id="stealthFormFromInput"
+									className="StealthForm__input"
+									type="text"
+									maxLength={4}
+									value={fromVal}
+									placeholder={from}
+									aria-placeholder={from}
+									aria-live="polite"
+									aria-labelledby="stealthFormFrom"
+									aria-invalid={error}
+									onChange={handleFromChange}
+									onKeyDown={handleKeyDown}
+								/>
+							) : from ? (
+								from
+							) : (
+								'....'
+							)}
+						</span>
 						<span className="StealForm__arrow">-></span>
-						<span id="stealthFormTo">To</span>:{' '}
-						{isEditable ? (
-							<input
-								id="stealthFormToInput"
-								className="StealthForm__input"
-								type="text"
-								maxLength={4}
-								value={toVal}
-								placeholder={to}
-								aria-placeholder={to}
-								aria-live="polite"
-								aria-labelledby="stealthFormTo"
-								aria-invalid={error}
-								onChange={handleToChange}
-								onKeyDown={handleKeyDown}
-							/>
-						) : to ? (
-							to
-						) : (
-							'....'
-						)}
+						<span
+							className={
+								'StealthForm__wordLine' +
+								(isEditable ? ' StealthForm__wordLine--editable' : '')
+							}
+						>
+							<span id="stealthFormTo">To</span>:{' '}
+							{isEditable ? (
+								<input
+									id="stealthFormToInput"
+									className="StealthForm__input"
+									type="text"
+									maxLength={4}
+									value={toVal}
+									placeholder={to}
+									aria-placeholder={to}
+									aria-live="polite"
+									aria-labelledby="stealthFormTo"
+									aria-invalid={error}
+									onChange={handleToChange}
+									onKeyDown={handleKeyDown}
+								/>
+							) : to ? (
+								to
+							) : (
+								'....'
+							)}
+						</span>
 					</h3>
 					{isEditable && (
 						<div className={getThemeClassname('StealthForm__error', dark)}>
@@ -205,20 +213,35 @@ export const StealthForm = ({ from, to, dark, onChange }) => {
 					)}
 				</div>
 			</FocusTrap>
-
-			{loading && createPortal(<Loading />, document.body)}
 		</div>
 	);
 };
 
 StealthForm.propTypes = {
+	dark: PropTypes.bool,
 	from: PropTypes.string,
 	to: PropTypes.string,
-	dark: PropTypes.bool,
 	onChange: PropTypes.func,
-	onRandomizeClick: PropTypes.func,
+	onLoading: PropTypes.func,
+	onApiError: PropTypes.func,
 };
-export default StealthForm;
+
+export const mapStateToProps = ({ solo: { from, to }, theme: { dark } }) => ({
+	from,
+	to,
+	dark,
+});
+
+const mapDispatchToProps = {
+	onLoading: applyLoading,
+	onApiError: applyError,
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(StealthForm);
 
 // Potential future improvements:
+// --- ACCESSIBILITY ---
 // - Putting form inside a fieldset tag with a legend

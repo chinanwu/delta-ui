@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { putFetch } from '../functions/FetchFunctions';
 
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import hasValidCharacters from '../functions/hasValidCharacters';
-
-import Loading from './Loading.jsx';
+import { applyHighscore } from '../thunk/DailyThunk.jsx';
 
 import './DailyWinModal.less';
 
@@ -20,9 +18,9 @@ export const DailyWinModal = ({
 	timer,
 	hintsUsed,
 	score,
-	isHighscore,
+	isHighscore, // maybe move into reducer, keep it as prop given by Daily for now
+	onSubmit,
 }) => {
-	const [loading, setLoading] = useState(false);
 	const [name, setName] = useState('');
 	const [error, setError] = useState('');
 	const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -31,17 +29,13 @@ export const DailyWinModal = ({
 		if (name.length < 4) {
 			setError('Please enter a 4-letter name!');
 		} else {
-			const player = {
+			onSubmit({
 				name: name,
 				score: score,
-			};
-			setLoading(true);
-			putFetch('/api/v1/highscore', JSON.stringify(player)).then(() => {
-				setHasSubmitted(true);
-				setLoading(false);
 			});
+			setHasSubmitted(true);
 		}
-	}, [name, score, setError, setHasSubmitted, setLoading]);
+	}, [name, setError, onSubmit, setHasSubmitted]);
 
 	const handleOnChange = useCallback(
 		event => {
@@ -142,7 +136,6 @@ export const DailyWinModal = ({
 					</button>
 				</Link>
 			</div>
-			{loading && createPortal(<Loading />, document.body)}
 		</div>
 	);
 };
@@ -156,10 +149,28 @@ DailyWinModal.propTypes = {
 	hintsUsed: PropTypes.number,
 	score: PropTypes.number,
 	isHighscore: PropTypes.bool,
+	onSubmit: PropTypes.func,
 };
 
-export default DailyWinModal;
+export const mapStateToProps = ({
+	daily: { from, to, history, numHints, score },
+	theme: { dark },
+}) => ({
+	dark,
+	from,
+	to,
+	playerSoln: history,
+	hintsUsed: 3 - numHints,
+	score,
+});
 
-// TODO
-// - See WinModal
-// - Maybe if click home without entering name, give error?
+const mapDispatchToProps = {
+	onSubmit: applyHighscore,
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(DailyWinModal);
+
+// Need to pass in timer and isHighscore

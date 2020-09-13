@@ -6,42 +6,31 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { escapeBtn } from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
-import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
+import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
 import Loading from './Loading.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
 
-export const Home = ({ dark }) => {
+export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [leaderboard, setLeaderboard] = useState([]);
 
 	useEffect(() => {
 		document.title = 'Home - Delta';
 	}, []);
 
 	useEffect(() => {
-		setLoading(true);
-		getFetch('/api/v1/dailychallenge')
-			.then(res => {
-				if (res.leaderboard) {
-					const resLeaderboard = [];
-					for (let i = 0; i < res.leaderboard.length; i++) {
-						resLeaderboard[i] = [
-							res.leaderboard[i].name,
-							res.leaderboard[i].score,
-						];
-					}
-					setLeaderboard(resLeaderboard);
-				}
-			})
-			.then(() => setLoading(false));
-	}, [setLoading, setLeaderboard]);
+		if (!leaderboard) {
+			// empty leaderboard ([]) would result in false, so this should only continue if leaderboard is null
+			getDaily();
+
+			// TODO: Not ideal for home to have a thunk that calls daily - if response not cached, will call again in Daily.
+			// But that's a tomorrow problem
+		}
+	}, [leaderboard, getDaily]);
 
 	const handleLeaderboardClick = useCallback(() => {
 		setShowLeaderboard(showLeaderboard => !showLeaderboard);
@@ -97,11 +86,11 @@ export const Home = ({ dark }) => {
 					</Link>
 				</div>
 
-				<div
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-label="Daily Challenge"
 				>
-					<p className="Home__dailyExplanation">
+					<p className="Home__blurb Home__dailyExplanation">
 						Complete the daily challenge with a record (read: top 10) score and
 						be added to the daily leaderboard! New challenges every day at
 						midnight EST (UTC -5).
@@ -147,21 +136,21 @@ export const Home = ({ dark }) => {
 							) : null}
 						</div>
 					</div>
-				</div>
-				<div
+				</section>
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-labelledby="rules"
 				>
 					<h2 id="rules">Rules</h2>
-					<p className="Home__rules">
+					<p className="Home__blurb">
 						In each game, you are given two words, a "from" word and a "to"
 						word. Starting from the "from" word, one letter must changed at a
 						time until the word becomes the "to" word. However, each time a
 						letter is swapped out for another, the resulting new word must still
 						be a valid four-letter word in the English language.
 					</p>
-				</div>
-				<div
+				</section>
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-labelledby="example"
 				>
@@ -240,10 +229,12 @@ export const Home = ({ dark }) => {
 						</strong>
 						old
 					</p>
-					<p className="Home__example--p">
-						For most word pairs, there are a multitude of possible answers!
+					<p className="Home__example--p Home__blurb">
+						For most word pairs, there are a multitude of possible answers! But
+						in order to score the most points, you'll need to do it with the
+						least number of steps!
 					</p>
-				</div>
+				</section>
 			</>
 			<footer
 				className={
@@ -282,32 +273,35 @@ export const Home = ({ dark }) => {
 								<button
 									id="homeCloseAcksBtn"
 									className={getThemeClassname('Home__closeAcksBtn', dark)}
-									aria-label="Close"
+									aria-label="Close acknowledgements modal"
 									onClick={handleCloseAcks}
 								>
 									X
 								</button>
-								<h2 id="homeModalHeader" className="Home__modalHeader">
-									Acknowledgements
-								</h2>
-								<div id="homeModalDesc" className="Home__modalAck">
+								<h2 id="homeModalHeader">Acknowledgements</h2>
+								<p>
 									Thank you to MCS, the one who introduced me to this word game.
-								</div>
-								<h3 className="Home__modalHeader">Icons</h3>
-								<div className="Home__modalAck">
+								</p>
+								<h3>Icons</h3>
+								<p>
 									Moon icon in theme toggle made by{' '}
 									<a
+										className={getThemeClassname('Home__modalLink', dark)}
 										href="https://www.flaticon.com/authors/freepik"
 										title="Freepik"
 									>
 										Freepik
 									</a>{' '}
 									from{' '}
-									<a href="https://www.flaticon.com/" title="Flaticon">
+									<a
+										className={getThemeClassname('Home__modalLink', dark)}
+										href="https://www.flaticon.com/"
+										title="Flaticon"
+									>
 										{' '}
 										www.flaticon.com
 									</a>
-								</div>
+								</p>
 							</div>
 						</div>
 					</FocusTrap>,
@@ -319,15 +313,21 @@ export const Home = ({ dark }) => {
 
 Home.propTypes = {
 	dark: PropTypes.bool,
+	leaderboard: PropTypes.array,
+	getDaily: PropTypes.func,
 };
 
-export const mapStateToProps = ({ theme: { dark } }) => ({
+export const mapStateToProps = ({
+	theme: { dark },
+	home: { loading, leaderboard },
+}) => ({
 	dark,
+	loading,
+	leaderboard,
 });
 
 const mapDispatchToProps = {
-	onChangeFrom: applyFrom,
-	onChangeTo: applyTo,
+	getDaily: requestDailyChallenge,
 };
 
 export default connect(
@@ -338,8 +338,8 @@ export default connect(
 // TODO:
 // - Double check accessibility for this page.
 //       - Missing any aria?
-// - Figuring out if I really want Fun Facts, and how I want to do it.
-// 			 - If I remove it, reminder to reset the Home__footer position to a different height
-// - Figure out a better way to prevent scrolling on body when Modal opens (if there is a way)
 // - Add styling specific to each platform (e.g. moz, etc.)
-// - Esc keydown for modal
+
+// Potential future improvements:
+// - Fun facts section!
+// - Figure out a better way to prevent scrolling on body when Modal opens (if there is a way)

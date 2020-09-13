@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component rendering renders Error 1`] = `
+<div
+  aria-busy="true"
+  className="Error"
+  role="alert"
+>
+  <div
+    className="Error__content"
+  >
+    <span>
+      Something wrong happened! Please try again.
+    </span>
+    <ForwardRef
+      to="/"
+    >
+      <button
+        className="Error__homeBtn"
+        id="errorHomeBtn"
+        role="link"
+      >
+        Return Home
+      </button>
+    </ForwardRef>
+  </div>
+</div>
+`;

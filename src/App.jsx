@@ -3,7 +3,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 const Daily = loadable(() =>
-	import(/* webpackChunkName:"Daily" */ './components/Daily.jsx')
+	import(/* webpackChunkName:"Daily" */ './components/DailyV2.jsx')
 );
 const Home = loadable(() =>
 	import(/* webpackChunkName:"Home" */ './components/Home.jsx')
@@ -12,7 +12,7 @@ const NotFound = loadable(() =>
 	import(/* webpackChunkName:"NotFound" */ './components/NotFound.jsx')
 );
 const Solo = loadable(() =>
-	import(/* webpackChunkName:"Solo" */ './components/Solo.jsx')
+	import(/* webpackChunkName:"Solo" */ './components/SoloV3.jsx')
 );
 
 import './App.less';
@@ -27,3 +27,12 @@ export const App = () => (
 );
 
 export default App;
+
+// TODO:
+// - onFocus styling
+// - HOC Daily and Solo? Because of the timer
+
+// Potential future improvements:
+// - Modal component
+// - Theme context
+// - Section tags where applicable

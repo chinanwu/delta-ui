@@ -21,6 +21,8 @@ Simply:
 - Lazy loading/Code splitting [Read](https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52/) [Read](https://reactjs.org/docs/code-splitting.html)
 - Loading screen
 - Pull out general code - Modal, Game
+- Better solution for loading - Right now is just a state that is set in every component
+- Add bing to word list
 
 ### General Helpful Tools I used:
 - [Colour contrast checker](https://webaim.org/resources/contrastchecker/)

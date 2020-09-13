@@ -1,9 +1,10 @@
 import FocusTrap from 'focus-trap-react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Confetti from 'react-confetti';
+import { createPortal } from 'react-dom';
+import { connect } from 'react-redux';
+import { ERROR_NOT_ONE_OFF, ERROR_NOT_REAL_WORD } from '../constants/Errors';
 
 import {
 	aBtn,
@@ -18,14 +19,15 @@ import { getFetch } from '../functions/FetchFunctions';
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
-import { applyFrom, applyTo, applyGame } from '../thunk/GameThunk.jsx';
+import isValidWord from '../functions/isValidWord';
+import { applyFrom, applyTo, applyGame } from '../thunk/SoloThunk.jsx';
 
 import Error from './Error.jsx';
 import Loading from './Loading.jsx';
 import HintButton from './HintButton.jsx';
 import StealthForm from './StealthForm.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
-import WinModal from './WinModal.jsx';
+import SoloWinModal from './SoloWinModal.jsx';
 
 import './Solo.less';
 
@@ -77,18 +79,18 @@ export const Solo = ({
 	const [score, setScore] = useState(0);
 
 	useEffect(() => {
+		document.title = 'Play - Delta';
+	}, []);
+
+	useEffect(() => {
 		let interval = null;
-		if (!win) {
+		if (!win && !loading) {
 			interval = setInterval(() => {
 				setTimer(seconds => seconds + 1);
 			}, 10);
 		}
 		return () => clearInterval(interval);
 	}, [timer, win]);
-
-	useEffect(() => {
-		document.title = 'Play - Delta';
-	}, []);
 
 	useEffect(() => {
 		if (!from && !to) {
@@ -316,20 +318,18 @@ export const Solo = ({
 					.then(() => setLoading(false))
 					.catch(() => setApiError(true));
 			} else {
-				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
-					if (res.success) {
-						setHistory(history => [...history, guess]);
-						setError(null);
-						setShowHintInHistory(false);
-					} else {
-						setGuessVals(history[history.length - 1].match(regex));
-						setError("Word entered isn't a real word");
-					}
-				});
+				if (isValidWord(guess)) {
+					setHistory(history => [...history, guess]);
+					setError(null);
+					setShowHintInHistory(false);
+				} else {
+					setGuessVals(history[history.length - 1].match(regex));
+					setError(ERROR_NOT_REAL_WORD);
+				}
 			}
 		} else {
 			setGuessVals(history[history.length - 1].match(regex));
-			setError('Word must be one letter off from previous word');
+			setError(ERROR_NOT_ONE_OFF);
 		}
 	}, [
 		from,
@@ -472,7 +472,7 @@ export const Solo = ({
 					<FocusTrap>
 						<div className="Solo__win">
 							<Confetti number={50} recycle={false} />
-							<WinModal
+							<SoloWinModal
 								dark={dark}
 								from={from}
 								to={to}

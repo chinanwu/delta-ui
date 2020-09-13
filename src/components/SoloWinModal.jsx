@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useCallback, useState } from 'react';
+import { connect } from 'react-redux';
 
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
+import { createGame } from '../thunk/SoloThunk.jsx';
 
-import './WinModal.less';
+import './SoloWinModal.less';
 
-export const WinModal = ({
+export const SoloWinModal = ({
 	dark,
 	from,
 	to,
@@ -27,7 +29,7 @@ export const WinModal = ({
 	}, [onNewGame]);
 
 	return (
-		<div className={getThemeClassname('WinModal', dark)}>
+		<div className={getThemeClassname('SoloWinModal', dark)}>
 			<h1 className="WinModal__header">Success!</h1>
 			<div>
 				<h2>Stats:</h2>
@@ -105,21 +107,39 @@ export const WinModal = ({
 	);
 };
 
-WinModal.propTypes = {
+SoloWinModal.propTypes = {
 	dark: PropTypes.bool,
 	from: PropTypes.string,
 	to: PropTypes.string,
 	playerSoln: PropTypes.arrayOf(PropTypes.string),
-	timer: PropTypes.number,
+	timer: PropTypes.number, // passed in from Solo
 	hintsUsed: PropTypes.number,
 	score: PropTypes.number,
 	solution: PropTypes.arrayOf(PropTypes.string),
 	onNewGame: PropTypes.func,
 };
 
-export default WinModal;
+export const mapStateToProps = ({
+	solo: { from, to, history, numHints, score, solution },
+	theme: { dark },
+}) => ({
+	dark,
+	from,
+	to,
+	playerSoln: history,
+	hintsUsed: 3 - numHints,
+	score,
+	solution,
+});
+
+const mapDispatchToProps = {
+	onNewGame: createGame,
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(SoloWinModal);
 
 // TODO
 // Optimal solution on hover and active styling
-
-// add bing to word list

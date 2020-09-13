@@ -1,0 +1,112 @@
+@import '../style/buttons';
+
+.Guess {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30rem;
+}
+
+.Guess__label {
+	margin-bottom: 2rem;
+}
+
+.Guess__inputs {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+}
+
+.Guess__input {
+	margin: 0.4rem;
+	width: 3.6rem;
+	height: 4.2rem;
+	text-align: center;
+	font-size: 1.6rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
+}
+
+.Guess__input--dark {
+	color: white;
+	background: @dark-02;
+	border: 1px solid black;
+	padding: 0.3rem;
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #bfbfbf;
+	}
+
+	&:-ms-input-placeholder {
+		color: #bfbfbf;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #bfbfbf;
+	}
+}
+
+.Guess__enterBtn {
+	@smBtn();
+}
+
+.Guess__error {
+	font-size: 1.8rem;
+	text-align: center;
+	color: @error;
+	margin-top: 1rem;
+	position: relative;
+	top: 3rem;
+	height: 6rem;
+}
+
+.Game__error--dark {
+	color: @errorDark;
+}
+
+@media only screen and (max-width: 550px) {
+	.Guess {
+		width: initial;
+	}
+
+	.Guess__label {
+		margin-bottom: 0;
+	}
+
+	.Guess__inputs {
+		position: initial;
+	}
+
+	.Guess__enterBtn {
+		font-size: 125%;
+	}
+
+	.Guess__error {
+		position: initial;
+		top: initial;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.Guess__input {
+		font-size: 2rem;
+	}
+}
+
+@media only screen and (max-width: 310px) {
+	.Guess__inputs {
+		flex-direction: column;
+	}
+}

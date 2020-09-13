@@ -18,6 +18,7 @@ import { getFetch } from '../functions/FetchFunctions';
 import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
 import getThemeClassname from '../functions/getThemeClassname';
 import isOneOff from '../functions/isOneOff';
+import isValidWord from '../functions/isValidWord';
 
 import DailyWinModal from './DailyWinModal.jsx';
 import Loading from './Loading.jsx';
@@ -34,6 +35,7 @@ export const Daily = ({ dark }) => {
 	const [to, setTo] = useState('');
 	const [date, setDate] = useState('');
 	const [lowestHighscore, setLowestHighscore] = useState(-1);
+	const [apiError, setApiError] = useState(false);
 
 	const [win, setWin] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -46,12 +48,17 @@ export const Daily = ({ dark }) => {
 
 	const [history, setHistory] = useState([]);
 	const [guessVals, setGuessVals] = useState([]);
+
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 	const historyBottomRef = useRef(null);
 
 	const [timer, setTimer] = useState(0);
 
 	const [score, setScore] = useState(0);
+
+	useEffect(() => {
+		document.title = 'Daily Challenge - Delta';
+	}, []);
 
 	useEffect(() => {
 		let interval = null;
@@ -64,10 +71,6 @@ export const Daily = ({ dark }) => {
 	}, [timer, win]);
 
 	useEffect(() => {
-		document.title = 'Daily Challenge - Delta';
-	}, []);
-
-	useEffect(() => {
 		setLoading(true);
 		getFetch('/api/v1/dailychallenge')
 			.then(res => {
@@ -76,7 +79,11 @@ export const Daily = ({ dark }) => {
 				setTo(res.to);
 				setHistory([res.from]);
 				setGuessVals(res.from.match(regex));
-				setLowestHighscore(res.leaderboard[res.leaderboard.length - 1].score);
+				const lowest =
+					res.leaderboard.length > 0
+						? res.leaderboard[res.leaderboard.length - 1].score
+						: -1;
+				setLowestHighscore(lowest);
 			})
 			.then(() => setLoading(false));
 	}, [setLoading, setDate, setFrom, setTo, setLowestHighscore]);
@@ -85,7 +92,7 @@ export const Daily = ({ dark }) => {
 		historyBottomRef.current.scrollIntoView({
 			behavior: 'smooth',
 		});
-	}, [history]);
+	}, [history, historyBottomRef]);
 
 	const handleHintClick = useCallback(() => {
 		setLoading(true);
@@ -98,18 +105,20 @@ export const Daily = ({ dark }) => {
 					setHint({ word: res.hint, numLeft: res.numLeft });
 					setShowHintInHistory(true);
 				} else {
-					// Error is for guessing, need another way to log this
-					// setError('Something went wrong grabbing game words!');
+					setApiError(true);
 				}
 			})
-			.then(() => setLoading(false));
+			.then(() => setLoading(false))
+			.catch(() => setApiError(true));
 	}, [
-		numHints,
+		setLoading,
 		history,
+		to,
 		setNumHints,
+		numHints,
 		setHint,
 		setShowHintInHistory,
-		setLoading,
+		setApiError,
 	]);
 
 	const handleExpandHint = useCallback(
@@ -191,18 +200,17 @@ export const Daily = ({ dark }) => {
 							setHistory(history => [...history, guess]);
 						}
 					})
-					.then(() => setLoading(false));
+					.then(() => setLoading(false))
+					.catch(() => setApiError(true));
 			} else {
-				getFetch(`/api/v1/validate?word=${guess}`).then(res => {
-					if (res.success) {
-						setHistory(history => [...history, guess]);
-						setError(null);
-						setShowHintInHistory(false);
-					} else {
-						setGuessVals(history[history.length - 1].match(regex));
-						setError("Word entered isn't a real word");
-					}
-				});
+				if (isValidWord(guess)) {
+					setHistory(history => [...history, guess]);
+					setError(null);
+					setShowHintInHistory(false);
+				} else {
+					setGuessVals(history[history.length - 1].match(regex));
+					setError("Word entered isn't a real word");
+				}
 			}
 		} else {
 			setGuessVals(history[history.length - 1].match(regex));

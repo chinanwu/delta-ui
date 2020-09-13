@@ -1,4 +1,4 @@
-@import '../style/button';
+@import '../style/buttons';
 
 .DailyWinModal {
 	background-color: white;
@@ -8,6 +8,11 @@
 	margin: 2rem;
 	overflow: scroll;
 	width: 45rem;
+}
+
+.DailyWinModal--dark {
+	background-color: @dark-10;
+	color: #fff;
 
 	//Chrome/Edge/Safari
 	&::-webkit-scrollbar,
@@ -18,11 +23,6 @@
 
 	//Firefox
 	scrollbar-color: #323232 @dark-02; /* scroll thumb & track */
-}
-
-.DailyWinModal--dark {
-	background-color: @dark-10;
-	color: #fff;
 }
 
 .DailyWinModal__header {

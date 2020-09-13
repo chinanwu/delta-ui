@@ -1,4 +1,4 @@
-@import '../style/button';
+@import '../style/buttons';
 @import '../style/colours';
 
 .HintButton {
@@ -22,6 +22,12 @@
 .HintButton__content--dark {
 	background-color: @dark-02;
 	color: #fff;
+}
+
+.HintButton__hint {
+	font-size: 1.6rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
 }
 
 .HintButton__btn {
@@ -48,6 +54,10 @@
 
 	.HintButton--expanded {
 		align-items: initial;
+	}
+
+	.HintButton__hint {
+		font-size: 125%;
 	}
 
 	.HintButton__btn {
