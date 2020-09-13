@@ -95,7 +95,9 @@ Daily.propTypes = {
 
 export const mapStateToProps = ({
 	daily: { from, to, date, win, error, loading },
+	theme: { dark },
 }) => ({
+	dark,
 	from,
 	to,
 	date,

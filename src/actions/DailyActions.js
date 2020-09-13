@@ -26,5 +26,3 @@ export const addGuess = createAction('DAILY/ADD_GUESS');
 export const setGuessError = createAction('DAILY/SET_GUESS_ERROR');
 
 export const closeHint = createAction('DAILY/CLOSE_HINT');
-
-export const setTimeStarted = createAction('DAILY/SET_TIME_STARTED');

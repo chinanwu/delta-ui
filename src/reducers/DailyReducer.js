@@ -13,7 +13,6 @@ import {
 	getDailyChallengeStarted,
 	getDailyChallengeSuccess,
 	getDailyChallengeFailed,
-	setTimeStarted,
 } from '../actions/DailyActions';
 
 export const defaultState = {
@@ -46,7 +45,7 @@ export default handleActions(
 			loading: true,
 		}),
 		[getDailyChallengeSuccess]: (state, { payload }) => ({
-			...state,
+			...defaultState,
 			loading: false,
 			date: payload.id,
 			from: payload.from,
@@ -98,7 +97,7 @@ export default handleActions(
 			loading: true,
 		}),
 		[getScoreSuccess]: (state, { payload }) => ({
-			...defaultState,
+			...state,
 			win: true,
 			score: payload.score,
 		}),
@@ -111,11 +110,6 @@ export default handleActions(
 		[closeHint]: state => ({
 			...state,
 			hintExpanded: false,
-		}),
-
-		[setTimeStarted]: (state, { payload }) => ({
-			...state,
-			timeStarted: payload,
 		}),
 	},
 	defaultState

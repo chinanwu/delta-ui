@@ -54,7 +54,7 @@ export const DailyWinModal = ({
 
 	const isHighscore =
 		leaderboard.length > 1
-			? leaderboard[leaderboard.length - 1].score > score
+			? leaderboard[leaderboard.length - 1][1] < score
 			: true;
 
 	return (
@@ -104,8 +104,8 @@ export const DailyWinModal = ({
 				</div>
 			)}
 
-			<div>
-				<h2>Stats:</h2>
+			<section aria-labelledby="dailyWinModalStats">
+				<h2 id="dailyWinModalStats">Stats:</h2>
 				<ul>
 					<li>
 						It took you {playerSoln.length} step
@@ -122,9 +122,12 @@ export const DailyWinModal = ({
 						to help guide you along the way!
 					</li>
 				</ul>
-			</div>
-			<div className="DailyWinModal__solution">
-				<h2>Your solution:</h2>
+			</section>
+			<section
+				aria-labelledby="dailyWinModalPlayerSoln"
+				className="DailyWinModal__solution"
+			>
+				<h2 id="dailyWinModalPlayerSoln">Your solution:</h2>
 				<ul className="DailyWinModal__solutionList">
 					{playerSoln.map((word, i) => (
 						<li
@@ -135,12 +138,12 @@ export const DailyWinModal = ({
 						</li>
 					))}
 				</ul>
-			</div>
-			<div>
-				<h2>Your Score:</h2>
+			</section>
+			<section aria-labelledby="dailyWinModalScore">
+				<h2 id="dailyWinModalScore">Your Score:</h2>
 				<div className="DailyWinModal__score">{score}</div>
-			</div>
-			<div className="DailyWinModal__btn--center">
+			</section>
+			<span className="DailyWinModal__btn--center">
 				<Link to="/">
 					<button
 						id="dailyWinModalHomeBtn"
@@ -150,7 +153,7 @@ export const DailyWinModal = ({
 						Return Home
 					</button>
 				</Link>
-			</div>
+			</span>
 		</Modal>
 	);
 };

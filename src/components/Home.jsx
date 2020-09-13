@@ -43,18 +43,6 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 		setShowAcks(false);
 	}, [setShowAcks]);
 
-	const handleModalKeyDown = useCallback(
-		event => {
-			if (event && event.keyCode) {
-				if (event.keyCode === escapeBtn) {
-					event.preventDefault();
-					handleCloseAcks();
-				}
-			}
-		},
-		[setShowAcks]
-	);
-
 	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<ThemeToggle />

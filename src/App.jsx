@@ -31,6 +31,8 @@ export default App;
 // TODO:
 // - onFocus styling, :focus-visible?
 // - TabIndex order
+// - Button links have a weird double focus - i.e. it focuses on the Link as well as the inner button,
+// so it takes two tabs to get away from it.
 
 // Potential future improvements:
 // - Modal component
