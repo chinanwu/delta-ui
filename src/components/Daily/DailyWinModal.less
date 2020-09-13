@@ -1,19 +1,14 @@
 @import '../../style/buttons';
 
 .DailyWinModal {
-	background-color: white;
-	color: black;
 	padding: 1rem;
-	box-shadow: @box-shadow-16;
 	margin: 2rem;
 	overflow: scroll;
 	width: 45rem;
+	max-height: 90%; //To allow scrolling
 }
 
 .DailyWinModal--dark {
-	background-color: @dark-10;
-	color: #fff;
-
 	//Chrome/Edge/Safari
 	&::-webkit-scrollbar,
 	&::-webkit-scrollbar-track,

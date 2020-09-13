@@ -42,6 +42,10 @@
 	@dark();
 }
 
+.Daily__easterEgg {
+	display: none;
+}
+
 @media only screen and (max-width: 550px) {
 	.Daily__game {
 		flex-direction: column;
@@ -62,5 +66,14 @@
 
 	.Daily__words {
 		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 225px) {
+	.Daily__easterEgg {
+		display: initial;
+		position: absolute;
+		top: 0;
+		font-size: 1rem;
 	}
 }

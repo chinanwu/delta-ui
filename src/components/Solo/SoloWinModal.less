@@ -8,6 +8,18 @@
 	max-height: 90%; //To allow scrolling
 }
 
+.SoloWinModal--dark {
+	//Chrome/Edge/Safari
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar-thumb {
+		background-color: @dark-02;
+	}
+
+	//Firefox
+	scrollbar-color: #323232 @dark-02; /* scroll thumb & track */
+}
+
 .SoloWinModal__header {
 	text-align: center;
 }

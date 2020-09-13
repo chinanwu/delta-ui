@@ -16,7 +16,7 @@ export const SoloHistory = ({
 		to={to}
 		history={history}
 		hintWord={hintWord}
-		hintNumleft={hintNumLeft}
+		hintNumLeft={hintNumLeft}
 		win={win}
 		showHint={showHint}
 	/>

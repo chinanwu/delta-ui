@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
+import Confetti from 'react-confetti';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,17 +9,19 @@ import getThemeClassname from '../../functions/getThemeClassname';
 import hasValidCharacters from '../../functions/hasValidCharacters';
 import { applyHighscore } from '../../thunk/DailyThunk.jsx';
 
+import Modal from '../Modal.jsx';
+
 import './DailyWinModal.less';
 
 export const DailyWinModal = ({
 	dark,
 	from,
 	to,
+	leaderboard,
 	playerSoln,
 	timer,
 	hintsUsed,
 	score,
-	isHighscore, // maybe move into reducer, keep it as prop given by Daily for now
 	onSubmit,
 }) => {
 	const [name, setName] = useState('');
@@ -49,9 +52,21 @@ export const DailyWinModal = ({
 		[setName]
 	);
 
+	const isHighscore =
+		leaderboard.length > 1
+			? leaderboard[leaderboard.length - 1].score > score
+			: true;
+
 	return (
-		<div className={getThemeClassname('DailyWinModal', dark)}>
-			<h1 className="DailyWinModal__header">Success!</h1>
+		<Modal
+			name="score"
+			ariaLabelledBy="dailyWinModalHeader"
+			contentClassname={getThemeClassname('DailyWinModal', dark)}
+			general={<Confetti number={50} recycle={false} />}
+		>
+			<h1 id="dailyWinModalHeader" className="DailyWinModal__header">
+				Success!
+			</h1>
 
 			{isHighscore && !hasSubmitted && (
 				<div>
@@ -136,7 +151,7 @@ export const DailyWinModal = ({
 					</button>
 				</Link>
 			</div>
-		</div>
+		</Modal>
 	);
 };
 
@@ -144,6 +159,7 @@ DailyWinModal.propTypes = {
 	dark: PropTypes.bool,
 	from: PropTypes.string,
 	to: PropTypes.string,
+	leaderboard: PropTypes.array,
 	playerSoln: PropTypes.arrayOf(PropTypes.string),
 	timer: PropTypes.number,
 	hintsUsed: PropTypes.number,
@@ -153,7 +169,7 @@ DailyWinModal.propTypes = {
 };
 
 export const mapStateToProps = ({
-	daily: { from, to, history, numHints, score },
+	daily: { from, to, history, numHints, score, leaderboard },
 	theme: { dark },
 }) => ({
 	dark,
@@ -162,6 +178,7 @@ export const mapStateToProps = ({
 	playerSoln: history,
 	hintsUsed: 3 - numHints,
 	score,
+	leaderboard,
 });
 
 const mapDispatchToProps = {
@@ -173,4 +190,6 @@ export default connect(
 	mapDispatchToProps
 )(DailyWinModal);
 
-// Need to pass in timer and isHighscore
+// TODO:
+// - Pull out duplicate code between this and SoloWinModal
+// - Pull out duplicate styling between this and SoloWinModal

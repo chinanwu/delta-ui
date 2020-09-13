@@ -30,6 +30,7 @@ NOTE: The api is now implemented via AWS Gateway and Lambda functons so delta-ap
 ### Salmon Read These
 I tend to research a lot and read through articles and then add them as a comment in my code but then I forget where I put it so I end up re-researching for an article that said one particular thing over and over. This section is really just for me.
 - HOC [1](https://medium.com/@soorajchandran/introduction-to-higher-order-components-hoc-in-react-383c9343a3aa) [2](https://medium.com/@rossbulat/how-to-use-react-higher-order-components-c0be6821eb6c)
+- Redux, and some readings about using it to fetch [1](https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3) [2](https://medium.com/@kylpo/redux-best-practices-eef55a20cc72) [3](https://redux.js.org/recipes/structuring-reducers/initializing-state/) [4](https://redux-actions.js.org/api/handleaction)
 
 ### General Helpful Tools I used:
 - [Colour contrast checker](https://webaim.org/resources/contrastchecker/)

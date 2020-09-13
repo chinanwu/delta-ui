@@ -27,7 +27,8 @@ export const defaultState = {
 
 	guessError: null,
 	history: [],
-	hint: null,
+	hintWord: null,
+	hintNumLeft: null,
 	hintExpanded: false,
 	showHintInHistory: false,
 	numHints: 3,
@@ -68,8 +69,9 @@ export default handleActions(
 		[getHintSuccess]: (state, { payload }) => ({
 			...state,
 			loading: false,
-			hint: payload,
-			numHints: state.daily.numHints - 1,
+			hintWord: payload.hint,
+			hintNumLeft: payload.numLeft,
+			numHints: state.numHints - 1,
 			hintExpanded: true,
 			showHintInHistory: true,
 		}),
@@ -82,7 +84,7 @@ export default handleActions(
 		[addGuess]: (state, { payload }) => ({
 			...state,
 			prevWord: payload,
-			history: [...state.daily.history, payload],
+			history: [...state.history, payload],
 			guessError: null,
 			showHintInHistory: false,
 		}),
@@ -118,9 +120,3 @@ export default handleActions(
 	},
 	defaultState
 );
-
-// Readings:
-// https://redux-actions.js.org/api/handleaction
-// https://redux.js.org/recipes/structuring-reducers/initializing-state/
-// https://medium.com/@kylpo/redux-best-practices-eef55a20cc72
-// https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3

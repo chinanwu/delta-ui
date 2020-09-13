@@ -15,6 +15,7 @@ import ThemeToggle from '../ThemeToggle.jsx';
 import DailyGuess from './DailyGuess.jsx';
 import DailyHintButton from './DailyHintButton.jsx';
 import DailyHistory from './DailyHistory.jsx';
+import DailyWinModal from './DailyWinModal.jsx';
 
 import './DailyV2.less';
 
@@ -71,8 +72,11 @@ export const Daily = ({
 				</div>
 			</div>
 
+			<div className="Daily__easterEgg">This is an incredibly tiny screen</div>
+
 			{loading && createPortal(<Loading />, document.body)}
 			{error && createPortal(<Error />, document.body)}
+			{win && createPortal(<DailyWinModal timer={timer} />, document.body)}
 		</div>
 	);
 };

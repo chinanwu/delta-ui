@@ -4,6 +4,7 @@ import Confetti from 'react-confetti';
 import { connect } from 'react-redux';
 
 import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
 import { createGame } from '../../thunk/SoloThunk.jsx';
 
 import Modal from '../Modal.jsx';
@@ -11,6 +12,7 @@ import Modal from '../Modal.jsx';
 import './SoloWinModal.less';
 
 export const SoloWinModal = ({
+	dark,
 	from,
 	to,
 	playerSoln,
@@ -33,7 +35,7 @@ export const SoloWinModal = ({
 		<Modal
 			name="score"
 			ariaLabelledBy="soloWinModalHeader"
-			contentClassname="SoloWinModal"
+			contentClassname={getThemeClassname('SoloWinModal', dark)}
 			general={<Confetti number={50} recycle={false} />}
 		>
 			<h1 id="soloWinModalHeader" className="SoloWinModal__header">
@@ -116,6 +118,7 @@ export const SoloWinModal = ({
 };
 
 SoloWinModal.propTypes = {
+	dark: PropTypes.bool,
 	from: PropTypes.string,
 	to: PropTypes.string,
 	playerSoln: PropTypes.arrayOf(PropTypes.string),
@@ -128,7 +131,9 @@ SoloWinModal.propTypes = {
 
 export const mapStateToProps = ({
 	solo: { from, to, history, numHints, score, solution },
+	theme: { dark },
 }) => ({
+	dark,
 	from,
 	to,
 	playerSoln: history,

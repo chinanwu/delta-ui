@@ -31,7 +31,8 @@ export const defaultState = {
 	history: sessionStorage.getItem('from')
 		? [sessionStorage.getItem('from')]
 		: [],
-	hint: null,
+	hintWord: null,
+	hintNumLeft: null,
 	hintExpanded: false,
 	showHintInHistory: false,
 	numHints: 3,
@@ -57,6 +58,7 @@ export default handleActions(
 			hintNumLeft: payload.numLeft,
 			numHints: state.numHints - 1,
 			hintExpanded: true,
+			showHintInHistory: true,
 		}),
 		[getHintFailed]: (state, { payload }) => ({
 			...state,
@@ -87,6 +89,7 @@ export default handleActions(
 			hint: null,
 			hintExpanded: false,
 			guessError: null,
+			showHintInHistory: false,
 		}),
 		[setGuessError]: (state, { payload }) => ({
 			...state,

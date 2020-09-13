@@ -30,8 +30,6 @@ export const HintButton = ({
 		[isExpanded, numHints, giveSolution, onHint, onSolnClick]
 	);
 
-	console.log(dark);
-
 	return (
 		<div
 			className={

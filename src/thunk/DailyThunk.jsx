@@ -17,6 +17,7 @@ import {
 	setTimeStarted,
 } from '../actions/DailyActions';
 import { putHighscore } from '../functions/FetchFunctions';
+
 import {
 	requestHint as getHint,
 	requestDailyChallenge as getDailyChallenge,
