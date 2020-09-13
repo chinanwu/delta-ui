@@ -28,7 +28,15 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 
 	const handleKeyDown = useCallback(
 		event => {
-			if (event && event.target && event.keyCode && event.key) {
+			if (
+				event &&
+				event.target &&
+				event.keyCode &&
+				event.key &&
+				!event.ctrlKey &&
+				!event.altKey &&
+				!event.metaKey
+			) {
 				const i = parseInt(event.target.dataset.id);
 				const next = (i + 1) % maxLen;
 				const prev = i - 1 < 0 ? maxLen - 1 : i - 1;
@@ -120,7 +128,12 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 				</button>
 			</div>
 
-			<div className={getThemeClassname('Guess__error', dark)}>{error}</div>
+			<div
+				className={getThemeClassname('Guess__error', dark)}
+				aria-live="passive"
+			>
+				{error}
+			</div>
 		</div>
 	);
 };

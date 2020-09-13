@@ -1,74 +1,71 @@
 @import '../../style/buttons';
 
-.WinModal {
-	background-color: white;
-	color: black;
+.SoloWinModal {
 	padding: 1rem;
-	box-shadow: @box-shadow-16;
 	margin: 2rem;
 	overflow: scroll;
 	width: 45rem;
+	max-height: 90%; //To allow scrolling
 }
 
-.WinModal--dark {
-	background-color: @dark-10;
-	color: #fff;
-}
-
-.WinModal__header {
+.SoloWinModal__header {
 	text-align: center;
 }
 
-.WinModal__solutions {
+.SoloWinModal__solutions {
 	display: flex;
 	justify-content: center;
 }
 
-.WinModal__solution {
+.SoloWinModal__solution {
 	flex-basis: 100%;
 }
 
-.WinModal__solutionList {
+.SoloWinModal__solutionList {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
 
-.WinModal__solutionItem {
+.SoloWinModal__solutionItem {
 	font-size: 1.8rem;
 	padding: 0 0 0 1rem;
 	margin: 0;
 }
 
-.WinModal__btn--center {
+.SoloWinModal__btn--center {
 	display: flex;
 	justify-content: center;
 }
 
-.WinModal__showSolnBtn {
+.SoloWinModal__showSolnBtn {
 	@smBtn();
 	margin: 0;
 }
 
-.WinModal__score {
+.SoloWinModal__score {
 	font-size: 3.2rem;
 	margin: 1rem;
 	text-align: center;
 }
 
-.WinModal__newBtn {
+.SoloWinModal__newBtn {
 	@largeBtn();
 	margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 500px) {
-	.WinModal {
+	.SoloWinModal {
 		width: initial;
 	}
 }
 
 @media only screen and (max-width: 375px) {
-	.WinModal__solutions {
+	.SoloWinModal__solutions {
 		flex-direction: column;
+	}
+
+	.SoloWinModal__solutionItem {
+		text-align: center;
 	}
 }

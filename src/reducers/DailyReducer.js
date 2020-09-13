@@ -69,7 +69,7 @@ export default handleActions(
 			...state,
 			loading: false,
 			hint: payload,
-			numHints: state.solo.numHints - 1,
+			numHints: state.daily.numHints - 1,
 			hintExpanded: true,
 			showHintInHistory: true,
 		}),

@@ -4,7 +4,7 @@ import {
 	getDailyChallengeSuccess,
 } from '../actions/HomeActions';
 
-import { requestDailyChallenge as getDailyChallenge } from './RequestThunk.jsx';
+import { requestDailyChallenge as getDailyChallenge } from './GeneralThunk.jsx';
 
 export const requestDailyChallenge = () => dispatch =>
 	getDailyChallenge(

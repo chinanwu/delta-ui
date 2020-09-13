@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 
 import History from '../History.jsx';
 
-export const DailyHistory = ({ to, history, hint, win, showHint }) => (
+export const DailyHistory = ({
+	to,
+	history,
+	hintWord,
+	hintNumLeft,
+	win,
+	showHint,
+}) => (
 	<History
 		to={to}
 		history={history}
-		hintWord={hint ? hint.word : null}
-		hintNumleft={hint ? hint.numLeft : null}
+		hintWord={hintWord}
+		hintNumleft={hintNumLeft}
 		win={win}
 		showHint={showHint}
 	/>
@@ -18,17 +25,19 @@ export const DailyHistory = ({ to, history, hint, win, showHint }) => (
 DailyHistory.propTypes = {
 	to: PropTypes.string,
 	history: PropTypes.arrayOf(PropTypes.string),
-	hint: PropTypes.object,
+	hintWord: PropTypes.string,
+	hintNumLeft: PropTypes.number,
 	win: PropTypes.bool,
 	showHint: PropTypes.bool,
 };
 
 export const mapStateToProps = ({
-	daily: { to, history, hint, win, showHintInHistory },
+	daily: { to, history, hintWord, hintNumLeft, win, showHintInHistory },
 }) => ({
 	to,
 	history,
-	hint,
+	hintWord,
+	hintNumLeft,
 	win,
 	showHint: showHintInHistory,
 });

@@ -30,6 +30,7 @@ export default App;
 
 // TODO:
 // - onFocus styling, :focus-visible?
+// - TabIndex order
 
 // Potential future improvements:
 // - Modal component

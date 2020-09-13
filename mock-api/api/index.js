@@ -11,7 +11,10 @@ router.get('/api/v1/hint', (req, res) =>
 	res.json({ hint: 'meat', numLeft: 3 })
 );
 router.get('/api/v1/solve', (req, res) =>
-	res.json({ solution: ['heat', 'meat', 'mead', 'meld', 'mold', 'cold'] })
+	res.json({
+		solution: ['heat', 'meat', 'mead', 'meld', 'mold', 'cold'],
+		solutionToPlayer: ['meat', 'mead', 'meld', 'mold', 'bold', 'hold', 'cold'],
+	})
 );
 router.get('/api/v1/score', (req, res) =>
 	res.json({

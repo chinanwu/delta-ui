@@ -18,18 +18,12 @@ import {
 	editLoading,
 	editError,
 } from '../actions/SoloActions';
-import {
-	ERROR_INVALID_WORD_ENTERED,
-	ERROR_NOT_ONE_OFF,
-} from '../constants/Errors';
 import { getSolution, getWords } from '../functions/FetchFunctions';
-import isOneOff from '../functions/isOneOff';
-import isValidWord from '../functions/isValidWord';
 
 import {
 	requestHint as getHint,
-	requestScore as getScore,
-} from './RequestThunk.jsx';
+	applyGuess as setGuess,
+} from './GeneralThunk.jsx';
 
 export const createGame = () => dispatch => {
 	dispatch(getWordsStarted());
@@ -55,29 +49,16 @@ export const createGame = () => dispatch => {
 export const applyGuess = guess => (dispatch, useState) => {
 	const { solo } = useState();
 
-	const valid = isValidWord(guess);
-	if (isOneOff(solo.prevWord, guess) && valid) {
-		// TODO: Need to check this is done in time for getScore's access to history.
-		dispatch(addGuess(guess));
-
-		if (guess === solo.to) {
-			getScore(
-				getScoreStarted,
-				getScoreSuccess,
-				getScoreFailed,
-				solo,
-				dispatch
-			);
-
-			// TODO: Maybe...?
-			// sessionStorage.setItem('from', null);
-			// sessionStorage.setItem('to', null);
-		}
-	} else {
-		dispatch(
-			setGuessError(valid ? ERROR_NOT_ONE_OFF : ERROR_INVALID_WORD_ENTERED)
-		);
-	}
+	return setGuess(
+		guess,
+		addGuess,
+		setGuessError,
+		getScoreStarted,
+		getScoreSuccess,
+		getScoreFailed,
+		solo,
+		dispatch
+	);
 };
 
 export const requestHint = () => (dispatch, getState) => {
@@ -96,11 +77,11 @@ export const requestHint = () => (dispatch, getState) => {
 
 export const requestSolution = () => (dispatch, getState) => {
 	const {
-		solo: { from, to },
+		solo: { from, to, prevWord },
 	} = getState();
 	dispatch(getSolutionStarted());
-	return getSolution(from, to)
-		.then(res => dispatch(getSolutionSuccess(res.solution)))
+	return getSolution(from, to, prevWord)
+		.then(res => dispatch(getSolutionSuccess(res)))
 		.catch(e => dispatch(getSolutionFailed(e)));
 };
 

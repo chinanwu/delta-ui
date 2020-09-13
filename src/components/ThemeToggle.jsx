@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
+import getThemeClassname from '../functions/getThemeClassname';
 
 import { applyTheme } from '../thunk/ThemeThunk.jsx';
 
@@ -22,7 +23,7 @@ export const ThemeToggle = ({ dark, onChangeTheme }) => {
 					aria-labelledby="themeToggleLabel"
 					onChange={handleChange}
 				/>
-				<span className="ThemeToggle__slider" />
+				<span className={getThemeClassname('ThemeToggle__slider', dark)} />
 			</label>
 			<div id="themeToggleLabel" className="ThemeToggle__label">
 				Theme

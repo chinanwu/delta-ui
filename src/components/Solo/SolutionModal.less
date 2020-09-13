@@ -1,0 +1,37 @@
+@import '../../style/buttons';
+
+.SolutionModal {
+	text-align: center;
+	padding: 2rem;
+	width: 40rem;
+}
+
+.SolutionModal__solutions {
+	display: flex;
+	justify-content: center;
+}
+
+.SolutionModal__solution {
+	flex-basis: 100%;
+}
+
+.SolutionModal__list {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 0;
+	font-size: 1.8rem;
+}
+
+.SolutionModal__newBtn {
+	@largeBtn();
+}
+
+@media only screen and (max-width: 415px) {
+	.SolutionModal {
+		width: initial;
+	}
+
+	.SolutionModal__solutions {
+		flex-direction: column;
+	}
+}

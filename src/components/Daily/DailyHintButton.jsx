@@ -7,19 +7,19 @@ import { applyCloseHint, requestHint } from '../../thunk/DailyThunk.jsx';
 import HintButton from '../HintButtonV2.jsx';
 
 export const DailyHintButton = ({
-	hint,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded,
-	error,
 	onHint,
 	onClose,
 }) => (
 	<HintButton
 		id="dailyHintBtn"
-		hint={hint}
+		hintWord={hintWord}
+		hintNumLeft={hintNumLeft}
 		numHints={numHints}
 		isExpanded={isExpanded}
-		error={error}
 		giveSolution={false}
 		onHint={onHint}
 		onClose={onClose}
@@ -27,18 +27,19 @@ export const DailyHintButton = ({
 );
 
 DailyHintButton.propTypes = {
-	hint: PropTypes.object,
+	hintWord: PropTypes.string,
+	hintNumLeft: PropTypes.number,
 	numHints: PropTypes.number,
-	error: PropTypes.string,
 	isExpanded: PropTypes.bool,
 	onHint: PropTypes.func,
 	onClose: PropTypes.func,
 };
 
 export const mapStateToProps = ({
-	daily: { hint, numHints, hintExpanded },
+	daily: { hintWord, hintNumLeft, numHints, hintExpanded },
 }) => ({
-	hint,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded: hintExpanded,
 });

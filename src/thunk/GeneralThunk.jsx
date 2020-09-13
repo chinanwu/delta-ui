@@ -1,13 +1,19 @@
 import {
+	ERROR_INVALID_WORD_ENTERED,
+	ERROR_NOT_ONE_OFF,
+} from '../constants/Errors';
+import {
 	getDailyChallenge,
 	getHint,
 	getScore,
 } from '../functions/FetchFunctions';
+import isOneOff from '../functions/isOneOff';
+import isValidWord from '../functions/isValidWord';
 
 export const requestHint = (started, success, failed, from, to, dispatch) => {
 	dispatch(started());
 	return getHint(from, to)
-		.then(res => dispatch(success(res.hint)))
+		.then(res => dispatch(success(res)))
 		.catch(e => dispatch(failed(e)));
 };
 
@@ -35,4 +41,30 @@ export const requestDailyChallenge = (started, success, failed, dispatch) => {
 			dispatch(success({ from, to, id, leaderboard, timeStarted }));
 		})
 		.catch(e => dispatch(failed(e)));
+};
+
+export const applyGuess = (
+	guess,
+	guessAction,
+	guessErrorAction,
+	started,
+	success,
+	failed,
+	state,
+	dispatch
+) => {
+	const valid = isValidWord(guess.toLowerCase());
+
+	if (isOneOff(state.prevWord, guess) && valid) {
+		// TODO: Need to check this is done in time for getScore's access to history.
+		dispatch(guessAction(guess));
+
+		if (guess === state.to) {
+			requestScore(started, success, failed, state, dispatch);
+		}
+	} else {
+		dispatch(
+			guessErrorAction(valid ? ERROR_NOT_ONE_OFF : ERROR_INVALID_WORD_ENTERED)
+		);
+	}
 };

@@ -1,0 +1,63 @@
+@import '../style/colours';
+@import '../style/shadows';
+
+.Modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: @modalBg;
+}
+
+.Modal__content {
+	background-color: white;
+	color: black;
+	box-shadow: @box-shadow-16;
+	// Note: will need to deal with overflow by user of Modal. Since
+	// modals usually should not be large enough for a overflow
+}
+
+.Modal__content--dark {
+	background-color: @dark-10;
+	color: #fff;
+}
+
+.Modal__close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 1.6rem;
+	background-color: #d3d3d3;
+	padding: 0.5rem 1rem;
+	border: none;
+	cursor: pointer;
+	border-top-right-radius: 1rem;
+	transition: background-color 0.2s;
+
+	&:hover {
+		background-color: #e4e4e4;
+	}
+
+	&:active {
+		background-color: #b7b7b7;
+	}
+}
+
+.Modal__close--dark {
+	background-color: #4d4d4d;
+	color: #eeeeee;
+
+	&:hover {
+		background-color: #636363;
+	}
+
+	&:active {
+		background-color: #3a3a3a;
+	}
+}

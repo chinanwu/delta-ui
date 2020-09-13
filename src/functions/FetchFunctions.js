@@ -33,8 +33,8 @@ const putFetch = (endpt, body) =>
 
 export const getWords = () => getFetch('/api/v1/words');
 
-export const getSolution = (from, to) =>
-	getFetch(`/api/v1/solve?from=${from}&to=${to}`);
+export const getSolution = (from, to, prevWord) =>
+	getFetch(`/api/v1/solve?from=${from}&to=${to}&prevWord=${prevWord}`);
 
 export const getHint = (from, to) =>
 	getFetch(`/api/v1/hint?from=${from}&to=${to}`);

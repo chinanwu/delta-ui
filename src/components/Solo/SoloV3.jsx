@@ -15,6 +15,8 @@ import ThemeToggle from '../ThemeToggle.jsx';
 import SoloGuess from './SoloGuess.jsx';
 import SoloHintButton from './SoloHintButton.jsx';
 import SoloHistory from './SoloHistory.jsx';
+import SoloWinModal from './SoloWinModal.jsx';
+import SolutionModal from './SolutionModal.jsx';
 import StealthForm from './StealthForm.jsx';
 
 import './SoloV3.less';
@@ -24,6 +26,7 @@ export const Solo = ({
 	from,
 	to,
 	win,
+	solution,
 	error,
 	loading,
 	onNewGame,
@@ -47,6 +50,14 @@ export const Solo = ({
 			setTimer(0);
 		}
 	}, [from, to, onNewGame, setTimer]);
+
+	useEffect(() => {
+		if (win) {
+			document.body.classList.add('Modal--open');
+		} else {
+			document.body.classList.remove('Modal--open');
+		}
+	}, [win]);
 
 	const handleEditWords = useCallback(
 		(from, to) => {
@@ -78,6 +89,8 @@ export const Solo = ({
 
 			{loading && createPortal(<Loading />, document.body)}
 			{error && createPortal(<Error />, document.body)}
+			{win && createPortal(<SoloWinModal timer={timer} />, document.body)}
+			{solution && createPortal(<SolutionModal />, document.body)}
 		</div>
 	);
 };
@@ -87,6 +100,7 @@ Solo.propTypes = {
 	from: PropTypes.string,
 	to: PropTypes.string,
 	win: PropTypes.bool,
+	solution: PropTypes.arrayOf(PropTypes.string),
 	error: PropTypes.object,
 	loading: PropTypes.bool,
 	onNewGame: PropTypes.func,
@@ -94,13 +108,14 @@ Solo.propTypes = {
 };
 
 export const mapStateToProps = ({
-	solo: { from, to, win, error, loading },
+	solo: { from, to, win, solution, error, loading },
 	theme: { dark },
 }) => ({
 	dark,
 	from,
 	to,
 	win,
+	solution,
 	error,
 	loading,
 });
@@ -116,3 +131,6 @@ export default withTitle('Play')(
 		mapDispatchToProps
 	)(Solo)
 );
+
+// TODO:
+// - Implemenet use of WinModal and Solution here

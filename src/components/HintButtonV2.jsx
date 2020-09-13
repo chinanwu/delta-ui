@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
+import { connect } from 'react-redux';
 
 import getThemeClassname from '../functions/getThemeClassname';
 
 import './HintButton.less';
 
-// Notes:
-// dark can be grabbed by HintButton
-// id, hint, numHints, isExpanded, giveSolution, onSolnClick, onHint, onClick provided
-
 export const HintButton = ({
 	id,
 	dark,
-	hint,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded,
-	error,
 	giveSolution,
 	onSolnClick,
 	onHint,
 	onClose,
 }) => {
-	// noinspection CommaExpressionJS
 	const handleClick = useCallback(
 		() =>
 			isExpanded
@@ -33,6 +29,8 @@ export const HintButton = ({
 				: null,
 		[isExpanded, numHints, giveSolution, onHint, onSolnClick]
 	);
+
+	console.log(dark);
 
 	return (
 		<div
@@ -50,11 +48,9 @@ export const HintButton = ({
 				aria-live="passive"
 			>
 				<h3 id="hintHeader">Hint: </h3>
+				<p className="HintButton__hint">Recommended next word: {hintWord}</p>
 				<p className="HintButton__hint">
-					Recommended next word: {hint ? hint.word : ''}
-				</p>
-				<p className="HintButton__hint">
-					Estimated number of words left: {hint ? hint.numLeft : ''}
+					Estimated number of words left: {hintNumLeft}
 				</p>
 			</div>
 			<button
@@ -100,14 +96,14 @@ export const mapStateToProps = ({ theme: { dark } }) => ({
 HintButton.propTypes = {
 	id: PropTypes.string,
 	dark: PropTypes.bool,
-	hint: PropTypes.object,
+	hintWord: PropTypes.string,
+	hintNumLeft: PropTypes.number,
 	numHints: PropTypes.number,
 	isExpanded: PropTypes.bool,
-	error: PropTypes.string,
 	giveSolution: PropTypes.bool,
 	onHint: PropTypes.func,
 	onSolnClick: PropTypes.func,
 	onClose: PropTypes.func,
 };
 
-export default HintButton;
+export default connect(mapStateToProps)(HintButton);

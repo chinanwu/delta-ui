@@ -11,20 +11,20 @@ import {
 import HintButton from '../HintButtonV2.jsx';
 
 export const SoloHintButton = ({
-	hint,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded,
-	error,
 	onHint,
 	onSolve,
 	onClose,
 }) => (
 	<HintButton
 		id="soloHintBtn"
-		hint={hint}
+		hintWord={hintWord}
+		hintNumLeft={hintNumLeft}
 		numHints={numHints}
 		isExpanded={isExpanded}
-		error={error}
 		giveSolution={true}
 		onHint={onHint}
 		onSolnClick={onSolve}
@@ -33,19 +33,20 @@ export const SoloHintButton = ({
 );
 
 SoloHintButton.propTypes = {
-	hint: PropTypes.object,
+	hintWord: PropTypes.string,
+	hintNumLeft: PropTypes.number,
 	numHints: PropTypes.number,
 	isExpanded: PropTypes.bool,
-	error: PropTypes.string,
 	onHint: PropTypes.func,
 	onSolve: PropTypes.func,
 	onClose: PropTypes.func,
 };
 
 export const mapStateToProps = ({
-	solo: { hint, numHints, hintExpanded },
+	solo: { hintWord, hintNumLeft, numHints, hintExpanded },
 }) => ({
-	hint,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded: hintExpanded,
 });

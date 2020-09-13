@@ -52,19 +52,20 @@ export const History = ({
 				))}
 				<li ref={historyBottomRef} />
 
-				{showHint && hintWord !== to ? (
-					<>
-						<li className={getThemeClassname('History__hintWord', dark)}>
-							{hintWord}
-						</li>
-						{makeMysteryStepListItems(hintNumLeft - 2)}
-						<li>{to}</li>
-					</>
-				) : (
-					<>
-						<li className="History__hintWord">{hintWord}</li>
-					</>
-				)}
+				{showHint &&
+					(hintWord !== to ? (
+						<>
+							<li className={getThemeClassname('History__hintWord', dark)}>
+								{hintWord}
+							</li>
+							{makeMysteryStepListItems(hintNumLeft - 2)}
+							<li>{to}</li>
+						</>
+					) : (
+						<>
+							<li className="History__hintWord">{hintWord}</li>
+						</>
+					))}
 			</ul>
 		</div>
 	);
@@ -85,3 +86,6 @@ export const mapStateToProps = ({ theme: { dark } }) => ({
 });
 
 export default connect(mapStateToProps)(History);
+
+// TODO:
+// - Show hint in history as long as no guess has been entered

@@ -16,19 +16,12 @@ import {
 	setHighscoreSuccess,
 	setTimeStarted,
 } from '../actions/DailyActions';
-import {
-	ERROR_INVALID_WORD_ENTERED,
-	ERROR_NOT_ONE_OFF,
-} from '../constants/Errors';
 import { putHighscore } from '../functions/FetchFunctions';
-import isOneOff from '../functions/isOneOff';
-import isValidWord from '../functions/isValidWord';
-
 import {
 	requestHint as getHint,
-	requestScore as getScore,
 	requestDailyChallenge as getDailyChallenge,
-} from './RequestThunk.jsx';
+	applyGuess as setGuess,
+} from './GeneralThunk.jsx';
 
 export const requestDailyChallenge = () => dispatch =>
 	getDailyChallenge(
@@ -55,25 +48,16 @@ export const requestHint = () => (dispatch, getState) => {
 export const applyGuess = guess => (dispatch, useState) => {
 	const { daily } = useState();
 
-	const valid = isValidWord(guess);
-	if (isOneOff(daily.prevWord, guess) && valid) {
-		// TODO: Need to check this is done in time for getScore's access to history.
-		dispatch(addGuess(guess));
-
-		if (guess === daily.to) {
-			getScore(
-				getScoreStarted,
-				getScoreSuccess,
-				getScoreFailed,
-				daily,
-				dispatch
-			);
-		}
-	} else {
-		dispatch(
-			setGuessError(valid ? ERROR_NOT_ONE_OFF : ERROR_INVALID_WORD_ENTERED)
-		);
-	}
+	return setGuess(
+		guess,
+		addGuess,
+		setGuessError,
+		getScoreStarted,
+		getScoreSuccess,
+		getScoreFailed,
+		daily,
+		dispatch
+	);
 };
 
 export const applyHighscore = player => dispatch => {

@@ -1,4 +1,3 @@
-import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -11,6 +10,7 @@ import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
 import withTitle from './HOC/withTitle.jsx';
 import Loading from './Loading.jsx';
+import { Modal } from './Modal.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
@@ -255,53 +255,37 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 
 			{showAcks &&
 				createPortal(
-					<FocusTrap>
-						<div
-							id="homeModalDiv"
-							className="Home__modal"
-							onKeyDown={handleModalKeyDown}
-						>
-							<div
-								className={getThemeClassname('Home__modalContent', dark)}
-								role="dialog"
-								aria-modal={true}
-								aria-labelledby="homeModalHeader"
+					<Modal
+						name="Acknowledgements"
+						ariaLabelledBy="homeModalHeader"
+						contentClassname="Home__modalContent"
+						onClose={handleCloseAcks}
+					>
+						<h2 id="homeModalHeader">Acknowledgements</h2>
+						<p>
+							Thank you to MCS, the one who introduced me to this word game.
+						</p>
+						<h3>Icons</h3>
+						<p>
+							Moon icon in theme toggle made by{' '}
+							<a
+								className={getThemeClassname('Home__modalLink', dark)}
+								href="https://www.flaticon.com/authors/freepik"
+								title="Freepik"
 							>
-								<button
-									id="homeCloseAcksBtn"
-									className={getThemeClassname('Home__closeAcksBtn', dark)}
-									aria-label="Close acknowledgements modal"
-									onClick={handleCloseAcks}
-								>
-									X
-								</button>
-								<h2 id="homeModalHeader">Acknowledgements</h2>
-								<p>
-									Thank you to MCS, the one who introduced me to this word game.
-								</p>
-								<h3>Icons</h3>
-								<p>
-									Moon icon in theme toggle made by{' '}
-									<a
-										className={getThemeClassname('Home__modalLink', dark)}
-										href="https://www.flaticon.com/authors/freepik"
-										title="Freepik"
-									>
-										Freepik
-									</a>{' '}
-									from{' '}
-									<a
-										className={getThemeClassname('Home__modalLink', dark)}
-										href="https://www.flaticon.com/"
-										title="Flaticon"
-									>
-										{' '}
-										www.flaticon.com
-									</a>
-								</p>
-							</div>
-						</div>
-					</FocusTrap>,
+								Freepik
+							</a>{' '}
+							from{' '}
+							<a
+								className={getThemeClassname('Home__modalLink', dark)}
+								href="https://www.flaticon.com/"
+								title="Flaticon"
+							>
+								{' '}
+								www.flaticon.com
+							</a>
+						</p>
+					</Modal>,
 					document.body
 				)}
 		</div>

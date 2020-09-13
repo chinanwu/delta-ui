@@ -40,6 +40,7 @@ export const defaultState = {
 	timeStarted: null,
 	score: -1,
 	solution: null,
+	solutionToPlayer: null,
 	win: false,
 };
 
@@ -52,8 +53,9 @@ export default handleActions(
 		[getHintSuccess]: (state, { payload }) => ({
 			...state,
 			loading: false,
-			hint: payload,
-			numHints: state.solo.numHints - 1,
+			hintWord: payload.hint,
+			hintNumLeft: payload.numLeft,
+			numHints: state.numHints - 1,
 			hintExpanded: true,
 		}),
 		[getHintFailed]: (state, { payload }) => ({
@@ -69,7 +71,8 @@ export default handleActions(
 		[getSolutionSuccess]: (state, { payload }) => ({
 			...state,
 			loading: false,
-			solution: payload,
+			solution: payload.solution,
+			solutionToPlayer: payload.solutionToPlayer,
 		}),
 		[getSolutionFailed]: (state, { payload }) => ({
 			...state,
@@ -80,7 +83,7 @@ export default handleActions(
 		[addGuess]: (state, { payload }) => ({
 			...state,
 			prevWord: payload,
-			history: [...state.daily.history, payload],
+			history: [...state.history, payload],
 			hint: null,
 			hintExpanded: false,
 			guessError: null,
