@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { ERROR_INVALID_WORDS_ENTERED } from '../constants/Errors';
-import { enterBtn, escapeBtn, spaceBtn } from '../constants/Keycodes';
-import { getWords } from '../functions/FetchFunctions';
-import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
-import isValidWord from '../functions/isValidWord';
-import { applyError, applyLoading } from '../thunk/SoloThunk.jsx';
+import { ERROR_INVALID_WORDS_ENTERED } from '../../constants/Errors';
+import { enterBtn, escapeBtn, spaceBtn } from '../../constants/Keycodes';
+import { getWords } from '../../functions/FetchFunctions';
+import getThemeClassname from '../../functions/getThemeClassname';
+import hasValidCharacters from '../../functions/hasValidCharacters';
+import isValidWord from '../../functions/isValidWord';
+import { applyError, applyLoading } from '../../thunk/SoloThunk.jsx';
 
 import './StealthForm.less';
 

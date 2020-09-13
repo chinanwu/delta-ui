@@ -13,17 +13,17 @@ import {
 	rightArrowBtn,
 	tabBtn,
 	zBtn,
-} from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import isOneOff from '../functions/isOneOff';
-import isValidWord from '../functions/isValidWord';
+} from '../../constants/Keycodes';
+import { getFetch } from '../../functions/FetchFunctions';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import isOneOff from '../../functions/isOneOff';
+import isValidWord from '../../functions/isValidWord';
 
 import DailyWinModal from './DailyWinModal.jsx';
-import Loading from './Loading.jsx';
-import HintButton from './HintButton.jsx';
-import ThemeToggle from './ThemeToggle.jsx';
+import Loading from '../Loading.jsx';
+import HintButton from '../HintButton.jsx';
+import ThemeToggle from '../ThemeToggle.jsx';
 
 import './Daily.less';
 

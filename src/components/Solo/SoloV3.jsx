@@ -3,17 +3,19 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import { applyWords, createGame } from '../thunk/SoloThunk.jsx';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import { applyWords, createGame } from '../../thunk/SoloThunk.jsx';
 
-import Error from './Error.jsx';
-import Loading from './Loading.jsx';
+import Error from '../Error.jsx';
+import withTitle from '../HOC/withTitle.jsx';
+import Loading from '../Loading.jsx';
+import ThemeToggle from '../ThemeToggle.jsx';
+
 import SoloGuess from './SoloGuess.jsx';
 import SoloHintButton from './SoloHintButton.jsx';
 import SoloHistory from './SoloHistory.jsx';
 import StealthForm from './StealthForm.jsx';
-import ThemeToggle from './ThemeToggle.jsx';
 
 import './SoloV3.less';
 
@@ -28,10 +30,6 @@ export const Solo = ({
 	onChangeWords,
 }) => {
 	const [timer, setTimer] = useState(0);
-
-	useEffect(() => {
-		document.title = 'Play - Delta';
-	}, []);
 
 	useEffect(() => {
 		let interval = null;
@@ -112,7 +110,9 @@ const mapDispatchToProps = {
 	onChangeWords: applyWords,
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Solo);
+export default withTitle('Play')(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(Solo)
+);

@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Confetti from 'react-confetti';
 import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
-import { ERROR_NOT_ONE_OFF, ERROR_NOT_REAL_WORD } from '../constants/Errors';
+import { ERROR_NOT_ONE_OFF, ERROR_NOT_REAL_WORD } from '../../constants/Errors';
 
 import {
 	aBtn,
@@ -14,19 +14,19 @@ import {
 	rightArrowBtn,
 	tabBtn,
 	zBtn,
-} from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import isOneOff from '../functions/isOneOff';
-import isValidWord from '../functions/isValidWord';
-import { applyFrom, applyTo, applyGame } from '../thunk/SoloThunk.jsx';
+} from '../../constants/Keycodes';
+import { getFetch } from '../../functions/FetchFunctions';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import isOneOff from '../../functions/isOneOff';
+import isValidWord from '../../functions/isValidWord';
+import { applyFrom, applyTo, applyGame } from '../../thunk/SoloThunk.jsx';
 
-import Error from './Error.jsx';
-import Loading from './Loading.jsx';
-import HintButton from './HintButton.jsx';
+import Error from '../Error.jsx';
+import Loading from '../Loading.jsx';
+import HintButton from '../HintButton.jsx';
 import StealthForm from './StealthForm.jsx';
-import ThemeToggle from './ThemeToggle.jsx';
+import ThemeToggle from '../ThemeToggle.jsx';
 import SoloWinModal from './SoloWinModal.jsx';
 
 import './Solo.less';

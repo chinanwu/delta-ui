@@ -3,10 +3,10 @@ import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import hasValidCharacters from '../functions/hasValidCharacters';
-import { applyHighscore } from '../thunk/DailyThunk.jsx';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import hasValidCharacters from '../../functions/hasValidCharacters';
+import { applyHighscore } from '../../thunk/DailyThunk.jsx';
 
 import './DailyWinModal.less';
 

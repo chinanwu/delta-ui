@@ -2,48 +2,41 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-	requestHint,
-	requestSolution,
-	applyCloseHint,
-} from '../thunk/SoloThunk.jsx';
+import { applyCloseHint, requestHint } from '../../thunk/DailyThunk.jsx';
 
-import HintButton from './HintButtonV2.jsx';
+import HintButton from '../HintButtonV2.jsx';
 
-export const SoloHintButton = ({
+export const DailyHintButton = ({
 	hint,
 	numHints,
 	isExpanded,
 	error,
 	onHint,
-	onSolve,
 	onClose,
 }) => (
 	<HintButton
-		id="soloHintBtn"
+		id="dailyHintBtn"
 		hint={hint}
 		numHints={numHints}
 		isExpanded={isExpanded}
 		error={error}
-		giveSolution={true}
+		giveSolution={false}
 		onHint={onHint}
-		onSolnClick={onSolve}
 		onClose={onClose}
 	/>
 );
 
-SoloHintButton.propTypes = {
+DailyHintButton.propTypes = {
 	hint: PropTypes.object,
 	numHints: PropTypes.number,
-	isExpanded: PropTypes.bool,
 	error: PropTypes.string,
+	isExpanded: PropTypes.bool,
 	onHint: PropTypes.func,
-	onSolve: PropTypes.func,
 	onClose: PropTypes.func,
 };
 
 export const mapStateToProps = ({
-	solo: { hint, numHints, hintExpanded },
+	daily: { hint, numHints, hintExpanded },
 }) => ({
 	hint,
 	numHints,
@@ -52,11 +45,10 @@ export const mapStateToProps = ({
 
 const mapDispatchToProps = {
 	onHint: requestHint,
-	onSolve: requestSolution,
 	onClose: applyCloseHint,
 };
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(SoloHintButton);
+)(DailyHintButton);

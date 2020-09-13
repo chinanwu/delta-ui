@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import History from './History.jsx';
+import History from '../History.jsx';
 
-export const SoloHistory = ({ to, history, hint, win, showHint }) => (
+export const DailyHistory = ({ to, history, hint, win, showHint }) => (
 	<History
 		to={to}
 		history={history}
@@ -15,7 +15,7 @@ export const SoloHistory = ({ to, history, hint, win, showHint }) => (
 	/>
 );
 
-SoloHistory.propTypes = {
+DailyHistory.propTypes = {
 	to: PropTypes.string,
 	history: PropTypes.arrayOf(PropTypes.string),
 	hint: PropTypes.object,
@@ -24,7 +24,7 @@ SoloHistory.propTypes = {
 };
 
 export const mapStateToProps = ({
-	solo: { to, history, hint, win, showHintInHistory },
+	daily: { to, history, hint, win, showHintInHistory },
 }) => ({
 	to,
 	history,
@@ -33,4 +33,4 @@ export const mapStateToProps = ({
 	showHint: showHintInHistory,
 });
 
-export default connect(mapStateToProps)(SoloHistory);
+export default connect(mapStateToProps)(DailyHistory);

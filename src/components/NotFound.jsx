@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import getThemeClassname from '../functions/getThemeClassname';
 
+import withTitle from './HOC/withTitle';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './NotFound.less';
@@ -23,4 +24,4 @@ export const mapStateToProps = ({ theme: { dark } }) => ({
 	dark,
 });
 
-export default connect(mapStateToProps)(NotFound);
+export default withTitle('Not Found')(connect(mapStateToProps)(NotFound));

@@ -9,6 +9,7 @@ import { escapeBtn } from '../constants/Keycodes';
 import getThemeClassname from '../functions/getThemeClassname';
 import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
+import withTitle from './HOC/withTitle.jsx';
 import Loading from './Loading.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
@@ -17,10 +18,6 @@ import './Home.less';
 export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
-
-	useEffect(() => {
-		document.title = 'Home - Delta';
-	}, []);
 
 	useEffect(() => {
 		if (!leaderboard) {
@@ -330,10 +327,12 @@ const mapDispatchToProps = {
 	getDaily: requestDailyChallenge,
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Home);
+export default withTitle('Home')(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(Home)
+);
 
 // TODO:
 // - Double check accessibility for this page.

@@ -3,16 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import { requestDailyChallenge } from '../thunk/DailyThunk.jsx';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import { requestDailyChallenge } from '../../thunk/DailyThunk.jsx';
+
+import Error from '../Error.jsx';
+import withTitle from '../HOC/withTitle.jsx';
+import Loading from '../Loading.jsx';
+import ThemeToggle from '../ThemeToggle.jsx';
 
 import DailyGuess from './DailyGuess.jsx';
 import DailyHintButton from './DailyHintButton.jsx';
 import DailyHistory from './DailyHistory.jsx';
-import Error from './Error.jsx';
-import Loading from './Loading.jsx';
-import ThemeToggle from './ThemeToggle.jsx';
 
 import './DailyV2.less';
 
@@ -27,10 +29,6 @@ export const Daily = ({
 	getDaily,
 }) => {
 	const [timer, setTimer] = useState(0);
-
-	useEffect(() => {
-		document.title = 'Daily Challenge - Delta';
-	}, []);
 
 	useEffect(() => {
 		let interval = null;
@@ -106,7 +104,9 @@ const mapDispatchToProps = {
 	getDaily: requestDailyChallenge,
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Daily);
+export default withTitle('Daily Challenge')(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(Daily)
+);

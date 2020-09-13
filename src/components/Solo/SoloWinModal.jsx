@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 
-import formatCentisecondsTimer from '../functions/formatCentisecondsTimer';
-import getThemeClassname from '../functions/getThemeClassname';
-import { createGame } from '../thunk/SoloThunk.jsx';
+import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
+import getThemeClassname from '../../functions/getThemeClassname';
+import { createGame } from '../../thunk/SoloThunk.jsx';
 
 import './SoloWinModal.less';
 

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React, { useEffect } from 'react';
 
-import { Daily, mapStateToProps } from '../../components/Daily.jsx';
+import { Daily, mapStateToProps } from '../../components/Daily/Daily.jsx';
 
 jest.unmock('../../components/Daily.jsx');
 

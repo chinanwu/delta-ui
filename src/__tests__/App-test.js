@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { App } from '../App.jsx';
 import Home from '../components/Home.jsx';
 import NotFound from '../components/NotFound.jsx';
-import Solo from '../components/Solo.jsx';
+import Solo from '../components/Solo/Solo.jsx';
 
 jest.unmock('../App.jsx');
 jest.unmock('../components/NotFound.jsx'); // I have truly NO idea why I must do this to make the test pass
