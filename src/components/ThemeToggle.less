@@ -1,3 +1,5 @@
+@import '../style/shadows';
+
 .ThemeToggle__container {
 	position: absolute;
 	top: 1rem;
@@ -75,7 +77,9 @@ input:checked + .ThemeToggle__slider:before {
 }
 
 input:focus + .ThemeToggle__slider {
-	box-shadow: 0 0 1px rgba(184, 175, 177, 0.25);
+	-webkit-box-shadow: @box-shadow-02;
+	-moz-box-shadow: @box-shadow-02;
+	box-shadow: @box-shadow-02;
 }
 
 input:checked + .ThemeToggle__slider:before {
@@ -83,7 +87,6 @@ input:checked + .ThemeToggle__slider:before {
 	-ms-transform: translateX(2.4rem);
 	transform: translateX(2.4rem);
 }
-// From: https://www.w3schools.com/howto/howto_css_ThemeToggle.asp
 
 @media only screen and (max-width: 375px) {
 	.ThemeToggle__container {
@@ -96,3 +99,5 @@ input:checked + .ThemeToggle__slider:before {
 		padding-right: 0.4rem;
 	}
 }
+
+// From: https://www.w3schools.com/howto/howto_css_ThemeToggle.asp

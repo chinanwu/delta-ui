@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import getThemeClassname from '../functions/getThemeClassname';
 
-import withTitle from './HOC/withTitle';
+import withTitle from './HOC/withTitle.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './NotFound.less';
@@ -12,10 +12,13 @@ import './NotFound.less';
 export const NotFound = ({ dark }) => (
 	<div className={getThemeClassname('NotFound', dark)}>
 		<ThemeToggle />
-		<h1>404, Page Not Found!</h1>
-		<h2 className="NotFound__link">
+		<h1>404 - Page Not Found!</h1>
+		<h2 className="NotFound__linkContainer">
 			<span className="NotFound__linkWords">Perhaps you'd like a link</span>
-			<Link to="/">home</Link>?
+			<Link className={getThemeClassname('NotFound__link', dark)} to="/">
+				home
+			</Link>
+			?
 		</h2>
 	</div>
 );

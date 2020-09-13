@@ -29,10 +29,11 @@ export const App = () => (
 export default App;
 
 // TODO:
-// - onFocus styling
-// - HOC Daily and Solo? Because of the timer
+// - onFocus styling, :focus-visible?
 
 // Potential future improvements:
 // - Modal component
 // - Theme context
 // - Section tags where applicable
+// - HOC timer wrapper
+// - Better link colouring (:link, :visited, :focus)
