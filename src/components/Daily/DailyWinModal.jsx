@@ -59,6 +59,7 @@ export const DailyWinModal = ({
 
 	return (
 		<Modal
+			dark={dark}
 			name="score"
 			ariaLabelledBy="dailyWinModalHeader"
 			contentClassname={getThemeClassname('DailyWinModal', dark)}

@@ -90,8 +90,8 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 		inputRefs.forEach(inputRef => {
 			inputRef.current.value = '';
 		});
-
 		onGuess(guess);
+		setGuessVals(prevWord.match(regex));
 	}, [guessVals, inputRefs, onGuess]);
 
 	return (

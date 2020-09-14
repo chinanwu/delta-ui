@@ -89,7 +89,7 @@ export const applyCloseHint = () => dispatch => dispatch(closeHint());
 
 export const applyWords = (from, to) => dispatch => {
 	const timeStarted = new Date().getTime();
-	dispatch(editWords(from, to, timeStarted));
+	dispatch(editWords({ from, to, timeStarted }));
 };
 
 export const applyLoading = loading => dispatch =>

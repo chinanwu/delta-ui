@@ -18,6 +18,7 @@ const makeSolutionToPlayerArr = (history, solutionToPlayer) => {
 };
 
 export const SolutionModal = ({
+	dark,
 	solution,
 	history,
 	solutionToPlayer,
@@ -29,6 +30,7 @@ export const SolutionModal = ({
 
 	return (
 		<Modal
+			dark={dark}
 			name="solution"
 			ariaLabelledBy="solutionHeader"
 			contentClassname="SolutionModal"
@@ -69,6 +71,7 @@ export const SolutionModal = ({
 };
 
 SolutionModal.propTypes = {
+	dark: PropTypes.bool,
 	solution: PropTypes.arrayOf(PropTypes.string),
 	history: PropTypes.arrayOf(PropTypes.string),
 	solutionToPlayer: PropTypes.arrayOf(PropTypes.string),
@@ -77,7 +80,9 @@ SolutionModal.propTypes = {
 
 export const mapStateToProps = ({
 	solo: { solution, history, solutionToPlayer },
+	theme: { dark },
 }) => ({
+	dark,
 	solution,
 	history,
 	solutionToPlayer,

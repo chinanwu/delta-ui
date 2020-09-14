@@ -75,7 +75,7 @@ export const Daily = ({
 			<div className="Daily__easterEgg">This is an incredibly tiny screen</div>
 
 			{loading && createPortal(<Loading />, document.body)}
-			{error && createPortal(<Error />, document.body)}
+			{error && createPortal(<Error dark={dark} />, document.body)}
 			{win && createPortal(<DailyWinModal timer={timer} />, document.body)}
 		</div>
 	);

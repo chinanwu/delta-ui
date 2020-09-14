@@ -4,7 +4,8 @@ import { editTheme } from '../actions/ThemeActions';
 
 export const defaultState = {
 	dark:
-		// Not supported for Samsung Internet and Internet explorer and Firefox for Android
+		// Not supported for Samsung Internet, Internet explorer,
+		// and Firefox for Android
 		window.matchMedia &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches,
 };

@@ -1,7 +1,6 @@
 import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
-import { connect } from 'react-redux';
 
 import { escapeBtn } from '../constants/Keycodes';
 import getThemeClassname from '../functions/getThemeClassname';
@@ -76,8 +75,4 @@ Modal.propTypes = {
 	onClose: PropTypes.func,
 };
 
-export const mapStateToProps = ({ theme: { dark } }) => ({
-	dark,
-});
-
-export default connect(mapStateToProps)(Modal);
+export default Modal;

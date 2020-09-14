@@ -137,7 +137,7 @@ export default handleActions(
 
 		[editWords]: (state, { payload }) => ({
 			...defaultState,
-			from: payload.form,
+			from: payload.from,
 			to: payload.to,
 			prevWord: payload.from,
 			history: [payload.from],

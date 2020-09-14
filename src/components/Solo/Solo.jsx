@@ -25,6 +25,7 @@ import { applyFrom, applyTo, applyGame } from '../../thunk/SoloThunk.jsx';
 import Error from '../Error.jsx';
 import Loading from '../Loading.jsx';
 import HintButton from '../HintButton.jsx';
+import { Modal } from '../Modal';
 import StealthForm from './StealthForm.jsx';
 import ThemeToggle from '../ThemeToggle.jsx';
 import SoloWinModal from './SoloWinModal.jsx';
@@ -466,7 +467,7 @@ export const Solo = ({
 			</div>
 
 			{loading && createPortal(<Loading />, document.body)}
-			{apiError && createPortal(<Error />, document.body)}
+			{apiError && createPortal(<Error dark={dark} />, document.body)}
 			{win &&
 				createPortal(
 					<FocusTrap>

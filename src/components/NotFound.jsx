@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -22,6 +23,10 @@ export const NotFound = ({ dark }) => (
 		</h2>
 	</div>
 );
+
+NotFound.propTypes = {
+	dark: PropTypes.bool,
+};
 
 export const mapStateToProps = ({ theme: { dark } }) => ({
 	dark,

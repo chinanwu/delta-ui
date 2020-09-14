@@ -33,6 +33,7 @@ export const SoloWinModal = ({
 
 	return (
 		<Modal
+			dark={dark}
 			name="score"
 			ariaLabelledBy="soloWinModalHeader"
 			contentClassname={getThemeClassname('SoloWinModal', dark)}

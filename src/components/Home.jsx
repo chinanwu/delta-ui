@@ -4,7 +4,6 @@ import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { escapeBtn } from '../constants/Keycodes';
 import getThemeClassname from '../functions/getThemeClassname';
 import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
@@ -23,9 +22,6 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 		if (!leaderboard) {
 			// empty leaderboard ([]) would result in false, so this should only continue if leaderboard is null
 			getDaily();
-
-			// TODO: Not ideal for home to have a thunk that calls daily - if response not cached, will call again in Daily.
-			// But that's a tomorrow problem
 		}
 	}, [leaderboard, getDaily]);
 
@@ -46,7 +42,6 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<ThemeToggle />
-
 			<h1 className="Home__header">Delta</h1>
 			<>
 				<div className="Home__btns">
@@ -239,20 +234,19 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
 			</footer>
 
-			{loading && createPortal(<Loading />, document.body)}
+			{loading && showLeaderboard && createPortal(<Loading />, document.body)}
 
 			{showAcks &&
 				createPortal(
 					<Modal
+						dark={dark}
 						name="Acknowledgements"
 						ariaLabelledBy="homeModalHeader"
 						contentClassname="Home__modalContent"
 						onClose={handleCloseAcks}
 					>
 						<h2 id="homeModalHeader">Acknowledgements</h2>
-						<p>
-							Thank you to MCS, the one who introduced me to this word game.
-						</p>
+						<p>Thank you to MS, the one who introduced me to this word game.</p>
 						<h3>Icons</h3>
 						<p>
 							Moon icon in theme toggle made by{' '}

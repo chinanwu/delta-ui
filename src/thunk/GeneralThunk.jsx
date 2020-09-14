@@ -20,7 +20,7 @@ export const requestHint = (started, success, failed, from, to, dispatch) => {
 export const requestScore = (started, success, failed, state, dispatch) => {
 	const { from, to, timeStarted, numHints, history } = state;
 	const timeFinished = new Date();
-	const time = (timeFinished.getTime() - timeStarted) / 1000; // in seconds
+	const time = Math.round((timeFinished.getTime() - timeStarted) / 1000);
 
 	dispatch(started());
 	return getScore(from, to, time, numHints, history)

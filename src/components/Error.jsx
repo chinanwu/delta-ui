@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import getThemeClassname from '../functions/getThemeClassname';
 
 import './Error.less';
 
-export const Error = () => (
-	<div className="Error" role="alert" aria-busy="true">
+export const Error = ({ dark }) => (
+	<div
+		className={getThemeClassname('Error', dark)}
+		role="alert"
+		aria-busy="true"
+	>
 		<div className="Error__content">
 			<span>Something wrong happened! Please try again.</span>
 			<Link to="/">
@@ -16,7 +23,11 @@ export const Error = () => (
 	</div>
 );
 
-export default Error;
+export const mapStateToProps = ({ theme: { dark } }) => ({
+	dark,
+});
+
+export default connect(mapStateToProps)(Error);
 
 // TODO:
 // - Dark mode
