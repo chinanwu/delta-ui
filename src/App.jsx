@@ -3,7 +3,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 const Daily = loadable(() =>
-	import(/* webpackChunkName:"Daily" */ './components/Daily/DailyV2.jsx')
+	import(/* webpackChunkName:"Daily" */ './components/Daily/Daily.jsx')
 );
 const Home = loadable(() =>
 	import(/* webpackChunkName:"Home" */ './components/Home.jsx')
@@ -12,7 +12,7 @@ const NotFound = loadable(() =>
 	import(/* webpackChunkName:"NotFound" */ './components/NotFound.jsx')
 );
 const Solo = loadable(() =>
-	import(/* webpackChunkName:"Solo" */ './components/Solo/SoloV3.jsx')
+	import(/* webpackChunkName:"Solo" */ './components/Solo/Solo.jsx')
 );
 
 import './App.less';
