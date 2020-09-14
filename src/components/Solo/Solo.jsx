@@ -90,7 +90,7 @@ export const Solo = ({
 			{loading && createPortal(<Loading />, document.body)}
 			{error && createPortal(<Error dark={dark} />, document.body)}
 			{win && createPortal(<SoloWinModal timer={timer} />, document.body)}
-			{solution && createPortal(<SolutionModal />, document.body)}
+			{solution && !win && createPortal(<SolutionModal />, document.body)}
 		</div>
 	);
 };
