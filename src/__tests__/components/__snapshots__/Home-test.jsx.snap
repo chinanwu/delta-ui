@@ -1,0 +1,2810 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component behaviour closes acknowledgement modal 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body
+      class="Modal--open"
+    />,
+    "implementation": null,
+    "key": null,
+  }
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <FocusTrap
+      _createFocusTrap={[Function]}
+      active={true}
+      focusTrapOptions={Object {}}
+      paused={false}
+    >
+      <div
+        className="Home__modal"
+        id="homeModalDiv"
+        onKeyDown={[Function]}
+      >
+        <div
+          aria-labelledby="homeModalHeader"
+          aria-modal={true}
+          role="dialog"
+        >
+          <button
+            aria-label="Close"
+            id="homeCloseAcksBtn"
+            onClick={[Function]}
+          >
+            X
+          </button>
+          <h2
+            className="Home__modalHeader"
+            id="homeModalHeader"
+          >
+            Acknowledgements
+          </h2>
+          <div
+            className="Home__modalAck"
+            id="homeModalDesc"
+          >
+            Thank you to MCS, the one who introduced me to this word game.
+          </div>
+          <h3
+            className="Home__modalHeader"
+          >
+            Icons
+          </h3>
+          <div
+            className="Home__modalAck"
+          >
+            Moon icon in theme toggle made by
+             
+            <a
+              href="https://www.flaticon.com/authors/freepik"
+              title="Freepik"
+            >
+              Freepik
+            </a>
+             
+            from
+             
+            <a
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+               
+              www.flaticon.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </FocusTrap>,
+    "containerInfo": <body
+      class="Modal--open"
+    />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component behaviour closes acknowledgement modal with escape 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <FocusTrap
+      _createFocusTrap={[Function]}
+      active={true}
+      focusTrapOptions={Object {}}
+      paused={false}
+    >
+      <div
+        className="Home__modal"
+        id="homeModalDiv"
+        onKeyDown={[Function]}
+      >
+        <div
+          aria-labelledby="homeModalHeader"
+          aria-modal={true}
+          role="dialog"
+        >
+          <button
+            aria-label="Close"
+            id="homeCloseAcksBtn"
+            onClick={[Function]}
+          >
+            X
+          </button>
+          <h2
+            className="Home__modalHeader"
+            id="homeModalHeader"
+          >
+            Acknowledgements
+          </h2>
+          <div
+            className="Home__modalAck"
+            id="homeModalDesc"
+          >
+            Thank you to MCS, the one who introduced me to this word game.
+          </div>
+          <h3
+            className="Home__modalHeader"
+          >
+            Icons
+          </h3>
+          <div
+            className="Home__modalAck"
+          >
+            Moon icon in theme toggle made by
+             
+            <a
+              href="https://www.flaticon.com/authors/freepik"
+              title="Freepik"
+            >
+              Freepik
+            </a>
+             
+            from
+             
+            <a
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+               
+              www.flaticon.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </FocusTrap>,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component behaviour does nothing if any other event in acknowledgement modal 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <FocusTrap
+      _createFocusTrap={[Function]}
+      active={true}
+      focusTrapOptions={Object {}}
+      paused={false}
+    >
+      <div
+        className="Home__modal"
+        id="homeModalDiv"
+        onKeyDown={[Function]}
+      >
+        <div
+          aria-labelledby="homeModalHeader"
+          aria-modal={true}
+          role="dialog"
+        >
+          <button
+            aria-label="Close"
+            id="homeCloseAcksBtn"
+            onClick={[Function]}
+          >
+            X
+          </button>
+          <h2
+            className="Home__modalHeader"
+            id="homeModalHeader"
+          >
+            Acknowledgements
+          </h2>
+          <div
+            className="Home__modalAck"
+            id="homeModalDesc"
+          >
+            Thank you to MCS, the one who introduced me to this word game.
+          </div>
+          <h3
+            className="Home__modalHeader"
+          >
+            Icons
+          </h3>
+          <div
+            className="Home__modalAck"
+          >
+            Moon icon in theme toggle made by
+             
+            <a
+              href="https://www.flaticon.com/authors/freepik"
+              title="Freepik"
+            >
+              Freepik
+            </a>
+             
+            from
+             
+            <a
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+               
+              www.flaticon.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </FocusTrap>,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component behaviour does nothing if keydown with any other key in acknowledgement modal 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <FocusTrap
+      _createFocusTrap={[Function]}
+      active={true}
+      focusTrapOptions={Object {}}
+      paused={false}
+    >
+      <div
+        className="Home__modal"
+        id="homeModalDiv"
+        onKeyDown={[Function]}
+      >
+        <div
+          aria-labelledby="homeModalHeader"
+          aria-modal={true}
+          role="dialog"
+        >
+          <button
+            aria-label="Close"
+            id="homeCloseAcksBtn"
+            onClick={[Function]}
+          >
+            X
+          </button>
+          <h2
+            className="Home__modalHeader"
+            id="homeModalHeader"
+          >
+            Acknowledgements
+          </h2>
+          <div
+            className="Home__modalAck"
+            id="homeModalDesc"
+          >
+            Thank you to MCS, the one who introduced me to this word game.
+          </div>
+          <h3
+            className="Home__modalHeader"
+          >
+            Icons
+          </h3>
+          <div
+            className="Home__modalAck"
+          >
+            Moon icon in theme toggle made by
+             
+            <a
+              href="https://www.flaticon.com/authors/freepik"
+              title="Freepik"
+            >
+              Freepik
+            </a>
+             
+            from
+             
+            <a
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+               
+              www.flaticon.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </FocusTrap>,
+    "containerInfo": <body
+      class=""
+    />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component behaviour fetches daily challenge 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="undefined Home__leaderboardContent--expanded"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component behaviour opens acknowledgement modal 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        />
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component behaviour set leaderboard if successful response from daily challenge 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="undefined Home__leaderboardContent--expanded"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component behaviour shows leaderboard when click on accordion 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        />
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home dark 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home light 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="undefined"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home with loading 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="undefined Home__leaderboardContent--expanded"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component rendering renders Home with open leaderboard 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <div
+      aria-label="Daily Challenge"
+    >
+      <p
+        className="Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="undefined Home__leaderboardContent--expanded"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Rank
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Score
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  test
+                </td>
+                <td>
+                  99
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="rules"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__rules"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </div>
+    <div
+      aria-labelledby="example"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong>
+          d
+        </strong>
+         
+        -&gt; he
+        <strong>
+          l
+        </strong>
+        d -&gt; h
+        <strong>
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong>
+          m
+        </strong>
+        eat -&gt; m
+        <strong>
+          o
+        </strong>
+        at -&gt; moa
+        <strong>
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          o
+        </strong>
+        n -&gt; moo
+        <strong>
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong>
+          l
+        </strong>
+        d -&gt;
+         
+        <strong>
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        For most word pairs, there are a multitude of possible answers!
+      </p>
+    </div>
+  </React.Fragment>
+  <footer
+    className="undefined Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <br />
+    Made by 
+    <a
+      href="https://chinanwu.com"
+    >
+      Chin-An Wu
+    </a>
+  </footer>
+</div>
+`;

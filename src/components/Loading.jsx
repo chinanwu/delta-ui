@@ -3,12 +3,13 @@ import MoonLoader from 'react-spinners/ClipLoader';
 
 import './Loading.less';
 
-export const Loading = () => {
-	return (
-		<div className="Loading" role="alert" aria-busy="true">
-			<MoonLoader loading={true} />
-		</div>
-	);
-};
+export const Loading = () => (
+	<div className="Loading" role="alert" aria-busy="true">
+		<MoonLoader color="#ffffff" loading={true} />
+	</div>
+);
 
 export default Loading;
+
+// TODO:
+// - Look into how to make this more accessible

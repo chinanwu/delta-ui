@@ -30,13 +30,13 @@ exports[`ThemeToggle behaviour changes the theme 1`] = `
 
 exports[`ThemeToggle rendering renders ThemeToggle 1`] = `
 <div
-  aria-labelledby="themeToggleLabel"
   className="ThemeToggle__container"
 >
   <label
     className="ThemeToggle"
   >
     <input
+      aria-labelledby="themeToggleLabel"
       id="themeToggleInput"
       onChange={[Function]}
       type="checkbox"
@@ -56,7 +56,6 @@ exports[`ThemeToggle rendering renders ThemeToggle 1`] = `
 
 exports[`ThemeToggle rendering renders ThemeToggle dark mode 1`] = `
 <div
-  aria-labelledby="themeToggleLabel"
   className="ThemeToggle__container"
 >
   <label
@@ -64,6 +63,7 @@ exports[`ThemeToggle rendering renders ThemeToggle dark mode 1`] = `
   >
     <input
       aria-checked={true}
+      aria-labelledby="themeToggleLabel"
       checked={true}
       id="themeToggleInput"
       onChange={[Function]}
@@ -84,7 +84,6 @@ exports[`ThemeToggle rendering renders ThemeToggle dark mode 1`] = `
 
 exports[`ThemeToggle rendering renders ThemeToggle light 1`] = `
 <div
-  aria-labelledby="themeToggleLabel"
   className="ThemeToggle__container"
 >
   <label
@@ -92,6 +91,7 @@ exports[`ThemeToggle rendering renders ThemeToggle light 1`] = `
   >
     <input
       aria-checked={false}
+      aria-labelledby="themeToggleLabel"
       checked={false}
       id="themeToggleInput"
       onChange={[Function]}

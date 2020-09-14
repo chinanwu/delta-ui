@@ -1,0 +1,160 @@
+@import '../../style/colours';
+@import '../../style/buttons';
+
+.StealthForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.StealthForm__btn {
+	@medBtn();
+	background-color: @green;
+
+	&:hover {
+		background-color: @greenHover;
+	}
+
+	&:active {
+		background-color: @greenActive;
+	}
+}
+
+.StealthForm__editBtn {
+	@smBtn();
+	margin-left: 1rem;
+	margin-top: 1rem;
+	font-size: 1.6rem;
+	align-self: start;
+
+	&::after {
+		content: ' Game';
+	}
+}
+
+.StealthForm__editBtn--disabled--dark {
+	@btnDark();
+}
+
+.StealthForm__form {
+	transition: box-shadow 0.2s;
+}
+
+.StealthForm--editable {
+	padding-top: 1rem;
+	padding-bottom: 1.5rem;
+	margin-right: 1rem;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
+	box-shadow: @box-shadow-08;
+	transition: all 1s;
+	border-radius: 1rem;
+	width: 50rem;
+}
+
+.StealthForm--editable--dark {
+	background-color: @dark-04;
+	color: #fff;
+}
+
+.StealthForm__editHeader {
+	text-align: center;
+}
+
+.StealthForm__words {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0;
+	font-size: 2.4rem;
+}
+
+.StealthForm__wordLine {
+	display: flex;
+}
+
+.StealthForm__input {
+	font-size: 2rem;
+	width: 6rem;
+	text-align: center;
+	margin-left: 0.5rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
+}
+
+.StealForm__arrow {
+	&:before,
+	&:after {
+		content: '\00a0';
+	}
+}
+
+.StealthForm__btns {
+	display: flex;
+	justify-content: center;
+}
+
+.StealthForm__error {
+	text-align: center;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	color: @error;
+	font-size: 1.6rem;
+}
+
+.StealthForm__error--dark {
+	color: @errorDark;
+}
+
+@media only screen and (max-width: 550px) {
+	.StealthForm__btn,
+	.StealthForm__editBtn {
+		font-size: 125%;
+	}
+
+	.StealthForm__editBtn::after {
+		content: '';
+	}
+
+	.StealthForm__editBtn {
+		width: 7rem;
+		margin-left: 1rem;
+		margin-top: 1rem;
+	}
+
+	.StealthForm--editable {
+		padding-top: 2rem;
+		padding-bottom: 1.5rem;
+		margin: 1rem;
+		//width: initial;
+		width: 23rem;
+	}
+
+	.StealthForm__words {
+		flex-direction: column;
+	}
+
+	.StealthForm__wordLine {
+		display: initial;
+		text-align: center;
+	}
+
+	.StealthForm__wordLine--editable {
+		display: flex;
+	}
+
+	.StealthForm__btns {
+		flex-direction: column;
+	}
+}

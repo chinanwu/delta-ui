@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Daily rendering renders Daily dark 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h2
+    className="Daily__header"
+  >
+    Daily Challenge
+  </h2>
+  <p
+    className="Daily__date"
+  >
+    For the day of 
+    
+  </p>
+  <h3
+    className="Daily__words"
+  >
+    From: 
+    
+     -&gt; To: 
+    
+  </h3>
+  <div
+    className="Daily__timer"
+    role="timer"
+  />
+  <div>
+    <div
+      aria-labelledby="dailyHistory"
+      className="Daily__history"
+    >
+      <h3
+        className="Daily__historyLabel"
+        id="dailyHistory"
+      >
+        History
+      </h3>
+      <ul
+        aria-live="polite"
+        className="undefined"
+      >
+        <li />
+      </ul>
+    </div>
+    <div>
+      <HintButton
+        ariaLabelledBy="dailyHintHeader"
+        btnText="Get a Hint: 3"
+        dark={true}
+        giveSolution={false}
+        id="dailyHintBtn"
+        isExpanded={false}
+        numHints={3}
+        onClick={[Function]}
+        onExpandChange={[Function]}
+      >
+        <h3
+          id="dailyHintHeader"
+        >
+          Hint: 
+        </h3>
+        <p
+          className="Daily__hint"
+        >
+          Recommended next word: 
+          
+        </p>
+        <p
+          className="Daily__hint"
+        >
+          Estimated number of words left: 
+          
+        </p>
+      </HintButton>
+      <div
+        className="Daily__guessContainer"
+      >
+        <h3
+          className="Daily__guessLabel"
+          id="dailyGuessLabel"
+        >
+          Next Word:
+        </h3>
+        <div
+          className="Daily__guessInputs"
+        >
+          <div />
+          <button
+            className="Daily__enterBtn"
+            id="dailyEnterBtn"
+            onClick={[Function]}
+          >
+            Enter
+          </button>
+        </div>
+        <div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Daily__easterEgg"
+  >
+    This is an incredibly tiny screen
+  </div>
+</div>
+`;
+
+exports[`Daily rendering renders Daily light 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h2
+    className="Daily__header"
+  >
+    Daily Challenge
+  </h2>
+  <p
+    className="Daily__date"
+  >
+    For the day of 
+    
+  </p>
+  <h3
+    className="Daily__words"
+  >
+    From: 
+    
+     -&gt; To: 
+    
+  </h3>
+  <div
+    className="Daily__timer"
+    role="timer"
+  />
+  <div>
+    <div
+      aria-labelledby="dailyHistory"
+      className="Daily__history"
+    >
+      <h3
+        className="Daily__historyLabel"
+        id="dailyHistory"
+      >
+        History
+      </h3>
+      <ul
+        aria-live="polite"
+        className="undefined"
+      >
+        <li />
+      </ul>
+    </div>
+    <div>
+      <HintButton
+        ariaLabelledBy="dailyHintHeader"
+        btnText="Get a Hint: 3"
+        dark={false}
+        giveSolution={false}
+        id="dailyHintBtn"
+        isExpanded={false}
+        numHints={3}
+        onClick={[Function]}
+        onExpandChange={[Function]}
+      >
+        <h3
+          id="dailyHintHeader"
+        >
+          Hint: 
+        </h3>
+        <p
+          className="Daily__hint"
+        >
+          Recommended next word: 
+          
+        </p>
+        <p
+          className="Daily__hint"
+        >
+          Estimated number of words left: 
+          
+        </p>
+      </HintButton>
+      <div
+        className="Daily__guessContainer"
+      >
+        <h3
+          className="Daily__guessLabel"
+          id="dailyGuessLabel"
+        >
+          Next Word:
+        </h3>
+        <div
+          className="Daily__guessInputs"
+        >
+          <div />
+          <button
+            className="Daily__enterBtn"
+            id="dailyEnterBtn"
+            onClick={[Function]}
+          >
+            Enter
+          </button>
+        </div>
+        <div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Daily__easterEgg"
+  >
+    This is an incredibly tiny screen
+  </div>
+</div>
+`;
+
+exports[`Daily rendering renders expected elements 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h2
+    className="Daily__header"
+  >
+    Daily Challenge
+  </h2>
+  <p
+    className="Daily__date"
+  >
+    For the day of 
+    
+  </p>
+  <h3
+    className="Daily__words"
+  >
+    From: 
+    
+     -&gt; To: 
+    
+  </h3>
+  <div
+    className="Daily__timer"
+    role="timer"
+  />
+  <div>
+    <div
+      aria-labelledby="dailyHistory"
+      className="Daily__history"
+    >
+      <h3
+        className="Daily__historyLabel"
+        id="dailyHistory"
+      >
+        History
+      </h3>
+      <ul
+        aria-live="polite"
+        className="undefined"
+      >
+        <li />
+      </ul>
+    </div>
+    <div>
+      <HintButton
+        ariaLabelledBy="dailyHintHeader"
+        btnText="Get a Hint: 3"
+        giveSolution={false}
+        id="dailyHintBtn"
+        isExpanded={false}
+        numHints={3}
+        onClick={[Function]}
+        onExpandChange={[Function]}
+      >
+        <h3
+          id="dailyHintHeader"
+        >
+          Hint: 
+        </h3>
+        <p
+          className="Daily__hint"
+        >
+          Recommended next word: 
+          
+        </p>
+        <p
+          className="Daily__hint"
+        >
+          Estimated number of words left: 
+          
+        </p>
+      </HintButton>
+      <div
+        className="Daily__guessContainer"
+      >
+        <h3
+          className="Daily__guessLabel"
+          id="dailyGuessLabel"
+        >
+          Next Word:
+        </h3>
+        <div
+          className="Daily__guessInputs"
+        >
+          <div />
+          <button
+            className="Daily__enterBtn"
+            id="dailyEnterBtn"
+            onClick={[Function]}
+          >
+            Enter
+          </button>
+        </div>
+        <div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Daily__easterEgg"
+  >
+    This is an incredibly tiny screen
+  </div>
+</div>
+`;

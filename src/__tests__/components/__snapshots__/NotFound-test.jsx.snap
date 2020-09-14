@@ -5,3 +5,27 @@ exports[`NotFound component rendering renders NavBar 1`] = `
   404!
 </div>
 `;
+
+exports[`NotFound component rendering renders NotFound 1`] = `
+<div>
+  <Memo(Connect(ThemeToggle)) />
+  <h1>
+    404, Page Not Found!
+  </h1>
+  <h2
+    className="NotFound__link"
+  >
+    <span
+      className="NotFound__linkWords"
+    >
+      Perhaps you'd like a link
+    </span>
+    <ForwardRef
+      to="/"
+    >
+      home
+    </ForwardRef>
+    ?
+  </h2>
+</div>
+`;

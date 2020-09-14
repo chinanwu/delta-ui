@@ -1,24 +1,36 @@
 import React from 'react';
-
-import './Error.less';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export const Error = () => {
-	return (
-		<div className="Error" role="alert" aria-busy="true">
-			<div className="Error__content">
-				<span>Something wrong happened! Please try again.</span>
-				<Link to="/">
-					<button id="errorHomeBtn" className="Error__homeBtn" role="link">
-						Return Home
-					</button>
-				</Link>
-			</div>
-		</div>
-	);
-};
+import getThemeClassname from '../functions/getThemeClassname';
 
-export default Error;
+import './Error.less';
+
+export const Error = ({ dark }) => (
+	<div
+		className={getThemeClassname('Error', dark)}
+		role="alert"
+		aria-busy="true"
+	>
+		<div className="Error__content">
+			<span>Something wrong happened! Please try again.</span>
+			<Link to="/">
+				<button id="errorHomeBtn" className="Error__homeBtn" role="link">
+					Return Home
+				</button>
+			</Link>
+		</div>
+	</div>
+);
+
+export const mapStateToProps = ({ theme: { dark } }) => ({
+	dark,
+});
+
+export default connect(mapStateToProps)(Error);
 
 // TODO:
 // - Dark mode
+
+// Potential future improvements:
+// - Make this into a toast?

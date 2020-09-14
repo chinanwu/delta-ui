@@ -13,10 +13,43 @@
 	@dark();
 }
 
-.NotFound__link {
+.NotFound__linkContainer {
 	display: flex;
 }
 
 .NotFound__linkWords::after {
 	content: '\00a0';
+}
+
+.NotFound__link {
+	transition: box-shadow 0.3s, color 0.3s;
+
+	&:link {
+		color: black;
+	}
+
+	&:visited {
+		color: black;
+	}
+
+	&:focus,
+	&:hover {
+		box-shadow: @green 0px -3rem 0px inset;
+		color: black;
+	}
+}
+
+.NotFound__link--dark {
+	&:link {
+		color: white;
+	}
+
+	&:visited {
+		color: white;
+	}
+
+	&:focus,
+	&:hover {
+		color: black;
+	}
 }

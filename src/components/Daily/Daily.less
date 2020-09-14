@@ -1,0 +1,329 @@
+@import '../../style/colours';
+@import '../../style/buttons';
+
+.Daily {
+	height: 100%;
+}
+
+.Daily--dark {
+	@dark();
+}
+
+.Daily__header {
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.Daily__date {
+	text-align: center;
+	margin: 0;
+}
+
+.Daily__words {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0;
+	font-size: 2.4rem;
+}
+
+.Daily__hintContent {
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem;
+}
+
+.Daily__hintContent--dark {
+	background-color: @dark-02;
+	color: #fff;
+}
+
+.Daily__hint--short {
+	margin-top: 0;
+}
+
+.Daily__enterBtn,
+.Daily__hintCloseBtn {
+	@smBtn();
+}
+
+.Daily__timer {
+	text-align: center;
+	font-size: 2.4rem;
+}
+
+.Daily__game {
+	display: flex;
+	justify-content: center;
+	height: 70%;
+	margin-top: 1rem;
+}
+
+.Daily__game--dark {
+	@dark();
+}
+
+.Daily__history {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center; // For history label
+}
+
+.Daily__historyLabel {
+	border: 1px solid @green;
+	background-color: @green;
+	width: 22rem;
+	color: black;
+}
+
+.Daily__historyList {
+	border: 1px solid black;
+	list-style: none;
+	padding: 1rem 0;
+	margin: 0;
+	overflow: scroll;
+	width: 100%;
+	height: 100%;
+	font-size: 2.4rem;
+
+	//Chrome/Edge/Safari
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar-thumb {
+		background-color: white;
+	}
+
+	//Firefox
+	scrollbar-color: #b0b0b0 white; /* scroll thumb & track */
+}
+
+.Daily__historyList--dark {
+	border: none;
+	background-color: @dark-02;
+	color: #fff;
+
+	//Chrome/Edge/Safari
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar-thumb {
+		background-color: @dark-02;
+	}
+
+	//Firefox
+	scrollbar-color: #323232 @dark-02; /* scroll thumb & track */
+}
+
+.Daily__historyList--hideScroll {
+	overflow: hidden;
+}
+
+.Daily__historyHintWord {
+	color: #757575;
+}
+
+.Daily__historyHintWord--dark {
+	color: #aedb7a;
+}
+
+.Daily__historyHintMysteryLi {
+	display: flex;
+	justify-content: center;
+}
+
+.Daily__historyHintMystery {
+	width: 10rem;
+	margin-bottom: 0.5rem;
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+.Daily__historyHintMystery--dark {
+	background-color: #3c2b3b;
+	color: white;
+}
+
+.Daily__hint {
+	font-size: 1.6rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
+}
+
+.Daily__guessContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30rem;
+}
+
+.Daily__guessLabel {
+	margin-bottom: 2rem;
+}
+
+.Daily__guessInputs {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+}
+
+.Daily__guessInput {
+	margin: 0.4rem;
+	width: 3.6rem;
+	height: 4.2rem;
+	text-align: center;
+	font-size: 1.6rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
+}
+
+.Daily__guessInput--dark {
+	color: white;
+	background: @dark-02;
+	border: 1px solid black;
+	padding: 0.3rem;
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #bfbfbf;
+	}
+
+	&:-ms-input-placeholder {
+		color: #bfbfbf;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #bfbfbf;
+	}
+}
+
+.Daily__gameError {
+	font-size: 1.8rem;
+	text-align: center;
+	color: @error;
+	margin-top: 1rem;
+	position: relative;
+	top: 3rem;
+	height: 6rem;
+}
+
+.Daily__gameError--dark {
+	color: @errorDark;
+}
+
+.Daily__win {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: @green;
+	background-color: @modalBg;
+}
+
+.Daily__easterEgg {
+	display: none;
+}
+
+@media only screen and (max-width: 550px) {
+	.Daily__game {
+		flex-direction: column;
+		height: initial;
+	}
+
+	.Daily__enterBtn,
+	.Daily__hint {
+		font-size: 125%;
+	}
+
+	.Daily__hintContent {
+		margin-right: 2rem;
+		margin-left: 2rem;
+	}
+
+	.Daily__guessContainer {
+		width: initial;
+	}
+
+	.Daily__guessLabel {
+		margin-bottom: 0;
+	}
+
+	.Daily__guessInputs {
+		position: initial;
+	}
+
+	.Daily__gameError {
+		position: initial;
+		top: initial;
+	}
+
+	.Daily__historyList {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		font-size: 3rem;
+		text-align: center;
+		padding-left: 0;
+		width: 22rem;
+		height: 20rem;
+	}
+
+	.Daily__historyLabel {
+		width: 20rem;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.Daily__words {
+		padding-top: 2rem;
+	}
+
+	.Daily__guessInput {
+		font-size: 2rem;
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	.Daily__header {
+		margin-top: 4rem;
+	}
+
+	.Daily__words {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 310px) {
+	.Daily__guessInputs {
+		flex-direction: column;
+	}
+}
+
+@media only screen and (max-width: 225px) {
+	.Daily__easterEgg {
+		display: initial;
+		position: absolute;
+		top: 0;
+		font-size: 1rem;
+	}
+}

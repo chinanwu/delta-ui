@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 
+import daily from './DailyReducer';
+import home from './HomeReducer';
+import solo from './SoloReducer';
 import theme from './ThemeReducer';
-import game from './GameReducer';
 
-const rootReducer = combineReducers({ theme, game });
+const rootReducer = combineReducers({ daily, home, solo, theme });
 
 export default rootReducer;

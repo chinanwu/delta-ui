@@ -1,10 +1,12 @@
 @import '../style/colours';
-@import '../style/button';
+@import '../style/buttons';
+@import '../style/animations';
 
 .Home {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	text-align: center;
 }
 
 .Home--dark {
@@ -29,6 +31,11 @@
 	width: 15rem;
 	padding-top: 1.2rem;
 	padding-bottom: 1.2rem;
+
+	&:hover,
+	&:focus {
+		animation: bounce 0.5s;
+	}
 }
 
 .Home__soloBtn {
@@ -42,8 +49,8 @@
 
 .Home__leaderboard {
 	width: 60%;
-	text-align: center;
 	display: flex;
+
 	flex-direction: column;
 	align-items: center;
 }
@@ -72,7 +79,6 @@
 	table {
 		border-collapse: collapse;
 		font-size: 1.6rem;
-		text-align: center;
 		margin-bottom: 1rem;
 	}
 
@@ -135,14 +141,7 @@
 	@dark();
 }
 
-.Home__dailyExplanation,
-.Home__rules,
-.Home__example--p {
-	text-align: center;
-}
-
-.Home__dailyExplanation,
-.Home__rules {
+.Home__blurb {
 	width: 60%;
 }
 
@@ -161,7 +160,6 @@
 .Home__footer {
 	position: absolute;
 	bottom: 0;
-	text-align: center;
 	width: 100%;
 }
 
@@ -190,55 +188,32 @@
 	margin-bottom: 0.5rem;
 }
 
-.Home__modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: @modalBg;
-	box-shadow: @box-shadow-24;
-}
-
 .Home__modalContent {
 	position: relative;
 	width: 30rem;
 	padding: 4rem;
-	background-color: white;
-}
-
-.Home__modalContent--dark {
-	background-color: #1b1b1b;
-	color: #eeeeee;
-}
-
-.Home__closeAcksBtn {
-	position: absolute;
-	top: 0;
-	right: 0;
-	font-size: 1.6rem;
-	background-color: lightgrey;
-	padding: 0.5rem 1rem;
-	border: none;
-	cursor: pointer;
-}
-
-.Home__closeAcksBtn--dark {
-	background-color: #4d4d4d;
-	color: #eeeeee;
-}
-
-.Home__modalHeader {
+	border-radius: 1rem;
 	text-align: center;
 }
 
-.Home__modalAck {
-	text-align: center;
+.Home__modalLink {
+	&:link {
+		color: black;
+	}
+
+	&:visited {
+		color: black;
+	}
+}
+
+.Home__modalLink--dark {
+	&:link {
+		color: #eeeeee;
+	}
+
+	&:visited {
+		color: #eeeeee;
+	}
 }
 
 @media only screen and (max-height: 850px) {
@@ -248,9 +223,8 @@
 }
 
 @media only screen and (max-width: 830px) {
-	.Home__dailyExplanation,
 	.Home__leaderboard,
-	.Home__rules {
+	.Home__blurb {
 		width: 80%;
 	}
 }
@@ -287,9 +261,8 @@
 		font-size: 2.4rem;
 	}
 
-	.Home__dailyExplanation,
-	.Home__leaderboard,
-	.Home__rules {
+	.Home__blurb,
+	.Home__leaderboard {
 		width: initial;
 	}
 

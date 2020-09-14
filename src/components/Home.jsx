@@ -1,47 +1,29 @@
-import FocusTrap from 'focus-trap-react';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { escapeBtn } from '../constants/Keycodes';
-import { getFetch } from '../functions/FetchFunctions';
 import getThemeClassname from '../functions/getThemeClassname';
-import { applyFrom, applyTo } from '../thunk/GameThunk.jsx';
+import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
+import withTitle from './HOC/withTitle.jsx';
 import Loading from './Loading.jsx';
+import { Modal } from './Modal.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
 
-export const Home = ({ dark }) => {
+export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
 	const [showAcks, setShowAcks] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [leaderboard, setLeaderboard] = useState([]);
 
 	useEffect(() => {
-		document.title = 'Home - Delta';
-	}, []);
-
-	useEffect(() => {
-		setLoading(true);
-		getFetch('/api/v1/dailychallenge')
-			.then(res => {
-				if (res.leaderboard) {
-					const resLeaderboard = [];
-					for (let i = 0; i < res.leaderboard.length; i++) {
-						resLeaderboard[i] = [
-							res.leaderboard[i].name,
-							res.leaderboard[i].score,
-						];
-					}
-					setLeaderboard(resLeaderboard);
-				}
-			})
-			.then(() => setLoading(false));
-	}, [setLoading, setLeaderboard]);
+		if (!leaderboard) {
+			// empty leaderboard ([]) would result in false, so this should only continue if leaderboard is null
+			getDaily();
+		}
+	}, [leaderboard, getDaily]);
 
 	const handleLeaderboardClick = useCallback(() => {
 		setShowLeaderboard(showLeaderboard => !showLeaderboard);
@@ -57,22 +39,9 @@ export const Home = ({ dark }) => {
 		setShowAcks(false);
 	}, [setShowAcks]);
 
-	const handleModalKeyDown = useCallback(
-		event => {
-			if (event && event.keyCode) {
-				if (event.keyCode === escapeBtn) {
-					event.preventDefault();
-					handleCloseAcks();
-				}
-			}
-		},
-		[setShowAcks]
-	);
-
 	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<ThemeToggle />
-
 			<h1 className="Home__header">Delta</h1>
 			<>
 				<div className="Home__btns">
@@ -97,11 +66,11 @@ export const Home = ({ dark }) => {
 					</Link>
 				</div>
 
-				<div
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-label="Daily Challenge"
 				>
-					<p className="Home__dailyExplanation">
+					<p className="Home__blurb Home__dailyExplanation">
 						Complete the daily challenge with a record (read: top 10) score and
 						be added to the daily leaderboard! New challenges every day at
 						midnight EST (UTC -5).
@@ -147,21 +116,21 @@ export const Home = ({ dark }) => {
 							) : null}
 						</div>
 					</div>
-				</div>
-				<div
+				</section>
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-labelledby="rules"
 				>
 					<h2 id="rules">Rules</h2>
-					<p className="Home__rules">
+					<p className="Home__blurb">
 						In each game, you are given two words, a "from" word and a "to"
 						word. Starting from the "from" word, one letter must changed at a
 						time until the word becomes the "to" word. However, each time a
 						letter is swapped out for another, the resulting new word must still
 						be a valid four-letter word in the English language.
 					</p>
-				</div>
-				<div
+				</section>
+				<section
 					className={getThemeClassname('Home--centre', dark)}
 					aria-labelledby="example"
 				>
@@ -240,10 +209,12 @@ export const Home = ({ dark }) => {
 						</strong>
 						old
 					</p>
-					<p className="Home__example--p">
-						For most word pairs, there are a multitude of possible answers!
+					<p className="Home__example--p Home__blurb">
+						For most word pairs, there are a multitude of possible answers! But
+						in order to score the most points, you'll need to do it with the
+						least number of steps!
 					</p>
-				</div>
+				</section>
 			</>
 			<footer
 				className={
@@ -263,54 +234,40 @@ export const Home = ({ dark }) => {
 				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
 			</footer>
 
-			{loading && createPortal(<Loading />, document.body)}
+			{loading && showLeaderboard && createPortal(<Loading />, document.body)}
 
 			{showAcks &&
 				createPortal(
-					<FocusTrap>
-						<div
-							id="homeModalDiv"
-							className="Home__modal"
-							onKeyDown={handleModalKeyDown}
-						>
-							<div
-								className={getThemeClassname('Home__modalContent', dark)}
-								role="dialog"
-								aria-modal={true}
-								aria-labelledby="homeModalHeader"
+					<Modal
+						dark={dark}
+						name="Acknowledgements"
+						ariaLabelledBy="homeModalHeader"
+						contentClassname="Home__modalContent"
+						onClose={handleCloseAcks}
+					>
+						<h2 id="homeModalHeader">Acknowledgements</h2>
+						<p>Thank you to MS, the one who introduced me to this word game.</p>
+						<h3>Icons</h3>
+						<p>
+							Moon icon in theme toggle made by{' '}
+							<a
+								className={getThemeClassname('Home__modalLink', dark)}
+								href="https://www.flaticon.com/authors/freepik"
+								title="Freepik"
 							>
-								<button
-									id="homeCloseAcksBtn"
-									className={getThemeClassname('Home__closeAcksBtn', dark)}
-									aria-label="Close"
-									onClick={handleCloseAcks}
-								>
-									X
-								</button>
-								<h2 id="homeModalHeader" className="Home__modalHeader">
-									Acknowledgements
-								</h2>
-								<div id="homeModalDesc" className="Home__modalAck">
-									Thank you to MCS, the one who introduced me to this word game.
-								</div>
-								<h3 className="Home__modalHeader">Icons</h3>
-								<div className="Home__modalAck">
-									Moon icon in theme toggle made by{' '}
-									<a
-										href="https://www.flaticon.com/authors/freepik"
-										title="Freepik"
-									>
-										Freepik
-									</a>{' '}
-									from{' '}
-									<a href="https://www.flaticon.com/" title="Flaticon">
-										{' '}
-										www.flaticon.com
-									</a>
-								</div>
-							</div>
-						</div>
-					</FocusTrap>,
+								Freepik
+							</a>{' '}
+							from{' '}
+							<a
+								className={getThemeClassname('Home__modalLink', dark)}
+								href="https://www.flaticon.com/"
+								title="Flaticon"
+							>
+								{' '}
+								www.flaticon.com
+							</a>
+						</p>
+					</Modal>,
 					document.body
 				)}
 		</div>
@@ -319,27 +276,35 @@ export const Home = ({ dark }) => {
 
 Home.propTypes = {
 	dark: PropTypes.bool,
+	leaderboard: PropTypes.array,
+	getDaily: PropTypes.func,
 };
 
-export const mapStateToProps = ({ theme: { dark } }) => ({
+export const mapStateToProps = ({
+	theme: { dark },
+	home: { loading, leaderboard },
+}) => ({
 	dark,
+	loading,
+	leaderboard,
 });
 
 const mapDispatchToProps = {
-	onChangeFrom: applyFrom,
-	onChangeTo: applyTo,
+	getDaily: requestDailyChallenge,
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Home);
+export default withTitle('Home')(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)(Home)
+);
 
 // TODO:
 // - Double check accessibility for this page.
 //       - Missing any aria?
-// - Figuring out if I really want Fun Facts, and how I want to do it.
-// 			 - If I remove it, reminder to reset the Home__footer position to a different height
-// - Figure out a better way to prevent scrolling on body when Modal opens (if there is a way)
 // - Add styling specific to each platform (e.g. moz, etc.)
-// - Esc keydown for modal
+
+// Potential future improvements:
+// - Fun facts section!
+// - Figure out a better way to prevent scrolling on body when Modal opens (if there is a way)

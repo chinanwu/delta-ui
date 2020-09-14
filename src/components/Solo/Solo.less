@@ -1,0 +1,430 @@
+@import '../../style/colours';
+@import '../../style/buttons';
+
+.Solo {
+	height: 100%;
+}
+
+.Solo--dark {
+	@dark();
+}
+
+.Solo__words {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0;
+	font-size: 2.4rem;
+}
+
+.Solo__editBtn {
+	@smBtn();
+	margin-left: 2rem;
+	margin-top: 2rem;
+	font-size: 1.6rem;
+
+	&::after {
+		content: ' Game';
+	}
+}
+
+.Solo__editorContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border: 1px solid black;
+	padding: 1rem;
+	height: 10rem;
+}
+
+.Solo__editorContent--dark {
+	background-color: @dark-02;
+	color: #fff;
+}
+
+.Solo__editorForms {
+	display: flex;
+}
+
+.Solo__editorInput {
+	font-size: 1.4rem;
+}
+
+.Solo__editor--center {
+	&::before,
+	&::after {
+		content: '\00a0';
+	}
+}
+
+.Solo__editor--center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.Solo__editorBtns {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+}
+
+.Solo__enterBtn,
+.Solo__editorBtn,
+.Solo__hintCloseBtn {
+	@smBtn();
+}
+
+.Solo__timer {
+	text-align: center;
+	font-size: 2.4rem;
+}
+
+.Solo__game {
+	display: flex;
+	justify-content: center;
+	height: 70%;
+	margin-top: 1rem;
+}
+
+.Solo__game--dark {
+	@dark();
+}
+
+.Solo__history {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center; // For history label
+}
+
+.Solo__historyLabel {
+	border: 1px solid @green;
+	background-color: @green;
+	width: 22rem;
+	color: black;
+}
+
+.Solo__historyList {
+	border: 1px solid black;
+	list-style: none;
+	padding: 1rem 0;
+	margin: 0;
+	overflow: scroll;
+	width: 100%;
+	height: 100%;
+	font-size: 2.4rem;
+
+	//Chrome/Edge/Safari
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar-thumb {
+		background-color: white;
+	}
+
+	//Firefox
+	scrollbar-color: #b0b0b0 white; /* scroll thumb & track */
+}
+
+.Solo__historyList--dark {
+	border: none;
+	background-color: @dark-02;
+	color: #fff;
+
+	//Chrome/Edge/Safari
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar-thumb {
+		background-color: @dark-02;
+	}
+
+	//Firefox
+	scrollbar-color: #323232 @dark-02; /* scroll thumb & track */
+}
+
+.Solo__historyList--hideScroll {
+	overflow: hidden;
+}
+
+.Solo__historyHintWord {
+	color: #757575;
+}
+
+.Solo__historyHintWord--dark {
+	color: #aedb7a;
+}
+
+.Solo__historyHintMysteryLi {
+	display: flex;
+	justify-content: center;
+}
+
+.Solo__historyHintMystery {
+	width: 10rem;
+	margin-bottom: 0.5rem;
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+.Solo__historyHintMystery--dark {
+	background-color: #3c2b3b;
+	color: white;
+}
+
+.Solo__hint {
+	font-size: 1.6rem;
+	margin-bottom: 0.5rem;
+	margin-top: 0;
+}
+
+.Solo__guessContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30rem;
+}
+
+.Solo__guessLabel {
+	margin-bottom: 2rem;
+}
+
+.Solo__guessInputs {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+}
+
+.Solo__guessInput {
+	margin: 0.4rem;
+	width: 3.6rem;
+	height: 4.2rem;
+	text-align: center;
+	font-size: 1.6rem;
+
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #595959;
+	}
+
+	&:-ms-input-placeholder {
+		color: #595959;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #595959;
+	}
+}
+
+.Solo__guessInput--dark {
+	color: white;
+	background: @dark-02;
+	border: 1px solid black;
+	padding: 0.3rem;
+	&::-moz-placeholder {
+		// Make placeholder text colour AAA
+		color: #bfbfbf;
+	}
+
+	&:-ms-input-placeholder {
+		color: #bfbfbf;
+	}
+
+	&::-webkit-input-placeholder {
+		color: #bfbfbf;
+	}
+}
+
+.Solo__gameError {
+	font-size: 1.8rem;
+	text-align: center;
+	color: @error;
+	margin-top: 1rem;
+	position: relative;
+	top: 3rem;
+	height: 6rem;
+}
+
+.Solo__gameError--dark {
+	color: @errorDark;
+}
+
+.Solo__win,
+.Solo__solution {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: @green;
+	background-color: @modalBg;
+}
+
+.Solo__solutionContent {
+	background-color: white;
+	color: black;
+	padding: 4rem;
+}
+
+.Solo__solutionContent--dark {
+	background-color: @dark-10;
+	color: #fff;
+}
+
+.Solo__solutionHeader {
+	text-align: center;
+}
+
+.Solo__solutionList {
+	text-align: center;
+	list-style: none;
+	padding-left: 0;
+	font-size: 1.8rem;
+}
+
+.Solo__newBtn {
+	@largeBtn();
+}
+
+.Solo__easterEgg {
+	display: none;
+}
+
+@media only screen and (max-width: 550px) {
+	.Solo__game {
+		flex-direction: column;
+		height: initial;
+	}
+
+	.Solo__editor,
+	.Solo__editorBtn,
+	.Solo__enterBtn,
+	.Solo__editBtn,
+	.Solo__hint {
+		font-size: 125%;
+	}
+
+	.Solo__editor,
+	.Solo__editor--hiding {
+		width: initial;
+		margin-left: 2rem;
+		margin-right: 2rem;
+	}
+
+	.Solo__editBtn::after {
+		content: '';
+	}
+
+	.Solo__editBtn {
+		width: 7rem;
+		margin-left: 1rem;
+		margin-top: 1rem;
+	}
+
+	.Solo__editorContent {
+		padding: 2rem;
+		height: 20rem;
+	}
+
+	.Solo__editorForms {
+		flex-direction: column;
+	}
+
+	.Solo__editorForm {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.Solo__editorLabel,
+	.Solo__editorInput {
+		font-size: 1.8rem;
+	}
+
+	.Solo__editorInput {
+		width: 15rem;
+	}
+
+	.Solo__editorBtns {
+		flex-direction: column;
+	}
+
+	.Solo__guessContainer {
+		width: initial;
+	}
+
+	.Solo__guessLabel {
+		margin-bottom: 0;
+	}
+
+	.Solo__guessInputs {
+		position: initial;
+	}
+
+	.Solo__gameError {
+		position: initial;
+		top: initial;
+	}
+
+	.Solo__historyList {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		font-size: 3rem;
+		text-align: center;
+		padding-left: 0;
+		width: 22rem;
+		height: 20rem;
+	}
+
+	.Solo__historyLabel {
+		width: 20rem;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.Solo__words {
+		padding-top: 2rem;
+	}
+
+	.Solo__guessInput {
+		font-size: 2rem;
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	.Solo__words {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 310px) {
+	.Solo__editor {
+		margin: 0;
+		border: 1px solid black;
+	}
+
+	.Solo__editorContent {
+		border: none;
+	}
+
+	.Solo__guessInputs {
+		flex-direction: column;
+	}
+}
+
+@media only screen and (max-width: 225px) {
+	.Solo__easterEgg {
+		display: initial;
+		position: absolute;
+		top: 0;
+		font-size: 1rem;
+	}
+}
