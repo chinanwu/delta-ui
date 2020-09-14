@@ -35,7 +35,6 @@ export default App;
 // so it takes two tabs to get away from it.
 
 // Potential future improvements:
-// - Modal component
 // - Theme context
 // - Section tags where applicable
 // - HOC timer wrapper
