@@ -1,3 +1,3 @@
 import { createAction } from 'redux-actions';
 
-export const editTheme = createAction('theme/edit');
+export const editTheme = createAction('THEME/EDIT');

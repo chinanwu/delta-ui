@@ -44,7 +44,9 @@ export const StealthForm = ({
 	const handleFromChange = useCallback(
 		event => {
 			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
+				const val = event.target.value
+					? event.target.value.toString().toLowerCase()
+					: '';
 				if (hasValidCharacters(val)) setFromVal(val);
 			}
 		},
@@ -54,7 +56,9 @@ export const StealthForm = ({
 	const handleToChange = useCallback(
 		event => {
 			if (event && event.target) {
-				const val = event.target.value ? event.target.value.toString() : '';
+				const val = event.target.value
+					? event.target.value.toString().toLowerCase()
+					: '';
 				if (hasValidCharacters(val)) setToVal(val);
 			}
 		},
