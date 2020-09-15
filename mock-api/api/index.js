@@ -45,18 +45,7 @@ router.get('/api/v1/dailychallenge', (req, res) =>
 		id: '2020-09-06',
 		from: 'heat',
 		to: 'cold',
-		leaderboard: [
-			{ name: 'sock', score: 99 },
-			{ name: 'slmn', score: 81 },
-			{ name: 'sam1', score: 70 },
-			{ name: 'sam2', score: 69 },
-			{ name: 'sam3', score: 50 },
-			{ name: 'sam4', score: 31 },
-			{ name: 'john', score: 30 },
-			{ name: 'sam5', score: 20 },
-			{ name: 'sam6', score: 10 },
-			{ name: 'sam6', score: 2 },
-		],
+		leaderboard: [],
 	})
 );
 router.put('/api/v1/highscore', (req, res) =>

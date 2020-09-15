@@ -50,7 +50,7 @@ export const applyGuess = guess => (dispatch, useState) => {
 	const { solo } = useState();
 
 	return setGuess(
-		guess,
+		guess.toLowerCase(),
 		addGuess,
 		setGuessError,
 		getScoreStarted,

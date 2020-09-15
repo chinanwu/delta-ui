@@ -13,6 +13,8 @@ import {
 	getDailyChallengeStarted,
 	getDailyChallengeSuccess,
 	getDailyChallengeFailed,
+	setHighscoreSuccess,
+	setHighscoreFailed,
 } from '../actions/DailyActions';
 
 export const defaultState = {
@@ -36,6 +38,7 @@ export const defaultState = {
 	timeStarted: null,
 	score: -1,
 	win: false,
+	hasSubmitted: false,
 };
 
 export default handleActions(
@@ -110,6 +113,16 @@ export default handleActions(
 		[closeHint]: state => ({
 			...state,
 			hintExpanded: false,
+		}),
+
+		// Note no reducer for started - I want the submitting of highscore to be on the DL
+		[setHighscoreSuccess]: state => ({
+			...state,
+			hasSubmitted: true,
+		}),
+		[setHighscoreFailed]: (state, { payload }) => ({
+			...state,
+			error: payload,
 		}),
 	},
 	defaultState

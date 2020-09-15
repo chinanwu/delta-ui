@@ -4,6 +4,7 @@ import Confetti from 'react-confetti';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { enterBtn } from '../../constants/Keycodes';
 import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
 import getThemeClassname from '../../functions/getThemeClassname';
 import hasValidCharacters from '../../functions/hasValidCharacters';
@@ -22,11 +23,11 @@ export const DailyWinModal = ({
 	timer,
 	hintsUsed,
 	score,
+	hasSubmitted,
 	onSubmit,
 }) => {
 	const [name, setName] = useState('');
 	const [error, setError] = useState('');
-	const [hasSubmitted, setHasSubmitted] = useState(false);
 
 	const handleSubmitHighscore = useCallback(() => {
 		if (name.length < 4) {
@@ -36,9 +37,8 @@ export const DailyWinModal = ({
 				name: name,
 				score: score,
 			});
-			setHasSubmitted(true);
 		}
-	}, [name, setError, onSubmit, setHasSubmitted]);
+	}, [name, setError, onSubmit]);
 
 	const handleOnChange = useCallback(
 		event => {
@@ -50,6 +50,17 @@ export const DailyWinModal = ({
 			}
 		},
 		[setName]
+	);
+
+	const handleKeyDown = useCallback(
+		event => {
+			if (event && event.keyCode) {
+				if (event.keyCode === enterBtn) {
+					handleSubmitHighscore();
+				}
+			}
+		},
+		[name, setError, onSubmit]
 	);
 
 	const isHighscore =
@@ -87,6 +98,7 @@ export const DailyWinModal = ({
 								value={name}
 								maxLength={4}
 								onChange={handleOnChange}
+								onKeyDown={handleKeyDown}
 							/>
 						</div>
 						<button
@@ -168,12 +180,12 @@ DailyWinModal.propTypes = {
 	timer: PropTypes.number,
 	hintsUsed: PropTypes.number,
 	score: PropTypes.number,
-	isHighscore: PropTypes.bool,
+	hasSubmitted: PropTypes.bool,
 	onSubmit: PropTypes.func,
 };
 
 export const mapStateToProps = ({
-	daily: { from, to, history, numHints, score, leaderboard },
+	daily: { from, to, history, numHints, score, leaderboard, hasSubmitted },
 	theme: { dark },
 }) => ({
 	dark,
@@ -183,6 +195,7 @@ export const mapStateToProps = ({
 	hintsUsed: 3 - numHints,
 	score,
 	leaderboard,
+	hasSubmitted,
 });
 
 const mapDispatchToProps = {

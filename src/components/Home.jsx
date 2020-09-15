@@ -114,6 +114,9 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 									<p>No one has completed the Daily Challenge... yet? 👀</p>
 								)
 							) : null}
+							<i>
+								Note: If you don't see your score in here, refresh the page!
+							</i>
 						</div>
 					</div>
 				</section>

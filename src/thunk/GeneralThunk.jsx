@@ -53,7 +53,7 @@ export const applyGuess = (
 	state,
 	dispatch
 ) => {
-	const valid = isValidWord(guess.toLowerCase());
+	const valid = isValidWord(guess);
 
 	if (isOneOff(state.prevWord, guess) && valid) {
 		// TODO: Need to check this is done in time for getScore's access to history.

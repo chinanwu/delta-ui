@@ -14,7 +14,6 @@ import {
 	setHighscoreFailed,
 	setHighscoreStarted,
 	setHighscoreSuccess,
-	setTimeStarted,
 } from '../actions/DailyActions';
 import { putHighscore } from '../functions/FetchFunctions';
 
@@ -50,7 +49,7 @@ export const applyGuess = guess => (dispatch, useState) => {
 	const { daily } = useState();
 
 	return setGuess(
-		guess,
+		guess.toLowerCase(),
 		addGuess,
 		setGuessError,
 		getScoreStarted,
@@ -69,7 +68,3 @@ export const applyHighscore = player => dispatch => {
 };
 
 export const applyCloseHint = () => dispatch => dispatch(closeHint());
-
-// TODO:
-// - Do thunks always need to return the dispatch? e.g. return dispatch(...);
-// 		- Based on these examples: https://gist.github.com/markerikson/ea4d0a6ce56ee479fe8b356e099f857e I do NOT think so.
