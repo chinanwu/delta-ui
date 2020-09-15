@@ -26,4 +26,6 @@ export const editWords = createAction('SOLO/EDIT_WORDS');
 export const editLoading = createAction('SOLO/EDIT_LOADING');
 export const editError = createAction('SOLO/EDIT_ERROR');
 
+export const setWin = createAction('SOLO/SET_WIN');
+
 //https://daveceddia.com/where-fetch-data-redux/

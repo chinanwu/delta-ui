@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
 import getThemeClassname from '../../functions/getThemeClassname';
-import { requestDailyChallenge } from '../../thunk/DailyThunk.jsx';
+import { getScore, requestDailyChallenge } from '../../thunk/DailyThunk.jsx';
 
 import Error from '../Error.jsx';
 import withTitle from '../HOC/withTitle.jsx';
@@ -28,6 +28,7 @@ export const Daily = ({
 	loading,
 	error,
 	getDaily,
+	onWin,
 }) => {
 	const [timer, setTimer] = useState(0);
 
@@ -47,6 +48,15 @@ export const Daily = ({
 			setTimer(0);
 		}
 	}, [from, to, getDaily, setTimer]);
+
+	useEffect(() => {
+		if (win) {
+			onWin(timer);
+			document.body.classList.add('Modal--open');
+		} else {
+			document.body.classList.remove('Modal--open');
+		}
+	}, [win, onWin, timer]);
 
 	return (
 		<div className={getThemeClassname('Daily', dark)}>
@@ -87,10 +97,10 @@ Daily.propTypes = {
 	to: PropTypes.string,
 	date: PropTypes.string,
 	win: PropTypes.bool,
-	timeStarted: PropTypes.number,
 	error: PropTypes.object,
 	loading: PropTypes.bool,
 	getDaily: PropTypes.func,
+	onWin: PropTypes.func,
 };
 
 export const mapStateToProps = ({
@@ -108,6 +118,7 @@ export const mapStateToProps = ({
 
 const mapDispatchToProps = {
 	getDaily: requestDailyChallenge,
+	onWin: getScore,
 };
 
 export default withTitle('Daily Challenge')(

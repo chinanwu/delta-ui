@@ -15,6 +15,7 @@ import {
 	getDailyChallengeFailed,
 	setHighscoreSuccess,
 	setHighscoreFailed,
+	setWin,
 } from '../actions/DailyActions';
 
 export const defaultState = {
@@ -35,7 +36,6 @@ export const defaultState = {
 	numHints: 3,
 	prevWord: '',
 
-	timeStarted: null,
 	score: -1,
 	win: false,
 	hasSubmitted: false,
@@ -49,14 +49,12 @@ export default handleActions(
 		}),
 		[getDailyChallengeSuccess]: (state, { payload }) => ({
 			...defaultState,
-			loading: false,
 			date: payload.id,
 			from: payload.from,
 			to: payload.to,
 			prevWord: payload.from,
 			history: [payload.from],
 			leaderboard: payload.leaderboard,
-			timeStarted: payload.timeStarted,
 		}),
 		[getDailyChallengeFailed]: (state, { payload }) => ({
 			...state,
@@ -101,7 +99,7 @@ export default handleActions(
 		}),
 		[getScoreSuccess]: (state, { payload }) => ({
 			...state,
-			win: true,
+			loading: false,
 			score: payload.score,
 		}),
 		[getScoreFailed]: (state, { payload }) => ({
@@ -123,6 +121,11 @@ export default handleActions(
 		[setHighscoreFailed]: (state, { payload }) => ({
 			...state,
 			error: payload,
+		}),
+
+		[setWin]: state => ({
+			...state,
+			win: true,
 		}),
 	},
 	defaultState

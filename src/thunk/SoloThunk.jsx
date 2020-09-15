@@ -17,12 +17,14 @@ import {
 	editWords,
 	editLoading,
 	editError,
+	setWin,
 } from '../actions/SoloActions';
 import { getSolution, getWords } from '../functions/FetchFunctions';
 
 import {
 	requestHint as getHint,
 	applyGuess as setGuess,
+	requestScore,
 } from './GeneralThunk.jsx';
 
 export const createGame = () => dispatch => {
@@ -37,25 +39,22 @@ export const createGame = () => dispatch => {
 
 			dispatch(
 				getWordsSuccess({
-					from: from,
-					to: to,
-					timeStarted: new Date().getTime(),
+					from,
+					to,
 				})
 			);
 		})
 		.catch(e => dispatch(getWordsFailed(e)));
 };
 
-export const applyGuess = guess => (dispatch, useState) => {
-	const { solo } = useState();
+export const applyGuess = guess => (dispatch, getState) => {
+	const { solo } = getState();
 
 	return setGuess(
 		guess.toLowerCase(),
 		addGuess,
 		setGuessError,
-		getScoreStarted,
-		getScoreSuccess,
-		getScoreFailed,
+		setWin,
 		solo,
 		dispatch
 	);
@@ -88,14 +87,29 @@ export const requestSolution = () => (dispatch, getState) => {
 export const applyCloseHint = () => dispatch => dispatch(closeHint());
 
 export const applyWords = (from, to) => dispatch => {
-	const timeStarted = new Date().getTime();
-	dispatch(editWords({ from, to, timeStarted }));
+	sessionStorage.setItem('from', from);
+	sessionStorage.setItem('to', to);
+
+	dispatch(editWords({ from, to }));
 };
 
 export const applyLoading = loading => dispatch =>
 	dispatch(editLoading(loading));
 
 export const applyError = error => dispatch => dispatch(editError(error));
+
+export const getScore = timer => (dispatch, getState) => {
+	const { solo } = getState();
+
+	return requestScore(
+		timer,
+		getScoreStarted,
+		getScoreSuccess,
+		getScoreFailed,
+		solo,
+		dispatch
+	);
+};
 
 // Readings:
 // https://reactgo.com/redux-fetch-data-api/

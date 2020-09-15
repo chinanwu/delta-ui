@@ -17,13 +17,17 @@ export const requestHint = (started, success, failed, from, to, dispatch) => {
 		.catch(e => dispatch(failed(e)));
 };
 
-export const requestScore = (started, success, failed, state, dispatch) => {
-	const { from, to, timeStarted, numHints, history } = state;
-	const timeFinished = new Date();
-	const time = Math.round((timeFinished.getTime() - timeStarted) / 1000);
-
+export const requestScore = (
+	timer,
+	started,
+	success,
+	failed,
+	state,
+	dispatch
+) => {
+	const { from, to, numHints, history } = state;
 	dispatch(started());
-	return getScore(from, to, time, numHints, history)
+	return getScore(from, to, timer, numHints, history)
 		.then(res => dispatch(success(res)))
 		.catch(e => dispatch(failed(e)));
 };
@@ -37,8 +41,7 @@ export const requestDailyChallenge = (started, success, failed, dispatch) => {
 				leaderboard[i] = [res.leaderboard[i].name, res.leaderboard[i].score];
 			}
 			const { from, to, id } = res;
-			const timeStarted = new Date().getTime();
-			dispatch(success({ from, to, id, leaderboard, timeStarted }));
+			dispatch(success({ from, to, id, leaderboard }));
 		})
 		.catch(e => dispatch(failed(e)));
 };
@@ -47,20 +50,17 @@ export const applyGuess = (
 	guess,
 	guessAction,
 	guessErrorAction,
-	started,
-	success,
-	failed,
+	win,
 	state,
 	dispatch
 ) => {
 	const valid = isValidWord(guess);
 
 	if (isOneOff(state.prevWord, guess) && valid) {
-		// TODO: Need to check this is done in time for getScore's access to history.
 		dispatch(guessAction(guess));
 
 		if (guess === state.to) {
-			requestScore(started, success, failed, state, dispatch);
+			dispatch(win());
 		}
 	} else {
 		dispatch(

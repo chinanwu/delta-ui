@@ -18,6 +18,7 @@ import {
 	closeHint,
 	editWords,
 	editLoading,
+	setWin,
 } from '../actions/SoloActions';
 
 export const defaultState = {
@@ -38,7 +39,6 @@ export const defaultState = {
 	numHints: 3,
 	prevWord: sessionStorage.getItem('from') || '',
 
-	timeStarted: null,
 	score: -1,
 	solution: null,
 	solutionToPlayer: null,
@@ -102,7 +102,7 @@ export default handleActions(
 		}),
 		[getScoreSuccess]: (state, { payload }) => ({
 			...state,
-			win: true,
+			loading: false,
 			score: payload.score,
 			solution: payload.optimalSolution,
 		}),
@@ -122,7 +122,6 @@ export default handleActions(
 			to: payload.to,
 			prevWord: payload.from,
 			history: [payload.from],
-			timeStarted: payload.timeStarted,
 		}),
 		[getWordsFailed]: (state, { payload }) => ({
 			...state,
@@ -141,12 +140,16 @@ export default handleActions(
 			to: payload.to,
 			prevWord: payload.from,
 			history: [payload.from],
-			timeStarted: payload.timeStarted,
 		}),
 
 		[editLoading]: (state, { payload }) => ({
 			...state,
 			loading: payload,
+		}),
+
+		[setWin]: state => ({
+			...state,
+			win: true,
 		}),
 	},
 	defaultState

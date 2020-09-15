@@ -21,6 +21,7 @@ import {
 	requestHint as getHint,
 	requestDailyChallenge as getDailyChallenge,
 	applyGuess as setGuess,
+	requestScore,
 } from './GeneralThunk.jsx';
 
 export const requestDailyChallenge = () => dispatch =>
@@ -52,9 +53,6 @@ export const applyGuess = guess => (dispatch, useState) => {
 		guess.toLowerCase(),
 		addGuess,
 		setGuessError,
-		getScoreStarted,
-		getScoreSuccess,
-		getScoreFailed,
 		daily,
 		dispatch
 	);
@@ -68,3 +66,16 @@ export const applyHighscore = player => dispatch => {
 };
 
 export const applyCloseHint = () => dispatch => dispatch(closeHint());
+
+export const getScore = timer => (dispatch, getState) => {
+	const { daily } = getState();
+
+	return requestScore(
+		timer,
+		getScoreStarted,
+		getScoreSuccess,
+		getScoreFailed,
+		daily,
+		dispatch
+	);
+};

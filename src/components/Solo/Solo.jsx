@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import formatCentisecondsTimer from '../../functions/formatCentisecondsTimer';
 import getThemeClassname from '../../functions/getThemeClassname';
-import { applyWords, createGame } from '../../thunk/SoloThunk.jsx';
+import { applyWords, createGame, getScore } from '../../thunk/SoloThunk.jsx';
 
 import Error from '../Error.jsx';
 import withTitle from '../HOC/withTitle.jsx';
@@ -31,6 +31,7 @@ export const Solo = ({
 	loading,
 	onNewGame,
 	onChangeWords,
+	onWin,
 }) => {
 	const [timer, setTimer] = useState(0);
 
@@ -53,11 +54,12 @@ export const Solo = ({
 
 	useEffect(() => {
 		if (win) {
+			onWin(timer);
 			document.body.classList.add('Modal--open');
 		} else {
 			document.body.classList.remove('Modal--open');
 		}
-	}, [win]);
+	}, [win, onWin, timer]);
 
 	const handleEditWords = useCallback(
 		(from, to) => {
@@ -105,6 +107,7 @@ Solo.propTypes = {
 	loading: PropTypes.bool,
 	onNewGame: PropTypes.func,
 	onChangeWords: PropTypes.func,
+	onWin: PropTypes.func,
 };
 
 export const mapStateToProps = ({
@@ -123,6 +126,7 @@ export const mapStateToProps = ({
 const mapDispatchToProps = {
 	onNewGame: createGame,
 	onChangeWords: applyWords,
+	onWin: getScore,
 };
 
 export default withTitle('Play')(
