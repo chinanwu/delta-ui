@@ -1,0 +1,858 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Guess behaviour does nothing when event is invalid 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour does nothing when tab is pressed 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour doesn't do anything when backspace on first box 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour doesn't move to first box when enter last letter 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour goes to previous box and focuses when backspace 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour moves to next box when enter a letter 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour moves to next box when right arrow 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour moves to previous box when left arrow 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour prevents other key presses 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess behaviour submits when enter button is clicked 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`Guess behaviour submits when enter is pressed 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="g"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="o"
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="d"
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess rendering renders expected elements 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  />
+</div>
+`;
+
+exports[`Guess rendering renders with props 1`] = `
+<div
+  className="Guess"
+>
+  <h3
+    className="Guess__label"
+    id="guessLabel"
+  >
+    Next Word:
+  </h3>
+  <div
+    className="Guess__inputs"
+  >
+    <div>
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={0}
+        id="guessInput_0"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={1}
+        id="guessInput_1"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={2}
+        id="guessInput_2"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+      <input
+        aria-invalid=""
+        aria-labelledby="guessLabel"
+        data-id={3}
+        id="guessInput_3"
+        maxLength={1}
+        onKeyDown={[Function]}
+        placeholder="."
+        type="text"
+      />
+    </div>
+    <button
+      className="Guess__enterBtn"
+      id="guessEnterBtn"
+      onClick={[Function]}
+    >
+      Enter
+    </button>
+  </div>
+  <div
+    aria-live="passive"
+  >
+    
+  </div>
+</div>
+`;

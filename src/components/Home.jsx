@@ -233,8 +233,17 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 				>
 					Acknowledgements
 				</button>
-				<br />
-				Made by <a href="https://chinanwu.com">Chin-An Wu</a>
+				<span>
+					Made by <a href="https://chinanwu.com">Chin-An Wu</a>
+				</span>
+				<span
+					className={
+						'Home__footerVersion' +
+						(showLeaderboard ? ' Home__footerVersion--relative' : '')
+					}
+				>
+					v0.1.0
+				</span>
 			</footer>
 
 			{loading && showLeaderboard && createPortal(<Loading />, document.body)}

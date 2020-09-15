@@ -3,7 +3,6 @@
 exports[`Error component rendering renders Error 1`] = `
 <div
   aria-busy="true"
-  className="Error"
   role="alert"
 >
   <div

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { applyCloseHint, requestHint } from '../../thunk/DailyThunk.jsx';
 
-import HintButton from '../HintButtonV2.jsx';
+import HintButton from '../HintButton.jsx';
 
 export const DailyHintButton = ({
 	hintWord,

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
+import { connect } from 'react-redux';
 
 import getThemeClassname from '../functions/getThemeClassname';
 
@@ -8,28 +9,26 @@ import './HintButton.less';
 export const HintButton = ({
 	id,
 	dark,
-	children,
-	btnText,
+	hintWord,
+	hintNumLeft,
 	numHints,
 	isExpanded,
-	ariaLabelledBy,
 	giveSolution,
-	onClick,
 	onSolnClick,
-	onExpandChange,
+	onHint,
+	onClose,
 }) => {
-	const handleClick = useCallback(() => {
-		if (isExpanded) {
-			onExpandChange(false);
-		} else {
-			if (numHints > 0) {
-				onClick();
-				onExpandChange(true);
-			} else {
-				if (giveSolution) onSolnClick();
-			}
-		}
-	}, [isExpanded, numHints, onExpandChange, onClick, onSolnClick]);
+	const handleClick = useCallback(
+		() =>
+			isExpanded
+				? onClose()
+				: numHints > 0
+				? onHint()
+				: giveSolution
+				? onSolnClick()
+				: null,
+		[isExpanded, numHints, giveSolution, onHint, onSolnClick]
+	);
 
 	return (
 		<div
@@ -43,10 +42,14 @@ export const HintButton = ({
 					getThemeClassname('HintButton__content', dark) +
 					(isExpanded ? ' HintButton__content--expanded' : '')
 				}
-				aria-labelledby={ariaLabelledBy}
+				aria-labelledby="hintHeader"
 				aria-live="passive"
 			>
-				{children}
+				<h3 id="hintHeader">Hint: </h3>
+				<p className="HintButton__hint">Recommended next word: {hintWord}</p>
+				<p className="HintButton__hint">
+					Estimated number of words left: {hintNumLeft}
+				</p>
 			</div>
 			<button
 				id={id}
@@ -78,21 +81,27 @@ export const HintButton = ({
 					? giveSolution
 						? 'Get the solution'
 						: 'Out of Hints'
-					: btnText}
+					: `Get a Hint: ${numHints}`}
 			</button>
 		</div>
 	);
 };
 
+export const mapStateToProps = ({ theme: { dark } }) => ({
+	dark,
+});
+
 HintButton.propTypes = {
-	id: PropTypes.string.isRequired,
+	id: PropTypes.string,
 	dark: PropTypes.bool,
-	children: PropTypes.any,
-	btnText: PropTypes.string,
+	hintWord: PropTypes.string,
+	hintNumLeft: PropTypes.number,
 	numHints: PropTypes.number,
-	onClick: PropTypes.func,
+	isExpanded: PropTypes.bool,
+	giveSolution: PropTypes.bool,
+	onHint: PropTypes.func,
 	onSolnClick: PropTypes.func,
-	onExpandChange: PropTypes.func,
+	onClose: PropTypes.func,
 };
 
-export default HintButton;
+export default connect(mapStateToProps)(HintButton);

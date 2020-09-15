@@ -43,7 +43,18 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 
 				if (event.keyCode >= aBtn && event.keyCode <= zBtn) {
 					event.preventDefault();
-					guessVals[i] = event.key;
+					setGuessVals(guessVals => {
+						let values = [];
+						for (let j = 0; j < 4; j++) {
+							if (i === j) {
+								values[j] = event.key;
+							} else {
+								values[j] = guessVals[j];
+							}
+						}
+
+						return values;
+					});
 					inputRefs[i].current.value = event.key;
 					if (next >= i) {
 						inputRefs[next].current.focus();

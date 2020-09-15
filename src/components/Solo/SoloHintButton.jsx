@@ -8,7 +8,7 @@ import {
 	applyCloseHint,
 } from '../../thunk/SoloThunk.jsx';
 
-import HintButton from '../HintButtonV2.jsx';
+import HintButton from '../HintButton.jsx';
 
 export const SoloHintButton = ({
 	hintWord,

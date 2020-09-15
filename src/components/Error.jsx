@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import getThemeClassname from '../functions/getThemeClassname';
@@ -23,14 +23,14 @@ export const Error = ({ dark }) => (
 	</div>
 );
 
-export const mapStateToProps = ({ theme: { dark } }) => ({
-	dark,
-});
+Error.propTypes = {
+	dark: PropTypes.bool,
+};
 
-export default connect(mapStateToProps)(Error);
+export default Error;
 
 // TODO:
-// - Dark mode
+// - Accessibility
 
 // Potential future improvements:
 // - Make this into a toast?

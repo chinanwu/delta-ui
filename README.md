@@ -19,7 +19,6 @@ NOTE: The api is now implemented via AWS Gateway and Lambda functions so delta-a
 ## Find an issue?
 Thank you for using this! If you've found a bug, please [create a ticket](https://github.com/chinanwu/delta-ui/issues)! Or, if you've found a bug and you've fixed it, please [create a merge request](https://github.com/chinanwu/delta-ui/pulls)!
 
-
 ## Potential Future Features:
 - Scoring
 - Dictionary for words seen during game at the end of game
@@ -33,6 +32,8 @@ Thank you for using this! If you've found a bug, please [create a ticket](https:
 - Lazy loading/Code splitting [Read](https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52/) [Read](https://reactjs.org/docs/code-splitting.html)
 - Loading screen/modal/toast?, error modal/toast
 - eslint it up!
+- Better deployment pipeline
+- Words to be added: "poop", "bing"
 
 ## General Helpful Tools I used:
 - [Colour contrast checker](https://webaim.org/resources/contrastchecker/)

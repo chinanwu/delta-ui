@@ -7,18 +7,10 @@ exports[`Loading component rendering renders Loading 1`] = `
   role="alert"
 >
   <Loader
-    color="#000000"
+    color="#ffffff"
     css=""
     loading={true}
     size={35}
   />
-</div>
-`;
-
-exports[`Loading component rendering renders NotFound 1`] = `
-<div
-  className="Loading"
->
-  'ey I'm loadin' 'ere!
 </div>
 `;

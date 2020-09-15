@@ -33,9 +33,12 @@ export default App;
 // - TabIndex order
 // - Button links have a weird double focus - i.e. it focuses on the Link as well as the inner button,
 // so it takes two tabs to get away from it.
+// - Pull out duplicate input styling (scrollbar stuff specifically)
 
 // Potential future improvements:
+// - Ability to only enter 1 letter in the Guess and have it "filled in" in the backend w the other words.
 // - Theme context
 // - Section tags where applicable
 // - HOC timer wrapper
 // - Better link colouring (:link, :visited, :focus)
+// - Fun facts toast
