@@ -46,8 +46,8 @@ describe('Guess', () => {
 			);
 			expect(wrapper.getElement()).toMatchSnapshot();
 			wrapper.find('#guessEnterBtn').simulate('click');
-			expect(onGuess.mock.calls).toEqual([['good']]);
-			expect(setGuessVals.mock.calls).toEqual([[['f', 'o', 'o', 'd']]]);
+			expect(onGuess.mock.calls).toEqual([['food']]);
+			expect(setGuessVals).not.toHaveBeenCalled();
 		});
 
 		it('submits when enter is pressed', () => {
@@ -67,14 +67,13 @@ describe('Guess', () => {
 			const wrapper = shallow(<Guess prevWord="food" onGuess={onGuess} />);
 			expect(wrapper.getElement()).toMatchSnapshot();
 			wrapper.find('#guessInput_0').simulate('keydown', event);
-			expect(onGuess.mock.calls).toEqual([['good']]);
-			expect(setGuessVals.mock.calls).toEqual([[['f', 'o', 'o', 'd']]]);
+			expect(onGuess.mock.calls).toEqual([['food']]);
+			expect(setGuessVals).not.toHaveBeenCalled();
 			expect(focus).toHaveBeenCalledTimes(1);
 			expect(preventDefault).toHaveBeenCalledTimes(1);
 		});
 
 		it('moves to next box when enter a letter', () => {
-			const setGuessVals = jest.fn();
 			const preventDefault = jest.fn();
 			const focus = jest.fn();
 			const select = jest.fn();
@@ -87,7 +86,6 @@ describe('Guess', () => {
 				keyCode: aBtn,
 				preventDefault: preventDefault,
 			};
-			useState.mockReturnValue([['g', 'o', 'o', 'd'], setGuessVals]);
 			useRef
 				.mockReturnValueOnce(ref)
 				.mockReturnValueOnce(secondRef)
@@ -97,14 +95,11 @@ describe('Guess', () => {
 			wrapper.find('#guessInput_0').simulate('keydown', event);
 			expect(focus).toHaveBeenCalledTimes(1);
 			expect(select).toHaveBeenCalledTimes(1);
-			// expect(setGuessVals.mock.calls).toEqual([[['a', 'o', 'o', 'd']]]); // TODO: Functional state setter
-			expect(setGuessVals).toHaveBeenCalledTimes(1);
 			expect(preventDefault).toHaveBeenCalledTimes(1);
 			expect(ref.current.value).toEqual('a');
 		});
 
 		it("doesn't move to first box when enter last letter", () => {
-			const setGuessVals = jest.fn();
 			const preventDefault = jest.fn();
 			const focus = jest.fn();
 			const select = jest.fn();
@@ -116,7 +111,6 @@ describe('Guess', () => {
 				keyCode: zBtn,
 				preventDefault: preventDefault,
 			};
-			useState.mockReturnValue([['g', 'o', 'o', 'd'], setGuessVals]);
 			useRef
 				.mockReturnValueOnce(ref)
 				.mockReturnValueOnce(ref)
@@ -127,8 +121,6 @@ describe('Guess', () => {
 			wrapper.find('#guessInput_3').simulate('keydown', event);
 			expect(focus).not.toHaveBeenCalled();
 			expect(select).not.toHaveBeenCalled();
-			// expect(setGuessVals.mock.calls).toEqual([[['a', 'o', 'o', 'd']]]); // TODO: Functional state setter
-			expect(setGuessVals).toHaveBeenCalledTimes(1);
 			expect(preventDefault).toHaveBeenCalledTimes(1);
 			expect(currentRef.current.value).toEqual('z');
 		});

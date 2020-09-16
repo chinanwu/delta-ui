@@ -24,7 +24,7 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 
 	useEffect(() => {
 		setGuessVals(prevWord.match(regex));
-	}, [prevWord, setGuessVals]);
+	}, [prevWord]);
 
 	const handleKeyDown = useCallback(
 		event => {
@@ -43,18 +43,6 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 
 				if (event.keyCode >= aBtn && event.keyCode <= zBtn) {
 					event.preventDefault();
-					setGuessVals(guessVals => {
-						let values = [];
-						for (let j = 0; j < 4; j++) {
-							if (i === j) {
-								values[j] = event.key;
-							} else {
-								values[j] = guessVals[j];
-							}
-						}
-
-						return values;
-					});
 					inputRefs[i].current.value = event.key;
 					if (next >= i) {
 						inputRefs[next].current.focus();
@@ -97,13 +85,18 @@ export const Guess = ({ dark, prevWord, error, onGuess }) => {
 	);
 
 	const handleEnterClick = useCallback(() => {
-		const guess = guessVals.join('');
-		inputRefs.forEach(inputRef => {
-			inputRef.current.value = '';
+		let guess = '';
+		inputRefs.forEach((inputRef, i) => {
+			if (inputRef.current.value !== '') {
+				guess = guess + inputRef.current.value;
+				inputRef.current.value = '';
+			} else {
+				guess = guess + prevWord[i];
+			}
 		});
+
 		onGuess(guess);
-		setGuessVals(prevWord.match(regex));
-	}, [guessVals, inputRefs, onGuess]);
+	}, [inputRefs, onGuess]);
 
 	return (
 		<div className="Guess">
