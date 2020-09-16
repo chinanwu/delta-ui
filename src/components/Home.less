@@ -13,6 +13,17 @@
 	@dark();
 }
 
+.Home__version {
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: white;
+}
+
+.Home__version--dark {
+	@dark();
+}
+
 .Home__header {
 	display: flex;
 	justify-content: center;
@@ -160,7 +171,7 @@
 }
 
 .Home__footer {
-	position: absolute;
+	position: initial;
 	bottom: 0;
 	width: 100%;
 	display: flex;
@@ -173,16 +184,6 @@
 
 .Home__footer--dark a {
 	color: white;
-}
-
-.Home__footer--relative {
-	position: initial;
-}
-
-.Home__footerVersion {
-	position: fixed;
-	left: 0;
-	bottom: 0;
 }
 
 .Home__acksBtn--dark {
@@ -206,7 +207,7 @@
 	text-align: center;
 }
 
-.Home__modalLink {
+.Home__link {
 	&:link {
 		color: black;
 	}
@@ -216,19 +217,13 @@
 	}
 }
 
-.Home__modalLink--dark {
+.Home__link--dark {
 	&:link {
 		color: #eeeeee;
 	}
 
 	&:visited {
 		color: #eeeeee;
-	}
-}
-
-@media only screen and (max-height: 850px) {
-	.Home__footer {
-		position: initial;
 	}
 }
 

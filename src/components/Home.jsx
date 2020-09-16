@@ -42,6 +42,8 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<ThemeToggle />
+			<span className={getThemeClassname('Home__version', dark)}>v0.1.0</span>
+
 			<h1 className="Home__header">Delta</h1>
 			<>
 				<div className="Home__btns">
@@ -218,6 +220,33 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 						least number of steps!
 					</p>
 				</section>
+
+				<section
+					className={getThemeClassname('Home--centre', dark)}
+					aria-labelledby="support"
+				>
+					<h3 id="support">Want to support Delta?</h3>
+					<p className="Home__blurb">
+						Buy me a{' '}
+						<a
+							className={getThemeClassname('Home__link', dark)}
+							href="https://ko-fi.com/salmonw"
+						>
+							ko-fi
+						</a>
+						! Proceeds will go towards the costs of the website and supporting
+						me! If you're unable to support financially and you want to show
+						support, you can: Play more Delta! Tell me you like this game! Share
+						this with your friends! You can even find and{' '}
+						<a
+							className={getThemeClassname('Home__link', dark)}
+							href="https://github.com/chinanwu/delta-ui"
+						>
+							report
+						</a>{' '}
+						bugs! I greatly appreciate you even being on this site. Thank you!
+					</p>
+				</section>
 			</>
 			<footer
 				className={
@@ -235,14 +264,6 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 				</button>
 				<span>
 					Made by <a href="https://chinanwu.com">Chin-An Wu</a>
-				</span>
-				<span
-					className={
-						'Home__footerVersion' +
-						(showLeaderboard ? ' Home__footerVersion--relative' : '')
-					}
-				>
-					v0.1.0
 				</span>
 			</footer>
 
@@ -263,7 +284,7 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 						<p>
 							Moon icon in theme toggle made by{' '}
 							<a
-								className={getThemeClassname('Home__modalLink', dark)}
+								className={getThemeClassname('Home__link', dark)}
 								href="https://www.flaticon.com/authors/freepik"
 								title="Freepik"
 							>
@@ -271,7 +292,7 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 							</a>{' '}
 							from{' '}
 							<a
-								className={getThemeClassname('Home__modalLink', dark)}
+								className={getThemeClassname('Home__link', dark)}
 								href="https://www.flaticon.com/"
 								title="Flaticon"
 							>
