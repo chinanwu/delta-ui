@@ -14,6 +14,7 @@ import {
 	setHighscoreFailed,
 	setHighscoreStarted,
 	setHighscoreSuccess,
+	setWin,
 } from '../actions/DailyActions';
 import { putHighscore } from '../functions/FetchFunctions';
 
@@ -53,6 +54,7 @@ export const applyGuess = guess => (dispatch, useState) => {
 		guess.toLowerCase(),
 		addGuess,
 		setGuessError,
+		setWin,
 		daily,
 		dispatch
 	);
