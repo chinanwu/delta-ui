@@ -1,3 +1,4 @@
+import loadable from '@loadable/component';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -7,12 +8,17 @@ import { Link } from 'react-router-dom';
 import getThemeClassname from '../functions/getThemeClassname';
 import { requestDailyChallenge } from '../thunk/HomeThunk.jsx';
 
+import Banner from './Banner.jsx';
 import withTitle from './HOC/withTitle.jsx';
 import Loading from './Loading.jsx';
-import { Modal } from './Modal.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 import './Home.less';
+
+// import { Modal } from './Modal.jsx';
+const Modal = loadable(() =>
+	import(/* webpackChunkName:"Modal" */ './Modal.jsx')
+);
 
 export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	const [showLeaderboard, setShowLeaderboard] = useState(false);
@@ -41,6 +47,7 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 
 	return (
 		<div className={getThemeClassname('Home', dark)}>
+			<Banner />
 			<ThemeToggle />
 			<span className={getThemeClassname('Home__version', dark)}>v0.1.0</span>
 
@@ -234,10 +241,10 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 						>
 							ko-fi
 						</a>
-						! Proceeds will go towards the costs of the website and supporting
-						me! If you're unable to support financially and you want to show
-						support, you can: Play more Delta! Tell me you like this game! Share
-						this with your friends! You can even find and{' '}
+						! Proceeds will go towards the costs of the website and future
+						improvements! If you're unable to support financially and you want
+						to show support, you can: Play more Delta! Tell me you like this
+						game! Share this with your friends! You can even find and{' '}
 						<a
 							className={getThemeClassname('Home__link', dark)}
 							href="https://github.com/chinanwu/delta-ui"

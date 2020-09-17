@@ -46,7 +46,7 @@ export const Solo = ({
 	}, [timer, win]);
 
 	useEffect(() => {
-		if (!from && !to) {
+		if (!from || !to) {
 			onNewGame();
 			setTimer(0);
 		}

@@ -5,22 +5,14 @@ import { connect } from 'react-redux';
 
 import { ERROR_INVALID_WORDS_ENTERED } from '../../constants/Errors';
 import { enterBtn, escapeBtn, spaceBtn } from '../../constants/Keycodes';
-import { getWords } from '../../functions/FetchFunctions';
 import getThemeClassname from '../../functions/getThemeClassname';
+import getWords from '../../functions/getWords';
 import hasValidCharacters from '../../functions/hasValidCharacters';
 import isValidWord from '../../functions/isValidWord';
-import { applyError, applyLoading } from '../../thunk/SoloThunk.jsx';
 
 import './StealthForm.less';
 
-export const StealthForm = ({
-	dark,
-	from,
-	to,
-	onChange,
-	onLoading,
-	onApiError,
-}) => {
+export const StealthForm = ({ dark, from, to, onChange }) => {
 	const [isEditable, setIsEditable] = useState(false);
 	const [fromVal, setFromVal] = useState('');
 	const [toVal, setToVal] = useState('');
@@ -80,16 +72,11 @@ export const StealthForm = ({
 	);
 
 	const handleRandomizeClick = useCallback(() => {
-		onLoading(true);
-		getWords()
-			.then(res => {
-				setFromVal(res.from);
-				setToVal(res.to);
-				setError('');
-			})
-			.then(() => onLoading(false))
-			.catch(e => onApiError(e));
-	}, [setFromVal, setToVal, setError, onLoading, onApiError]);
+		const { from, to } = getWords();
+		setFromVal(from);
+		setToVal(to);
+		setError('');
+	}, [setFromVal, setToVal, setError]);
 
 	const handleSubmitClick = useCallback(() => {
 		if (isValidWord(fromVal) && isValidWord(toVal)) {
@@ -226,8 +213,6 @@ StealthForm.propTypes = {
 	from: PropTypes.string,
 	to: PropTypes.string,
 	onChange: PropTypes.func,
-	onLoading: PropTypes.func,
-	onApiError: PropTypes.func,
 };
 
 export const mapStateToProps = ({ solo: { from, to }, theme: { dark } }) => ({
@@ -236,15 +221,7 @@ export const mapStateToProps = ({ solo: { from, to }, theme: { dark } }) => ({
 	dark,
 });
 
-const mapDispatchToProps = {
-	onLoading: applyLoading,
-	onApiError: applyError,
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(StealthForm);
+export default connect(mapStateToProps)(StealthForm);
 
 // Potential future improvements:
 // --- ACCESSIBILITY ---

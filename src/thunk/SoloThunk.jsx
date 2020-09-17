@@ -10,16 +10,14 @@ import {
 	getScoreFailed,
 	addGuess,
 	setGuessError,
-	getWordsStarted,
-	getWordsSuccess,
-	getWordsFailed,
 	closeHint,
 	editWords,
 	editLoading,
 	editError,
 	setWin,
 } from '../actions/SoloActions';
-import { getSolution, getWords } from '../functions/FetchFunctions';
+import { getSolution } from '../functions/FetchFunctions';
+import getWords from '../functions/getWords';
 
 import {
 	requestHint as getHint,
@@ -28,23 +26,12 @@ import {
 } from './GeneralThunk.jsx';
 
 export const createGame = () => dispatch => {
-	dispatch(getWordsStarted());
-	return getWords()
-		.then(res => {
-			const from = res.from;
-			const to = res.to;
+	const { from, to } = getWords();
 
-			sessionStorage.setItem('from', from);
-			sessionStorage.setItem('to', to);
+	sessionStorage.setItem('from', from);
+	sessionStorage.setItem('to', to);
 
-			dispatch(
-				getWordsSuccess({
-					from,
-					to,
-				})
-			);
-		})
-		.catch(e => dispatch(getWordsFailed(e)));
+	dispatch(editWords({ from, to }));
 };
 
 export const applyGuess = guess => (dispatch, getState) => {

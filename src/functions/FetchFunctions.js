@@ -31,8 +31,6 @@ const putFetch = (endpt, body) =>
 		.then(res => res)
 		.catch(err => Promise.reject(err));
 
-export const getWords = () => getFetch('/api/v1/words');
-
 export const getSolution = (from, to, prevWord) =>
 	getFetch(`/api/v1/solve?from=${from}&to=${to}&prevWord=${prevWord}`);
 

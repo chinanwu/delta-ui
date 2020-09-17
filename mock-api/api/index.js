@@ -7,7 +7,7 @@ router.get('/api/v1/words', (req, res) =>
 );
 // router.get('/api/v1/words', (req, res) => res.json({ error: 'message' }));
 router.get('/api/v1/hint', (req, res) =>
-	res.json({ hint: 'meat', numLeft: 5 })
+	res.json({ hint: 'meat', numLeft: 10 })
 );
 router.get('/api/v1/solve', (req, res) =>
 	res.json({

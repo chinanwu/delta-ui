@@ -12,10 +12,6 @@ export const getSolutionStarted = createAction('SOLO/GET_SOLUTION_STARTED');
 export const getSolutionSuccess = createAction('SOLO/GET_SOLUTION_SUCCESS');
 export const getSolutionFailed = createAction('SOLO/GET_SOLUTION_FAILURE');
 
-export const getWordsStarted = createAction('SOLO/GET_WORDS_STARTED');
-export const getWordsSuccess = createAction('SOLO/GET_WORDS_SUCCESS');
-export const getWordsFailed = createAction('SOLO/GET_WORDS_FAILURE');
-
 export const addGuess = createAction('SOLO/ADD_GUESS');
 export const setGuessError = createAction('SOLO/SET_GUESS_ERROR');
 

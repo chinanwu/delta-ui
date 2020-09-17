@@ -12,9 +12,6 @@ import {
 	getScoreFailed,
 	addGuess,
 	setGuessError,
-	getWordsStarted,
-	getWordsSuccess,
-	getWordsFailed,
 	closeHint,
 	editWords,
 	editLoading,
@@ -107,23 +104,6 @@ export default handleActions(
 			solution: payload.optimalSolution,
 		}),
 		[getScoreFailed]: (state, { payload }) => ({
-			...state,
-			loading: false,
-			error: payload,
-		}),
-
-		[getWordsStarted]: state => ({
-			...state,
-			loading: true,
-		}),
-		[getWordsSuccess]: (state, { payload }) => ({
-			...defaultState,
-			from: payload.from,
-			to: payload.to,
-			prevWord: payload.from,
-			history: [payload.from],
-		}),
-		[getWordsFailed]: (state, { payload }) => ({
 			...state,
 			loading: false,
 			error: payload,
