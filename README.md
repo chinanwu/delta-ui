@@ -34,6 +34,7 @@ Thank you for using this! If you've found a bug, please [create a ticket](https:
 - eslint it up!
 - Better deployment pipeline
 - Words to be added: "poop", "bing"
+- Do mobile breakpoints for horizontal views
 
 ## General Helpful Tools I used:
 - [Colour contrast checker](https://webaim.org/resources/contrastchecker/)

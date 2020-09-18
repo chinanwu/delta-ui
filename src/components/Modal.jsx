@@ -8,6 +8,7 @@ import getThemeClassname from '../functions/getThemeClassname';
 import './Modal.less';
 
 export const Modal = ({
+	id,
 	dark,
 	name,
 	ariaLabelledBy,
@@ -36,7 +37,7 @@ export const Modal = ({
 
 	return (
 		<FocusTrap>
-			<div className="Modal" onKeyDown={handleKeyDown}>
+			<div id={id} className="Modal" onKeyDown={handleKeyDown}>
 				{general}
 				<div
 					className={

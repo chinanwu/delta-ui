@@ -48,7 +48,7 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 	return (
 		<div className={getThemeClassname('Home', dark)}>
 			<Banner />
-			<ThemeToggle />
+			<ThemeToggle isHome={true} />
 			<span className={getThemeClassname('Home__version', dark)}>v0.1.0</span>
 
 			<h1 className="Home__header">Delta</h1>
@@ -279,6 +279,7 @@ export const Home = ({ dark, leaderboard, loading, getDaily }) => {
 			{showAcks &&
 				createPortal(
 					<Modal
+						id="modal"
 						dark={dark}
 						name="Acknowledgements"
 						ariaLabelledBy="homeModalHeader"

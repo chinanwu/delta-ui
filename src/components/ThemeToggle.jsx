@@ -7,13 +7,18 @@ import { applyTheme } from '../thunk/ThemeThunk.jsx';
 
 import './ThemeToggle.less';
 
-export const ThemeToggle = ({ dark, onChangeTheme }) => {
+export const ThemeToggle = ({ dark, isHome, onChangeTheme }) => {
 	const handleChange = useCallback(() => {
 		onChangeTheme(!dark);
 	}, [dark, onChangeTheme]);
 
 	return (
-		<div className="ThemeToggle__container">
+		<div
+			className={
+				'ThemeToggle__container' +
+				(isHome ? ' ThemeToggle__container--banner' : '')
+			}
+		>
 			<label className="ThemeToggle">
 				<input
 					id="themeToggleInput"
@@ -34,6 +39,7 @@ export const ThemeToggle = ({ dark, onChangeTheme }) => {
 
 ThemeToggle.propTypes = {
 	dark: PropTypes.bool,
+	isHome: PropTypes.bool,
 	onChangeTheme: PropTypes.func,
 };
 
