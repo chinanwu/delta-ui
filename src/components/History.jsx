@@ -74,7 +74,7 @@ export const History = ({
 History.propTypes = {
 	dark: PropTypes.bool,
 	to: PropTypes.string,
-	history: PropTypes.arrayOf(PropTypes.string),
+	history: PropTypes.arrayOf(PropTypes.string).isRequired,
 	hintWord: PropTypes.string,
 	hintNumLeft: PropTypes.number,
 	win: PropTypes.bool,
@@ -86,6 +86,3 @@ export const mapStateToProps = ({ theme: { dark } }) => ({
 });
 
 export default connect(mapStateToProps)(History);
-
-// TODO:
-// - Show hint in history as long as no guess has been entered

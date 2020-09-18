@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withTitle HOC behaviour does its thing 1`] = `undefined`;
+
+exports[`withTitle HOC rendering renders withTitle 1`] = `<withTitle />`;

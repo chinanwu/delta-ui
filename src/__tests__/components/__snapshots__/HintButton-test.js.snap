@@ -1,0 +1,386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HintButton behaviour closes on click when expanded 1`] = `
+<div
+  className="HintButton HintButton--expanded"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content HintButton__content--expanded"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-expanded={true}
+    aria-haspopup={null}
+    aria-label="Close Hint"
+    className="HintButton__btn HintButton__btn--expanded"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Close Hint
+  </button>
+</div>
+`;
+
+exports[`HintButton behaviour does nothing on click when out of hints and not give solution 1`] = `
+<div
+  className="HintButton"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    aria-label="Out of Hints"
+    className="HintButton__btn"
+    disabled={true}
+    id="test"
+    onClick={[Function]}
+  >
+    Out of Hints
+  </button>
+</div>
+`;
+
+exports[`HintButton behaviour gets hint on click when closed 1`] = `
+<div
+  className="HintButton"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-expanded={false}
+    aria-haspopup={null}
+    aria-label="Get a Hint"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get a Hint: 3
+  </button>
+</div>
+`;
+
+exports[`HintButton behaviour gets solution on click when out of hints 1`] = `
+<div
+  className="HintButton"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-expanded={false}
+    aria-haspopup="dialog"
+    aria-label="Get the solution"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get the solution
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders HintButton dark 1`] = `
+<div
+  className="HintButton HintButton--dark"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content HintButton__content--dark"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-haspopup={null}
+    aria-label="Get a Hint"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get a Hint: undefined
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders HintButton light 1`] = `
+<div
+  className="HintButton"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-haspopup={null}
+    aria-label="Get a Hint"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get a Hint: undefined
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders expanded HintButton 1`] = `
+<div
+  className="HintButton HintButton--expanded"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content HintButton__content--expanded"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-expanded={true}
+    aria-haspopup={null}
+    aria-label="Close Hint"
+    className="HintButton__btn HintButton__btn--expanded"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Close Hint
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders expected elements 1`] = `
+<div
+  className="HintButton"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-haspopup={null}
+    aria-label="Get a Hint"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get a Hint: undefined
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders no hints left for daily 1`] = `
+<div
+  className="HintButton HintButton--dark"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content HintButton__content--dark"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-haspopup="dialog"
+    aria-label="Out of Hints"
+    className="HintButton__btn HintButton__btn--disabled--dark"
+    disabled={true}
+    id="test"
+    onClick={[Function]}
+  >
+    Out of Hints
+  </button>
+</div>
+`;
+
+exports[`HintButton rendering renders no hints left for solo 1`] = `
+<div
+  className="HintButton HintButton--dark"
+>
+  <div
+    aria-labelledby="hintHeader"
+    aria-live="passive"
+    className="HintButton__content HintButton__content--dark"
+  >
+    <h3
+      id="hintHeader"
+    >
+      Hint: 
+    </h3>
+    <p
+      className="HintButton__hint"
+    >
+      Recommended next word: 
+    </p>
+    <p
+      className="HintButton__hint"
+    >
+      Estimated number of words left: 
+    </p>
+  </div>
+  <button
+    aria-haspopup="dialog"
+    aria-label="Get the solution"
+    className="HintButton__btn"
+    disabled={false}
+    id="test"
+    onClick={[Function]}
+  >
+    Get the solution
+  </button>
+</div>
+`;

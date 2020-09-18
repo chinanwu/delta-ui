@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NotFound component rendering renders NotFound 1`] = `
-<div>
+<div
+  className="NotFound"
+>
   <Memo(Connect(ThemeToggle)) />
   <h1>
     404 - Page Not Found!
@@ -15,6 +17,7 @@ exports[`NotFound component rendering renders NotFound 1`] = `
       Perhaps you'd like a link
     </span>
     <ForwardRef
+      className="NotFound__link"
       to="/"
     >
       home

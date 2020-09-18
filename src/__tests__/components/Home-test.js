@@ -142,63 +142,6 @@ describe('Home component', () => {
 			wrapper.find('#modal').prop('onClose')();
 			expect(setShowAcks.mock.calls).toEqual([[false]]);
 		});
-
-		// it('closes acknowledgement modal', () => {
-		// 	const setShowAcks = jest.fn();
-		// 	useState
-		// 		.mockReturnValueOnce([false, jest.fn()])
-		// 		.mockReturnValue([true, setShowAcks]);
-		// 	const wrapper = shallow(<Home />);
-		// 	expect(wrapper.getElement()).toMatchSnapshot();
-		// 	wrapper.find('#homeCloseAcksBtn').simulate('click');
-		// 	expect(setShowAcks.mock.calls).toEqual([[false]]);
-		// });
-
-		// it('closes acknowledgement modal with escape', () => {
-		// 	const preventDefault = jest.fn();
-		// 	const event = {
-		// 		keyCode: escapeBtn,
-		// 		preventDefault: preventDefault,
-		// 	};
-		// 	const setShowAcks = jest.fn();
-		// 	useState
-		// 		.mockReturnValueOnce([false, jest.fn()])
-		// 		.mockReturnValue([true, setShowAcks]);
-		// 	const wrapper = shallow(<Home />);
-		// 	expect(wrapper.getElement()).toMatchSnapshot();
-		// 	wrapper.find('#homeModalDiv').simulate('keydown', event);
-		// 	expect(setShowAcks.mock.calls).toEqual([[false]]);
-		// 	expect(preventDefault).toHaveBeenCalledTimes(1);
-		// });
-		//
-		// it('does nothing if keydown with any other key in acknowledgement modal', () => {
-		// 	const preventDefault = jest.fn();
-		// 	const event = {
-		// 		keyCode: aBtn,
-		// 		preventDefault: preventDefault,
-		// 	};
-		// 	const setShowAcks = jest.fn();
-		// 	useState
-		// 		.mockReturnValueOnce([false, jest.fn()])
-		// 		.mockReturnValue([true, setShowAcks]);
-		// 	const wrapper = shallow(<Home />);
-		// 	expect(wrapper.getElement()).toMatchSnapshot();
-		// 	wrapper.find('#homeModalDiv').simulate('keydown', event);
-		// 	expect(setShowAcks).not.toHaveBeenCalled();
-		// 	expect(preventDefault).not.toHaveBeenCalled();
-		// });
-		//
-		// it('does nothing if any other event in acknowledgement modal', () => {
-		// 	const event = {};
-		// 	const setShowAcks = jest.fn();
-		// 	useState
-		// 		.mockReturnValueOnce([false, jest.fn()])
-		// 		.mockReturnValue([true, setShowAcks]);
-		// 	const wrapper = shallow(<Home />);
-		// 	expect(wrapper.getElement()).toMatchSnapshot();
-		// 	wrapper.find('#homeModalDiv').simulate('keydown', event);
-		// 	expect(setShowAcks).not.toHaveBeenCalled();
-		// });
 	});
 
 	describe('mapStateToProps', () => {

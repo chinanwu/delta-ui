@@ -4,6 +4,7 @@ import React from 'react';
 import { NotFound, mapStateToProps } from '../../components/NotFound.jsx';
 
 jest.unmock('../../components/NotFound.jsx');
+jest.unmock('../../functions/getThemeClassname');
 
 // mock the HOC
 jest.mock('../../components/HOC/withTitle', () => () => Component => props => (

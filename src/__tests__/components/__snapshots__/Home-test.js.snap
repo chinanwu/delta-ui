@@ -1,0 +1,2726 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component behaviour closes acknowledgement modal 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <UNDEFINED
+      ariaLabelledBy="homeModalHeader"
+      contentClassname="Home__modalContent"
+      id="modal"
+      name="Acknowledgements"
+      onClose={[Function]}
+    >
+      <h2
+        id="homeModalHeader"
+      >
+        Acknowledgements
+      </h2>
+      <p>
+        Thank you to MS, the one who introduced me to this word game.
+      </p>
+      <h3>
+        Icons
+      </h3>
+      <p>
+        Moon icon in theme toggle made by
+         
+        <a
+          className="Home__link"
+          href="https://www.flaticon.com/authors/freepik"
+          title="Freepik"
+        >
+          Freepik
+        </a>
+         
+        from
+         
+        <a
+          className="Home__link"
+          href="https://www.flaticon.com/"
+          title="Flaticon"
+        >
+           
+          www.flaticon.com
+        </a>
+      </p>
+    </UNDEFINED>,
+    "containerInfo": <body
+      class="Modal--open"
+    />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component behaviour opens acknowledgement modal 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component behaviour shows leaderboard when click on accordion 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home dark 1`] = `
+<div
+  className="Home Home--dark"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version Home__version--dark"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre Home--centre--dark"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent Home__leaderboardContent--dark"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre Home--centre--dark"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre Home--centre--dark"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis Home__example--emphasis--dark"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre Home--centre--dark"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link Home__link--dark"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link Home__link--dark"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer Home__footer--dark"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn Home__acksBtn--dark"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home light 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home with loading 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent Home__leaderboardContent--expanded"
+        >
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <Loading />,
+    "containerInfo": <body />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component rendering renders Home with open acknowledgements 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            +
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+  Object {
+    "$$typeof": Symbol(react.portal),
+    "children": <UNDEFINED
+      ariaLabelledBy="homeModalHeader"
+      contentClassname="Home__modalContent"
+      dark={false}
+      id="modal"
+      name="Acknowledgements"
+      onClose={[Function]}
+    >
+      <h2
+        id="homeModalHeader"
+      >
+        Acknowledgements
+      </h2>
+      <p>
+        Thank you to MS, the one who introduced me to this word game.
+      </p>
+      <h3>
+        Icons
+      </h3>
+      <p>
+        Moon icon in theme toggle made by
+         
+        <a
+          className="Home__link"
+          href="https://www.flaticon.com/authors/freepik"
+          title="Freepik"
+        >
+          Freepik
+        </a>
+         
+        from
+         
+        <a
+          className="Home__link"
+          href="https://www.flaticon.com/"
+          title="Flaticon"
+        >
+           
+          www.flaticon.com
+        </a>
+      </p>
+    </UNDEFINED>,
+    "containerInfo": <body />,
+    "implementation": null,
+    "key": null,
+  }
+</div>
+`;
+
+exports[`Home component rendering renders Home with open empty leaderboard 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent Home__leaderboardContent--expanded"
+        >
+          <p>
+            No one has completed the Daily Challenge... yet? 👀
+          </p>
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;
+
+exports[`Home component rendering renders Home with open leaderboard 1`] = `
+<div
+  className="Home"
+>
+  <Banner />
+  <Memo(Connect(ThemeToggle))
+    isHome={true}
+  />
+  <span
+    className="Home__version"
+  >
+    v0.1.0
+  </span>
+  <h1
+    className="Home__header"
+  >
+    Delta
+  </h1>
+  <React.Fragment>
+    <div
+      className="Home__btns"
+    >
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/solo"
+      >
+        <button
+          aria-label="Create solo game"
+          className="Home__btn Home__soloBtn"
+          id="homeCreateSoloBtn"
+          role="link"
+        >
+          Play!
+        </button>
+      </ForwardRef>
+      <ForwardRef
+        className="Home__btnContainer"
+        to="/daily"
+      >
+        <button
+          className="Home__btn Home__dailyBtn"
+          id="homeDailyBtn"
+          role="link"
+        >
+          Daily Challenge
+        </button>
+      </ForwardRef>
+    </div>
+    <section
+      aria-label="Daily Challenge"
+      className="Home--centre"
+    >
+      <p
+        className="Home__blurb Home__dailyExplanation"
+      >
+        Complete the daily challenge with a record (read: top 10) score and be added to the daily leaderboard! New challenges every day at midnight EST (UTC -5).
+      </p>
+      <div
+        className="Home__leaderboard"
+      >
+        <button
+          className="Home__leaderboardBtn"
+          id="homeLeaderboardBtn"
+          onClick={[Function]}
+        >
+          <span>
+            Today's Leaderboard
+          </span>
+           
+          <span>
+            -
+          </span>
+        </button>
+        <div
+          className="Home__leaderboardContent Home__leaderboardContent--expanded"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  Rank
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Score
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  t
+                </td>
+                <td>
+                  e
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  2
+                </td>
+                <td />
+                <td />
+              </tr>
+            </tbody>
+          </table>
+          <i>
+            Note: If you don't see your score in here, refresh the page!
+          </i>
+        </div>
+      </div>
+    </section>
+    <section
+      aria-labelledby="rules"
+      className="Home--centre"
+    >
+      <h2
+        id="rules"
+      >
+        Rules
+      </h2>
+      <p
+        className="Home__blurb"
+      >
+        In each game, you are given two words, a "from" word and a "to" word. Starting from the "from" word, one letter must changed at a time until the word becomes the "to" word. However, each time a letter is swapped out for another, the resulting new word must still be a valid four-letter word in the English language.
+      </p>
+    </section>
+    <section
+      aria-labelledby="example"
+      className="Home--centre"
+    >
+      <h2
+        id="example"
+      >
+        Example
+      </h2>
+      <p>
+        From: "heat" -&gt; To: "cold"
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt; hea
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; he
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt; h
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        ld -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        Or alternatively,
+      </p>
+      <p
+        className="Home__example--p"
+      >
+        heat -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          m
+        </strong>
+        eat -&gt; m
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        at -&gt; moa
+        <strong
+          className="Home__example--emphasis"
+        >
+          n
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          o
+        </strong>
+        n -&gt; moo
+        <strong
+          className="Home__example--emphasis"
+        >
+          d
+        </strong>
+         
+        -&gt; mo
+        <strong
+          className="Home__example--emphasis"
+        >
+          l
+        </strong>
+        d -&gt;
+         
+        <strong
+          className="Home__example--emphasis"
+        >
+          c
+        </strong>
+        old
+      </p>
+      <p
+        className="Home__example--p Home__blurb"
+      >
+        For most word pairs, there are a multitude of possible answers! But in order to score the most points, you'll need to do it with the least number of steps!
+      </p>
+    </section>
+    <section
+      aria-labelledby="support"
+      className="Home--centre"
+    >
+      <h3
+        id="support"
+      >
+        Want to support Delta?
+      </h3>
+      <p
+        className="Home__blurb"
+      >
+        Buy me a
+         
+        <a
+          className="Home__link"
+          href="https://ko-fi.com/salmonw"
+        >
+          ko-fi
+        </a>
+        ! Proceeds will go towards the costs of the website and future improvements! If you're unable to support financially and you want to show support, you can: Play more Delta! Tell me you like this game! Share this with your friends! You can even find and
+         
+        <a
+          className="Home__link"
+          href="https://github.com/chinanwu/delta-ui"
+        >
+          report
+        </a>
+         
+        bugs! I greatly appreciate you even being on this site. Thank you!
+      </p>
+    </section>
+  </React.Fragment>
+  <footer
+    className="Home__footer Home__footer--relative"
+  >
+    <button
+      aria-haspopup="dialog"
+      className="Home__acksBtn"
+      id="homeOpenAcksBtn"
+      onClick={[Function]}
+    >
+      Acknowledgements
+    </button>
+    <span>
+      Made by 
+      <a
+        href="https://chinanwu.com"
+      >
+        Chin-An Wu
+      </a>
+    </span>
+  </footer>
+</div>
+`;

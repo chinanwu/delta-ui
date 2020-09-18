@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`History component rendering renders History 1`] = `
+<div
+  aria-labelledby="historyLabel"
+  className="History"
+>
+  <h3
+    className="History__label"
+    id="historyLabel"
+  >
+    History
+  </h3>
+  <ul
+    aria-live="polite"
+    className="History__list"
+  >
+    <li>
+      test
+    </li>
+    <li />
+  </ul>
+</div>
+`;
+
+exports[`History component rendering renders hidden scrollbar when win 1`] = `
+<div
+  aria-labelledby="historyLabel"
+  className="History"
+>
+  <h3
+    className="History__label"
+    id="historyLabel"
+  >
+    History
+  </h3>
+  <ul
+    aria-live="polite"
+    className="History__list History__list--hideScroll"
+  >
+    <li>
+      test
+    </li>
+    <li />
+  </ul>
+</div>
+`;
+
+exports[`History component rendering renders hint when it is to 1`] = `
+<div
+  aria-labelledby="historyLabel"
+  className="History"
+>
+  <h3
+    className="History__label"
+    id="historyLabel"
+  >
+    History
+  </h3>
+  <ul
+    aria-live="polite"
+    className="History__list"
+  >
+    <li>
+      test
+    </li>
+    <li />
+    <React.Fragment>
+      <li
+        className="History__hintWord"
+      >
+        from
+      </li>
+    </React.Fragment>
+  </ul>
+</div>
+`;
+
+exports[`History component rendering renders hints 1`] = `
+<div
+  aria-labelledby="historyLabel"
+  className="History"
+>
+  <h3
+    className="History__label"
+    id="historyLabel"
+  >
+    History
+  </h3>
+  <ul
+    aria-live="polite"
+    className="History__list"
+  >
+    <li>
+      test
+    </li>
+    <li />
+    <React.Fragment>
+      <li
+        className="History__hintWord"
+      >
+        from
+      </li>
+      <li
+        className="History__hintMysteryLi"
+      >
+        <div
+          className="History__hintMystery"
+        >
+          ?
+        </div>
+      </li>
+      <li />
+    </React.Fragment>
+  </ul>
+</div>
+`;

@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component behaviour closes Modal 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component behaviour closes Modal on click 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component behaviour closes Modal with escape key press 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    id="test"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component behaviour does nothing if key press but no close 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    id="test"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    />
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component behaviour does nothing other key press 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    id="test"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component behaviour does nothing with invalid event 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    id="test"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component rendering renders Loading 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    />
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component rendering renders Modal 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    />
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component rendering renders additional styling 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content Test"
+      role="dialog"
+    />
+  </div>
+</FocusTrap>
+`;
+
+exports[`Modal component rendering renders close button 1`] = `
+<FocusTrap
+  _createFocusTrap={[Function]}
+  active={true}
+  focusTrapOptions={Object {}}
+  paused={false}
+>
+  <div
+    className="Modal"
+    onKeyDown={[Function]}
+  >
+    <div
+      aria-modal={true}
+      className="Modal__content"
+      role="dialog"
+    >
+      <button
+        aria-label="Close undefined modal"
+        className="Modal__close"
+        id="modalClose"
+        onClick={[Function]}
+      >
+        X
+      </button>
+    </div>
+  </div>
+</FocusTrap>
+`;
