@@ -12,6 +12,25 @@ module.exports = merge(common, {
 				parallel: true,
 				cache: true,
 				sourceMap: true,
+				terserOptions: {
+					parse: {
+						ecma: 8,
+					},
+					compress: {
+						ecma: 5,
+						warnings: false,
+						inline: 2,
+					},
+					mangle: {
+						safari10: true,
+					},
+					output: {
+						ecma: 5,
+						comments: false,
+						ascii_only: true,
+					},
+				},
+				extractComments: false,
 			}),
 			new OptimizeCssAssetsPlugin({
 				cssProcessorOptions: {

@@ -5,6 +5,7 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center; // For history label
+	height: 100%;
 }
 
 .History__label {
@@ -84,6 +85,10 @@
 }
 
 @media only screen and (max-width: 550px) {
+	.History {
+		height: 24.5rem;
+	}
+
 	.History__list {
 		display: flex;
 		align-items: center;
@@ -92,7 +97,6 @@
 		text-align: center;
 		padding-left: 0;
 		width: 22rem;
-		height: 20rem;
 	}
 
 	.History__label {

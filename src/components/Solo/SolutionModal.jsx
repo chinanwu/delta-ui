@@ -42,7 +42,7 @@ export const SolutionModal = ({
 					<h2 id="solutionOptimal">Optimal:</h2>
 					<ul className="SolutionModal__list" aria-labelledby="solutionOptimal">
 						{solution.map((step, i) => (
-							<li key={`Solo__solution-${i}`}>{step}</li>
+							<li key={`SolutionModal__list-${i}`}>{step}</li>
 						))}
 					</ul>
 				</span>

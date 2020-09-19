@@ -111,14 +111,18 @@ export const StealthForm = ({ dark, from, to, onChange }) => {
 					}
 				>
 					{isEditable && <h2 className="StealthForm__editHeader">Edit Game</h2>}
-					<h3 className="StealthForm__words">
+					<h3 className={'StealthForm__words'}>
 						<span
 							className={
 								'StealthForm__wordLine' +
-								(isEditable ? ' StealthForm__wordLine--editable' : '')
+								(isEditable
+									? ' StealthForm__wordLine--editable'
+									: ' StealthForm__wordLine--highlight')
 							}
 						>
-							<span id="stealthFormFrom">From</span>:{' '}
+							<span id="stealthFormFrom" className="StealthForm__wordLabel">
+								From
+							</span>
 							{isEditable ? (
 								<input
 									id="stealthFormFromInput"
@@ -144,10 +148,14 @@ export const StealthForm = ({ dark, from, to, onChange }) => {
 						<span
 							className={
 								'StealthForm__wordLine' +
-								(isEditable ? ' StealthForm__wordLine--editable' : '')
+								(isEditable
+									? ' StealthForm__wordLine--editable'
+									: ' StealthForm__wordLine--highlight')
 							}
 						>
-							<span id="stealthFormTo">To</span>:{' '}
+							<span id="stealthFormTo" className="StealthForm__wordLabel">
+								To
+							</span>
 							{isEditable ? (
 								<input
 									id="stealthFormToInput"

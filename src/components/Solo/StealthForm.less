@@ -73,6 +73,21 @@
 	display: flex;
 }
 
+.StealthForm__wordLine--highlight {
+	box-shadow: @greenLight 0px -1rem 0px inset;
+	text-shadow: 0.05rem 0.05rem #fff, -0.05rem 0.05rem #fff,
+		0.05rem -0.05rem #fff, -0.05rem -0.05rem #fff;
+
+	transition: box-shadow 0.2s;
+	&:hover {
+		box-shadow: @greenLight 0px -4rem 0px inset;
+	}
+}
+
+.StealthForm__wordLabel:after {
+	content: ':\00a0';
+}
+
 .StealthForm__input {
 	font-size: 2rem;
 	width: 6rem;
@@ -140,10 +155,6 @@
 		width: initial;
 	}
 
-	.StealthForm__words {
-		flex-direction: column;
-	}
-
 	.StealthForm__wordLine {
 		display: initial;
 		text-align: center;
@@ -151,6 +162,27 @@
 
 	.StealthForm__wordLine--editable {
 		display: flex;
+	}
+
+	.StealthForm__wordLine--highlight {
+		&:hover {
+			box-shadow: @greenLight 0px -3rem 0px inset;
+		}
+	}
+}
+
+@media only screen and (max-width: 336px) {
+	.StealthForm__wordLine {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.StealthForm__wordLabel {
+		font-size: 1.6rem;
+	}
+
+	.StealthForm__wordLabel:after {
+		content: '';
 	}
 }
 

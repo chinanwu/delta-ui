@@ -33,7 +33,7 @@ Thank you for using this! If you've found a bug, please [create a ticket](https:
 - Loading screen/modal/toast?, error modal/toast
 - eslint it up!
 - Better deployment pipeline
-- Words to be added: "poop", "bing"
+- Words to be added: "poop", "bing", "alex", "moan",
 - Do mobile breakpoints for horizontal views
 
 ## General Helpful Tools I used:
@@ -45,3 +45,4 @@ I tend to research a lot and read through articles and then add them as a commen
 - HOC [1](https://medium.com/@soorajchandran/introduction-to-higher-order-components-hoc-in-react-383c9343a3aa) [2](https://medium.com/@rossbulat/how-to-use-react-higher-order-components-c0be6821eb6c)
 - Redux, and some readings about using it to fetch [1](https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3) [2](https://medium.com/@kylpo/redux-best-practices-eef55a20cc72) [3](https://redux.js.org/recipes/structuring-reducers/initializing-state/) [4](https://redux-actions.js.org/api/handleaction)
 - Toasts [1](https://medium.com/@sheribyrnehaber/designing-toast-messages-for-accessibility-fb610ac364be)
+- PWA [1](https://felixgerschau.com/how-to-make-your-react-app-a-progressive-web-app-pwa/)
