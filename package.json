@@ -1,7 +1,7 @@
 {
   "name": "delta-ui",
   "version": "0.1.0",
-  "description": "Delta Word Game",
+  "description": "UI for Delta Word Game",
   "main": "index.jsx",
   "repository": {
     "type": "git",
@@ -15,6 +15,10 @@
   },
   "author": "Chin-An Wu",
   "license": "ISC",
+  "bugs": "github.com/chinanwu/delta-ui/issues",
+  "homepage": "https://delta.chinanwu.com",
+  "keywords": ["React", "word game", "Redux", "Javascript", "puzzle"],
+  "private": true,
   "dependencies": {
     "@loadable/component": "^5.13.1",
     "focus-trap-react": "^8.0.0",
@@ -79,5 +83,10 @@
       "react-dom",
       "redux-actions"
     ]
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

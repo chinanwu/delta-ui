@@ -10,7 +10,10 @@ const makeMysteryStepListItems = num => {
 	let all = [];
 	for (let i = 0; i < num; i++) {
 		all[i] = (
-			<li className="History__hintMysteryLi" key={`History__HintMystery--${i}`}>
+			<li
+				className="History__hintMysteryLi History__listItem"
+				key={`History__HintMystery--${i}`}
+			>
 				<div className="History__hintMystery">?</div>
 			</li>
 		);
@@ -48,22 +51,31 @@ export const History = ({
 				aria-live="polite"
 			>
 				{history.map((item, i) => (
-					<li key={`historyItem-${i}`}>{item}</li>
+					<li key={`historyItem-${i}`} className="History__listItem">
+						{item}
+					</li>
 				))}
 				<li ref={historyBottomRef} />
 
 				{showHint &&
 					(hintWord !== to ? (
 						<>
-							<li className={getThemeClassname('History__hintWord', dark)}>
+							<li
+								className={
+									getThemeClassname('History__hintWord', dark) +
+									' History__listItem'
+								}
+							>
 								{hintWord}
 							</li>
 							{makeMysteryStepListItems(hintNumLeft - 2)}
-							<li>{to}</li>
+							<li className="History__listItem">{to}</li>
 						</>
 					) : (
 						<>
-							<li className="History__hintWord">{hintWord}</li>
+							<li className="History__listItem History__hintWord">
+								{hintWord}
+							</li>
 						</>
 					))}
 			</ul>
