@@ -117,7 +117,7 @@ export const StealthForm = ({ dark, from, to, onChange }) => {
 								'StealthForm__wordLine' +
 								(isEditable
 									? ' StealthForm__wordLine--editable'
-									: ' StealthForm__wordLine--highlight')
+									: dark ? ' StealthForm__wordLine--highlight--dark' : " StealthForm__wordLine--highlight")
 							}
 						>
 							<span id="stealthFormFrom" className="StealthForm__wordLabel">
@@ -150,7 +150,7 @@ export const StealthForm = ({ dark, from, to, onChange }) => {
 								'StealthForm__wordLine' +
 								(isEditable
 									? ' StealthForm__wordLine--editable'
-									: ' StealthForm__wordLine--highlight')
+									: dark ? ' StealthForm__wordLine--highlight--dark' : " StealthForm__wordLine--highlight")
 							}
 						>
 							<span id="stealthFormTo" className="StealthForm__wordLabel">

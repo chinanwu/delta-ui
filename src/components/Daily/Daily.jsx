@@ -66,7 +66,13 @@ export const Daily = ({
 			<p className="Daily__date">For the day of {date}</p>
 
 			<h3 className="Daily__words">
-				From: {from} -> To: {to}
+				<span className={getThemeClassname('Daily__wordLine', dark)}>
+					<span className="Daily__wordLabel">From</span>{from}
+				</span>
+				<span className="Daily__wordArrow">-></span>
+				<span className={getThemeClassname('Daily__wordLine', dark)}>
+				<span className="Daily__wordLabel">To</span>{to}
+				</span>
 			</h3>
 
 			<div className="Daily__timer" role="timer">

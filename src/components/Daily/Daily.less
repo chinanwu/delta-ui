@@ -26,6 +26,40 @@
 	font-size: 2.4rem;
 }
 
+.Daily__wordLine {
+	display: flex;
+	box-shadow: @greenLight 0px -1rem 0px inset;
+	text-shadow: 0.05rem 0.05rem #fff, -0.05rem 0.05rem #fff,
+		0.05rem -0.05rem #fff, -0.05rem -0.05rem #fff;
+
+	transition: box-shadow 0.2s;
+	&:hover {
+		box-shadow: @greenLight 0px -4rem 0px inset;
+	}
+}
+
+.Daily__wordLine--dark {
+	box-shadow: @dark-10 0px -1rem 0px inset;
+	text-shadow: none;
+
+	transition: box-shadow 0.2s;
+	&:hover {
+		box-shadow: @dark-10 0px -4rem 0px inset;
+	}
+}
+
+.Daily__wordLabel::after {
+	content: ': ';
+}
+
+.Daily__wordArrow::before {
+	content: '\00a0'
+}
+
+.Daily__wordArrow::after {
+	content: '\00a0'
+}
+
 .Daily__timer {
 	text-align: center;
 	font-size: 2.4rem;
@@ -51,6 +85,23 @@
 		flex-direction: column;
 		height: initial;
 	}
+
+	.Daily__wordLine {
+		display: initial;
+		text-align: center;
+	}
+
+	.Daily__wordLine {
+		&:hover {
+			box-shadow: @greenLight 0px -3rem 0px inset;
+		}
+	}
+
+	.Daily__wordLine--dark {
+		&:hover {
+			box-shadow: @dark-10 0px -3rem 0px inset;
+		}
+	}
 }
 
 @media only screen and (max-width: 375px) {
@@ -61,11 +112,26 @@
 
 @media only screen and (max-width: 340px) {
 	.Daily__header {
-		margin-top: 4rem;
+		padding-top: 4rem;
 	}
 
 	.Daily__words {
 		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 336px) {
+	.Daily__wordLine {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.Daily__wordLabel {
+		font-size: 1.6rem;
+	}
+
+	.Daily__wordLabel:after {
+		content: '';
 	}
 }
 
